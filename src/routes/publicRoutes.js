@@ -2,6 +2,7 @@
 import { FullWidthLayout } from "~/layouts";
 import { SignIn, SignUp } from "~/pages/auth";
 import Forgot from "~/pages/auth/Forgot";
+import Home from "~/pages/home/Home";
 
 // page
 
@@ -23,5 +24,10 @@ export const publicRoutes = [
         component: Forgot,
         exact: true,
         layout: FullWidthLayout,
+    },
+    {
+        path: "/",
+        component: Home,
+        exact: true,
     },
 ];
