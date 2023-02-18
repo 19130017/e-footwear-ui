@@ -4,9 +4,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 1.5rem 0;
     .content {
         border-radius: 1px solid #ccc;
-        width: 40%;
+        width: 50%;
+
         .btn-facebook {
             font-size: 1.4rem;
             border-radius: 1.5rem;
@@ -20,35 +22,31 @@
             text-transform: inherit;
         }
         .option {
-            margin: 3rem 0;
+            margin: 2rem 0;
             text-align: center;
             width: 100%;
-            font-size: 2rem;
-            position: relative;
+            font-size: 1.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             &::after {
                 content: "";
-                height: 1px;
-                width: 50%;
-                background-color: #ccc;
-                position: absolute;
-                top: 50%;
-                right: 0;
+                height: 2px;
+                background-color: #ebebeb;
+                flex: 1;
             }
             &::before {
                 content: "";
-                height: 1px;
-                width: 50%;
-                background-color: #ccc;
-                position: absolute;
-                top: 50%;
-                left: 0;
+                height: 2px;
+                background-color: #ebebeb;
+                flex: 1;
             }
         }
         .title {
             font-size: 3rem;
             font-weight: bold;
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .sub-title {
