@@ -1,2 +1,2 @@
-export { default as FullWidthLayout } from "./FullWidthLayout";
-export { default as DefaultLayout } from "./DefaultLayout";
+export { default as FullWidthLayout } from "./fullwidth-layout";
+export { default as DefaultLayout } from "./main-layout";

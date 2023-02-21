@@ -1,11 +1,11 @@
 import { Box } from "@mui/material";
-import style from "./DefaultLayout.module.scss";
+import style from "./MainLayout.module.scss";
 import classNames from "classnames/bind";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "~/components/header";
+import Footer from "~/components/footer";
 const cx = classNames.bind(style);
 
-function DefaultLayout({ children }) {
+function MainLayout({ children }) {
     return (
         <Box className={cx("main")}>
             <Header />
@@ -15,4 +15,4 @@ function DefaultLayout({ children }) {
     );
 }
 
-export default DefaultLayout;
+export default MainLayout;

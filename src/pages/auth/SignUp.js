@@ -10,13 +10,13 @@ function SignUp() {
                 <Typography variant="h3" className={cx("title")}>
                     Đăng ký tài khoản
                 </Typography>
-                <Typography variant="body2" className={cx("sub-title")} sx={{ fontSize: "1.4rem" }}>
+                {/* <Typography variant="body2" className={cx("sub-title")} sx={{ fontSize: "1.4rem" }}>
                     Nếu đã từng mua hàng trên Website trước đây, bạn có thể dùng tính năng
                     <Link href="/auth/forgot" underline="none" sx={{ margin: "0 0.5rem" }}>
                         "Lấy mật khẩu"
                     </Link>
                     để có thể truy cập vào tài khoản bằng username nhé.
-                </Typography>
+                </Typography> */}
                 <form>
                     <Box>
                         <TextField
