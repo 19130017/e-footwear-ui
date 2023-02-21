@@ -57,6 +57,7 @@ function SignIn() {
         e.preventDefault();
         if(validate()){
             // xử lý tiếp
+            resetForm();
         }
     };
 
