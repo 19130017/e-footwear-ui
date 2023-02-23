@@ -6,8 +6,7 @@ const cx = classNames.bind(style);
 function FullWidthLayout({ children }) {
     return (
         <Box>
-          
-                    <FullWidthHeader cx={cx} />
+            <FullWidthHeader cx={cx} />
 
             <Box>{children}</Box>
         </Box>
