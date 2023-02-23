@@ -1,8 +1,10 @@
-import { Box, Button, Grid, Link, TextField, Typography } from "@mui/material";
+import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import style from "./Auth.module.scss";
 import classNames from "classnames/bind";
 import { FacebookButton } from "~/components/button";
 import { Form, useForm } from "~/hooks/useForm";
+import { Link } from "react-router-dom";
+import { TitleFullWidth } from "~/components/header/FullWidthHeader";
 const cx = classNames.bind(style);
 
 function SignIn() {
@@ -55,7 +57,7 @@ function SignIn() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(validate()){
+        if (validate()) {
             // xử lý tiếp
             resetForm();
         }
@@ -64,12 +66,11 @@ function SignIn() {
     return (
         <Box className={cx("wrapper")}>
             <Box className={cx("content")}>
-                <Typography variant="h3" className={cx("title")}>
-                    Đăng nhập
-                </Typography>
+                <TitleFullWidth cx={cx} title=" Đăng nhập" />
+
                 <Typography variant="body2" className={cx("sub-title")} sx={{ fontSize: "1.4rem" }}>
                     Nếu đã từng mua hàng trên Website trước đây, bạn có thể dùng tính năng
-                    <Link href="/auth/forgot" underline="none" sx={{ margin: "0 0.5rem" }}>
+                    <Link to="/auth/forgot" className={cx("btn", "btn--inline")}>
                         "Lấy mật khẩu"
                     </Link>
                     để có thể truy cập vào tài khoản bằng username nhé.
@@ -90,7 +91,7 @@ function SignIn() {
                             helperText={errors.username}
                             InputProps={{ style: { borderRadius: "1.5rem", fontSize: "1.4rem" } }}
                             InputLabelProps={{
-                                style: { fontSize: "1.6rem"},
+                                style: { fontSize: "1.6rem" },
                             }}
                         />
                     </Box>
@@ -130,14 +131,14 @@ function SignIn() {
 
                 <Grid container sx={{ marginTop: "2rem" }}>
                     <Grid item xs={6}>
-                        <Link href="/auth/sign-up" underline="none">
+                        <Link to="/auth/sign-up" className={cx("btn")}>
                             Đăng ký tài khoản mới
                         </Link>
                     </Grid>
                     <Grid item xs={6}>
                         <Link
-                            href="/auth/forgot"
-                            underline="none"
+                            to="/auth/forgot"
+                            className={cx("btn", "btn-right")}
                             sx={{ textAlign: "right", display: "block" }}
                         >
                             Quên mật khẩu

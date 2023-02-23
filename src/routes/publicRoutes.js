@@ -1,7 +1,9 @@
 // layout
 import { FullWidthLayout } from "~/layouts";
+import About from "~/pages/about/About";
 import { SignIn, SignUp } from "~/pages/auth";
 import Forgot from "~/pages/auth/Forgot";
+import Contact from "~/pages/contact/Contact";
 import Home from "~/pages/home/Home";
 import Profile from "~/pages/profile/Profile";
 
@@ -32,8 +34,13 @@ export const publicRoutes = [
         exact: true,
     },
     {
-        path: "/profile",
-        component: Profile,
+        path: "/about",
+        component: About,
+        exact: true,
+    },
+    {
+        path: "/contact",
+        component: Contact,
         exact: true,
     },
 ];
