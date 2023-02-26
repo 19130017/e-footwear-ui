@@ -10,7 +10,7 @@ function Header() {
         <Box className={cx("header")}>
             <Link to="/about">about</Link>
             <Link to="/contact">contact</Link>
-            <Link to="/account">account</Link>
+            <Link to="/account/profile">account</Link>
         </Box>
     );
 }
