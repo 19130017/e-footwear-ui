@@ -7,8 +7,8 @@ import Home from "./pages/home";
 import Contact from "./pages/contact";
 import About from "./pages/about";
 import Account from "./pages/account";
-import Profile from "./pages/profile";
-import ChangePassword from "./pages/change-password";
+import Profile from "./components/account-items/Profile";
+import ChangePassword from "./components/account-items/ChangePassword";
 
 function App() {
     const isLogin = true;
