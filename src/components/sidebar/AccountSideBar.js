@@ -1,7 +1,6 @@
 import {
     Avatar,
     Box,
-    Button,
     Collapse,
     Grid,
     List,
@@ -11,23 +10,15 @@ import {
     Typography,
 } from "@mui/material";
 import classNames from "classnames/bind";
-import style from "./SideBar.module.scss";
+import style from "./AccountSideBar.module.scss";
 import CheckIcon from "@mui/icons-material/Check";
 import avatar from "~/assets/images/avatar.png";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import PersonIcon from "@mui/icons-material/Person";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import PaymentsIcon from '@mui/icons-material/Payments';
+import PaymentsIcon from "@mui/icons-material/Payments";
 
 const cx = classNames.bind(style);
 function SideBar() {
-    const [open, setOpen] = useState(true);
-
-    const handleClick = () => {
-        setOpen(!open);
-    };
     return (
         <Box className={cx("side-bar")}>
             <Grid container alignItems="center">
@@ -50,13 +41,12 @@ function SideBar() {
             </Grid>
             <Grid container sx={{ marginTop: "2rem" }}>
                 <Grid item>
-                    {/* <Link to="/account">Quản lý tài khoản</Link> */}
                     <List
                         sx={{ display: "block" }}
                         component="nav"
                         aria-labelledby="nested-list-subheader"
                     >
-                        <ListItemButton onClick={handleClick}>
+                        <ListItemButton>
                             <ListItemIcon sx={{ minWidth: 0 }}>
                                 <PersonIcon sx={{ width: "2.4rem", height: "2.4rem" }} />
                             </ListItemIcon>
@@ -70,9 +60,8 @@ function SideBar() {
                                     },
                                 }}
                             />
-                            {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
                         </ListItemButton>
-                        <Collapse in={open} timeout="auto" unmountOnExit>
+                        <Collapse in={true} timeout="auto" unmountOnExit>
                             <List component="div" disablePadding>
                                 <ListItemButton
                                     sx={{ padding: "0 0 0 4rem" }}
@@ -107,8 +96,8 @@ function SideBar() {
                             </List>
                         </Collapse>
                     </List>
-                    <List sx={{padding:0}}>
-                        <ListItemButton component={Link} to="/account/history">
+                    <List sx={{ padding: 0 }}>
+                        <ListItemButton component={Link} to="/account/purchase">
                             <ListItemIcon sx={{ minWidth: 0 }}>
                                 <PaymentsIcon sx={{ width: "2.4rem", height: "2.4rem" }} />
                             </ListItemIcon>

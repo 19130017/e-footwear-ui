@@ -3,7 +3,7 @@ import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
 import { Form, useForm } from "~/hooks/useForm";
 import AccountHeader from "../header/AccountHeader";
-import style from "./Account.module.scss";
+import style from "./ChangePassword.module.scss";
 const cx = classNames.bind(style);
 function ChangePassword() {
     const initialFormValues = {
