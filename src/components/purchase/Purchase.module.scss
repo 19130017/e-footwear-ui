@@ -1,0 +1,84 @@
+.purchase-section {
+    padding-bottom: 5rem;
+    .purchase-item {
+        padding: 2.4rem 2.4rem 1.2rem 2.4rem;
+        background-color: var(--secondary-color);
+        width: 95%;
+        margin-bottom: 2rem;
+        .total-wrapper {
+            padding-top: 1.2rem;
+            .cost-wrapper {
+                font-size: 1.4rem;
+                display: flex;
+                align-items: center;
+                .cost {
+                    font-size: 2.2rem;
+                    font-weight: bold;
+                    margin-left: 0.5rem;
+                    color: var(--tag-color);
+                }
+            }
+        }
+
+        .delivery-wrapper {
+            border-bottom: 1px solid #efefef;
+            padding-bottom: 1rem;
+            .delivery-status {
+                font-size: 1.4rem;
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                color: #26aa99 !important;
+                .delivery-icon {
+                    width: 2rem;
+                    height: 2rem;
+                    margin-right: 1rem;
+                }
+            }
+        }
+        .product-wrapper {
+            padding: 1.2rem 0 1rem;
+            border-bottom: 1px solid #efefef;
+
+            .product-link {
+                text-decoration: none;
+                .price-wrapper {
+                    display: flex;
+                    .old-price {
+                        font-size: 1.4rem;
+                        color: rgba(85, 85, 85, 0.8);
+                        text-decoration: line-through;
+                        margin-right: 0.5rem;
+                    }
+                    .new-price {
+                        font-size: 1.4rem;
+                        color: var(--tag-color);
+                    }
+                }
+                .product-detail {
+                    .text {
+                        font-size: 1.4rem;
+                        color: var(--main-color);
+
+                        &.text-ellipsis {
+                            text-overflow: ellipsis;
+                            overflow: hidden;
+                            -webkit-line-clamp: 2;
+                            -webkit-box-orient: vertical;
+                            display: -webkit-box;
+                        }
+                        &.text-light {
+                            color: rgba(85, 85, 85, 0.8);
+                        }
+                    }
+                }
+
+                .product-image {
+                    width: 8rem;
+                    height: 8rem;
+                    border: 1px solid #efefef;
+                }
+            }
+        }
+    }
+}

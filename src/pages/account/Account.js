@@ -1,7 +1,6 @@
-import { Box, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { Outlet } from "react-router-dom";
-import SideBar from "~/components/sidebar/SideBar";
-
+import SideBar from "~/components/sidebar/AccountSideBar";
 
 function Account() {
     return (
@@ -10,7 +9,7 @@ function Account() {
                 <SideBar />
             </Grid>
             <Grid item xs={9}>
-                <Outlet/>
+                <Outlet />
             </Grid>
         </Grid>
     );

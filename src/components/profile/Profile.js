@@ -2,7 +2,7 @@ import { Avatar, Box, Button, Grid, TextField, Typography } from "@mui/material"
 import { useForm, Form } from "~/hooks/useForm";
 import avatar from "~/assets/images/avatar.png";
 import classNames from "classnames/bind";
-import style from "./Account.module.scss";
+import style from "./Profile.module.scss";
 import AccountHeader from "../header/AccountHeader";
 const cx = classNames.bind(style);
 
