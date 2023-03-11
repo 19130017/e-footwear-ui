@@ -11,6 +11,9 @@ function Home() {
     <Box className={cx("main")}>
         <MyCarousel>
         </MyCarousel>
+
+
+        
     </Box>
   );
 }
