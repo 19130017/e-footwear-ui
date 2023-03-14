@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { authApi } from "~/apis/authApi";
-import MySwal, { PopUpSuccess, Toast } from "~/utils/MySwal";
+import MySwal, { PopUpSuccess } from "~/utils/MySwal";
 import { AUTH_REGISTER } from "./authType";
 const initialState = {
     username: "",
@@ -14,7 +14,6 @@ const initialState = {
 const fetchRegister = createAsyncThunk(AUTH_REGISTER, async (params, thunkApi) => {
     try {
         const response = await authApi.requestRegister(params);
-        console.log(response);
         return response.status === 200
             ? thunkApi.fulfillWithValue(response)
             : thunkApi.rejectWithValue(response);
@@ -44,6 +43,7 @@ const authSlice = createSlice({
                 return state;
             })
             .addCase(fetchRegister.fulfilled, (state, action) => {
+                console.log(action.payload);
                 const data = action.payload?.data;
                 state.isLoading = false;
                 PopUpSuccess.fire({

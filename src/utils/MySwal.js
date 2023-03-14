@@ -7,8 +7,8 @@ const PopUpSuccess = Swal.mixin({
     customClass: {
         confirmButton: "popup-btn--confirm",
         popup: "rounded-3 popup-shadow",
-        title:'popup-title--success',
-        text: "popup-text--success"
+        title: "popup-title--success",
+        text: "popup-text--success",
     },
     buttonsStyling: false,
 });

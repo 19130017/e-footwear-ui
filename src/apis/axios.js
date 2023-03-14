@@ -2,7 +2,10 @@ import axios from "axios";
 
 const axiosClient = axios.create({
     baseURL: process.env.REACT_APP_API_ENDPOINT,
-    headers: { "Content-Type": "application/json" },
+    headers: {
+        "content-type": "application/json",
+    },
+    // paramsSerializer: (params) => params,
 });
 
 // Add a request interceptor
