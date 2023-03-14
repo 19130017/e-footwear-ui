@@ -13,7 +13,7 @@ function Product() {
           display: "flex",
           alignItems: "center",
           padding: "20px 40px",
-          border: "1px solid #ccc",
+          borderBottom: "1px solid #ccc",
         }}
       >
         <Typography
