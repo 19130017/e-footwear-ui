@@ -1,4 +1,4 @@
-import style from "./ProductDetail.module.scss";
+import style from "./product-detail.module.scss";
 import * as React from "react";
 import { Box, Button, Grid, Input, Typography } from "@mui/material";
 import classNames from "classnames/bind";
