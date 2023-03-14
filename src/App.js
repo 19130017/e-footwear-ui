@@ -1,14 +1,16 @@
 import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 // layouts
-import { MainLayout, FullWidthLayout } from "./layouts";
+import { MainLayout, FullWidthLayout } from "~/layouts";
 // pages
-import { SignIn, SignUp, Forgot } from "./pages/auth";
-import Home from "./pages/home";
-import Contact from "./pages/contact";
-import About from "./pages/about";
-import Account from "./pages/account";
-import Profile from "./pages/profile";
-import ChangePassword from "./pages/change-password";
+import { SignIn, SignUp, Forgot } from "~/pages/auth";
+import Home from "~/pages/home";
+import Contact from "~/pages/contact";
+import About from "~/pages/about";
+import Account from "~/pages/account";
+import Purchase from "~/components/purchase";
+import Profile from "~/components/profile";
+import OrderDetail from "~/components/order-detail";
+import ChangePassword from "~/components/change-password";
 
 function App() {
     const isLogin = true;
@@ -32,6 +34,8 @@ function App() {
                     >
                         <Route path="profile" element={<Profile />} />
                         <Route path="change-password" element={<ChangePassword />} />
+                        <Route path="purchase" element={<Purchase />} />
+                        <Route path="purchase/order/:id" element={<OrderDetail />} />
                     </Route>
                 </Route>
 

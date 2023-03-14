@@ -1,13 +1,17 @@
-import { Box } from "@mui/material";
-import { Link, Navigate, Outlet } from "react-router-dom";
+import { Grid } from "@mui/material";
+import { Outlet } from "react-router-dom";
+import SideBar from "~/components/sidebar/AccountSideBar";
 
 function Account() {
     return (
-        <Box>
-            <Link to="/account/profile">profile</Link>
-            <Link to="/account/change-password">thay đổi mk</Link>
-            <Outlet />
-        </Box>
+        <Grid container sx={{ padding: "2rem 0", backgroundColor: "#eff0f4" }}>
+            <Grid item xs={3}>
+                <SideBar />
+            </Grid>
+            <Grid item xs={9}>
+                <Outlet />
+            </Grid>
+        </Grid>
     );
 }
 
