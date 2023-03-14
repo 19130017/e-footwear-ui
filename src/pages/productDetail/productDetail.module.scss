@@ -1,0 +1,194 @@
+.wrap-detail {
+    display: flex;
+
+    .wrap-img {
+        flex-basis: 50%;
+        overflow: hidden;
+        margin: 50px;
+        padding-bottom: 50px;
+        .slider {
+        }
+    }
+
+    .wrap-content {
+        flex-basis: 50%;
+        margin: 50px;
+        .title {
+            font-size: 24px;
+            margin: 10px 0px 15px;
+            font-weight: 500;
+        }
+
+        .price {
+            display: flex;
+            margin-top: 20px;
+            font-size: 30px;
+
+            .sale-price {
+                color: #ccc;
+                text-decoration: line-through;
+                margin-right: 20px;
+            }
+
+            .pre-sale-price {
+                margin-right: 10px;
+            }
+        }
+
+        .evaluate {
+            margin-top: 20px;
+
+            .evaluate-content {
+                font-size: 20px;
+                margin-left: 10px;
+            }
+        }
+
+        .quantity {
+            margin-top: 20px;
+            font-size: 20px;
+            display: flex;
+
+            .quantity-title {}
+
+            .quantity-content {
+                margin-left: 10px;
+            }
+        }
+
+        .size {
+            margin-top: 20px;
+
+            .size-title {
+                font-size: 20px;
+            }
+
+            .size-content {
+                margin-top: 20px;
+
+                .size-item {
+                    font-size: 14px;
+                    color: #000;
+                    text-align: center;
+                    border: 1px solid #ccc;
+                    border-radius: 10px;
+                }
+            }
+        }
+
+        .buy {
+            margin-top: 20px;
+            display: flex;
+
+            .buy-btn {
+                background-color: #000;
+                flex-basis: 35%;
+                border-radius: 5px;
+                border: 1px solid #000;
+
+                .sub-text {
+                    padding: 10px 5px;
+                    font-size: 15px;
+                    font-weight: 600;
+                    color: #fff;
+                }
+            }
+
+            .buy-contact {
+                margin-left: 20px;
+                background-color: #fff;
+                flex-basis: 35%;
+                border-radius: 5px;
+                border: 1px solid #000;
+                display: flex;
+
+                .sub-text {
+                    padding: 10px 5px;
+                    font-size: 15px;
+                    font-weight: 600;
+                    color: #000;
+                }
+            }
+        }
+
+        .description {
+            margin-top: 20px;
+
+            .description-title {
+                font-size: 20px;
+            }
+
+            .description-content {
+                width: 80%;
+                margin-top: 20px;
+                font-size: 16px;
+                font-weight: 300;
+                font-style: oblique;
+            }
+        }
+    }
+}
+
+//button quanity
+.buttons_added {
+    opacity: 1;
+    display: inline-block;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    white-space: nowrap;
+    vertical-align: top;
+}
+
+.is-form {
+    overflow: hidden;
+    position: relative;
+    background-color: #f9f9f9;
+    height: 40px;
+    width: 40px;
+    padding: 0;
+    text-shadow: 1px 1px 1px #fff;
+    border: 1px solid #ddd;
+}
+
+.is-form:focus,
+.input-text:focus {
+    outline: none;
+}
+
+.is-form.minus {
+    border-radius: 4px 0 0 4px;
+}
+
+.is-form.plus {
+    border-radius: 0 4px 4px 0;
+}
+
+.input-qty {
+    background-color: #fff;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    display: inline-block;
+    margin: 0;
+    font-size: 20px;
+    vertical-align: center;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-left: 0;
+    border-right: 0;
+    padding: 0;
+    outline: none;
+}
+
+.input-qty::-webkit-outer-spin-button,
+.input-qty::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
