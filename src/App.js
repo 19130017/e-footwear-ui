@@ -13,7 +13,7 @@ import OrderDetail from "~/components/order-detail";
 import ChangePassword from "~/components/change-password";
 import ResetPasswod from "./pages/auth/ResetPassword";
 import Product from "./pages/product/Product";
-import ProductDetail from "./pages/productDetail/productDetail";
+import ProductDetail from "./pages/productDetail/ProductDetail";
 
 function App() {
   const isLogin = true;
@@ -49,7 +49,8 @@ function App() {
           }
       >
         <Route path="/product" element={<Product/>} />
-        <Route path="/product/:id" element ={<ProductDetail/>}   />
+        {/* <Route path="/product/:id" element ={<ProductDetail/>}   /> */}
+        <Route path="/productDetail" element ={<ProductDetail/>}   />
         </Route>
 
 
