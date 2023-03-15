@@ -20,7 +20,7 @@ function Header() {
             <img src={logo} alt="" className={cx("logo")} />
           </Link>
         </Grid>
-        <Grid item xs={7}>
+        <Grid item xs={6}>
           <ul className={cx("menu")}>
             <li className={cx("link")}>
               <Link to="/product" className={cx("menu-item")}>
@@ -100,7 +100,7 @@ function Header() {
             </li>
           </ul>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={4}>
           <Box className={cx("icons")}>
             <Box
               sx={{
@@ -108,7 +108,7 @@ function Header() {
                 backgroundColor: "#efefef",
                 width: "100%",
                 borderRadius: "5px",
-                width: "300px",
+                width:"50%"
               }}
             >
               <InputBase
@@ -122,7 +122,7 @@ function Header() {
                 type="text"
               />
               <IconButton aria-label="search">
-                <SearchIcon className={cx("icon")} />
+                <SearchIcon outline="none" className={cx("icon")} />
               </IconButton>
             </Box>
             <PersonIcon className={cx("icon")} />
