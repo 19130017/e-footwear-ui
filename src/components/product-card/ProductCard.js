@@ -8,18 +8,22 @@ function ProductCard() {
     <Box className={cx("wrap-card")}>
       <Link to="/productDetail" className={cx("link")}>
         <Box className={cx("card")}>
-          <Box className={cx("sale")}>Sale</Box>
-          <img
-            className={cx("img")}
-            src="https://product.hstatic.net/1000230642/product/hsm001200den__2__5b334f3afd484a40bec4abe17b476c8f_grande.jpg"
-          ></img>
-          <Box className={cx("inner")}>
+          <Box className={cx("wrap-image")}>
             <Box className={cx("sale")}>Sale</Box>
-            <img
-              className={cx("img")}
-              src="https://product.hstatic.net/1000230642/product/hsm001200den__10__86abade27eac4056a9713976efd7d034_grande.jpg"
-            ></img>
+            <Box className={cx("outer")}>
+              <img
+                className={cx("img")}
+                src="https://product.hstatic.net/1000230642/product/hsm001200den__2__5b334f3afd484a40bec4abe17b476c8f_grande.jpg"
+              ></img>
+              <Box className={cx("inner")}>
+                <img
+                  className={cx("img")}
+                  src="https://product.hstatic.net/1000230642/product/hsm001200den__10__86abade27eac4056a9713976efd7d034_grande.jpg"
+                ></img>
+              </Box>
+            </Box>
           </Box>
+
         </Box>
         <Box className={cx("content")}>
           <Box className={cx("info")}>

@@ -4,6 +4,7 @@ import { Box, Button, Grid, Input, Typography } from "@mui/material";
 import classNames from "classnames/bind";
 import Rating from "@mui/material/Rating";
 import MySlider from "~/components/slider/MySlider";
+import RecentView from "~/components/recent-view/RecentView";
 const cx = classNames.bind(style);
 function ProductDetail() {
   const [value, setValue] = React.useState(3); //default star is 3
@@ -48,8 +49,8 @@ function ProductDetail() {
           <Box className={cx("size")}>
             <Box className={cx("size-title")}>Kích thước:</Box>
             <Box className={cx("size-content")}>
-              <Grid container spacing={10}>
-                <Grid item xs={1}>
+              <Grid container spacing={2}>
+                <Grid item xs={2}>
                   <Button
                     className={cx("size-item")}
                     size="medium"
@@ -59,7 +60,7 @@ function ProductDetail() {
                     36
                   </Button>
                 </Grid>
-                <Grid item xs={1}>
+                <Grid item xs={2}>
                   <Button
                     className={cx("size-item")}
                     size="medium"
@@ -69,7 +70,7 @@ function ProductDetail() {
                     37
                   </Button>
                 </Grid>
-                <Grid item xs={1}>
+                <Grid item xs={2}>
                   <Button
                     className={cx("size-item")}
                     size="medium"
@@ -79,7 +80,7 @@ function ProductDetail() {
                     38
                   </Button>
                 </Grid>
-                <Grid item xs={1}>
+                <Grid item xs={2}>
                   <Button
                     className={cx("size-item")}
                     size="medium"
@@ -89,7 +90,7 @@ function ProductDetail() {
                     39
                   </Button>
                 </Grid>
-                <Grid item xs={1}>
+                <Grid item xs={2}>
                   <Button
                     className={cx("size-item")}
                     size="medium"
@@ -99,7 +100,7 @@ function ProductDetail() {
                     40
                   </Button>
                 </Grid>
-                <Grid item xs={1}>
+                <Grid item xs={2}>
                   <Button
                     className={cx("size-item")}
                     size="medium"
@@ -109,7 +110,7 @@ function ProductDetail() {
                     41
                   </Button>
                 </Grid>
-                <Grid item xs={1}>
+                <Grid item xs={2}>
                   <Button
                     className={cx("size-item")}
                     size="medium"
@@ -119,7 +120,7 @@ function ProductDetail() {
                     42
                   </Button>
                 </Grid>
-                <Grid item xs={1}>
+                <Grid item xs={2}>
                   <Button
                     className={cx("size-item")}
                     size="medium"
@@ -186,6 +187,7 @@ function ProductDetail() {
         </Box>
       </Box>
       <Box className={cx("wrap-new")}>
+        <RecentView />
       </Box>
     </Box>
   );

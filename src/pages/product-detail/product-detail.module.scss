@@ -6,8 +6,7 @@
         overflow: hidden;
         margin: 50px;
         padding-bottom: 50px;
-        .slider {
-        }
+      
     }
 
     .wrap-content {
@@ -49,7 +48,6 @@
             font-size: 20px;
             display: flex;
 
-            .quantity-title {}
 
             .quantity-content {
                 margin-left: 10px;
@@ -82,7 +80,7 @@
 
             .buy-btn {
                 background-color: #000;
-                flex-basis: 35%;
+                flex-basis: 40%;
                 border-radius: 5px;
                 border: 1px solid #000;
 
@@ -97,7 +95,7 @@
             .buy-contact {
                 margin-left: 20px;
                 background-color: #fff;
-                flex-basis: 35%;
+                flex-basis: 40%;
                 border-radius: 5px;
                 border: 1px solid #000;
                 display: flex;
@@ -128,7 +126,11 @@
         }
     }
 }
-
+.wrap-new{
+    width:95%;
+    overflow: hidden;
+    margin: 0 auto;
+}
 //button quanity
 .buttons_added {
     opacity: 1;
