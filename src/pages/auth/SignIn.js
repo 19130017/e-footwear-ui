@@ -3,11 +3,17 @@ import style from "./Auth.module.scss";
 import classNames from "classnames/bind";
 import { FacebookButton } from "~/components/button";
 import { Form, useForm } from "~/hooks/useForm";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { TitleFullWidth } from "~/components/header/FullWidthHeader";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchLogin } from "~/toolkits/auth/authSlice";
+import { useEffect } from "react";
 const cx = classNames.bind(style);
 
 function SignIn() {
+    const { accessToken, userId } = useSelector((state) => state.authReducer);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const initialValues = {
         username: "",
         password: "",
@@ -55,10 +61,14 @@ function SignIn() {
         resetForm,
     } = useForm(initialValues, true, validate);
 
-    const handleSubmit = (e) => {
+    useEffect(() => {
+        if (accessToken && userId) navigate("/");
+    }, [accessToken, navigate]);
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (validate()) {
             // xử lý tiếp
+            await dispatch(fetchLogin(values));
             resetForm();
         }
     };
@@ -79,7 +89,7 @@ function SignIn() {
                     <Box>
                         <TextField
                             autoComplete="off"
-                            label="Tên đăng nhập"
+                            label="Username / Email"
                             name="username"
                             variant="outlined"
                             placeholder="Username"

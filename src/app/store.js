@@ -15,23 +15,28 @@ import authReducer from "~/toolkits/auth/authSlice";
 
 const persistConfig = {
     key: "root",
-    version: 1,
     storage,
+    whitelist: ["authReducer"],
 };
+// const userPersistConfig ={
+//     key:"user",
+//     sessionStorage,
+//     whitelist:['authReducer']
+// }
 
 const rootReducer = combineReducers({
     authReducer: authReducer,
 });
 
-// const appReducer = (state, action) => {
-//     if (action.type === "AUTH_LOGOUT" + '/fulfilled') {
-//         return rootReducer(undefined, action)
-//     }
+const appReducer = (state, action) => {
+    if (action.type === "AUTH_LOGOUT" + "/fulfilled") {
+        return rootReducer(undefined, action);
+    }
 
-//     return rootReducer(state, action)
-// }
+    return rootReducer(state, action);
+};
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, appReducer);
 
 export const store = configureStore({
     reducer: persistedReducer,
@@ -39,7 +44,7 @@ export const store = configureStore({
         getDefaultMiddleware({
             serializableCheck: {
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-            
+                ignoredActionPaths: ["payload.headers"],
             },
         }),
 });

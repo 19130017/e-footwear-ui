@@ -104,6 +104,7 @@ function SignUp() {
         e.preventDefault();
         if (validate()) {
             await dispatch(fetchRegister(values));
+            console.log("hello");
             // xử lý tiếp
             resetForm();
         }
@@ -220,7 +221,7 @@ function SignUp() {
                             className={cx("btn-login")}
                             fullWidth
                         >
-                            Đăng ký
+                            Tạo tài khoản
                         </Button>
                     </Box>
                 </Form>
