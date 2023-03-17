@@ -2,7 +2,7 @@ import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 // layouts
 import { MainLayout, FullWidthLayout } from "~/layouts";
 // pages
-import { SignIn, SignUp, Forgot, VerifyForgot, VerifyAccount } from "~/pages/auth";
+import { SignIn, SignUp, Forgot, VerifyForgot, VerifyAccount, ResetPassword } from "~/pages/auth";
 import Home from "~/pages/home";
 import Contact from "~/pages/contact";
 import About from "~/pages/about";
@@ -11,8 +11,7 @@ import Purchase from "~/components/purchase";
 import Profile from "~/components/profile";
 import OrderDetail from "~/components/order-detail";
 import ChangePassword from "~/components/change-password";
-import ResetPasswod from "./pages/auth/ResetPassword";
-import Product from "./pages/product/Product";
+import Product from "./pages/product";
 import ProductDetail from "./pages/product-detail";
 
 function App() {
@@ -49,8 +48,7 @@ function App() {
                     }
                 >
                     <Route path="/product" element={<Product />} />
-                    {/* <Route path="/product/:id" element ={<ProductDetail/>}   /> */}
-                    <Route path="/detail" element={<ProductDetail />} />
+                    <Route path="/detail/:slug" element={<ProductDetail />} />
                 </Route>
 
                 <Route
@@ -74,7 +72,7 @@ function App() {
                     }
                 ></Route>
 
-                <Route path="/auth/reset-password" element={<ResetPasswod />} />
+                <Route path="/auth/reset-password" element={<ResetPassword />} />
             </Routes>
         </div>
     );

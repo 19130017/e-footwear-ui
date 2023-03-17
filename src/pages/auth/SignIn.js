@@ -6,7 +6,7 @@ import { Form, useForm } from "~/hooks/useForm";
 import { Link, useNavigate } from "react-router-dom";
 import { TitleFullWidth } from "~/components/header/FullWidthHeader";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchLogin } from "~/toolkits/auth/authSlice";
+import { fetchLogin } from "~/redux/auth/authSlice";
 import { useEffect } from "react";
 const cx = classNames.bind(style);
 

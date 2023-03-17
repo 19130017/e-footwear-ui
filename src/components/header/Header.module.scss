@@ -2,8 +2,9 @@
     border-bottom: 1px solid #ccc;
     .link-logo {
         padding-left: 20px;
+        display: block;
         .logo {
-            width: 150px;
+            width: 140px;
             overflow: hidden;
         }
     }
@@ -14,8 +15,9 @@
         justify-content: center;
         align-items: center;
         list-style: none;
+        margin: 0;
         .link {
-            padding: 30px 30px;
+            padding: 2.3rem 1.5rem;
 
             .menu-item {
                 height: 100%;
@@ -41,7 +43,6 @@
                 z-index: 2;
                 display: none;
                 opacity: 0;
-                border-radius: 5px;
                 .submenu-item {
                     padding: 10px 20px;
                     text-decoration: none;
@@ -74,11 +75,21 @@
         align-items: center;
         margin-right: 30px;
         outline: none;
-        .icon {
-            height: 30px;
-            margin: 0 10px;
-            
-            width: 30px;
+        .icon-wrapper {
+            margin: 0 1rem;
+            .icon-btn {
+                padding: 0;
+                border-radius: 0;
+                &:hover,
+                &:focus {
+                    outline: none;
+                }
+                .icon {
+                    height: 30px;
+                    color: #252a2b;
+                    width: 30px;
+                }
+            }
         }
     }
 }

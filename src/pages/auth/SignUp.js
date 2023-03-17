@@ -7,7 +7,7 @@ import { TitleFullWidth } from "~/components/header/FullWidthHeader";
 import { FacebookButton } from "~/components/button";
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
-import { fetchRegister } from "~/toolkits/auth/authSlice";
+import { fetchRegister } from "~/redux/auth/authSlice";
 
 const cx = classNames.bind(style);
 function SignUp() {

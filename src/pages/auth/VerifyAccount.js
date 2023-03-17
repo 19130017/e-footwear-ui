@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchVerifyAccount } from "~/toolkits/auth/authSlice";
+import { fetchVerifyAccount } from "~/redux/auth/authSlice";
 
 function VerifyAccount() {
     const token = useParams();
