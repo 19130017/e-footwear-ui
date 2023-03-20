@@ -14,7 +14,7 @@ function SlickProduct({ data }) {
     return (
         <Slider {...settings}>
             {data.map((item, index) => (
-                <Box sx={{ padding: "0 1rem" }}>
+                <Box sx={{ padding: "0 1rem" }} key={index}>
                     <ProductCard
                         link={item.link}
                         name={item.name}

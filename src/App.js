@@ -11,8 +11,9 @@ import Purchase from "~/components/purchase";
 import Profile from "~/components/profile";
 import OrderDetail from "~/components/order-detail";
 import ChangePassword from "~/components/change-password";
-import Product from "./pages/product";
-import ProductDetail from "./pages/product-detail";
+import Product from "~/pages/product";
+import Cart from "~/pages/cart";
+import ProductDetail from "~/pages/product-detail";
 
 function App() {
     const isLogin = true;
@@ -29,7 +30,9 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/about" element={<About />} />
-
+                    <Route path="/cart" element={<Cart />} />
+                    <Route path="/product" element={<Product />} />
+                    <Route path="/detail/:slug" element={<ProductDetail />} />
                     <Route
                         path="/account"
                         element={isLogin ? <Account /> : <Navigate to="/auth/sign-in" />}
@@ -39,16 +42,6 @@ function App() {
                         <Route path="purchase" element={<Purchase />} />
                         <Route path="purchase/order/:id" element={<OrderDetail />} />
                     </Route>
-                </Route>
-                <Route
-                    element={
-                        <MainLayout>
-                            <Outlet />
-                        </MainLayout>
-                    }
-                >
-                    <Route path="/product" element={<Product />} />
-                    <Route path="/detail/:slug" element={<ProductDetail />} />
                 </Route>
 
                 <Route
@@ -63,16 +56,8 @@ function App() {
                     <Route path="/auth/forgot" element={<Forgot />} />
                     <Route path="/auth/verify-forgot/:token" element={<VerifyForgot />} />
                     <Route path="/auth/verify-account/:token" element={<VerifyAccount />} />
+                    <Route path="/auth/reset-password" element={<ResetPassword />} />
                 </Route>
-                <Route
-                    element={
-                        <FullWidthLayout>
-                            <Outlet />
-                        </FullWidthLayout>
-                    }
-                ></Route>
-
-                <Route path="/auth/reset-password" element={<ResetPassword />} />
             </Routes>
         </div>
     );

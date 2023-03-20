@@ -1,7 +1,7 @@
 import { Box, Button, Grid, InputBase } from "@mui/material";
 import style from "./Header.module.scss";
 import classNames from "classnames/bind";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "~/assets/images/logo.png";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from "@mui/icons-material/Person";
@@ -12,6 +12,7 @@ import Badge from "@mui/material/Badge";
 const cx = classNames.bind(style);
 
 function Header() {
+    const navigate = useNavigate();
     return (
         <Box className={cx("header")}>
             <Grid container>
@@ -126,7 +127,10 @@ function Header() {
                             </IconButton>
                         </Box>
                         <Box className={cx("icon-wrapper")}>
-                            <IconButton className={cx("icon-btn")}>
+                            <IconButton
+                                className={cx("icon-btn")}
+                                onClick={() => navigate("/auth/sign-in")}
+                            >
                                 <PersonIcon className={cx("icon")} />
                             </IconButton>
                         </Box>
@@ -137,6 +141,7 @@ function Header() {
                                 aria-label="show 4 new mails"
                                 color="inherit"
                                 className={cx("icon-btn")}
+                                onClick={() => navigate("/cart")}
                             >
                                 <Badge badgeContent={4} color="error">
                                     <ShoppingBagIcon className={cx("icon")} />

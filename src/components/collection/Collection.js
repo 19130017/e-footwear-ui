@@ -27,7 +27,7 @@ function Collection() {
             </Typography> */}
             <Grid container spacing={2}>
                 {collectionData.map((item, index) => (
-                    <Grid item xs={3}>
+                    <Grid item xs={3} key={index}>
                         <CollectionItem image={item.image} link={item.link} title={item.title} />
                     </Grid>
                 ))}

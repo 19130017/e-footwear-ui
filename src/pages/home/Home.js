@@ -8,11 +8,12 @@ import Banner from "~/components/banner";
 import { TabHome } from "~/components/tab";
 import Collection from "~/components/collection";
 import Ads from "~/components/ads";
+import HomeMarquee from "~/components/marquee";
+import FooterGallery from "~/components/footer-gallery";
+
 //
 
 import { bannerData } from "~/service/fakeData";
-import HomeMarquee from "~/components/marquee";
-import FooterGallery from "~/components/footer-gallery";
 const cx = classNames.bind(style);
 
 function Home() {
@@ -47,7 +48,7 @@ function Home() {
 
             <HomeMarquee />
 
-            <FooterGallery/>
+            <FooterGallery />
         </Box>
     );
 }
