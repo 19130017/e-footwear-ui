@@ -4,12 +4,15 @@ import { Link } from "react-router-dom";
 import { ColorRounded } from "../color";
 import CloseIcon from "@mui/icons-material/Close";
 import style from "./CartProducts.module.scss";
+import RemoveIcon from "@mui/icons-material/Remove";
+import AddIcon from "@mui/icons-material/Add";
 const cx = classnames.bind(style);
+
 function CartProduct({ item }) {
     return (
         <Box className={cx("product-item")}>
             <Box className={cx("btn-remove")}>
-                <CloseIcon sx={{ height: "3rem", width: "3rem" }} />
+                <CloseIcon sx={{ height: "2rem", width: "2rem", color:"red" }}  />
             </Box>
             <Box className={cx("product-image")}>
                 <img src={item.thumbnailBefore} alt={item.name} />
@@ -42,12 +45,12 @@ function CartProduct({ item }) {
                     </Grid>
                     <Grid item xs={2} className={cx("item")}>
                         <Box className={cx("btn-number")}>
-                            <Box>
-                                <Box component={"span"}>-</Box>
+                            <Box className={cx("btn-change-quantity")}>
+                                <RemoveIcon />
                             </Box>
-                            <Box component={"input"} readOnly value={1}></Box>
-                            <Box>
-                                <Box component={"span"}>+</Box>
+                            <Box component={"input"} readOnly value={1} className={cx('show-quantity')}></Box>
+                            <Box className={cx("btn-change-quantity")}>
+                                <AddIcon />
                             </Box>
                         </Box>
                     </Grid>

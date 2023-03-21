@@ -8,7 +8,7 @@ import Contact from "~/pages/contact";
 import About from "~/pages/about";
 import Account from "~/pages/account";
 import Purchase from "~/components/purchase";
-import Profile from "~/components/profile";
+import { Profile, ProfileEdit } from "~/components/profile";
 import OrderDetail from "~/components/order-detail";
 import ChangePassword from "~/components/change-password";
 import Product from "~/pages/product";
@@ -38,6 +38,7 @@ function App() {
                         element={isLogin ? <Account /> : <Navigate to="/auth/sign-in" />}
                     >
                         <Route path="profile" element={<Profile />} />
+                        <Route path="profile/:id" element={<ProfileEdit />} />
                         <Route path="change-password" element={<ChangePassword />} />
                         <Route path="purchase" element={<Purchase />} />
                         <Route path="purchase/order/:id" element={<OrderDetail />} />

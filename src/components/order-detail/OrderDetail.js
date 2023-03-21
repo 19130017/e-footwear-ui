@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Grid, Typography } from "@mui/material";
+import { Avatar, Box, Button, Grid, Paper, Typography } from "@mui/material";
 import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
 import style from "./OrderDetail.module.scss";
@@ -6,7 +6,7 @@ import ReceiptIcon from "@mui/icons-material/ReceiptOutlined";
 const cx = classNames.bind(style);
 function OrderDetail() {
     return (
-        <Box className={cx("order-detail-section")}>
+        <Paper className={cx("order-detail-section")}>
             <Box className={cx("header-wrapper")}>
                 <Box className={cx("header-top")}>
                     <Typography variant="h5" className={cx("title")}>
@@ -138,7 +138,7 @@ function OrderDetail() {
                     </Typography>
                 </Grid>
             </Grid>
-        </Box>
+        </Paper>
     );
 }
 
