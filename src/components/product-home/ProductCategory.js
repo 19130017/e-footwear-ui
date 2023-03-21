@@ -1,7 +1,8 @@
 import { Box } from "@mui/material";
-import { productCardData } from "~/service/fakeData";
 import SlickProduct from "../slick/SlickProduct";
-function ProductNews() {
+import { productCardData } from "~/service/fakeData";
+
+function ProductCategory() {
     return (
         <Box className="container">
             <SlickProduct data={productCardData} />
@@ -9,4 +10,4 @@ function ProductNews() {
     );
 }
 
-export default ProductNews;
+export default ProductCategory;
