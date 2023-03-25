@@ -230,4 +230,56 @@ const cartProductData = [
         size: 45,
     },
 ];
-export { afterSaleData, bannerData, productCardData, collectionData, galleryData, cartProductData };
+
+const userInfo = {
+    firstName: "Đỗ",
+    lastName: "Bình",
+    avatar: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fthatnhucuocsong.com.vn%2Fanh-avatar-dep-hinh-anh-dai-dien-fb-tiktok-zalo%2F&psig=AOvVaw1vT1CYMbx4NZj02VBB8DFO&ust=1679577732553000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCPCWiOPQ7_0CFQAAAAAdAAAAABAE",
+    birthday: "15/11/2001",
+    gender: "nam",
+    phone: "0387655461",
+    addresses: [
+        {
+            id: 1,
+            fullName: "Đỗ Bình",
+            address: "1270/10/11 Tổ 12 Kp3",
+            provinceName: "Tỉnh Đồng Nai",
+            districtName: "Thành phố Biên Hòa",
+            wardName: "Phường Trảng Dài",
+            isDefault: true,
+            phone: "012345678",
+            email: "",
+        },
+        {
+            id: 2,
+            fullName: "Đỗ Bình 2",
+            address: "1270/10/11 Tổ 12 Kp3",
+            provinceName: "Tỉnh Đồng Nai",
+            districtName: "Thành phố Biên Hòa",
+            wardName: "Phường Trảng Dài",
+            isDefault: false,
+            phone: "012345678",
+            email: "",
+        },
+        {
+            id: 3,
+            fullName: "Đỗ Bình 3",
+            address: "1270/10/11 Tổ 12 Kp3",
+            provinceName: "Tỉnh Đồng Nai",
+            districtName: "Thành phố Biên Hòa",
+            wardName: "Phường Trảng Dài",
+            isDefault: false,
+            phone: "012345678",
+            email: "",
+        },
+    ],
+};
+export {
+    afterSaleData,
+    bannerData,
+    productCardData,
+    collectionData,
+    galleryData,
+    cartProductData,
+    userInfo,
+};

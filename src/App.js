@@ -8,10 +8,11 @@ import Contact from "~/pages/contact";
 import About from "~/pages/about";
 import Account from "~/pages/account";
 import Purchase from "~/components/purchase";
-import { Profile, ProfileEdit } from "~/components/profile";
+import Profile from "~/components/profile";
 import OrderDetail from "~/components/order-detail";
 import ChangePassword from "~/components/change-password";
 import Product from "~/pages/product";
+import Address from "~/components/address";
 import Cart from "~/pages/cart";
 import ProductDetail from "~/pages/product-detail";
 
@@ -38,7 +39,7 @@ function App() {
                         element={isLogin ? <Account /> : <Navigate to="/auth/sign-in" />}
                     >
                         <Route path="profile" element={<Profile />} />
-                        <Route path="profile/:id" element={<ProfileEdit />} />
+                        <Route path="addresses" element={<Address />} />
                         <Route path="change-password" element={<ChangePassword />} />
                         <Route path="purchase" element={<Purchase />} />
                         <Route path="purchase/order/:id" element={<OrderDetail />} />

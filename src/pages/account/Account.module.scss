@@ -1,7 +1,10 @@
 .account-section {
     padding-bottom: 3rem;
     .theme {
-        background-color: #377dff;
+        background: #3fada8;
+        background: -webkit-linear-gradient(to right, #000c40, #3fada8);
+        background: linear-gradient(to right, #000c40, #3fada8);
+
         padding-top: 3.2rem;
         padding-bottom: 3.2rem;
 
