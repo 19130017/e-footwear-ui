@@ -1,4 +1,4 @@
-import { Box, Button, Grid, TextField, Typography } from "@mui/material";
+import { Box, Button, Grid, Paper, TextField, Typography } from "@mui/material";
 import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
 import { Form, useForm } from "~/hooks/useForm";
@@ -66,7 +66,7 @@ function ChangePassword() {
         }
     };
     return (
-        <Box className={cx("change-password-section")}>
+        <Paper className={cx("change-password-section")}>
             <AccountHeader
                 title="Đổi mật khẩu"
                 text="Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác"
@@ -136,7 +136,7 @@ function ChangePassword() {
                         </Grid>
 
                         <Grid container justifyContent="center">
-                            <Button variant="contained" type="submit">
+                            <Button variant="contained" type="submit" className={cx('btn-save')}>
                                 Lưu
                             </Button>
                         </Grid>
@@ -148,7 +148,7 @@ function ChangePassword() {
                     </Link>
                 </Grid>
             </Grid>
-        </Box>
+        </Paper>
     );
 }
 

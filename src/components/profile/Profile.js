@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Grid, TextField, Typography } from "@mui/material";
+import { Avatar, Box, Button, Grid, Paper, TextField, Typography } from "@mui/material";
 import { useForm, Form } from "~/hooks/useForm";
 import avatar from "~/assets/images/avatar.png";
 import classNames from "classnames/bind";
@@ -6,7 +6,7 @@ import style from "./Profile.module.scss";
 import AccountHeader from "../header/AccountHeader";
 const cx = classNames.bind(style);
 
-function Profile() {
+function ProfileEdit() {
     const initialFormValues = {
         username: "",
         email: "",
@@ -77,7 +77,7 @@ function Profile() {
         }
     };
     return (
-        <Box className={cx("profile-section")}>
+        <Paper className={cx("profile-section")}>
             <AccountHeader
                 title="Thông tin cá nhân"
                 text="Quản lý thông tin hồ sơ để bảo mật tài khoản"
@@ -176,7 +176,7 @@ function Profile() {
                             </Grid>
                         </Grid>
                         <Grid container justifyContent="center">
-                            <Button variant="contained" type="submit">
+                            <Button variant="contained" type="submit" className={cx("btn-save")}>
                                 Lưu
                             </Button>
                         </Grid>
@@ -208,8 +208,8 @@ function Profile() {
                     </Grid>
                 </Grid>
             </Grid>
-        </Box>
+        </Paper>
     );
 }
 
-export default Profile;
+export default ProfileEdit;

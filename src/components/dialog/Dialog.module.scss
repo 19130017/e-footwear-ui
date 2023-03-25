@@ -1,0 +1,89 @@
+.btn-edit {
+    border: 1.5px solid #da4343;
+    color: #da4343;
+    text-transform: inherit;
+    font-size: 1.3rem;
+    &:hover {
+        border-color: #c43c3c;
+    }
+}
+
+.btn-add-address {
+    .icon-add {
+        color: #000;
+        margin-right: 1rem;
+        width: 1.8rem;
+        height: 1.8rem;
+    }
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem !important;
+    border-radius: 1rem;
+    border: 1px dashed #000;
+    background-color: #fff;
+    width: 100%;
+    height: 60px;
+    text-transform: inherit;
+    color: rgb(20, 53, 195);
+    &:focus {
+        background-color: #fff;
+    }
+}
+
+.dialog-content {
+    .form {
+        .subtitle {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .form-multiple {
+            display: flex;
+            gap: 1rem;
+        }
+        .form-flex {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+
+            .form-label {
+                font-size: 1.3rem;
+                color: #000;
+                position: relative;
+                padding-left: 1rem;
+                display: inline-block;
+                margin-bottom: 0.5rem;
+                &::before {
+                    content: "*";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    color: #ff4d4f;
+                    font-size: 1.4rem;
+                }
+            }
+        }
+    }
+
+    .dialog-title {
+        color: #1b1d29;
+        font-size: 2.4rem;
+        font-weight: bold;
+    }
+    .btn-cancel {
+        border-color: #1435c3;
+        color: #1435c3;
+        text-transform: inherit;
+        font-size: 1.2rem;
+    }
+
+    .btn-save {
+        box-shadow: none;
+        background-color: #1435c3;
+        text-transform: inherit;
+
+        font-size: 1.2rem;
+    }
+}

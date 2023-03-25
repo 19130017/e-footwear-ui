@@ -1,0 +1,29 @@
+.marquee-section {
+    background-color: #06072e;
+    padding: 1rem 1rem;
+    .marquee-image {
+        width: 100%;
+    }
+    .marquee-content {
+        display: flex;
+        gap: 4rem;
+
+        & > span {
+            text-transform: uppercase;
+            color: #fff;
+            font-size: 2rem;
+        }
+    }
+    .marquee-btn {
+        background-color: #f9f86c;
+        border-radius: 1.5rem;
+        text-align: center;
+        font-size: 1.4rem;
+        color: #000;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        &:hover{
+            background-color: #d9d9d9;
+        }
+    }
+}

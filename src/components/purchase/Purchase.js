@@ -1,4 +1,4 @@
-import { Avatar, Box, Grid, Typography } from "@mui/material";
+import { Avatar, Box, Grid, Paper, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import style from "./Purchase.module.scss";
 import classNames from "classnames/bind";
@@ -82,7 +82,7 @@ function PurchaseContent({ id, cx }) {
 
 function Purchase() {
     return (
-        <Box className={cx("purchase-section")}>
+        <Paper className={cx("purchase-section")}>
             <Box className={cx("purchase-item")}>
                 <PurchaseHeader id={"123"} cx={cx} status={"Giao hành thành công"} />
                 <PurchaseContent id={"123"} cx={cx} />
@@ -93,7 +93,7 @@ function Purchase() {
                 <PurchaseContent id={"123"} cx={cx} />
                 <PurchaseFooter cx={cx} />
             </Box>
-        </Box>
+        </Paper>
     );
 }
 export default Purchase;

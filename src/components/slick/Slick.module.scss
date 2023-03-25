@@ -1,0 +1,35 @@
+.after-sale-content {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    .after-sale-text {
+        font-size: 1.4rem;
+        // height: 4.5rem;
+        strong {
+            font-weight: bold;
+        }
+    }
+}
+
+.main {
+    width: 100%;
+    margin: 0 auto;
+    .card {
+        width: 100%;
+        // overflow: hidden;
+        .picture {
+            max-width: 100%;
+            height: auto;
+        }
+    }
+}
+
+
+// .next-arrow-after-sale {
+//     position: absolute !important;
+//     right: 25% !important;
+//     // display: block !important;
+//     &::before {
+//         content: "" !important;
+//     }
+// }
