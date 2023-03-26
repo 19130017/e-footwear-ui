@@ -1,0 +1,76 @@
+.method-payment-list {
+    margin: 2rem 0;
+    width: 100%;
+    .method-payment-item {
+        padding-top: 0 !important;
+        width: 100%;
+        label {
+            width: 100%;
+        }
+        input[name="payment"]:checked ~ label > div {
+            border: 1px solid #1435c3;
+            position: relative;
+            &:hover {
+                background-color: rgb(255, 255, 255);
+            }
+            .pseudo {
+                position: absolute;
+                display: block;
+                top: 0;
+                right: 0;
+                border-style: solid;
+                border-width: 0px 36px 36px 0px;
+                border-color: transparent rgb(20, 53, 195) transparent transparent;
+            }
+            .icon {
+                position: absolute;
+                color: #fff;
+                top: 2px;
+                left: 17px;
+                width: 1.8rem;
+                height: 1.8rem;
+            }
+        }
+        .card {
+            border: 1px solid #e0e0e0;
+            background-color: rgb(255, 255, 255);
+            padding: 1rem 1.7rem;
+            overflow: hidden;
+            width: 100%;
+            border-radius: 0.4rem;
+            height: 9rem;
+            cursor: pointer;
+            .payment-body {
+                color: #82869e;
+                font-size: 1.3rem;
+                font-weight: 500;
+                margin-top: 0.5rem;
+            }
+
+            .pseudo {
+                display: none;
+            }
+            &:hover {
+                background: rgb(243, 243, 243);
+            }
+
+            .subtitle {
+                font-size: 1.5rem;
+                font-weight: bold;
+                line-height: 2.4rem;
+                display: flex;
+                align-items: center;
+                .recommend {
+                    font-size: 1rem;
+                    display: inline-block;
+                    background-color: #1435c3;
+                    color: #fff;
+                    border-radius: 0.3rem;
+                    line-height: 1.7rem;
+                    margin-left: 1rem;
+                    padding: 0 0.25rem;
+                }
+            }
+        }
+    }
+}

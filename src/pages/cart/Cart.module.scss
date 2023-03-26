@@ -44,7 +44,6 @@
                     .text {
                         font-size: 1.3rem;
                         line-height: 2.2rem;
-
                     }
                     .support {
                         padding-left: 1.5rem;
@@ -102,18 +101,22 @@
                     margin-top: 1.5rem;
                     box-shadow: none;
                 }
-                .summary-total {
-                    padding: 1rem 0;
-                    p {
+                .checkout-summary {
+                    margin-top: 1.5rem;
+                    .checkout-row {
                         display: flex;
                         justify-content: space-between;
-                        align-items: center;
-                        font-size: 1.6rem;
-                        font-weight: bold;
-                        span {
-                            color: red;
-                            font-size: 2.4rem;
-                            font-weight: 500;
+                        .subtitle {
+                            font-size: 1.4rem;
+                            line-height: 2.4rem;
+                            text-align: right;
+                        }
+                        .price {
+                            font-weight: bold;
+                        }
+                        .text{
+                            font-size: 1.2rem;
+                            color: #82869e;
                         }
                     }
                 }

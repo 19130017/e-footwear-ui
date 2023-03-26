@@ -1,10 +1,24 @@
-.btn-edit {
-    border: 1.5px solid #da4343;
-    color: #da4343;
-    text-transform: inherit;
-    font-size: 1.3rem;
-    &:hover {
-        border-color: #c43c3c;
+.dialog-main {
+    .btn-delete {
+        border: 1.5px solid #bcbfd6;
+        color: #434657;
+        text-transform: inherit;
+        font-size: 1.3rem;
+        background-color: #fff;
+        &:hover {
+            border: 1.5px solid #a7abc3;
+        }
+    }
+    .btn-edit {
+        border: 1.5px solid #da4343;
+        color: #da4343;
+        text-transform: inherit;
+        font-size: 1.3rem;
+        background-color: #fff;
+
+        &:hover {
+            border: 1.5px solid #c43c3c;
+        }
     }
 }
 
@@ -83,7 +97,20 @@
         box-shadow: none;
         background-color: #1435c3;
         text-transform: inherit;
-
         font-size: 1.2rem;
+        &:hover{
+            box-shadow: none;
+        }
+    }
+    .btn-truncate {
+        background-color: #da4343;
+        color: #fff;
+        box-shadow: none;
+        text-transform: inherit;
+        font-size: 1.2rem;
+        &:hover{
+            background-color: #da4343;
+            box-shadow: none;
+        }
     }
 }
