@@ -10,6 +10,7 @@ import { ColorDetail } from "~/components/color";
 import { SlickDetail } from "~/components/slick";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
+import Rate from "~/components/rate/Rate";
 const cx = classNames.bind(style);
 function ProductDetail() {
     const [value, setValue] = React.useState(3); //default star is 3
@@ -135,6 +136,10 @@ function ProductDetail() {
                 <Box className={cx("wrap-new")}>
                     <ProductCategory />
                 </Box>
+                <Box className={cx("wrap-rate")}>
+                    <Rate />
+                </Box>
+
             </Box>
 
             <Box>
