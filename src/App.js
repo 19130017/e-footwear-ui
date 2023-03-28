@@ -18,6 +18,7 @@ import Profile from "~/components/profile";
 import OrderDetail from "~/components/order-detail";
 import ChangePassword from "~/components/change-password";
 import NotFound from "./pages/not-found";
+import ComingSoon from "./pages/coming-soon/ComingSoon";
 function App() {
     const isLogin = true;
     return (
@@ -38,7 +39,7 @@ function App() {
                     <Route path="/detail/:slug" element={<ProductDetail />} />
                     <Route path="/checkout" element={<Checkout />} />
                     <Route path="/not-found" element={<NotFound/>} />
-
+                    <Route path="/coming-soon" element={<ComingSoon/>} />
                     <Route
                         path="/account"
                         element={isLogin ? <Account /> : <Navigate to="/auth/sign-in" />}
