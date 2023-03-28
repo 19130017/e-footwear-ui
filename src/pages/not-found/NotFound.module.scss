@@ -1,7 +1,7 @@
 .error {
     width: 100%;
     background-color: #fff;
-
+    height: 80vh;
     .wrap-error_image {
         display:  flex;
         justify-content: center;
@@ -15,7 +15,6 @@
     .wrap-button{
         display: flex;
         justify-content: center;
-        margin-bottom: 50px;
         .back {
             height: 60px;
             width: 40%;
