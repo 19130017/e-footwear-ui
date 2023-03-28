@@ -34,7 +34,7 @@ const productCardData = [
             "https://product.hstatic.net/1000230642/product/hsm001200den__2__5b334f3afd484a40bec4abe17b476c8f_grande.jpg",
         thumnailAfter:
             "https://product.hstatic.net/1000230642/product/hsm001200den__10__86abade27eac4056a9713976efd7d034_grande.jpg",
-        name: "Giày Thể Thao Nam Hunter X Giày Thể Thao Nam Hunter X - Dune OTP Real Black edition HSM00120N",
+        name: "Giày Thể Thao Nam Hunter X Dune OTP Real Black edition HSM00120N",
         salePrice: "1320000",
         preSalePrice: "1500000",
         totalSize: 5,

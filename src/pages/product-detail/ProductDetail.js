@@ -133,13 +133,14 @@ function ProductDetail() {
                         </Box>
                     </Box>
                 </Box>
-                <Box className={cx("wrap-new")}>
-                    <ProductCategory />
-                </Box>
+
                 <Box className={cx("wrap-rate")}>
                     <Rate />
                 </Box>
-
+                <Box className={cx("wrap-new")}>
+                   
+                    <ProductCategory />
+                </Box>
             </Box>
 
             <Box>

@@ -5,6 +5,8 @@ import { Typography } from "@mui/material";
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import { dataRate } from "~/assets/dataRate/dataRate";
 import { dataComment } from "~/assets/dataComment/dataComment";
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 const cx = classNames.bind(style);
 
@@ -14,7 +16,7 @@ function Rate() {
         <Box className={cx("wrap-rate")}>
             {dataRate.map((item, index) => (
                 <Box key={index} className={cx("container-rate")}>
-                    <Box  className={cx("rate")}>
+                    <Box className={cx("rate")}>
                         <Typography className={cx("rate-title")}>{item.rate}<span className={cx("sub-heading")}>/5</span></Typography>
                         <Rating className={cx("star")} name="read-only" value={item.numberStar} readOnly size="large" />
                         <Typography className={cx("rate-content")}>{item.numberRate} lượt đánh giá</Typography>
@@ -95,8 +97,11 @@ function Rate() {
                         </Box>
                     </Box>
                 ))}
-
-
+                <Box className={cx("wrap-pagination")}>
+                    <Stack spacing={2}>
+                        <Pagination className={cx("pagination")} count={10} shape="rounded" size="large" />
+                    </Stack>
+                </Box>
             </Box>
 
         </Box >

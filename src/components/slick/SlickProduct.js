@@ -5,7 +5,7 @@ import { NextArrowProduct, PrevArrowProduct } from "./CustomSlick";
 import "./_Custom.scss";
 function SlickProduct({ data }) {
     const settings = {
-        infinite: false,
+        infinite: true,
         slidesToShow: 4,
         slidesToScroll: 4,
         prevArrow: <PrevArrowProduct to="prev-arrow" />,
