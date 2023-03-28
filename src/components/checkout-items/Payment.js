@@ -32,7 +32,7 @@ function Payment() {
                             </Box>
                         </Box>
                         <Box className={cx("payment-body")}>
-                            Thanh toán qua Internet Banking, Visa, Master, JCB, MOMO
+                            Thanh toán qua Internet Banking, Visa, Master, JCB, MOMO.
                         </Box>
                         <Box className={cx("pseudo")}>
                             <CheckIcon className={cx("icon")} />
@@ -51,6 +51,9 @@ function Payment() {
                         className={cx("card", "active")}
                     >
                         <Box className={cx("subtitle")}>Thanh toán khi nhận hàng</Box>
+                        <Box className={cx("payment-body")}>
+                            Thanh toán bằng tiền mặt khi nhận hàng.
+                        </Box>
                         <Box className={cx("pseudo")}>
                             <CheckIcon className={cx("icon")} />
                         </Box>

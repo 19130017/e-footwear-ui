@@ -311,6 +311,17 @@ const userInfo = {
             phone: "012345678",
             email: "",
         },
+        {
+            id: 4,
+            fullName: "Đỗ Bình 4",
+            address: "1270/10/11 Tổ 12 Kp3",
+            provinceName: "Tỉnh Đồng Nai",
+            districtName: "Thành phố Biên Hòa",
+            wardName: "Phường Trảng Dài",
+            isDefault: false,
+            phone: "012345678",
+            email: "",
+        },
     ],
 };
 export {

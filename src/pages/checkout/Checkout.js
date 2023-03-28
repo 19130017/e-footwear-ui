@@ -2,6 +2,7 @@ import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import classnames from "classnames/bind";
 import { Link } from "react-router-dom";
 import { Payment, Address } from "~/components/checkout-items";
+import { AddressAdd } from "~/components/dialog";
 import { checkoutData, userInfo } from "~/service/fakeData";
 import style from "./Checkout.module.scss";
 
@@ -25,7 +26,9 @@ function Checkout() {
                     </Typography>
 
                     <Address data={userInfo.addresses} />
-
+                    <Box className={cx("add-address")}>
+                        <AddressAdd />
+                    </Box>
                     <Typography
                         variant="h6"
                         className={cx("subtitle")}
@@ -194,9 +197,9 @@ function Checkout() {
                             {total > 700000
                                 ? "Miễn phi"
                                 : Intl.NumberFormat("vi-VN", {
-                                      style: "currency",
-                                      currency: "VND",
-                                  }).format(11000)}
+                                    style: "currency",
+                                    currency: "VND",
+                                }).format(11000)}
                         </Typography>
                     </Box>
                     <Box className={cx("d-flex")}>
