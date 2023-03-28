@@ -44,16 +44,20 @@
 
             .product-link {
                 text-decoration: none;
+                position: relative;
                 .price-wrapper {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
                     display: flex;
                     .old-price {
-                        font-size: 1.4rem;
+                        font-size: 1.5rem;
                         color: rgba(85, 85, 85, 0.8);
                         text-decoration: line-through;
                         margin-right: 0.5rem;
                     }
                     .new-price {
-                        font-size: 1.4rem;
+                        font-size: 1.5rem;
                         color: var(--tag-color);
                     }
                 }

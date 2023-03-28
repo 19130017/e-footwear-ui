@@ -4,14 +4,18 @@
     width: 95%;
     margin-bottom: 2rem;
     border-radius: 1rem !important;
+
     .header-wrapper {
         padding-bottom: 2rem;
+
         .header-top {
             display: flex;
             justify-content: space-between;
+
             .title {
                 font-size: 1.6rem;
             }
+
             .btn-back {
                 color: var(--secondary-color) !important;
                 background-color: #30a2c4;
@@ -20,15 +24,20 @@
                 text-decoration: none;
             }
         }
+
         .header-content {
             margin-top: 1rem;
+
             .user-info {
                 border-right: 1px solid #ccc;
+
                 .text {
                     font-size: 1.4rem;
+
                     &.text-light {
                         color: rgba(0, 0, 0, 0.5);
                     }
+
                     &.text-ellipsis {
                         text-overflow: ellipsis;
                         overflow: hidden;
@@ -37,22 +46,26 @@
                     }
                 }
             }
+
             .delivery-info {
                 .delivery-log-wrapper {
                     display: flex;
                     align-items: center;
                     margin-bottom: 0.5rem;
+
                     .rounded {
                         padding: 0.5rem;
                         background-color: #ccc;
                         border-radius: 100%;
                         margin-right: 1rem;
                         position: relative;
+
                         &.active {
                             background-color: #26aa99;
                             position: relative;
                         }
                     }
+
                     .delivery-log {
                         font-size: 1.4rem;
                         display: flex;
@@ -65,21 +78,26 @@
 
     .product-wrapper {
         margin-top: 2rem;
+
         .product-item {
             border-top: 2px solid #efefef;
             padding-bottom: 2rem;
         }
+
         .product-image {
             height: 8rem;
             width: 8rem;
             border: 1px solid #efefef;
         }
+
         .product-detail {
             .text {
                 font-size: 1.4rem;
+
                 &.text-light {
                     color: rgba(85, 85, 85, 0.8);
                 }
+
                 &.text-ellipsis {
                     text-overflow: ellipsis;
                     overflow: hidden;
@@ -89,12 +107,26 @@
                 }
             }
         }
+
         .price-wrapper {
-            .price {
-                font-size: 1.4rem;
+            display: flex;
+
+            .old-price {
+                font-size: 1.5rem;
+                color: rgba(85, 85, 85, 0.8);
+                text-decoration: line-through;
+                margin-right: 0.5rem;
+            }
+
+            .new-price {
+                font-size: 1.5rem;
+                color: var(--tag-color);
             }
         }
+
         .quantity-wrapper {
+            display: flex;
+            justify-content: right;
             .quantity {
                 font-size: 1.4rem;
             }

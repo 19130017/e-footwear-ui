@@ -36,25 +36,25 @@ function OrderDetail() {
                             <Box className={cx("rounded", "active")}></Box>
                             <Typography variant="body1" className={cx("delivery-log")}>
                                 12:02 13/08/2022 - Chờ xác nhận
-                            </Typography>                            
+                            </Typography>
                         </Box>
                         <Box className={cx("delivery-log-wrapper")}>
                             <Box className={cx("rounded")}></Box>
                             <Typography variant="body1" className={cx("delivery-log")}>
                                 12:02 13/08/2022 - Chờ xác nhận
-                            </Typography>                            
+                            </Typography>
                         </Box>
                         <Box className={cx("delivery-log-wrapper")}>
                             <Box className={cx("rounded")}></Box>
                             <Typography variant="body1" className={cx("delivery-log")}>
                                 12:02 13/08/2022 - Chờ xác nhận
-                            </Typography>                            
+                            </Typography>
                         </Box>
                         <Box className={cx("delivery-log-wrapper")}>
                             <Box className={cx("rounded")}></Box>
                             <Typography variant="body1" className={cx("delivery-log")}>
                                 12:02 13/08/2022 - Chờ xác nhận
-                            </Typography>                            
+                            </Typography>
                         </Box>
                     </Grid>
                 </Grid>
@@ -84,8 +84,11 @@ function OrderDetail() {
                         </Grid>
                     </Grid>
                     <Grid item xs={2} className={cx("price-wrapper")}>
-                        <Typography variant="body1" className={cx("price")}>
+                        <Typography variant="body1" className={cx("old-price")}>
                             500.000đ
+                        </Typography>
+                        <Typography variant="body1" className={cx("new-price")}>
+                            300.000đ
                         </Typography>
                     </Grid>
                     <Grid item xs={2} className={cx("quantity-wrapper")}>
@@ -118,8 +121,11 @@ function OrderDetail() {
                         </Grid>
                     </Grid>
                     <Grid item xs={2} className={cx("price-wrapper")}>
-                        <Typography variant="body1" className={cx("price")}>
+                    <Typography variant="body1" className={cx("old-price")}>
                             500.000đ
+                        </Typography>
+                        <Typography variant="body1" className={cx("new-price")}>
+                            300.000đ
                         </Typography>
                     </Grid>
                     <Grid item xs={2} className={cx("quantity-wrapper")}>
@@ -134,7 +140,7 @@ function OrderDetail() {
                 <Grid item>
                     Tổng tiền:
                     <Typography variant="body1" className={cx("total")}>
-                        21321321đ
+                        1.600.000đ
                     </Typography>
                 </Grid>
             </Grid>
