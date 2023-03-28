@@ -3,8 +3,7 @@ import AccountHeader from "../header/AccountHeader";
 import classnames from "classnames/bind";
 import style from "./Address.module.scss";
 import { userInfo } from "~/service/fakeData";
-import AddressAdd from "../dialog/AddressAdd";
-import AddressEdit from "../dialog/AddressEdit";
+import { AddressAdd, AddressEdit, AddressDelete } from "../dialog";
 
 const cx = classnames.bind(style);
 function AddressItem({ data }) {
@@ -34,17 +33,11 @@ function AddressItem({ data }) {
                     <Grid item xs={4} className={cx("right-body")}>
                         <Grid container spacing={2} justifyContent={"flex-end"}>
                             <Grid item>
-                                <AddressEdit data={data}/>
+                                <AddressEdit data={data} />
                             </Grid>
                             {!data?.isDefault && (
                                 <Grid item>
-                                    <Button
-                                        disableRipple
-                                        variant="outlined"
-                                        className={cx("btn-delete")}
-                                    >
-                                        Xoá
-                                    </Button>
+                                    <AddressDelete />
                                 </Grid>
                             )}
                         </Grid>

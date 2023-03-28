@@ -167,7 +167,34 @@ const galleryData = [
         image: "https://file.hstatic.net/200000522597/file/240x240_8_bfbc1f9a56f24921979f053befbb7d67.jpg",
     },
 ];
-
+const checkoutData = [
+    {
+        link: "/detail/21321",
+        thumbnailBefore:
+            "https://product.hstatic.net/1000230642/product/hsm001200den__2__5b334f3afd484a40bec4abe17b476c8f_grande.jpg",
+        thumnailAfter:
+            "https://product.hstatic.net/1000230642/product/hsm001200den__10__86abade27eac4056a9713976efd7d034_grande.jpg",
+        name: " Giày Thể Thao Nam Hunter X - Dune OTP Real Black edition HSM00120N",
+        salePrice: 1329000,
+        preSalePrice: 1500000,
+        color: "red",
+        size: 45,
+        quantity: 1,
+    },
+    {
+        link: "/detail/21321",
+        thumbnailBefore:
+            "https://product.hstatic.net/1000230642/product/hsm001200den__2__5b334f3afd484a40bec4abe17b476c8f_grande.jpg",
+        thumnailAfter:
+            "https://product.hstatic.net/1000230642/product/hsm001200den__10__86abade27eac4056a9713976efd7d034_grande.jpg",
+        name: " Giày Thể Thao Nam Hunter X - Dune OTP Real Black edition HSM00120N",
+        salePrice: 132900,
+        preSalePrice: 150000,
+        color: "red",
+        size: 45,
+        quantity: 1,
+    },
+];
 const cartProductData = [
     {
         link: "/detail/21321",
@@ -176,8 +203,8 @@ const cartProductData = [
         thumnailAfter:
             "https://product.hstatic.net/1000230642/product/hsm001200den__10__86abade27eac4056a9713976efd7d034_grande.jpg",
         name: " Giày Thể Thao Nam Hunter X - Dune OTP Real Black edition HSM00120N",
-        salePrice: "1329000",
-        preSalePrice: "1500000",
+        salePrice: 1329000,
+        preSalePrice: 1500000,
         color: "red",
         size: 45,
     },
@@ -188,9 +215,9 @@ const cartProductData = [
         thumnailAfter:
             "https://product.hstatic.net/1000230642/product/hsm001200den__10__86abade27eac4056a9713976efd7d034_grande.jpg",
         name: " Giày Thể Thao Nam Hunter X - Dune OTP Real Black edition HSM00120N",
-        salePrice: "1329000",
-        preSalePrice: "1500000",
-        color: "blue",
+        salePrice: 1329000,
+        preSalePrice: 1500000,
+        color: "red",
         size: 45,
     },
     {
@@ -200,9 +227,9 @@ const cartProductData = [
         thumnailAfter:
             "https://product.hstatic.net/1000230642/product/hsm001200den__10__86abade27eac4056a9713976efd7d034_grande.jpg",
         name: " Giày Thể Thao Nam Hunter X - Dune OTP Real Black edition HSM00120N",
-        salePrice: "1329000",
-        preSalePrice: "1500000",
-        color: "green",
+        salePrice: 1329000,
+        preSalePrice: 1500000,
+        color: "red",
         size: 45,
     },
     {
@@ -212,9 +239,9 @@ const cartProductData = [
         thumnailAfter:
             "https://product.hstatic.net/1000230642/product/hsm001200den__10__86abade27eac4056a9713976efd7d034_grande.jpg",
         name: " Giày Thể Thao Nam Hunter X - Dune OTP Real Black edition HSM00120N",
-        salePrice: "1329000",
-        preSalePrice: "1500000",
-        color: "purple",
+        salePrice: 1329000,
+        preSalePrice: 1500000,
+        color: "red",
         size: 45,
     },
     {
@@ -224,9 +251,21 @@ const cartProductData = [
         thumnailAfter:
             "https://product.hstatic.net/1000230642/product/hsm001200den__10__86abade27eac4056a9713976efd7d034_grande.jpg",
         name: " Giày Thể Thao Nam Hunter X - Dune OTP Real Black edition HSM00120N",
-        salePrice: "1329000",
-        preSalePrice: "1500000",
-        color: "pink",
+        salePrice: 1329000,
+        preSalePrice: 1500000,
+        color: "red",
+        size: 45,
+    },
+    {
+        link: "/detail/21321",
+        thumbnailBefore:
+            "https://product.hstatic.net/1000230642/product/hsm001200den__2__5b334f3afd484a40bec4abe17b476c8f_grande.jpg",
+        thumnailAfter:
+            "https://product.hstatic.net/1000230642/product/hsm001200den__10__86abade27eac4056a9713976efd7d034_grande.jpg",
+        name: " Giày Thể Thao Nam Hunter X - Dune OTP Real Black edition HSM00120N",
+        salePrice: 1329000,
+        preSalePrice: 1500000,
+        color: "red",
         size: 45,
     },
 ];
@@ -282,4 +321,5 @@ export {
     galleryData,
     cartProductData,
     userInfo,
+    checkoutData,
 };

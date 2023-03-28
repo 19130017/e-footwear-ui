@@ -5,9 +5,12 @@ import Breadcrumb from "~/components/breadcrumbs";
 import FooterGallery from "~/components/footer-gallery";
 import CartProducts from "~/components/cart-products";
 import { cartProductData } from "~/service/fakeData";
+import { useNavigate } from "react-router-dom";
 const cx = classnames.bind(style);
 
 function Cart() {
+    const navigate = useNavigate();
+
     const breadcrumbs = [
         <Typography color="text.primary" className={cx("text")} key={1}>
             Giỏ hàng
@@ -44,19 +47,40 @@ function Cart() {
                             <Box className={cx("cart-right")}>
                                 <Box className={cx("order-summary-block")}>
                                     <Typography variant="h5" className={cx("cart-title")}>
-                                        Thông tin đơn hàng
+                                       Thanh toán
                                     </Typography>
                                     <Divider sx={{ color: "#ccc" }} />
-                                    <Box className={cx("summary-total")}>
-                                        <Typography variant="body1">
-                                            Tổng tiền
-                                            <Box component={"span"}>
+                                    <Box className={cx("checkout-summary")}>
+                                        <Box className={cx("checkout-row")}>
+                                            <Box component={"span"} className={cx("subtitle")}>
+                                                Tổng tính tạm
+                                            </Box>
+                                            <Box component={"span"} className={cx("subtitle", 'price')}>
                                                 {Intl.NumberFormat("vi-VN", {
                                                     style: "currency",
                                                     currency: "VND",
                                                 }).format(10023213)}
                                             </Box>
-                                        </Typography>
+                                        </Box>
+                                        <Box className={cx("checkout-row")}>
+                                            <Box component={"span"} className={cx("subtitle")}>
+                                                Thành tiền
+                                            </Box>
+                                            <Box>
+                                                <Box
+                                                    className={cx("subtitle", 'price')}
+                                                    sx={{ color: "#da4343" }}
+                                                >
+                                                    {Intl.NumberFormat("vi-VN", {
+                                                        style: "currency",
+                                                        currency: "VND",
+                                                    }).format(10023213)}
+                                                </Box>
+                                                <Box className={cx("text")}>
+                                                    (Đã bao gồm VAT)
+                                                </Box>
+                                            </Box>
+                                        </Box>
                                     </Box>
                                     <Divider sx={{ color: "#ccc" }} />
                                     <Box className={cx("cart-note")}>
@@ -64,8 +88,8 @@ function Cart() {
                                             Phí vận chuyển sẽ được tính ở trang thanh toán.
                                         </Typography>
                                     </Box>
-                                    <Button variant="contained" className={cx("btn-buy-now")}>
-                                        Thanh toán ngay
+                                    <Button onClick={()=>navigate('/checkout')} variant="contained" className={cx("btn-buy-now")}>
+                                        Tiếp tục
                                     </Button>
                                 </Box>
 

@@ -13,7 +13,6 @@ import {
     TextField,
     Typography,
 } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
 import classnames from "classnames/bind";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -89,7 +88,7 @@ function AddressEdit({ data }) {
             >
                 <DialogTitle className={cx("dialog-title")}>Thông tin người nhận hàng</DialogTitle>
                 <DialogContent>
-                    <Box component={"form"} className={cx("form")}>
+                    <Box onSubmit={handleSubmit} component={"form"} className={cx("form")}>
                         <Box className={cx("form-flex")}>
                             <Box>
                                 <Box
@@ -305,6 +304,7 @@ function AddressEdit({ data }) {
                                 </FormGroup>
                             </Box>
                         )}
+                     
                     </Box>
                 </DialogContent>
                 <DialogActions>
@@ -315,7 +315,7 @@ function AddressEdit({ data }) {
                     >
                         Huỷ bỏ
                     </Button>
-                    <Button variant="contained" onClick={handleSubmit} className={cx("btn-save")}>
+                    <Button type='submit' variant="contained"  className={cx("btn-save")}>
                         Lưu địa chỉ
                     </Button>
                 </DialogActions>

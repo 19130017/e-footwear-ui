@@ -7,15 +7,16 @@ import Home from "~/pages/home";
 import Contact from "~/pages/contact";
 import About from "~/pages/about";
 import Account from "~/pages/account";
+import Product from "~/pages/product";
+import Cart from "~/pages/cart";
+import ProductDetail from "~/pages/product-detail";
+import Checkout from "~/pages/checkout";
+//components
+import Address from "~/components/address";
 import Purchase from "~/components/purchase";
 import Profile from "~/components/profile";
 import OrderDetail from "~/components/order-detail";
 import ChangePassword from "~/components/change-password";
-import Product from "~/pages/product";
-import Address from "~/components/address";
-import Cart from "~/pages/cart";
-import ProductDetail from "~/pages/product-detail";
-
 function App() {
     const isLogin = true;
     return (
@@ -34,6 +35,7 @@ function App() {
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/product" element={<Product />} />
                     <Route path="/detail/:slug" element={<ProductDetail />} />
+                    <Route path="/checkout" element={<Checkout />} />
                     <Route
                         path="/account"
                         element={isLogin ? <Account /> : <Navigate to="/auth/sign-in" />}
