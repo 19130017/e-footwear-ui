@@ -46,7 +46,45 @@
 }
 
 .dialog-content {
+    position: relative;
+    .dialog-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: flex-end;
+        padding: 1rem 1rem;
+        align-items: center;
+        background-color: #fff;
+        .btn-cancel {
+            border-color: #1435c3;
+            color: #1435c3;
+            text-transform: inherit;
+            font-size: 1.2rem;
+        }
+
+        .btn-save {
+            box-shadow: none;
+            background-color: #1435c3;
+            text-transform: inherit;
+            font-size: 1.2rem;
+            &:hover {
+                box-shadow: none;
+            }
+        }
+        .btn-truncate {
+            background-color: #da4343;
+            color: #fff;
+            box-shadow: none;
+            text-transform: inherit;
+            font-size: 1.2rem;
+            &:hover {
+                background-color: #da4343;
+                box-shadow: none;
+            }
+        }
+    }
     .form {
+        position: relative;
+        
         .subtitle {
             font-size: 2rem;
             font-weight: bold;
@@ -56,12 +94,43 @@
             display: flex;
             gap: 1rem;
         }
+
         .form-flex {
             display: flex;
             flex-direction: column;
             justify-content: center;
             margin-bottom: 1.5rem;
+            position: relative;
 
+            .select-option {
+                position: absolute;
+                display: block;
+                max-height: 150px;
+                overflow-y: scroll;
+                width: 100%;
+                background-color: #fff;
+                top: 100%;
+                z-index: 1;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+                .option {
+                    cursor: pointer;
+                    padding-left: 1rem;
+                    padding-right: 1rem;
+                    height: 4rem;
+                    display: flex;
+                    font-size: 1.3rem;
+                    align-items: center;
+                    justify-content: space-between;
+                    .icon {
+                        width: 2rem;
+                        height: 2rem;
+                        color: #1435c3;
+                    }
+                }
+                &.hidden {
+                    display: none;
+                }
+            }
             .form-label {
                 font-size: 1.3rem;
                 color: #000;
@@ -86,31 +155,6 @@
         font-size: 2.4rem;
         font-weight: bold;
     }
-    .btn-cancel {
-        border-color: #1435c3;
-        color: #1435c3;
-        text-transform: inherit;
-        font-size: 1.2rem;
-    }
 
-    .btn-save {
-        box-shadow: none;
-        background-color: #1435c3;
-        text-transform: inherit;
-        font-size: 1.2rem;
-        &:hover{
-            box-shadow: none;
-        }
-    }
-    .btn-truncate {
-        background-color: #da4343;
-        color: #fff;
-        box-shadow: none;
-        text-transform: inherit;
-        font-size: 1.2rem;
-        &:hover{
-            background-color: #da4343;
-            box-shadow: none;
-        }
-    }
+   
 }
