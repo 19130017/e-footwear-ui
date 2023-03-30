@@ -1,9 +1,8 @@
 import style from "./Search.module.scss";
 import { Box, Grid, PaginationItem, Typography } from "@mui/material";
 import classNames from "classnames/bind";
-import FilterProduct from "~/components/filter/FilterProduct";
 import ProductCard from "~/components/product-card/ProductCard";
-import { productCardData, brands, sizes, colors } from "~/service/fakeData";
+import { productCardData } from "~/service/fakeData";
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 
