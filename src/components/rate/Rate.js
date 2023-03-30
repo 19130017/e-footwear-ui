@@ -1,4 +1,4 @@
-import { Box, Button, Rating } from "@mui/material";
+import { Box, Button, PaginationItem, Rating } from "@mui/material";
 import style from "./Rate.module.scss";
 import classNames from "classnames/bind";
 import { Typography } from "@mui/material";
@@ -99,7 +99,11 @@ function Rate() {
                 ))}
                 <Box className={cx("wrap-pagination")}>
                     <Stack spacing={2}>
-                        <Pagination className={cx("pagination")} count={10} shape="rounded" size="large" />
+                        <Pagination className={cx("pagination")} color="primary" count={10} shape="rounded" size="large" renderItem={(item) => (
+                            <PaginationItem sx={{ fontSize: "13px" }}
+                                {...item}
+                            />
+                        )} />
                     </Stack>
                 </Box>
             </Box>

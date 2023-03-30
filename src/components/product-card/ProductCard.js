@@ -13,20 +13,16 @@ function ProductCard(props) {
                 <Box className={cx("card")}>
                     <Box className={cx("wrap-image")}>
                         {discount && <Box className={cx("sale")}>Sale</Box>}
-                        <Box className={cx("outer")}>
-                            <img
-                                className={cx("img")}
-                                alt={props.name}
-                                src={props.thumnailBefore}
-                            />
-                            <Box className={cx("inner")}>
-                                <img
-                                    className={cx("img")}
-                                    src={props.thumnailAfter}
-                                    alt={props.name}
-                                />
-                            </Box>
-                        </Box>
+                        <img
+                            className={cx("img", 'inner')}
+                            alt={props.name}
+                            src={props.thumnailBefore}
+                        />
+                        <img
+                            className={cx("img", 'outer')}
+                            src={props.thumnailAfter}
+                            alt={props.name} />
+
                     </Box>
                 </Box>
                 <Box className={cx("content")}>

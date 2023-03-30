@@ -19,6 +19,7 @@ import OrderDetail from "~/components/order-detail";
 import ChangePassword from "~/components/change-password";
 import NotFound from "./pages/not-found";
 import ComingSoon from "./pages/coming-soon/ComingSoon";
+import Search from "./pages/search/Search";
 function App() {
     const isLogin = true;
     return (
@@ -38,8 +39,9 @@ function App() {
                     <Route path="/product" element={<Product />} />
                     <Route path="/detail/:slug" element={<ProductDetail />} />
                     <Route path="/checkout" element={<Checkout />} />
-                    <Route path="/not-found" element={<NotFound/>} />
-                    <Route path="/coming-soon" element={<ComingSoon/>} />
+                    <Route path="/not-found" element={<NotFound />} />
+                    <Route path="/coming-soon" element={<ComingSoon />} />
+                    <Route path="/search" element={<Search />} />
                     <Route
                         path="/account"
                         element={isLogin ? <Account /> : <Navigate to="/auth/sign-in" />}

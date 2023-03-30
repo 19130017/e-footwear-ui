@@ -333,6 +333,30 @@ const userInfo = {
         },
     ],
 };
+const brands = [
+
+    { key: "1", code: "Adidas" },
+    { key: "2", code: "Nike" },
+    { key: "3", code: "Puma" },
+    { key: "4", code: "Reebok" },
+];
+const colors = [
+    { key: "1", code: "Đen" },
+    { key: "2", code: "Trắng" },
+    { key: "3", code: "Xanh" },
+    { key: "4", code: "Đỏ" },
+];
+const sizes = [
+    { key: "1", code: "35" },
+    { key: "2", code: "36" },
+    { key: "3", code: "37" },
+    { key: "4", code: "38" },
+    { key: "5", code: "39" },
+    { key: "6", code: "40" },
+    { key: "7", code: "41" },
+    { key: "8", code: "42" },
+    { key: "9", code: "43" },
+]  ;
 export {
     afterSaleData,
     bannerData,
@@ -342,4 +366,8 @@ export {
     cartProductData,
     userInfo,
     checkoutData,
+    brands,
+    colors,
+    sizes,
+    
 };

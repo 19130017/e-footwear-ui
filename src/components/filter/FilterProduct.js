@@ -10,6 +10,7 @@ import { Box, fontSize, styled } from "@mui/system";
 import { PopperUnstyled } from "@mui/base";
 import classNames from "classnames/bind";
 import style from "./FilterProduct.module.scss";
+import { label } from "~/service/fakeData";
 const cx = classNames.bind(style);
 
 const blue = {
@@ -80,7 +81,7 @@ const StyledListbox = styled("ul")(
   font-family: IBM Plex Sans, sans-serif;
   font-size: 15px;
   box-sizing: border-box;
-  margin: 12px 0;
+  margin: 5px 0;
   min-width: 150px;
   max-height: 400px;
   border-radius: 12px;
@@ -159,25 +160,15 @@ CustomSelect.propTypes = {
     root: PropTypes.elementType,
   }),
 };
-function renderValue(option) {
-  if (option == null) {
-    return <span >Thương hiệu</span>;
-  }
-  return <span >{option.label}</span>;
-}
-export default function FilterProduct() {
+
+
+export default function FilterProduct({ data, label }) {
   return (
-    <CustomSelect renderValue={renderValue}>
-      {brands.map((c) => (
-        <StyledOption  key={c.key} value={c.code}>{c.code}</StyledOption>
+    <CustomSelect renderValue={() => label}>
+      {data.map((item, index) => (
+        <StyledOption key={item.key} value={item.code}>{item.code}</StyledOption>
       ))}
     </CustomSelect>
   );
 }
 
-const brands = [
-  { key: "1", code: "Adidas" },
-  { key: "2", code: "Nike" },
-  { key: "3", code: "Puma" },
-  { key: "4", code: "Reebok" },
-];
