@@ -9,7 +9,7 @@ function FullWidthLayout({ children }) {
         <Box>
             <FullWidthHeader cx={cx} />
 
-            <Box>{children}</Box>
+            <Box sx={{paddingBottom:"3rem"}}>{children}</Box>
             <Footer />
         </Box>
     );

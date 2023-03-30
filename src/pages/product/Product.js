@@ -3,7 +3,7 @@ import { Box, Grid, PaginationItem, Typography } from "@mui/material";
 import classNames from "classnames/bind";
 import FilterProduct from "~/components/filter/FilterProduct";
 import ProductCard from "~/components/product-card/ProductCard";
-import { productCardData, brands, sizes, colors } from "~/service/fakeData";
+import { productCardData, brands, sizes, colors, orderBy } from "~/service/fakeData";
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 
@@ -17,18 +17,27 @@ function Product() {
           alignItems: "center",
           padding: "20px 40px",
           borderBottom: "1px solid #ccc",
+          justifyContent: "space-between",
         }}
       >
-        <Typography
-          variant="body2"
-          className={cx("sub-title")}
-          sx={{ fontSize: "2.5rem", fontWeight: "bold" }}
-        >
-          Sản phẩm
-        </Typography>
-        <FilterProduct data={brands} label={"Thương hiệu"} />
-        <FilterProduct data={colors} label={"Màu sắc"} />
-        <FilterProduct data={sizes} label={"Size"} />
+
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Typography
+            variant="body2"
+            className={cx("sub-title")}
+            sx={{ fontSize: "2.5rem", fontWeight: "bold" }}
+          >
+            Sản phẩm
+          </Typography>
+          <FilterProduct data={brands} label={"Thương hiệu"} />
+          <FilterProduct data={colors} label={"Màu sắc"} />
+          <FilterProduct data={sizes} label={"Size"} />
+        </Box>
+
+        <Box sx={{ alignSelf: "flex-end" }}>
+          <FilterProduct data={orderBy} label={"Sắp xếp theo"} />
+        </Box>
+
       </Box>
       <Box sx={{ margin: "50px" }}>
         <Grid container spacing={2}>

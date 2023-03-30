@@ -21,7 +21,7 @@ import NotFound from "./pages/not-found";
 import ComingSoon from "./pages/coming-soon/ComingSoon";
 import Search from "./pages/search/Search";
 function App() {
-    const isLogin = true;
+    const isLogin = false;
     return (
         <div className="App">
             <Routes>
@@ -64,7 +64,7 @@ function App() {
                     <Route path="/auth/sign-in" element={<SignIn />} />
                     <Route path="/auth/sign-up" element={<SignUp />} />
                     <Route path="/auth/forgot" element={<Forgot />} />
-                    <Route path="/auth/account-success/:token" element={<AccountSuccess />} />
+                    <Route path="/auth/verify/:token" element={<AccountSuccess />} />
                     <Route path="/auth/verify-account/:token" element={<VerifyAccount />} />
                     <Route path="/auth/reset-password" element={<ResetPassword />} />
                 </Route>

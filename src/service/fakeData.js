@@ -356,7 +356,14 @@ const sizes = [
     { key: "7", code: "41" },
     { key: "8", code: "42" },
     { key: "9", code: "43" },
-]  ;
+];
+
+const orderBy = [
+    { key: "1", code: "Giá tăng dần" },
+    { key: "2", code: "Giá giảm dần" },
+    { key: "3", code: "Mới nhất " },
+    { key: "4", code: "Cũ nhất" },
+];
 export {
     afterSaleData,
     bannerData,
@@ -369,5 +376,5 @@ export {
     brands,
     colors,
     sizes,
-    
+    orderBy,
 };

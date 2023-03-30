@@ -166,7 +166,7 @@ export default function FilterProduct({ data, label }) {
   return (
     <CustomSelect renderValue={() => label}>
       {data.map((item, index) => (
-        <StyledOption key={item.key} value={item.code}>{item.code}</StyledOption>
+        <StyledOption key={index} value={item.code}>{item.code}</StyledOption>
       ))}
     </CustomSelect>
   );

@@ -111,7 +111,7 @@ function SignUp() {
     };
 
     return (
-        <Box className={cx("wrapper")}>
+        <Box className={cx("wrapper")} >
             <Box className={cx("content")}>
                 <TitleFullWidth cx={cx} title="Đăng ký tài khoản" />
                 <Typography variant="body2" className={cx("sub-title")} sx={{ fontSize: "1.4rem" }}>

@@ -7,7 +7,7 @@ const cx = classNames.bind(style);
 
 function AccountSuccess() {
     return (
-        <Box className={cx("wrapper")} sx={{height:"80vh"}}>
+        <Box className={cx("wrapper")} >
             <Box className={cx("content")}>
                 <TitleFullWidth cx={cx} title="Cấp lại mật khẩu" />
                 <Box
@@ -16,6 +16,7 @@ function AccountSuccess() {
                         display: "flex",
                         width: "100%",
                         justifyContent: "center",
+                        alignItems: "center",
                     }}
                 >
                     <Box

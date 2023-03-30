@@ -50,7 +50,7 @@ function Forgot() {
         }
     };
     return (
-        <Box className={cx("wrapper")}>
+        <Box className={cx("wrapper")} >
             <Box className={cx("content")}>
                 <TitleFullWidth cx={cx} title="Cấp lại mật khẩu" />
                 <Form onSubmit={handleSubmit}>

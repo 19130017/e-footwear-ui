@@ -74,7 +74,7 @@ function SignIn() {
     };
 
     return (
-        <Box className={cx("wrapper")}>
+        <Box className={cx("wrapper")}  >
             <Box className={cx("content")}>
                 <TitleFullWidth cx={cx} title=" Đăng nhập" />
 
