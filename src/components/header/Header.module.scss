@@ -1,4 +1,5 @@
 .header {
+    z-index: 0;
     .link-logo {
         padding-left: 20px;
         display: block;
@@ -76,6 +77,61 @@
         outline: none;
         .icon-wrapper {
             margin: 0 1rem;
+            position: relative;
+            &:hover {
+                .dropdown-account,
+                .dropdown-cart,
+                .dropdown-search {
+                    display: block;
+                }
+            }
+            .dropdown-cart {
+                width: 400px !important;
+            }
+
+            .dropdown-search {
+                display: none;
+                position: absolute;
+                top: calc(100% + 10px);
+                left: 0;
+                z-index: 1;
+                background-color: #fff;
+                width: 350px;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+                &::after {
+                    content: "";
+                    width: 70%;
+                    height: 20px;
+                    background-color: transparent;
+                    position: absolute;
+                    top: -10px;
+                    left: 3px;
+                    z-index: 1;
+                }
+            }
+            .dropdown-cart,
+            .dropdown-account {
+                display: none;
+                position: absolute;
+                top: calc(100% + 20px);
+                right: 0;
+                z-index: 1;
+                background-color: #fff;
+                width: 200px;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+                &::after {
+                    content: "";
+                    border-width: 15px 12px;
+                    border-style: solid;
+                    border-color: transparent transparent #fff;
+                    position: absolute;
+                    filter: drop-shadow(0px -1px 2px rgba(0, 0, 0, 0.2));
+                    top: -30px;
+                    right: 3px;
+                    z-index: 1;
+                }
+            }
+
             .icon-btn {
                 padding: 0;
                 border-radius: 0;

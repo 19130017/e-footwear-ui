@@ -1,7 +1,7 @@
-import { Box, Button, Grid, InputBase } from "@mui/material";
+import { Box, Grid, InputBase, Menu, Modal } from "@mui/material";
 import style from "./Header.module.scss";
 import classNames from "classnames/bind";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "~/assets/images/logo.png";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from "@mui/icons-material/Person";
@@ -9,10 +9,22 @@ import IconButton from "@mui/material/IconButton";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBagOutlined";
 import Badge from "@mui/material/Badge";
+import { DropdownAccount, DropdownCart, DropdownSearch } from "../dropdown";
+import { useState } from "react";
+import { cartProductData } from "~/service/fakeData";
 const cx = classNames.bind(style);
 
 function Header() {
-    const navigate = useNavigate();
+    const [dataSearch, setDataSearch] = useState();
+    const [searchText, setSearchText] = useState("");
+    const handleChange = (e) => {
+        // call api get
+        const value = e.target.value;
+        setSearchText(value);
+        if (value === "") setDataSearch(null);
+        else setDataSearch(cartProductData);
+    };
+
     return (
         <Box className={cx("header")}>
             <Grid container>
@@ -116,8 +128,8 @@ function Header() {
                                 }}
                                 placeholder="Bạn đang tìm gì ?"
                                 type="text"
+                                onChange={handleChange}
                             />
-                            {/* <Button></Button> */}
                             <IconButton
                                 aria-label="search"
                                 className={cx("icon-btn")}
@@ -125,14 +137,17 @@ function Header() {
                             >
                                 <SearchIcon className={cx("icon")} />
                             </IconButton>
+                            <Box className={cx("dropdown-search")}>
+                                <DropdownSearch data={dataSearch} value={searchText} />
+                            </Box>
                         </Box>
                         <Box className={cx("icon-wrapper")}>
-                            <IconButton
-                                className={cx("icon-btn")}
-                                onClick={() => navigate("/auth/sign-in")}
-                            >
+                            <IconButton className={cx("icon-btn")}>
                                 <PersonIcon className={cx("icon")} />
                             </IconButton>
+                            <Box className={cx("dropdown-account")}>
+                                <DropdownAccount />
+                            </Box>
                         </Box>
 
                         <Box className={cx("icon-wrapper")}>
@@ -141,12 +156,14 @@ function Header() {
                                 aria-label="show 4 new mails"
                                 color="inherit"
                                 className={cx("icon-btn")}
-                                onClick={() => navigate("/cart")}
                             >
                                 <Badge badgeContent={4} color="error">
                                     <ShoppingBagIcon className={cx("icon")} />
                                 </Badge>
                             </IconButton>
+                            <Box className={cx("dropdown-cart")}>
+                                <DropdownCart />
+                            </Box>
                         </Box>
                     </Box>
                 </Grid>
