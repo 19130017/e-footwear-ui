@@ -1,15 +1,12 @@
 import axios from "axios";
-
 const axiosClient = axios.create({
     baseURL: process.env.REACT_APP_API_ENDPOINT,
-    withCredentials: true,
     headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
+        "Content-type": "application/json; charset=UTF-8",
     },
 });
 // Add a request interceptor
-axios.interceptors.request.use(
+axiosClient.interceptors.request.use(
     function (config) {
         // Do something before request is sent
         // Do something before request is sent
@@ -35,7 +32,7 @@ axios.interceptors.request.use(
 );
 
 // Add a response interceptor
-axios.interceptors.response.use(
+axiosClient.interceptors.response.use(
     function (response) {
         // Any status code that lie within the range of 2xx cause this function to trigger
         // Do something with response data
