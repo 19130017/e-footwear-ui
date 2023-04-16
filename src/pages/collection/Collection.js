@@ -1,26 +1,42 @@
-import style from "./Product.module.scss";
+import style from "./Collection.module.scss";
 import { Box, Grid, PaginationItem, Typography } from "@mui/material";
 import classNames from "classnames/bind";
 import FilterProduct from "~/components/filter/FilterProduct";
 import ProductCard from "~/components/product-card/ProductCard";
-import { productCardData, brands, sizes, colors, orderBy } from "~/service/fakeData";
+import { sizes, colors, orderBy } from "~/service/fakeData";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { fetchAllProduct } from "~/redux/product/productSlice";
-
+import { Link, useParams } from "react-router-dom";
+import { fetchAllProductByCateSlug } from "~/redux/product/productSlice";
+import FooterGallery from "~/components/footer-gallery/FooterGallery";
+import Breadcrumb from "~/components/breadcrumbs/Breadcrumb";
+import { fetchCategoryBySlug } from "~/redux/category/categorySlice";
 const cx = classNames.bind(style);
-function Product() {
+
+function Collection() {
     const products = useSelector((state) => state.productReducer.products);
+    const category = useSelector((state) => state.categoryReducer.category);
     const dispatch = useDispatch();
-    console.log(products);
+    const slug = useParams();
+    const breadCrumbData = [
+        <span className={cx("text-link")} key={1}>
+            Danh mục
+        </span>,
+        <Link to={`/collection/${category?.slug}`} className={cx("text-link")} key={2}>
+            {category?.name} {category?.category?.name}
+        </Link>,
+    ];
+
     useEffect(() => {
-        dispatch(fetchAllProduct());
-    }, []);
+        dispatch(fetchAllProductByCateSlug(slug));
+        dispatch(fetchCategoryBySlug(slug));
+    }, [slug]);
 
     return (
         <Box>
+            <Breadcrumb data={breadCrumbData} />
             <Box
                 sx={{
                     display: "flex",
@@ -38,7 +54,6 @@ function Product() {
                     >
                         Sản phẩm
                     </Typography>
-                    <FilterProduct data={brands} label={"Thương hiệu"} />
                     <FilterProduct data={colors} label={"Màu sắc"} />
                     <FilterProduct data={sizes} label={"Size"} />
                 </Box>
@@ -47,40 +62,36 @@ function Product() {
                     <FilterProduct data={orderBy} label={"Sắp xếp theo"} />
                 </Box>
             </Box>
+
             <Box sx={{ margin: "50px" }}>
                 <Grid container spacing={2}>
                     {products &&
                         products.map((item, index) => (
                             <Grid key={index} item xs={3}>
-                                <ProductCard
-                                    link={item.slug}
-                                    name={item.name}
-                                    thumnailBefore={item.thumnailBefore}
-                                    thumnailAfter={item.thumnailAfter}
-                                    totalSize={item.totalSize}
-                                    totalColor={item.totalColor}
-                                    salePrice={item.discountPrice}
-                                    preSalePrice={item.originPrice}
-                                />
+                                <ProductCard product={item} />
                             </Grid>
                         ))}
                 </Grid>
             </Box>
-            <Box className={cx("wrap-pagination")}>
-                <Stack spacing={2}>
-                    <Pagination
-                        className={cx("pagination")}
-                        color="primary"
-                        count={10}
-                        shape="rounded"
-                        size="large"
-                        renderItem={(item) => (
-                            <PaginationItem sx={{ fontSize: "13px" }} {...item} />
-                        )}
-                    />
-                </Stack>
-            </Box>
+            {products.length > 10 && (
+                <Box className={cx("wrap-pagination")}>
+                    <Stack spacing={2}>
+                        <Pagination
+                            className={cx("pagination")}
+                            color="primary"
+                            count={`${products.length / 10}`}
+                            shape="rounded"
+                            size="large"
+                            renderItem={(item) => (
+                                <PaginationItem sx={{ fontSize: "13px" }} {...item} />
+                            )}
+                        />
+                    </Stack>
+                </Box>
+            )}
+
+            <FooterGallery />
         </Box>
     );
 }
-export default Product;
+export default Collection;

@@ -7,7 +7,7 @@ import Home from "~/pages/home";
 import Contact from "~/pages/contact";
 import About from "~/pages/about";
 import Account from "~/pages/account";
-import Product from "~/pages/product";
+import Product from "~/pages/collection";
 import Cart from "~/pages/cart";
 import ProductDetail from "~/pages/product-detail";
 import Checkout from "~/pages/checkout";
@@ -20,6 +20,7 @@ import ChangePassword from "~/components/change-password";
 import NotFound from "./pages/not-found";
 import ComingSoon from "./pages/coming-soon/ComingSoon";
 import Search from "./pages/search/Search";
+import Collection from "./pages/collection";
 function App() {
     const isLogin = false;
     return (
@@ -36,7 +37,7 @@ function App() {
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/cart" element={<Cart />} />
-                    <Route path="/product" element={<Product />} />
+                    <Route path="/collections/:slug" element={<Collection />} />
                     <Route path="/detail/:slug" element={<ProductDetail />} />
                     <Route path="/checkout" element={<Checkout />} />
                     <Route path="/not-found" element={<NotFound />} />

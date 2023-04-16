@@ -1,16 +1,15 @@
 import axios from "./axios";
 
 export const categoryApi = {
-    async fetchGetParentCategory() {
+    async requestGetParentCategory() {
         return await axios
             .get("/categories/parent")
             .then((response) => response)
             .catch((err) => err.response.data);
     },
-    async fetchGetChildrenCategory(id) {
-
+    async requestCategoryBySlug(params) {
         return await axios
-            .get(`/categories/parent/${id}`)
+            .get(`/categories/slug/${params.slug}`)
             .then((response) => response)
             .catch((err) => err.response.data);
     },

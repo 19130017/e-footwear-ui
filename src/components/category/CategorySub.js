@@ -6,7 +6,7 @@ const cx = classnames.bind(style);
 function CategorySub(props) {
     return (
         <>
-            <ArrowRightIcon className={cx("icon-sub")} />
+            {props?.item.length !== 0 && <ArrowRightIcon className={cx("icon-sub")} />}
             <ul className={cx("submenu-level")}>
                 {props.item.map((item, index) => (
                     <li key={index} className={cx("submenu-item")}>

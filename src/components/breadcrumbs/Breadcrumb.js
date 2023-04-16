@@ -1,4 +1,4 @@
-import { Breadcrumbs } from "@mui/material";
+import { Box, Breadcrumbs } from "@mui/material";
 import { Link } from "react-router-dom";
 import classnames from "classnames/bind";
 import style from "./Breadcrumb.module.scss";
@@ -12,7 +12,11 @@ function Breadcrumb({ data }) {
         ...data,
     ];
     return (
-        <Breadcrumbs aria-label="breadcrumb">{breadcrumbs.map((item, index) => item)}</Breadcrumbs>
+        <Box className="container">
+            <Breadcrumbs aria-label="breadcrumb">
+                {breadcrumbs.map((item, index) => item)}
+            </Breadcrumbs>
+        </Box>
     );
 }
 

@@ -1,13 +1,14 @@
 .wrap-card {
     overflow: hidden;
     margin: 0;
+    margin-bottom: 2rem;
 
     .card {
         transition: all 0.6s ease-in-out 0s;
 
         .wrap-image {
             position: relative;
-
+            background-color: rgba(0, 0, 0, 0.1);
             .sale {
                 position: absolute;
                 top: 0;
@@ -87,11 +88,11 @@
             // justify-content: space-between;
             font-weight: 600;
 
-            .salePrice {
+            .discount-price {
                 font-size: 1.4rem;
             }
 
-            .preSalePrice {
+            .origin-price {
                 text-decoration: line-through;
                 color: #ccc;
                 font-size: 1.4rem;

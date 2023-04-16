@@ -1,8 +1,8 @@
 import axios from "./axios";
 export const productApi = {
-    async requestAllProduct() {
+    async requestAllProductByCateSlug(params) {
         return await axios
-            .get("/products")
+            .get(`/products/category/slug/${params.slug}`)
             .then((response) => response)
             .catch((error) => error.response.data);
     },
