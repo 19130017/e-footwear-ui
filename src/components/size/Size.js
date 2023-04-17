@@ -1,29 +1,28 @@
-import { Box, Grid, TextField } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import classnames from "classnames/bind";
-import { useRef } from "react";
 import style from "./Size.module.scss";
 
 const cx = classnames.bind(style);
 
-function Size({ size, isCheck }) {
-    const sizeId = `size-${size}`;
-
+function Size(props) {
     return (
-        <Grid item xs={2}>
-            <Box
-                component={"input"}
-                id={sizeId}
-                type="radio"
-                name="size"
-                value={size}
-                hidden
-                data-size={size}
-                className={cx("size-checked")}
-                checked={isCheck}
-            />
-            <Box component={"label"} htmlFor={sizeId} className={cx("label-size")}>
-                {size}
-            </Box>
+        <Grid container>
+            {props.data.map((item, index) => (
+                <Grid
+                    item
+                    xs={2}
+                    key={index}
+                    className={cx(
+                        "size-wrapper",
+                        `${props?.value == item.size.value ? "checked" : ""}`                       
+                    )}
+                    onClick={(e) => props.parentCallback(e)}
+                    data-size={item.size.value}
+                    data-id={item.size.id}
+                >
+                    {item.size.value}
+                </Grid>
+            ))}
         </Grid>
     );
 }

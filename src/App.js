@@ -38,7 +38,7 @@ function App() {
                     <Route path="/about" element={<About />} />
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/collections/:slug" element={<Collection />} />
-                    <Route path="/detail/:slug" element={<ProductDetail />} />
+                    <Route path="/detail/:slug/:color_id" element={<ProductDetail />} />
                     <Route path="/checkout" element={<Checkout />} />
                     <Route path="/not-found" element={<NotFound />} />
                     <Route path="/coming-soon" element={<ComingSoon />} />

@@ -1,31 +1,29 @@
 import { Box, Grid } from "@mui/material";
 import classnames from "classnames/bind";
 import style from "./Color.module.scss";
+import { Link } from "react-router-dom";
 const cx = classnames.bind(style);
 
-function ColorDetail({ color, isCheck }) {
-    const colorId = `color-${color}`;
+function ColorDetail({ data, params }) {
+    // const colorId = `color-${color?.id}`;
     return (
-        <Grid item xs={2}>
-            <Box
-                component={"input"}
-                id={colorId}
-                type="radio"
-                name="color"
-                value={color}
-                hidden
-                data-color={color}
-                checked={isCheck}
-                className={cx("color-checked")}
-            />
-            <Box
-                component={"label"}
-                htmlFor={colorId}
-                sx={{ border: `2px solid ${color}` }}
-                className={cx("color-detail")}
-            >
-                <Box sx={{ backgroundColor: color }} className={cx("color-bg")}></Box>
-            </Box>
+        <Grid container spacing={2}>
+            {data?.map((item, index) => (
+                <Grid item xs={2} key={index}>
+                    <Link
+                        to={`/detail/${params.slug}/${item?.color.id}`}
+                        className={cx(
+                            "link",
+                            `${item?.color.id == params.color_id ? "checked" : ""}`
+                        )}
+                    >
+                        <Box
+                            sx={{ backgroundColor: `${item?.color.codeColor}` }}
+                            className={cx("color-bg")}
+                        ></Box>
+                    </Link>
+                </Grid>
+            ))}
         </Grid>
     );
 }

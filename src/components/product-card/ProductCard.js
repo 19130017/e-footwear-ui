@@ -6,7 +6,7 @@ const cx = classNames.bind(style);
 function ProductCard({ product }) {
     return (
         <Box className={cx("wrap-card")}>
-            <Link to={`/product/${product?.slug}`} className={cx("link")}>
+            <Link to={`/detail/${product?.slug}/${product?.color?.id}`} className={cx("link")}>
                 <Box className={cx("card")}>
                     <Box className={cx("wrap-image")}>
                         {product?.discountRate !== 0 && <Box className={cx("sale")}>Sale</Box>}
@@ -17,7 +17,7 @@ function ProductCard({ product }) {
                                         key={i}
                                         className={cx("img", "inner")}
                                         alt={product?.name}
-                                        src={`//${image.imageURL}`}
+                                        src={`${image.imageURL}`}
                                     />
                                 );
                             } else if (i === 1) {
@@ -25,7 +25,7 @@ function ProductCard({ product }) {
                                     <img
                                         key={i}
                                         className={cx("img", "outer")}
-                                        src={`//${image.imageURL}`}
+                                        src={`${image.imageURL}`}
                                         alt={product?.name}
                                     />
                                 );

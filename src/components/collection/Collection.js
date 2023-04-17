@@ -19,16 +19,16 @@ function CollectionItem(props) {
     );
 }
 
-function Collection() {
+function Collection({data}) {
     return (
         <Box sx={{ padding: "10rem 0 2rem" }} className="container">
             {/* <Typography variant="h3" className={cx("header")}>
                 Bộ sưu tập
             </Typography> */}
             <Grid container spacing={2}>
-                {collectionData.map((item, index) => (
+                {data?.map((item, index) => (
                     <Grid item xs={3} key={index}>
-                        <CollectionItem image={item.image} link={item.link} title={item.title} />
+                        <CollectionItem image={item.imageURL} link={item.link} title={item.title} />
                     </Grid>
                 ))}
             </Grid>

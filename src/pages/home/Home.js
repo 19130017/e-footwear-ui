@@ -1,5 +1,5 @@
 import { Box, Grid } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import classNames from "classnames/bind";
 import style from "./Home.module.scss";
 // components
@@ -14,13 +14,23 @@ import FooterGallery from "~/components/footer-gallery";
 //
 
 import { bannerData } from "~/service/fakeData";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchGetGalleriesByType } from "~/redux/gallery/gallerySlice";
 const cx = classNames.bind(style);
 
 function Home() {
+    const galleries = useSelector((state) => state.galleryReducer.galleries);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchGetGalleriesByType("banner"));
+        dispatch(fetchGetGalleriesByType("slide"));
+        dispatch(fetchGetGalleriesByType("ads"));
+        dispatch(fetchGetGalleriesByType("collection"));
+    }, []);
     return (
         <Box className={cx("main")}>
             {/* carousel bitis */}
-            <MyCarousel />
+            <MyCarousel data={galleries?.slide} />
             {/* after sale  */}
             <Box className="container">
                 <Box component={"section"} className={cx("section-after-sale")}>
@@ -31,9 +41,9 @@ function Home() {
             <Box className="container">
                 <Box component={"section"} className={cx("section-banner")}>
                     <Grid container spacing={1}>
-                        {bannerData.map((item, index) => (
+                        {galleries?.banner?.map((item, index) => (
                             <Grid item xs={4} key={index}>
-                                <Banner image={item.image} title={item.title} url={item.url} />
+                                <Banner image={item.imageURL} title={item.typeGallery.typeName} url={"/collection/hunter"} />
                             </Grid>
                         ))}
                     </Grid>
@@ -44,7 +54,7 @@ function Home() {
             {/* banner */}
             <Ads />
             {/* list collection + 8sp + xem them*/}
-            <Collection />
+            <Collection data={galleries?.collection}/>
 
             <HomeMarquee />
 

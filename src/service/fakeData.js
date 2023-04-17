@@ -364,6 +364,35 @@ const orderBy = [
     { key: "3", code: "Mới nhất " },
     { key: "4", code: "Cũ nhất" },
 ];
+const detailSlide = [
+    {
+      id: 1,
+      title: "Example 1",
+      imageURL:
+        "https://product.hstatic.net/1000230642/product/hsm001200den__10__f7f549ff0c3345f9831dcd89e1c2dd7f.jpg",
+    },
+    {
+      id: 2,
+      title: "Example 2",
+      imageURL:
+        "https://product.hstatic.net/1000230642/product/hsm001200den__3__22795055b6804c25b7fe54d3445bcd23.jpg",
+    },
+    {
+      id: 3,
+      title: "Example 3",
+      imageURL:
+        "https://product.hstatic.net/1000230642/product/hsm001200den__4__40e8e81655194183843fc5a26616a225.jpg",
+    },
+    {
+      id: 4,
+      title: "Example 4",
+      imageURL:
+        "https://product.hstatic.net/1000230642/product/hsm001200den__5__b38e19cd32e84e479b440d143ea36794.jpg",
+    },
+  
+  ];
+  
+
 export {
     afterSaleData,
     bannerData,
@@ -377,4 +406,5 @@ export {
     colors,
     sizes,
     orderBy,
+    detailSlide
 };

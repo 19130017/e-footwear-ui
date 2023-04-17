@@ -4,11 +4,10 @@ import Slider from "react-slick";
 import style from "./Slick.module.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { dataCarouselExample } from "../../assets/dataCarousel/dataCarouselExample";
 
 const cx = classNames.bind(style);
 
-function MyCarousel() {
+function MyCarousel({ data }) {
     const settings = {
         infinite: true,
         slidesToShow: 1,
@@ -17,6 +16,7 @@ function MyCarousel() {
         autoplaySpeed: 5000,
         arrows: false,
         dots: true,
+        variableWidth: true,
         adaptiveHeight: true,
         appendDots: (dots) => (
             <Box
@@ -49,12 +49,13 @@ function MyCarousel() {
         ),
     };
 
+
     return (
         <Box className={cx("main")}>
             <Slider {...settings}>
-                {dataCarouselExample.map((item, index) => (
-                    <Box className={cx("card")} key={index}>
-                        <img className={cx("picture")} src={item.linkImage} alt="slider" />
+                {data?.map((item, index) => (
+                    <Box className={cx("card-home")} key={index}>
+                        <img className={cx("picture")} src={item.imageURL} alt="slider" />
                     </Box>
                 ))}
             </Slider>

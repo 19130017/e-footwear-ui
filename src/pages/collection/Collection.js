@@ -20,6 +20,7 @@ function Collection() {
     const category = useSelector((state) => state.categoryReducer.category);
     const dispatch = useDispatch();
     const slug = useParams();
+
     const breadCrumbData = [
         <span className={cx("text-link")} key={1}>
             Danh mục
@@ -37,6 +38,13 @@ function Collection() {
     return (
         <Box>
             <Breadcrumb data={breadCrumbData} />
+            <Box>
+                <img
+                    src={category?.gallery?.imageURL}
+                    alt={category?.name}
+                    className={cx("image-category")}
+                />
+            </Box>
             <Box
                 sx={{
                     display: "flex",
@@ -79,10 +87,10 @@ function Collection() {
                         <Pagination
                             className={cx("pagination")}
                             color="primary"
-                            count={`${products.length / 10}`}
+                            count={2}
                             shape="rounded"
                             size="large"
-                            renderItem={(item) => (
+                            renderItem={(item, index) => (
                                 <PaginationItem sx={{ fontSize: "13px" }} {...item} />
                             )}
                         />
