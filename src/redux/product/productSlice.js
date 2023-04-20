@@ -3,7 +3,8 @@ import {
     GET_ALL_PRODUCT_BY_CATE_SLUG,
     GET_PRODUCT_BY_SLUG_COLOR,
     GET_PRODUCT_BY_SLUG,
-    GET_PRODUCTS,
+    GET_PRODUCTS_HOT,
+    GET_PRODUCTS_NEW,
 } from "./productType";
 import { productApi } from "~/apis/productApi";
 const initialState = {
@@ -50,9 +51,19 @@ const fetchProductBySlugColor = createAsyncThunk(
     }
 );
 
-const fetchProducts = createAsyncThunk(GET_PRODUCTS, async (params, thunkApi) => {
+const fetchProductsHot = createAsyncThunk(GET_PRODUCTS_HOT, async (params, thunkApi) => {
     try {
-        const response = await productApi.requestGetAllProducts(params);
+        const response = await productApi.requestGetProductHot(params);
+        return response.success
+            ? thunkApi.fulfillWithValue(response)
+            : thunkApi.rejectWithValue(response);
+    } catch (error) {
+        return thunkApi.rejectWithValue(error.response.data);
+    }
+});
+const fetchProductsNew = createAsyncThunk(GET_PRODUCTS_NEW, async (params, thunkApi) => {
+    try {
+        const response = await productApi.requestGetProductNew(params);
         return response.success
             ? thunkApi.fulfillWithValue(response)
             : thunkApi.rejectWithValue(response);
@@ -112,16 +123,31 @@ const productSlice = createSlice({
                 state.isLoading = false;
                 return state;
             })
-            // get all
-            .addCase(fetchProducts.pending, (state, action) => {
+            // get product hot
+            .addCase(fetchProductsHot.pending, (state, action) => {
                 state.isLoading = true;
                 return state;
             })
-            .addCase(fetchProducts.rejected, (state, action) => {
+            .addCase(fetchProductsHot.rejected, (state, action) => {
                 state.isLoading = false;
                 return state;
             })
-            .addCase(fetchProducts.fulfilled, (state, action) => {
+            .addCase(fetchProductsHot.fulfilled, (state, action) => {
+                const products = action.payload.data;
+                state.products = products;
+                state.isLoading = false;
+                return state;
+            })
+            // get product new
+            .addCase(fetchProductsNew.pending, (state, action) => {
+                state.isLoading = true;
+                return state;
+            })
+            .addCase(fetchProductsNew.rejected, (state, action) => {
+                state.isLoading = false;
+                return state;
+            })
+            .addCase(fetchProductsNew.fulfilled, (state, action) => {
                 const products = action.payload.data;
                 state.products = products;
                 state.isLoading = false;
@@ -132,4 +158,10 @@ const productSlice = createSlice({
 
 const productReducer = productSlice.reducer;
 export default productReducer;
-export { fetchAllProductByCateSlug, fetchProductBySlugColor, fetchProductsBySlug, fetchProducts };
+export {
+    fetchAllProductByCateSlug,
+    fetchProductBySlugColor,
+    fetchProductsBySlug,
+    fetchProductsHot,
+    fetchProductsNew,
+};

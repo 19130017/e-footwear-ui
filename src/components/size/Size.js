@@ -14,7 +14,7 @@ function Size(props) {
                     key={index}
                     className={cx(
                         "size-wrapper",
-                        `${props?.value == item.size.value ? "checked" : ""}`                       
+                        `${props?.value === item.size.value ? "checked" : ""}`                       
                     )}
                     onClick={(e) => props.parentCallback(e)}
                     data-size={item.size.value}

@@ -15,42 +15,69 @@ import { fetchProductBySlugColor, fetchProductsBySlug } from "~/redux/product/pr
 import { fetchGetDetail } from "~/redux/detail/detailSlice";
 import { DetailSlide } from "~/components/swiper";
 import { ProductCategory } from "~/components/product-home";
+import MySwal from "~/utils/MySwal";
 
 const cx = classNames.bind(style);
 
 function ProductDetail() {
     const [value, setValue] = useState(3);
     const params = useParams();
-    const product = useSelector((state) => state.productReducer.product);
-    const products = useSelector((state) => state.productReducer.products);
+    const { products, product, isLoading } = useSelector((state) => state.productReducer);
     const detail = useSelector((state) => state.detailReducer.detail);
     const dispatch = useDispatch();
     const [currentSlug, setCurrentSlug] = useState("");
-    const [currentSize, setCurrentSize] = useState("0");
-    let [quantity, setQuantity] = useState(1);
+    const [currentSize, setCurrentSize] = useState(0);
+
+    let [count, setCount] = useState(1);
     useEffect(() => {
         if (currentSlug !== params.slug) {
             setCurrentSlug(params.slug);
             dispatch(fetchProductsBySlug(params));
         }
-        setCurrentSize("0");
-        setQuantity(null);
+        setCurrentSize(0);
+        setCount(1);
         dispatch(fetchProductBySlugColor(params));
     }, [params]);
 
     const handleClick = (e) => {
-        const value = e.target.getAttribute("data-size");
+        const value = Number(e.target.getAttribute("data-size"));
         setCurrentSize(value);
-        const id = e.target.getAttribute("data-id");
+        const id = Number(e.target.getAttribute("data-id"));
         dispatch(fetchGetDetail({ ...params, size_id: id }));
     };
- 
+
+    const handleIncrease = (e) => {
+        console.log("click");
+        if (currentSize === 0) {
+            return MySwal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Vui lòng chọn kích thước của giày",
+            });
+        }
+        return count < detail?.stockQuantity
+            ? setCount(count + 1)
+            : setCount(detail?.stockQuantity);
+    };
+    const handleDecrease = (e) => {
+        if (currentSize === 0) {
+            MySwal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Vui lòng chọn kích thước của giày",
+            });
+        }
+        return count > 1 ? setCount(count - 1) : setCount(1);
+    };
+
+    const addCart = () => {};
+
     return (
         <Box>
             <Box sx={{ marginBottom: "6rem" }}>
                 <Box className={cx("wrap-detail")}>
                     <Box className={cx("wrap-img")}>
-                        <DetailSlide data={product?.images} />
+                        {!isLoading && <DetailSlide data={product?.images} />}
                     </Box>
                     <Box className={cx("wrap-content")}>
                         <Typography className={cx("title")}>{product?.name}</Typography>
@@ -91,12 +118,7 @@ function ProductDetail() {
                                     Còn hàng ({detail?.stockQuantity})
                                 </Box>
                             ) : (
-                                <Box
-                                    className={cx("quantity-content")}
-                                    sx={{ display: "none", color: "#ccc" }}
-                                >
-                                    Hết hàng
-                                </Box>
+                                <Box className={cx("state-content")}>Hết hàng</Box>
                             )}
                         </Box>
                         <Box className={cx("color")}>
@@ -125,27 +147,23 @@ function ProductDetail() {
                                     component={"button"}
                                     variant="outlined"
                                     className={cx("btn-change-quantity")}
+                                    onClick={handleDecrease}
                                 >
                                     <RemoveIcon />
                                 </Box>
-                                {/* <Box
-                                    component={"input"}
-                                    type="number"
-                                    readOnly
-                                    value={quantity}
-                                    min={1}
-                                    max={detail ? detail?.stockQuantity : 10}
-                                    className={cx("quantity-buy")}
-                                /> */}
+                                <Box className={cx("quantity-buy")}>{count}</Box>
                                 <Box
                                     component={"button"}
                                     variant="outlined"
                                     className={cx("btn-change-quantity")}
+                                    onClick={handleIncrease}
                                 >
                                     <AddIcon />
                                 </Box>
                             </Box>
-                            <Button className={cx("buy-btn", "btn-red")}>Thêm vào giỏ</Button>
+                            <Button className={cx("buy-btn", "btn-red")} onClick={addCart}>
+                                Thêm vào giỏ
+                            </Button>
                         </Box>
 
                         <Box className={cx("description")}>
@@ -156,9 +174,9 @@ function ProductDetail() {
                 </Box>
 
                 <Box className={cx("wrap-rate")}>{/* <Rate /> */}</Box>
-                <Box className={cx("product-relationship")}>
+                {/* <Box className={cx("product-relationship")}>
                     <ProductCategory data={products} />
-                </Box>
+                </Box> */}
             </Box>
 
             <Box>

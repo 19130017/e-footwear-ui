@@ -1,4 +1,4 @@
-import { Pagination } from "swiper";
+import { Pagination, Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -11,20 +11,19 @@ function DetailSlide({ data }) {
     return (
         <Swiper
             pagination={{ clickable: true }}
-            modules={[Pagination]}
+            autoplay={{ delay: 5000, disableOnInteraction: false }}
+            modules={[Pagination, Autoplay]}
             spaceBetween={50}
             slidesPerView={1}
-            loop={true}            
+            loop={true}
         >
-            {data?.map((item, index) => {
-                return (
-                    <SwiperSlide key={index}>
-                        <Box className={cx("card")} key={index}>
-                            <img className={cx("picture")} src={`${item.imageURL}`} alt={"test"} />
-                        </Box>
-                    </SwiperSlide>
-                );
-            })}
+            {data?.map((item, index) => (
+                <SwiperSlide key={index}>
+                    <Box className={cx("card")} key={index}>
+                        <img className={cx("picture")} src={`${item.imageURL}`} alt={"test"} />
+                    </Box>
+                </SwiperSlide>
+            ))}
         </Swiper>
     );
 }

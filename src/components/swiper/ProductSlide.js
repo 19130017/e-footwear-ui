@@ -10,7 +10,6 @@ function ProductSlide({ data }) {
         <Swiper
             spaceBetween={10}
             slidesPerView={4}
-            loop={true}
             style={{paddingBottom:'1rem'}}
         >
             {data?.map((item, index) => {

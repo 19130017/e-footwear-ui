@@ -16,16 +16,12 @@ import productReducer from "~/redux/product/productSlice";
 import categoryReducer from "~/redux/category/categorySlice";
 import detailReducer from "~/redux/detail/detailSlice";
 import galleryReducer from "~/redux/gallery/gallerySlice";
+import { cartReducer } from "~/redux/cart/cartSlice";
 const persistConfig = {
     key: "root",
     storage,
-    whitelist: ["authReducer"],
+    whitelist: ["authReducer", "cartReducer"],
 };
-// const userPersistConfig ={
-//     key:"user",
-//     sessionStorage,
-//     whitelist:['authReducer']
-// }
 
 const rootReducer = combineReducers({
     authReducer: authReducer,
@@ -33,6 +29,7 @@ const rootReducer = combineReducers({
     categoryReducer: categoryReducer,
     detailReducer: detailReducer,
     galleryReducer: galleryReducer,
+    cartReducer: cartReducer,
 });
 
 const appReducer = (state, action) => {

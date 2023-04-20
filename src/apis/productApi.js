@@ -24,4 +24,16 @@ export const productApi = {
             .then((response) => response)
             .catch((error) => error.response.data);
     },
+    async requestGetProductHot() {
+        return await axios
+            .get("/products/hot")
+            .then((response) => response)
+            .catch((error) => error.response.data);
+    },
+    async requestGetProductNew() {
+        return await axios
+            .get("/products/new")
+            .then((response) => response)
+            .catch((error) => error.response.data);
+    },
 };

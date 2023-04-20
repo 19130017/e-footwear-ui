@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 const cx = classnames.bind(style);
 
 function ColorDetail({ data, params }) {
-    // const colorId = `color-${color?.id}`;
     return (
         <Grid container spacing={2}>
             {data?.map((item, index) => (

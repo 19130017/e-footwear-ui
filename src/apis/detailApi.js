@@ -1,7 +1,6 @@
 import axios from "./axios";
 export const detailApi = {
     async requestGetDetail(params) {
-        console.log(params);
         return await axios
             .get(`/details/${params.size_id}/product/${params.slug}/${params.color_id}`)
             .then((response) => response)

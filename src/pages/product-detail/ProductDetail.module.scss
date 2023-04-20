@@ -53,6 +53,7 @@
 
             .state-content {
                 margin-left: 10px;
+                color: #f00;
             }
         }
 
@@ -105,17 +106,19 @@
                     justify-content: center;
                     cursor: pointer;
                     background-color: #fff;
+                    outline: none;
 
                     &:hover {
                         color: #fff;
                         background-color: #000;
+                        outline: none;
+                        border: none;
                     }
                 }
 
                 .quantity-buy {
-                    border: none;
-                    outline: none;
-                    text-align: center;
+                   width: 50px;
+                   text-align: center;
                 }
             }
 
