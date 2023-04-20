@@ -27,7 +27,7 @@ function HomeMarquee() {
                 <Button
                     variant="contained"
                     className={cx("marquee-btn")}
-                    onClick={() => navigate("/collection/nam")}
+                    onClick={() => navigate("/collections/nam")}
                 >
                     Mua sắm ngay
                 </Button>

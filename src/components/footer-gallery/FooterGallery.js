@@ -1,30 +1,36 @@
-import { Box, Grid } from "@mui/material";
+import { Box } from "@mui/material";
 import classnames from "classnames/bind";
 import { Link } from "react-router-dom";
-import { galleryData } from "~/service/fakeData";
 import style from "./FooterGallery.module.scss";
+import { fetchGetFooter } from "~/redux/gallery/gallerySlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 const cx = classnames.bind(style);
 function FooterGalleryItem(props) {
     return (
         <Box className={cx("gallery-item")}>
-            <Link to={props.link} target="_blank" className={cx("gallery-link")}>
-                <img src={props.image} alt={props.name} className={cx("gallery-image")} />
+            <Link to={props?.gallery?.link} target="_blank" className={cx("gallery-link")}>
+                <img
+                    src={props?.gallery?.imageURL}
+                    alt={props?.gallery?.typeGallery?.typeName}
+                    className={cx("gallery-image")}
+                />
             </Link>
         </Box>
     );
 }
 
 function FooterGallery() {
+    const footer = useSelector((state) => state.galleryReducer.footer);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchGetFooter());
+    }, []);
     return (
         <Box component={"section"} className={cx("section-footer-gallery")}>
             <Box className={cx("gallery-list")}>
-                {galleryData.map((item, index) => (
-                    <FooterGalleryItem
-                        key={index}
-                        link={item.link}
-                        image={item.image}
-                        name={item.name}
-                    />
+                {footer?.map((item, index) => (
+                    <FooterGalleryItem key={index} gallery={item} />
                 ))}
             </Box>
         </Box>

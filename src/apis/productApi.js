@@ -18,4 +18,10 @@ export const productApi = {
             .then((response) => response)
             .catch((error) => error.response.data);
     },
+    async requestGetAllProducts() {
+        return await axios
+            .get("/products")
+            .then((response) => response)
+            .catch((error) => error.response.data);
+    },
 };

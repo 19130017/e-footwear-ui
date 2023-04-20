@@ -1,0 +1,57 @@
+.after-sale-content {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    .after-sale-text {
+        font-size: 1.4rem;
+        strong {
+            font-weight: bold;
+        }
+    }
+}
+// .swiper-button-prev,
+// .swiper-button-next {
+//     color: #000;
+// }
+// .swiper-button-prev{
+//     left: 25%;
+// }
+// .swiper-button-next{
+//     right: 25%;
+// }
+
+.card {
+    width: 100%;
+    overflow: hidden;
+    .picture {
+        width: 100%;
+    }
+}
+
+.my-carousel{
+    height: 500px;
+}
+
+.custom-dots-carousel--border {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+}
+
+.custom-dots-carousel--dot {
+    background-color: #928c8c;
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+}
+.slick-active {
+    .custom-dots-carousel--dot {
+        background-color: #000;
+    }
+    .custom-dots-carousel--border {
+        border: 2px solid #000;
+        border-radius: 100%;
+    }
+}

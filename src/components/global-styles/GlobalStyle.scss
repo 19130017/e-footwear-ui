@@ -89,35 +89,3 @@ body {
     line-height: 1.5;
 }
 
-.custom-dots-carousel--border {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2rem;
-    height: 2rem;
-}
-
-.custom-dots-carousel--dot {
-    background-color: #928c8c;
-    width: 0.7rem;
-    height: 0.7rem;
-    border-radius: 50%;
-}
-.slick-active {
-    .custom-dots-carousel--dot {
-        background-color: #000;
-    }
-    .custom-dots-carousel--border {
-        border: 2px solid #000;
-        border-radius: 100%;
-    }
-}
-
-button:focus {
-    outline: none;
-}
-
-.slick-slider {
-    display: flex;
-    align-items: center;
-}

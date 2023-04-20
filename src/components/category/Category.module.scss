@@ -29,7 +29,7 @@
             text-decoration: none;
             list-style: none;
             background-color: #fff;
-            z-index: 1;
+            z-index: 5;
             opacity: 0;
             visibility: hidden;
             .submenu-item {
@@ -68,7 +68,7 @@
                     text-decoration: none;
                     list-style: none;
                     background-color: #fff;
-                    z-index: 1;
+                    z-index: 5;
                     opacity: 0;
                     visibility: hidden;
                 }

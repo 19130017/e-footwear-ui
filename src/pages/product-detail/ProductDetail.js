@@ -4,9 +4,7 @@ import classNames from "classnames/bind";
 import Rating from "@mui/material/Rating";
 import Size from "~/components/size";
 import FooterGallery from "~/components/footer-gallery";
-import { ProductCategory } from "~/components/product-home";
 import { ColorDetail } from "~/components/color";
-import { SlickDetail } from "~/components/slick";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import Rate from "~/components/rate/Rate";
@@ -15,6 +13,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useDeferredValue, useEffect, useState } from "react";
 import { fetchProductBySlugColor, fetchProductsBySlug } from "~/redux/product/productSlice";
 import { fetchGetDetail } from "~/redux/detail/detailSlice";
+import { DetailSlide } from "~/components/swiper";
+import { ProductCategory } from "~/components/product-home";
 
 const cx = classNames.bind(style);
 
@@ -34,7 +34,7 @@ function ProductDetail() {
             dispatch(fetchProductsBySlug(params));
         }
         setCurrentSize("0");
-        setQuantity(null)
+        setQuantity(null);
         dispatch(fetchProductBySlugColor(params));
     }, [params]);
 
@@ -44,22 +44,13 @@ function ProductDetail() {
         const id = e.target.getAttribute("data-id");
         dispatch(fetchGetDetail({ ...params, size_id: id }));
     };
-
-    const handleIncrease = (e) => {
-        if (detail == null) alert("Vui lòng chọn kích thước của giày");
-        if (quantity !== detail?.stockQuantity) setQuantity(() => quantity++);
-    };
-
-    const handleDecrease = (e) => {
-        if (detail == null) alert("Vui lòng chọn kích thước của giày");
-        if (quantity > 1) setQuantity(() => quantity--);
-    };
+ 
     return (
         <Box>
             <Box sx={{ marginBottom: "6rem" }}>
                 <Box className={cx("wrap-detail")}>
                     <Box className={cx("wrap-img")}>
-                        <SlickDetail data={product?.images} />
+                        <DetailSlide data={product?.images} />
                     </Box>
                     <Box className={cx("wrap-content")}>
                         <Typography className={cx("title")}>{product?.name}</Typography>
@@ -134,11 +125,10 @@ function ProductDetail() {
                                     component={"button"}
                                     variant="outlined"
                                     className={cx("btn-change-quantity")}
-                                    onClick={handleDecrease}
                                 >
                                     <RemoveIcon />
                                 </Box>
-                                <Box
+                                {/* <Box
                                     component={"input"}
                                     type="number"
                                     readOnly
@@ -146,12 +136,11 @@ function ProductDetail() {
                                     min={1}
                                     max={detail ? detail?.stockQuantity : 10}
                                     className={cx("quantity-buy")}
-                                />
+                                /> */}
                                 <Box
                                     component={"button"}
                                     variant="outlined"
                                     className={cx("btn-change-quantity")}
-                                    onClick={handleIncrease}
                                 >
                                     <AddIcon />
                                 </Box>
@@ -167,7 +156,9 @@ function ProductDetail() {
                 </Box>
 
                 <Box className={cx("wrap-rate")}>{/* <Rate /> */}</Box>
-                <Box className={cx("wrap-new")}>{/* <ProductCategory /> */}</Box>
+                <Box className={cx("product-relationship")}>
+                    <ProductCategory data={products} />
+                </Box>
             </Box>
 
             <Box>

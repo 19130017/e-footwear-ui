@@ -1,10 +1,10 @@
 import style from "./Search.module.scss";
 import { Box, Grid, PaginationItem, Typography } from "@mui/material";
 import classNames from "classnames/bind";
-import ProductCard from "~/components/product-card/ProductCard";
 import { productCardData } from "~/service/fakeData";
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import CardProduct from "~/components/card-product/CardProduct";
 
 const cx = classNames.bind(style);
 function Search() {
@@ -31,14 +31,7 @@ function Search() {
                 <Grid container spacing={2}>
                     {productCardData.map((item, index) => (
                         <Grid key={index} item xs={3}>
-                            <ProductCard link={item.link}
-                                name={item.name}
-                                thumnailBefore={item.thumnailBefore}
-                                thumnailAfter={item.thumnailAfter}
-                                totalSize={item.totalSize}
-                                totalColor={item.totalColor}
-                                salePrice={item.salePrice}
-                                preSalePrice={item.preSalePrice} />
+                            <CardProduct data={item}/>
                         </Grid>
                     ))}
                 </Grid>

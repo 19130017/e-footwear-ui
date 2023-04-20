@@ -1,18 +1,17 @@
 import { Box } from "@mui/material";
-import SlickProduct from "../slick/SlickProduct";
-import { productCardData } from "~/service/fakeData";
 import { Typography } from "@mui/material";
-import classNames from "classnames/bind";
-import style from "./ProductCategory.module.scss";
+import { ProductSlide } from "../swiper";
 
-const cx = classNames.bind(style);
-
-
-function ProductCategory() {
+function ProductCategory({ data }) {
     return (
-        <Box className={cx("container")}>
-            <Typography className={cx("title-category")}>Sản phẩm mới</Typography>
-            <SlickProduct data={productCardData} />
+        <Box className="container">
+            <Typography
+                variant="body1"
+                sx={{ fontSize: "2.5rem", marginBottom: "1rem", fontWeight: "500" }}
+            >
+                Sản phẩm liên quan
+            </Typography>
+            <ProductSlide data={data} />
         </Box>
     );
 }

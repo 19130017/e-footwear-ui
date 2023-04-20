@@ -2,7 +2,6 @@ import style from "./Collection.module.scss";
 import classnames from "classnames/bind";
 import { Box, Grid, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import { collectionData } from "~/service/fakeData";
 const cx = classnames.bind(style);
 
 function CollectionItem(props) {

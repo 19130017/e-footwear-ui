@@ -2,7 +2,6 @@ import style from "./Collection.module.scss";
 import { Box, Grid, PaginationItem, Typography } from "@mui/material";
 import classNames from "classnames/bind";
 import FilterProduct from "~/components/filter/FilterProduct";
-import ProductCard from "~/components/product-card/ProductCard";
 import { sizes, colors, orderBy } from "~/service/fakeData";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
@@ -13,11 +12,12 @@ import { fetchAllProductByCateSlug } from "~/redux/product/productSlice";
 import FooterGallery from "~/components/footer-gallery/FooterGallery";
 import Breadcrumb from "~/components/breadcrumbs/Breadcrumb";
 import { fetchCategoryBySlug } from "~/redux/category/categorySlice";
+import CardProduct from "~/components/card-product/CardProduct";
 const cx = classNames.bind(style);
 
 function Collection() {
     const products = useSelector((state) => state.productReducer.products);
-    const category = useSelector((state) => state.categoryReducer.category);
+    const { isLoading, category } = useSelector((state) => state.categoryReducer);
     const dispatch = useDispatch();
     const slug = useParams();
 
@@ -76,7 +76,7 @@ function Collection() {
                     {products &&
                         products.map((item, index) => (
                             <Grid key={index} item xs={3}>
-                                <ProductCard product={item} />
+                                <CardProduct data={item} />
                             </Grid>
                         ))}
                 </Grid>
