@@ -4,18 +4,36 @@ import style from "./Cart.module.scss";
 import Breadcrumb from "~/components/breadcrumbs";
 import FooterGallery from "~/components/footer-gallery";
 import CartProducts from "~/components/cart-products";
-import { cartProductData } from "~/service/fakeData";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { decrementQuantity, incrementQuantity, removeItemToCart } from "~/redux/cart/cartSlice";
 const cx = classnames.bind(style);
 
 function Cart() {
     const navigate = useNavigate();
-
+    const cart = useSelector((state) => state.cartReducer.cart);
+    const dispatch = useDispatch();
     const breadcrumbs = [
         <Typography color="text.primary" className={cx("text")} key={1}>
             Giỏ hàng
         </Typography>,
     ];
+
+    const removeItem = (index) => {
+        dispatch(removeItemToCart(index));
+    };
+    const increaseQuantity = (item) => {
+        dispatch(incrementQuantity(item));
+    };
+    const decreaseQuantity = (item) => {
+        dispatch(decrementQuantity(item));
+    };
+
+    const total = cart?.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue.discountPrice * currentValue.quantity;
+    }, 0);
+    const cost = total + total * 0.1;
+
     return (
         <Box className={cx("cart")}>
             <Box className={cx("breadcrumb")}>
@@ -34,12 +52,30 @@ function Cart() {
                                 <Divider sx={{ color: "#ccc" }} />
                                 <Box className={cx("list-item")}>
                                     <Typography variant="body1" className={cx("title-number")}>
-                                        Bạn đang có <strong>11 sản phẩm</strong> trong giỏ hàng
+                                        Bạn đang có <strong>{cart?.length} sản phẩm</strong> trong
+                                        giỏ hàng
                                     </Typography>
 
-                                    <Box className={cx("content")}>
-                                        <CartProducts data={cartProductData} />
-                                    </Box>
+                                    {cart?.length === 0 ? (
+                                        <Button
+                                            variant="outlined"
+                                            className={cx("btn-continue")}
+                                            onClick={() =>
+                                                navigate("/collections/giay-bong-da-nam")
+                                            }
+                                        >
+                                            Mua sắm sản phẩm
+                                        </Button>
+                                    ) : (
+                                        <Box className={cx("content")}>
+                                            <CartProducts
+                                                data={cart}
+                                                removeParentCallback={removeItem}
+                                                decreaseCallback={decreaseQuantity}
+                                                increaseCallback={increaseQuantity}
+                                            />
+                                        </Box>
+                                    )}
                                 </Box>
                             </Box>
                         </Grid>
@@ -47,7 +83,7 @@ function Cart() {
                             <Box className={cx("cart-right")}>
                                 <Box className={cx("order-summary-block")}>
                                     <Typography variant="h5" className={cx("cart-title")}>
-                                       Thanh toán
+                                        Thanh toán
                                     </Typography>
                                     <Divider sx={{ color: "#ccc" }} />
                                     <Box className={cx("checkout-summary")}>
@@ -55,11 +91,14 @@ function Cart() {
                                             <Box component={"span"} className={cx("subtitle")}>
                                                 Tổng tính tạm
                                             </Box>
-                                            <Box component={"span"} className={cx("subtitle", 'price')}>
-                                                {Intl.NumberFormat("vi-VN", {
+                                            <Box
+                                                component={"span"}
+                                                className={cx("subtitle", "price")}
+                                            >
+                                                {total.toLocaleString("it-IT", {
                                                     style: "currency",
                                                     currency: "VND",
-                                                }).format(10023213)}
+                                                })}
                                             </Box>
                                         </Box>
                                         <Box className={cx("checkout-row")}>
@@ -68,17 +107,15 @@ function Cart() {
                                             </Box>
                                             <Box>
                                                 <Box
-                                                    className={cx("subtitle", 'price')}
+                                                    className={cx("subtitle", "price")}
                                                     sx={{ color: "#da4343" }}
                                                 >
-                                                    {Intl.NumberFormat("vi-VN", {
+                                                    {cost.toLocaleString("it-IT", {
                                                         style: "currency",
                                                         currency: "VND",
-                                                    }).format(10023213)}
+                                                    })}
                                                 </Box>
-                                                <Box className={cx("text")}>
-                                                    (Đã bao gồm VAT)
-                                                </Box>
+                                                <Box className={cx("text")}>(Đã bao gồm VAT)</Box>
                                             </Box>
                                         </Box>
                                     </Box>
@@ -88,7 +125,11 @@ function Cart() {
                                             Phí vận chuyển sẽ được tính ở trang thanh toán.
                                         </Typography>
                                     </Box>
-                                    <Button onClick={()=>navigate('/checkout')} variant="contained" className={cx("btn-buy-now")}>
+                                    <Button
+                                        onClick={() => navigate("/checkout")}
+                                        variant="contained"
+                                        className={cx("btn-buy-now")}
+                                    >
                                         Tiếp tục
                                     </Button>
                                 </Box>

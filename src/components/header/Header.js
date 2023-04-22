@@ -12,12 +12,13 @@ import { DropdownAccount, DropdownCart, DropdownSearch } from "../dropdown";
 import { useState } from "react";
 import { cartProductData } from "~/service/fakeData";
 import Category from "../category/Category";
+import { useSelector } from "react-redux";
 const cx = classNames.bind(style);
 
 function Header() {
     const [dataSearch, setDataSearch] = useState();
     const [searchText, setSearchText] = useState("");
-
+    const cart = useSelector((state) => state.cartReducer.cart);
     const handleChange = (e) => {
         // call api get
         const value = e.target.value;
@@ -86,12 +87,12 @@ function Header() {
                                 color="inherit"
                                 className={cx("icon-btn")}
                             >
-                                <Badge badgeContent={4} color="error">
+                                <Badge badgeContent={cart.length} color="error">
                                     <ShoppingBagIcon className={cx("icon")} />
                                 </Badge>
                             </IconButton>
                             <Box className={cx("dropdown-cart")}>
-                                <DropdownCart />
+                                <DropdownCart data={cart} />
                             </Box>
                         </Box>
                     </Box>

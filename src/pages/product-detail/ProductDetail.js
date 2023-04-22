@@ -16,6 +16,7 @@ import { fetchGetDetail } from "~/redux/detail/detailSlice";
 import { DetailSlide } from "~/components/swiper";
 import { ProductCategory } from "~/components/product-home";
 import MySwal from "~/utils/MySwal";
+import { addToCart } from "~/redux/cart/cartSlice";
 
 const cx = classNames.bind(style);
 
@@ -47,7 +48,6 @@ function ProductDetail() {
     };
 
     const handleIncrease = (e) => {
-        console.log("click");
         if (currentSize === 0) {
             return MySwal.fire({
                 icon: "error",
@@ -61,7 +61,7 @@ function ProductDetail() {
     };
     const handleDecrease = (e) => {
         if (currentSize === 0) {
-            MySwal.fire({
+            return MySwal.fire({
                 icon: "error",
                 title: "Oops...",
                 text: "Vui lòng chọn kích thước của giày",
@@ -70,7 +70,34 @@ function ProductDetail() {
         return count > 1 ? setCount(count - 1) : setCount(1);
     };
 
-    const addCart = () => {};
+    const addCart = () => {
+        if (currentSize === 0) {
+            return MySwal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Vui lòng chọn kích thước của giày",
+            });
+        }
+        dispatch(
+            addToCart({
+                id: product.id,
+                slug: product.slug,
+                name: product.name,
+                originPrice: product.originPrice,
+                discountPrice: product.discountPrice,
+                discountRate: product.discountRate,
+                color: {
+                    id: product.color.id,
+                    name: product.color.name,
+                    codeColor: product.color.codeColor,
+                },
+                imageURL: product.images[0].imageURL,
+                quantity: count,
+                size: detail.size.value,
+                stockQuantity: detail.stockQuantity,
+            })
+        );
+    };
 
     return (
         <Box>

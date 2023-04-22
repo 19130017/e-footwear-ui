@@ -5,14 +5,17 @@ import { Payment, Address } from "~/components/checkout-items";
 import { AddressAdd } from "~/components/dialog";
 import { checkoutData, userInfo } from "~/service/fakeData";
 import style from "./Checkout.module.scss";
+import { useSelector } from "react-redux";
 
 const cx = classnames.bind(style);
 
 function Checkout() {
-    const total = checkoutData.reduce((accumulator, currentValue) => {
-        return accumulator + currentValue.salePrice;
+    const cart = useSelector((state) => state.cartReducer.cart);
+    const total = cart?.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue.discountPrice * currentValue.quantity;
     }, 0);
-    const cost = total > 700000 ? total : total + 11000;
+    const cost = total + total * 0.1;
+
     return (
         <Grid container spacing={2} className={cx("checkout")}>
             <Grid item xs={8} className={cx("checkout-left")}>
@@ -135,12 +138,12 @@ function Checkout() {
                         </Link>
                     </Box>
                     <Box className={cx("info-body")}>
-                        {checkoutData.map((item, index) => (
+                        {cart?.map((item, index) => (
                             <Box key={index} className={cx("checkout-item")}>
                                 <Grid container className={cx("grid-row")}>
                                     <Grid item xs={3} className={cx("grid-column")}>
                                         <img
-                                            src={item.thumbnailBefore}
+                                            src={item.imageURL}
                                             alt={item.name}
                                             className={cx("image")}
                                         />
@@ -151,7 +154,7 @@ function Checkout() {
                                         className={cx("grid-column")}
                                         sx={{ marginLeft: "2rem" }}
                                     >
-                                        <Link to={item.link}>
+                                        <Link to={`/detail/${item.slug}/${item.color.id}`}>
                                             <Typography
                                                 variant="body1"
                                                 className={cx("product-name")}
@@ -166,10 +169,10 @@ function Checkout() {
                                             Số lượng {item.quantity}
                                         </Typography>
                                         <Typography variant="body1" className={cx("product-price")}>
-                                            {Intl.NumberFormat("vi-VN", {
+                                            {item.discountPrice.toLocaleString("it-IT", {
                                                 style: "currency",
                                                 currency: "VND",
-                                            }).format(item.salePrice)}
+                                            })}
                                         </Typography>
                                     </Grid>
                                 </Grid>
@@ -183,10 +186,10 @@ function Checkout() {
                             Tổng tạm tính
                         </Typography>
                         <Typography variant="body1" className={cx("subtitle--bold")}>
-                            {Intl.NumberFormat("vi-VN", {
+                            {total.toLocaleString("it-IT", {
                                 style: "currency",
                                 currency: "VND",
-                            }).format(total)}
+                            })}
                         </Typography>
                     </Box>
                     <Box className={cx("d-flex")}>
@@ -197,9 +200,9 @@ function Checkout() {
                             {total > 700000
                                 ? "Miễn phi"
                                 : Intl.NumberFormat("vi-VN", {
-                                    style: "currency",
-                                    currency: "VND",
-                                }).format(11000)}
+                                      style: "currency",
+                                      currency: "VND",
+                                  }).format(11000)}
                         </Typography>
                     </Box>
                     <Box className={cx("d-flex")}>
@@ -208,10 +211,10 @@ function Checkout() {
                         </Typography>
                         <Box>
                             <Typography variant="body1" className={cx("subtitle-cost")}>
-                                {Intl.NumberFormat("vi-VN", {
+                                {cost.toLocaleString("it-IT", {
                                     style: "currency",
                                     currency: "VND",
-                                }).format(cost)}
+                                })}
                             </Typography>
                             <Typography variant="body2" className={cx("note-vat")}>
                                 (Đã bao gồm VAT)

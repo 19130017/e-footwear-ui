@@ -3,62 +3,68 @@ import classnames from "classnames/bind";
 import { Link, useNavigate } from "react-router-dom";
 import style from "./Dropdown.module.scss";
 const cx = classnames.bind(style);
-
-function DropdownCart() {
+function DropdownCart({ data }) {
     const navigate = useNavigate();
+    const total = data?.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue.discountPrice * currentValue.quantity;
+    }, 0);
     return (
         <Box className={cx("dropdown")}>
             <Typography variant="h5" className={cx("title")}>
                 Giỏ hàng
             </Typography>
-
-            <Box className={cx("content")}>
-                {[1, 2, 3].map((item, index) => (
-                    <Grid
-                        key={index}
-                        container
-                      className={cx('wrapper')}
-                    >
-                        <Grid item>
-                            <img
-                                className={cx("image")}
-                                alt="test"
-                                src="https://product.hstatic.net/1000230642/product/dsmh11100xdg__2__41ce09f903184a9b928a5493e00241ec_small.jpg"
-                            />
-                        </Grid>
-                        <Grid item sx={{ flex: 1, marginLeft: "0.5rem" }}>
-                            <Link to={"detail/213"} className={cx("product-link")}>
-                                <Typography variant="body1" className={cx("product-name")}>
-                                    Giày Bóng Đá Nam Hunter Football Futsal DSMH11100XDG (Xanh
-                                    Dương)
-                                </Typography>
-                            </Link>
-                            <Typography variant="body1" className={cx("product-type")}>
-                                Xanh dương / 44
-                            </Typography>
-                            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                                <Typography variant="body1" className={cx("quantity")}>
-                                    Số lượng: 1
-                                </Typography>
-                                <Box className={cx("summary-price")}>
-                                    <Typography variant="body1" className={cx("sale-price")}>
-                                        {Intl.NumberFormat("vi-VN", {
-                                            style: "currency",
-                                            currency: "VND",
-                                        }).format(2132131)}
+            {data?.length === 0 ? (
+                <Box className={cx("cart-empty")}>Hiện chưa có sản phẩm</Box>
+            ) : (
+                <Box className={cx("content")}>
+                    {data?.map((item, index) => (
+                        <Grid key={index} container className={cx("wrapper")}>
+                            <Grid item>
+                                <img
+                                    className={cx("image")}
+                                    alt="test"
+                                    src={`${item?.imageURL}`}
+                                />
+                            </Grid>
+                            <Grid item sx={{ flex: 1, marginLeft: "0.5rem" }}>
+                                <Link
+                                    to={`/detail/${item.slug}/${item?.color.id}`}
+                                    className={cx("product-link")}
+                                >
+                                    <Typography variant="body1" className={cx("product-name")}>
+                                        {item.name}
                                     </Typography>
-                                    <Typography variant="body1" className={cx("pre-price")}>
-                                        {Intl.NumberFormat("vi-VN", {
-                                            style: "currency",
-                                            currency: "VND",
-                                        }).format(2132131)}
+                                </Link>
+                                <Typography variant="body1" className={cx("product-type")}>
+                                    {item?.color.name} / {item.size}
+                                </Typography>
+                                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                                    <Typography variant="body1" className={cx("quantity")}>
+                                        Số lượng: {item.quantity}
                                     </Typography>
+                                    <Box className={cx("summary-price")}>
+                                        <Typography variant="body1" className={cx("sale-price")}>
+                                            {item?.discountPrice.toLocaleString("it-IT", {
+                                                style: "currency",
+                                                currency: "VND",
+                                            })}
+                                        </Typography>
+                                        {item?.discountRate !== 0 && (
+                                            <Typography variant="body1" className={cx("pre-price")}>
+                                                {item?.originPrice.toLocaleString("it-IT", {
+                                                    style: "currency",
+                                                    currency: "VND",
+                                                })}
+                                            </Typography>
+                                        )}
+                                    </Box>
                                 </Box>
-                            </Box>
+                            </Grid>
                         </Grid>
-                    </Grid>
-                ))}
-            </Box>
+                    ))}
+                </Box>
+            )}
+
             <Box className={cx("cart-summary")}>
                 <Box
                     sx={{
@@ -78,10 +84,10 @@ function DropdownCart() {
                         variant="body1"
                         sx={{ fontSize: "1.8rem", color: "red", fontWeight: "bold" }}
                     >
-                        {Intl.NumberFormat("vi-VN", {
+                        {total?.toLocaleString("it-IT", {
                             style: "currency",
                             currency: "VND",
-                        }).format(2132131)}
+                        })}
                     </Typography>
                 </Box>
                 <Box>

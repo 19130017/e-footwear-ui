@@ -114,7 +114,7 @@
                         .price {
                             font-weight: bold;
                         }
-                        .text{
+                        .text {
                             font-size: 1.2rem;
                             color: #82869e;
                         }
@@ -129,6 +129,13 @@
             border-radius: 0.7rem;
             .list-item {
                 padding: 1.5rem 0;
+
+                .btn-continue {
+                    font-size: 2rem;
+                    text-transform: initial;
+
+                    outline: none;
+                }
                 .title-number {
                     font-size: 1.4rem;
                     margin-bottom: 1.5rem;
