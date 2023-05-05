@@ -8,8 +8,7 @@ import HelpIcon from "@mui/icons-material/Help";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import ProfileIcon from "@mui/icons-material/AdminPanelSettings";
 const cx = classnames.bind(style);
-function DropdownAccount() {
-    const isLogin = false;
+function DropdownAccount({ isLogin }) {
     return (
         <List className={cx("list")}>
             {isLogin ? (

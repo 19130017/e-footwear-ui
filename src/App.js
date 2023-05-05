@@ -7,7 +7,6 @@ import Home from "~/pages/home";
 import Contact from "~/pages/contact";
 import About from "~/pages/about";
 import Account from "~/pages/account";
-import Product from "~/pages/collection";
 import Cart from "~/pages/cart";
 import ProductDetail from "~/pages/product-detail";
 import Checkout from "~/pages/checkout";

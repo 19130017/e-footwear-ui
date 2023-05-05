@@ -19,6 +19,7 @@ function Header() {
     const [dataSearch, setDataSearch] = useState();
     const [searchText, setSearchText] = useState("");
     const cart = useSelector((state) => state.cartReducer.cart);
+    const { isLogin, avatar } = useSelector((state) => state.authReducer);
     const handleChange = (e) => {
         // call api get
         const value = e.target.value;
@@ -71,12 +72,21 @@ function Header() {
                                 <DropdownSearch data={dataSearch} value={searchText} />
                             </Box>
                         </Box>
+
                         <Box className={cx("icon-wrapper")}>
                             <IconButton className={cx("icon-btn")}>
-                                <PersonIcon className={cx("icon")} />
+                                {isLogin ? (
+                                    <img
+                                        src={avatar}
+                                        alt="Anh dai dien"
+                                        className={cx("avatar-image")}
+                                    />
+                                ) : (
+                                    <PersonIcon className={cx("icon")} />
+                                )}
                             </IconButton>
                             <Box className={cx("dropdown-account")}>
-                                <DropdownAccount />
+                                <DropdownAccount isLogin={isLogin} />
                             </Box>
                         </Box>
 

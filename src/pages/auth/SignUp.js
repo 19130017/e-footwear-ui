@@ -67,7 +67,11 @@ function SignUp() {
         }
         if ("email" in fieldValues) {
             if (fieldValues.email !== "") {
-                if (/$^|.+@.+..+/.test(fieldValues.email)) {
+                if (
+                    fieldValues.email.match(
+                        /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+                    )
+                ) {
                     temp.email = "";
                     tempEnable.email = false;
                 } else {
@@ -104,14 +108,13 @@ function SignUp() {
         e.preventDefault();
         if (validate()) {
             await dispatch(fetchRegister(values));
-            console.log("hello");
             // xử lý tiếp
             resetForm();
         }
     };
 
     return (
-        <Box className={cx("wrapper")} >
+        <Box className={cx("wrapper")}>
             <Box className={cx("content")}>
                 <TitleFullWidth cx={cx} title="Đăng ký tài khoản" />
                 <Typography variant="body2" className={cx("sub-title")} sx={{ fontSize: "1.4rem" }}>

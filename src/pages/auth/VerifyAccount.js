@@ -5,16 +5,16 @@ import { useParams } from "react-router-dom";
 import { fetchVerifyAccount } from "~/redux/auth/authSlice";
 
 function VerifyAccount() {
-    // const token = useParams();
-    // const dispatch = useDispatch();
-    const response = true;
-    // const { response } = useSelector((state) => state.authReducer);
-    // useEffect(() => {
-    //     dispatch(fetchVerifyAccount(token));
-    // }, [dispatch]);
+    const token = useParams();
+    const dispatch = useDispatch();
+    const { response } = useSelector((state) => state.authReducer);
+    useEffect(() => {
+        dispatch(fetchVerifyAccount(token));
+    }, [dispatch]);
+
     return (
         <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-            {response && <Typography variant="body1">{response?.message}</Typography>}
+            h{response && <Typography variant="body1">{response?.message}</Typography>}
         </Box>
     );
 }

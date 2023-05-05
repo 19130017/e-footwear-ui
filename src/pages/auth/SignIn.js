@@ -11,24 +11,33 @@ import { useEffect } from "react";
 const cx = classNames.bind(style);
 
 function SignIn() {
-    const { accessToken, userId } = useSelector((state) => state.authReducer);
+    const { accountId, accessToken } = useSelector((state) => state.authReducer);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const initialValues = {
-        username: "",
+        email: "",
         password: "",
     };
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors };
         let tempEnable = { ...errorsEnable };
-        if ("username" in fieldValues) {
-            if (fieldValues.username === "") {
-                tempEnable.username = true;
-                temp.username = "Không được để trống.";
+        if ("email" in fieldValues) {
+            if (fieldValues.email !== "") {
+                if (
+                    fieldValues.email.match(
+                        /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+                    )
+                ) {
+                    temp.email = "";
+                    tempEnable.email = false;
+                } else {
+                    temp.email = "Không đúng định dạng email";
+                    tempEnable.email = true;
+                }
             } else {
-                tempEnable.username = false;
-                temp.username = "";
+                temp.email = "Không được để trống";
+                tempEnable.email = true;
             }
         }
         if ("password" in fieldValues) {
@@ -36,8 +45,13 @@ function SignIn() {
                 tempEnable.password = true;
                 temp.password = "Không được để trống.";
             } else {
-                tempEnable.password = false;
-                temp.password = "";
+                if (fieldValues.password.length >= 8) {
+                    temp.password = "";
+                    tempEnable.password = false;
+                } else {
+                    temp.password = "Mật khẩu phải có ít nhất 8 ký tự";
+                    tempEnable.password = true;
+                }
             }
         }
 
@@ -62,8 +76,8 @@ function SignIn() {
     } = useForm(initialValues, true, validate);
 
     useEffect(() => {
-        if (accessToken && userId) navigate("/");
-    }, [accessToken, navigate]);
+        if (accountId && accessToken) navigate("/");
+    }, [accountId, accessToken]);
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (validate()) {
@@ -74,7 +88,7 @@ function SignIn() {
     };
 
     return (
-        <Box className={cx("wrapper")}  >
+        <Box className={cx("wrapper")}>
             <Box className={cx("content")}>
                 <TitleFullWidth cx={cx} title=" Đăng nhập" />
 
@@ -83,22 +97,22 @@ function SignIn() {
                     <Link to="/auth/forgot" className={cx("btn", "btn--inline")}>
                         "Lấy mật khẩu"
                     </Link>
-                    để có thể truy cập vào tài khoản bằng username nhé.
+                    để có thể truy cập vào tài khoản bằng email nhé.
                 </Typography>
                 <Form onSubmit={handleSubmit}>
                     <Box>
                         <TextField
                             autoComplete="off"
-                            label="Username / Email"
-                            name="username"
+                            label="Email"
+                            name="email"
                             variant="outlined"
-                            placeholder="Username"
+                            placeholder="Nhập email bạn đã đăng ký"
                             fullWidth
                             onChange={handleInputChange}
                             FormHelperTextProps={{ style: { fontSize: 12 } }}
-                            error={errorsEnable.username}
-                            value={values.username}
-                            helperText={errors.username}
+                            error={errorsEnable.email}
+                            value={values.email}
+                            helperText={errors.email}
                             InputProps={{ style: { borderRadius: "1.5rem", fontSize: "1.4rem" } }}
                             InputLabelProps={{
                                 style: { fontSize: "1.6rem" },

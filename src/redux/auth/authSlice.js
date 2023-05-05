@@ -3,18 +3,19 @@ import { authApi } from "~/apis/authApi";
 import MySwal, { PopUpSuccess } from "~/utils/MySwal";
 import { AUTH_LOGIN, AUTH_REGISTER, AUTH_VERIFY_ACCOUNT } from "./authType";
 const initialState = {
-    userId: "",
-    accessToken: "",
+    accountId: 0,
     refreshToken: "",
-    isLogined: false,
+    firstName: "",
+    accessToken: "",
+    avatar: "",
+    isLogin: false,
     isLoading: false,
-    response: "",
 };
 
 const fetchRegister = createAsyncThunk(AUTH_REGISTER, async (params, thunkApi) => {
     try {
         const response = await authApi.requestRegister(params);
-        return response.status === 200
+        return response.success
             ? thunkApi.fulfillWithValue(response)
             : thunkApi.rejectWithValue(response);
     } catch (error) {
@@ -25,7 +26,7 @@ const fetchRegister = createAsyncThunk(AUTH_REGISTER, async (params, thunkApi) =
 const fetchVerifyAccount = createAsyncThunk(AUTH_VERIFY_ACCOUNT, async (params, thunkApi) => {
     try {
         const response = await authApi.requestVerifyAccount(params);
-        return response.status === 200
+        return response.success
             ? thunkApi.fulfillWithValue(response)
             : thunkApi.rejectWithValue(response);
     } catch (error) {
@@ -36,14 +37,13 @@ const fetchVerifyAccount = createAsyncThunk(AUTH_VERIFY_ACCOUNT, async (params, 
 const fetchLogin = createAsyncThunk(AUTH_LOGIN, async (params, thunkApi) => {
     try {
         const response = await authApi.requestLogin(params);
-        return response.status === 200
+        return response.success
             ? thunkApi.fulfillWithValue(response)
             : thunkApi.rejectWithValue(response);
     } catch (error) {
         return thunkApi.rejectWithValue(error.response.data);
     }
 });
-
 const authSlice = createSlice({
     name: "auth",
     initialState,
@@ -70,26 +70,35 @@ const authSlice = createSlice({
                 PopUpSuccess.fire({
                     icon: "success",
                     title: "Thành công",
-                    text: data.message,
+                    text: data,
                 });
+
                 return state;
             })
-            // verify
+            // verify account
             .addCase(fetchVerifyAccount.pending, (state, action) => {
                 state.isLoading = true;
                 return state;
             })
             .addCase(fetchVerifyAccount.rejected, (state, action) => {
                 state.isLoading = false;
-                state.response = action.payload;
+                MySwal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: action.payload.message,
+                });
                 return state;
             })
             .addCase(fetchVerifyAccount.fulfilled, (state, action) => {
+                const data = action.payload.data;
                 state.isLoading = false;
-                state.response = action.payload.data;
+                PopUpSuccess.fire({
+                    icon: "success",
+                    title: "Thành công",
+                    text: data,
+                });
                 return state;
             })
-
             // login
             .addCase(fetchLogin.pending, (state, action) => {
                 state.isLoading = true;
@@ -106,20 +115,17 @@ const authSlice = createSlice({
             })
             .addCase(fetchLogin.fulfilled, (state, action) => {
                 const data = action.payload.data;
-                console.log(data);
                 state.isLoading = false;
-                state.userId = data?.options?.data.userId
-                state.accessToken = data?.options?.data.access_token
-                state.refreshToken = data?.options?.data.refresh_token
-                // PopUpSuccess.fire({
-                //     icon: "success",
-                //     title: "Thành công",
-                //     text: data.message,
-                // });
+                state.isLogin = true;
+                state.firstName = data.firstName;
+                state.accessToken = data.token;
+                state.refreshToken = data.refreshToken;
+                state.accountId = data.accountId;
+                state.avatar = data.avatar;
                 return state;
             });
     },
 });
 const authReducer = authSlice.reducer;
 export default authReducer;
-export { fetchRegister, fetchVerifyAccount,fetchLogin };
+export { fetchRegister, fetchVerifyAccount, fetchLogin };
