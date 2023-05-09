@@ -30,7 +30,7 @@
             padding: 1rem 1rem 1.5rem 1.5rem;
             background-color: #fff;
             border-radius: 1rem;
-            .add-address{
+            .add-address {
                 width: 30%;
                 margin: 0 auto;
             }
@@ -187,7 +187,7 @@
             .d-flex {
                 display: flex;
                 justify-content: space-between;
-                align-items: start;
+                align-items: flex-start;
                 margin-bottom: 1rem;
                 .subtitle {
                     color: #848788;
@@ -210,4 +210,3 @@
         }
     }
 }
-

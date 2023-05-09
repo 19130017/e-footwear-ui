@@ -20,8 +20,9 @@ import NotFound from "./pages/not-found";
 import ComingSoon from "./pages/coming-soon/ComingSoon";
 import Search from "./pages/search/Search";
 import Collection from "./pages/collection";
+import { useSelector } from "react-redux";
 function App() {
-    const isLogin = false;
+    const { isLogin } = useSelector((state) => state.authReducer);
     return (
         <div className="App">
             <Routes>

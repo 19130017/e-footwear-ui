@@ -37,7 +37,6 @@ function DialogCustom(props) {
     const [openProvince, setOpenProvince] = useState(false);
     const [openDistrict, setOpenDistrict] = useState(false);
     const [openWard, setOpenWard] = useState(false);
-    console.log(provinces,districts,wards);
     // handle province
     const handleProvince = {
         clickInput: async () => {
@@ -52,7 +51,8 @@ function DialogCustom(props) {
                         "Content-Type": "application/json",
                     },
                 });
-                setProvinces(fetchData?.results);
+
+                setProvinces(fetchData?.data?.results);
             }
         },
 
@@ -77,20 +77,17 @@ function DialogCustom(props) {
             if (openWard) setOpenWard(!openWard);
             setOpenDistrict(!openDistrict);
 
-
-            if (!districts) {
-                const fetchData = await axios.get(
-                    `https://vapi.vnappmob.com/api/province/district/${province?.id}`,
-                    {
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                    }
-                );
-
-                setDistricts(fetchData?.results);
-            }
+            const fetchData = await axios.get(
+                `https://vapi.vnappmob.com/api/province/district/${province?.id}`,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+            setDistricts(fetchData?.data?.results);
         },
+
         chooseDistrict: (e) => {
             const id = e.target.getAttribute("data-district-id");
             const name = e.target.getAttribute("data-district-name");
@@ -111,17 +108,15 @@ function DialogCustom(props) {
             if (openProvince) setOpenProvince(!openProvince);
             setOpenWard(!openWard);
 
-            if (!wards) {
-                const fetchData = await axios.get(
-                    `https://vapi.vnappmob.com/api/province/ward/${district?.id}`,
-                    {
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                    }
-                );
-                setWards(fetchData?.results);
-            }
+            const fetchData = await axios.get(
+                `https://vapi.vnappmob.com/api/province/ward/${district?.id}`,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+            setWards(fetchData?.data?.results);
         },
         chooseWard: (e) => {
             const id = e.target.getAttribute("data-ward-id");
@@ -239,26 +234,27 @@ function DialogCustom(props) {
         handleInputChange,
         resetForm,
     } = useForm(initialValues, true, validate);
-    useEffect(() => {
-        const renderData = () => {
-            if (props?.data) {
-                setValues({
-                    ...values,
-                    fullName: props?.data?.fullName,
-                    email: props?.data?.email,
-                    phone: props?.data?.phone,
-                    provinceName: props?.data?.provinceName,
-                    districtName: props?.data?.districtName,
-                    wardName: props?.data?.wardName,
-                    address: props?.data?.address,
-                });
-                setDistrict({ id: props?.data?.districtId, name: props?.data?.districtName });
-                setProvince({ id: props?.data?.provinceId, name: props?.data?.provinceName });
-                setWard({ id: props?.data?.wardId, name: props?.data?.districtName });
-            }
-        };
-        renderData();
-    }, []);
+
+    // useEffect(() => {
+    //     const renderData = () => {
+    //         if (props?.data) {
+    //             setValues({
+    //                 ...values,
+    //                 fullName: props?.data?.fullName,
+    //                 email: props?.data?.email,
+    //                 phone: props?.data?.phone,
+    //                 provinceName: props?.data?.provinceName,
+    //                 districtName: props?.data?.districtName,
+    //                 wardName: props?.data?.wardName,
+    //                 address: props?.data?.address,
+    //             });
+    //             setDistrict({ id: props?.data?.districtId, name: props?.data?.districtName });
+    //             setProvince({ id: props?.data?.provinceId, name: props?.data?.provinceName });
+    //             setWard({ id: props?.data?.wardId, name: props?.data?.districtName });
+    //         }
+    //     };
+    //     renderData();
+    // }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -272,6 +268,7 @@ function DialogCustom(props) {
                 wardId: ward?.id,
             });
             props.parentCallbackClose(false);
+            resetForm();
         }
     };
 

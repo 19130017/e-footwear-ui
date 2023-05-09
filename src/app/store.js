@@ -10,13 +10,18 @@ import {
     REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+
 // reducers
 import authReducer from "~/redux/auth/authSlice";
 import productReducer from "~/redux/product/productSlice";
 import categoryReducer from "~/redux/category/categorySlice";
 import detailReducer from "~/redux/detail/detailSlice";
 import galleryReducer from "~/redux/gallery/gallerySlice";
-import { cartReducer } from "~/redux/cart/cartSlice";
+import customerReducer from "~/redux/customer/customerSlice";
+import cartReducer from "~/redux/cart/cartSlice";
+import addressReducer from "~/redux/address/addressSlice";
+import { AUTH_LOGOUT } from "~/redux/auth/authType";
+
 const persistConfig = {
     key: "root",
     storage,
@@ -24,16 +29,18 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
+    customerReducer: customerReducer,
     authReducer: authReducer,
     productReducer: productReducer,
     categoryReducer: categoryReducer,
     detailReducer: detailReducer,
     galleryReducer: galleryReducer,
     cartReducer: cartReducer,
+    addressReducer: addressReducer,
 });
 
 const appReducer = (state, action) => {
-    if (action.type === "AUTH_LOGOUT" + "/fulfilled") {
+    if (action.type === AUTH_LOGOUT + "/fulfilled") {
         return rootReducer(undefined, action);
     }
 

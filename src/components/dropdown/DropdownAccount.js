@@ -1,14 +1,23 @@
 import { Box, Divider, List, ListItem, ListItemText } from "@mui/material";
 import classnames from "classnames/bind";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import style from "./Dropdown.module.scss";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import HelpIcon from "@mui/icons-material/Help";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import ProfileIcon from "@mui/icons-material/AdminPanelSettings";
+import { useDispatch } from "react-redux";
+import { fetchLogout } from "~/redux/auth/authSlice";
+
 const cx = classnames.bind(style);
 function DropdownAccount({ isLogin }) {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const handleClick = async () => {
+        await dispatch(fetchLogout());
+        navigate("/auth/sign-in");
+    };
     return (
         <List className={cx("list")}>
             {isLogin ? (
@@ -29,7 +38,7 @@ function DropdownAccount({ isLogin }) {
                             </ListItemText>
                         </ListItem>
                     </Link>
-                    <Link to={"/auth/logout"} className={cx("item-link")}>
+                    <Box className={cx("item-link")} onClick={handleClick}>
                         <ListItem>
                             <ListItemText className={cx("item-text")}>
                                 <LogoutIcon className={cx("icon")} />
@@ -37,7 +46,7 @@ function DropdownAccount({ isLogin }) {
                             </ListItemText>
                         </ListItem>
                         <Divider />
-                    </Link>
+                    </Box>
                 </>
             ) : (
                 <>

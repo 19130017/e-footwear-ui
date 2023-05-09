@@ -6,14 +6,17 @@ import { Link } from "react-router-dom";
 import { TitleFullWidth } from "~/components/header/FullWidthHeader";
 import { FacebookButton } from "~/components/button";
 import { useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchRegister } from "~/redux/auth/authSlice";
+import Loading from "~/components/loading/Loading";
 
 const cx = classNames.bind(style);
 function SignUp() {
     const dispatch = useDispatch();
     const textRef = useRef();
     const refPassword = textRef.current?.value;
+    const { isLoading } = useSelector((state) => state.authReducer);
+
     const initialValues = {
         username: "",
         password: "",
@@ -246,6 +249,7 @@ function SignUp() {
                     </Grid>
                 </Grid>
             </Box>
+            <Loading open={isLoading} />
         </Box>
     );
 }

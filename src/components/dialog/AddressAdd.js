@@ -2,13 +2,19 @@ import style from "./Dialog.module.scss";
 import { Box, Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import classnames from "classnames/bind";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DialogCustom from "./DialogCustom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCreateAddress } from "~/redux/address/addressSlice";
+import Loading from "../loading/Loading";
 
 const cx = classnames.bind(style);
 
 function AddressAdd() {
     const [open, setOpen] = useState(false);
+    const { accountId, accessToken } = useSelector((state) => state.authReducer);
+    const { isLoading } = useSelector((state) => state.addressReducer);
+    const dispatch = useDispatch();
     const handleOpen = () => {
         setOpen(true);
     };
@@ -17,8 +23,22 @@ function AddressAdd() {
         setOpen(childData);
     };
     const handleSubmit = (childData) => {
-        //
-        console.log(childData);
+        const newAddress = {
+            address: childData.address,
+            fullName: childData.fullName,
+            phone: childData.phone,
+            email: childData.email,
+            isDefault: childData.isDefault,
+            addresses: {
+                districtId: childData.districtId,
+                districtName: childData.districtName,
+                provinceId: childData.provinceId,
+                provinceName: childData.provinceName,
+                wardId: childData.wardId,
+                wardName: childData.wardName,
+            },
+        };
+        dispatch(fetchCreateAddress({ newAddress, accessToken, accountId }));
     };
 
     return (
@@ -32,6 +52,7 @@ function AddressAdd() {
                 parentCallbackClose={handleClose}
                 parentCallbackSubmit={handleSubmit}
             />
+            <Loading open={isLoading} />
         </Box>
     );
 }

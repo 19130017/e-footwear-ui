@@ -1,11 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { authApi } from "~/apis/authApi";
 import MySwal, { PopUpSuccess } from "~/utils/MySwal";
-import { AUTH_LOGIN, AUTH_REGISTER, AUTH_VERIFY_ACCOUNT } from "./authType";
+import { AUTH_LOGIN, AUTH_REGISTER, AUTH_VERIFY_ACCOUNT, AUTH_LOGOUT } from "./authType";
+import storage from "redux-persist/lib/storage";
+
 const initialState = {
     accountId: 0,
     refreshToken: "",
-    firstName: "",
+    username: "",
     accessToken: "",
     avatar: "",
     isLogin: false,
@@ -43,6 +45,10 @@ const fetchLogin = createAsyncThunk(AUTH_LOGIN, async (params, thunkApi) => {
     } catch (error) {
         return thunkApi.rejectWithValue(error.response.data);
     }
+});
+
+const fetchLogout = createAsyncThunk(AUTH_LOGOUT, async (params, thunkApi) => {
+    return;
 });
 const authSlice = createSlice({
     name: "auth",
@@ -117,15 +123,25 @@ const authSlice = createSlice({
                 const data = action.payload.data;
                 state.isLoading = false;
                 state.isLogin = true;
-                state.firstName = data.firstName;
+                state.username = data.username;
                 state.accessToken = data.token;
                 state.refreshToken = data.refreshToken;
                 state.accountId = data.accountId;
                 state.avatar = data.avatar;
+                return state;
+            })
+            //Logout
+            .addCase(fetchLogout.fulfilled, (state, action) => {
+                state.accountId = 0;
+                state.refreshToken = "";
+                state.username = "";
+                state.accessToken = "";
+                state.avatar = "";
+                // storage.getItem("persist:root");
                 return state;
             });
     },
 });
 const authReducer = authSlice.reducer;
 export default authReducer;
-export { fetchRegister, fetchVerifyAccount, fetchLogin };
+export { fetchRegister, fetchVerifyAccount, fetchLogin, fetchLogout };

@@ -8,36 +8,34 @@ import { TitleFullWidth } from "~/components/header/FullWidthHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLogin } from "~/redux/auth/authSlice";
 import { useEffect } from "react";
+import { fetchGetProfile } from "~/redux/customer/customerSlice";
+import Loading from "~/components/loading/Loading";
 const cx = classNames.bind(style);
 
 function SignIn() {
-    const { accountId, accessToken } = useSelector((state) => state.authReducer);
+    const { accountId, accessToken, isLoading } = useSelector((state) => state.authReducer);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const initialValues = {
-        email: "",
+        username: "",
         password: "",
     };
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors };
         let tempEnable = { ...errorsEnable };
-        if ("email" in fieldValues) {
-            if (fieldValues.email !== "") {
-                if (
-                    fieldValues.email.match(
-                        /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
-                    )
-                ) {
-                    temp.email = "";
-                    tempEnable.email = false;
-                } else {
-                    temp.email = "Không đúng định dạng email";
-                    tempEnable.email = true;
-                }
+        if ("username" in fieldValues) {
+            if (fieldValues.username === "") {
+                tempEnable.username = true;
+                temp.username = "Không được để trống.";
             } else {
-                temp.email = "Không được để trống";
-                tempEnable.email = true;
+                if (fieldValues.username.length >= 5) {
+                    tempEnable.username = false;
+                    temp.username = "";
+                } else {
+                    tempEnable.username = true;
+                    temp.username = "Username ít nhất phải 5 ký tự";
+                }
             }
         }
         if ("password" in fieldValues) {
@@ -76,7 +74,9 @@ function SignIn() {
     } = useForm(initialValues, true, validate);
 
     useEffect(() => {
-        if (accountId && accessToken) navigate("/");
+        if (accessToken !== "" && accountId !== 0) {
+            navigate("/");
+        }
     }, [accountId, accessToken]);
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -97,22 +97,22 @@ function SignIn() {
                     <Link to="/auth/forgot" className={cx("btn", "btn--inline")}>
                         "Lấy mật khẩu"
                     </Link>
-                    để có thể truy cập vào tài khoản bằng email nhé.
+                    để có thể truy cập vào tài khoản bằng username nhé.
                 </Typography>
                 <Form onSubmit={handleSubmit}>
                     <Box>
                         <TextField
                             autoComplete="off"
-                            label="Email"
-                            name="email"
+                            label="Username"
+                            name="username"
                             variant="outlined"
-                            placeholder="Nhập email bạn đã đăng ký"
+                            placeholder="Username"
                             fullWidth
                             onChange={handleInputChange}
                             FormHelperTextProps={{ style: { fontSize: 12 } }}
-                            error={errorsEnable.email}
-                            value={values.email}
-                            helperText={errors.email}
+                            error={errorsEnable.username}
+                            value={values.username}
+                            helperText={errors.username}
                             InputProps={{ style: { borderRadius: "1.5rem", fontSize: "1.4rem" } }}
                             InputLabelProps={{
                                 style: { fontSize: "1.6rem" },
@@ -170,6 +170,7 @@ function SignIn() {
                     </Grid>
                 </Grid>
             </Box>
+            <Loading open={isLoading} />
         </Box>
     );
 }

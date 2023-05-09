@@ -23,10 +23,40 @@ export const authApi = {
     async requestLogin(params) {
         return await axios
             .post("/accounts/login", {
-                email: params.email,
+                username: params.username,
                 password: params.password,
             })
             .then((response) => response)
             .catch((error) => error.response.data);
     },
+
+    async requestGetProfile(params) {
+        return await axios
+            .get(`/accounts/profile/${params.accountId}`, {
+                headers: {
+                    Authorization: `Bearer ${params.accessToken}`,
+                },
+            })
+            .then((response) => response)
+            .catch((error) => error.response.data);
+    },
+    async requestUpdateProfile(customerInfo, accessToken) {
+        return await axios
+            .put(
+                `/accounts/profile`,
+                {
+                    accountId: customerInfo.accountId,
+                    firstName: customerInfo.firstName,
+                    lastName: customerInfo.lastName,
+                    birthday: customerInfo.birthday,
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                }
+            )
+            .then((response) => response)
+            .catch((error) => error.response.data);
+    },   
 };
