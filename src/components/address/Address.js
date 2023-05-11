@@ -6,17 +6,19 @@ import { AddressAdd } from "../dialog";
 import AddressItem from "./AddressItem";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { fetchGetAddresses } from "~/redux/customer/customerSlice";
+import { fetchGetAddresses } from "~/redux/address/addressSlice";
+import Loading from "../loading/Loading";
 
 const cx = classnames.bind(style);
 
 function Address() {
-    const { addresses } = useSelector((state) => state.customerReducer);
+    const { addresses, isLoading, isChanged } = useSelector((state) => state.addressReducer);
     const { accountId, accessToken } = useSelector((state) => state.authReducer);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchGetAddresses({ accountId, accessToken }));
-    }, [dispatch]);
+    }, [dispatch, isChanged]);
+
     return (
         <Paper className={cx("address")}>
             <AccountHeader
@@ -25,13 +27,22 @@ function Address() {
             />
 
             <Box className={cx("content")}>
-                <AddressAdd />
+                <AddressAdd accountId={accountId} accessToken={accessToken} dispatch={dispatch} />
 
                 <Box className={cx("address-list")}>
                     {addresses &&
-                        addresses.map((item, index) => <AddressItem key={index} data={item} />)}
+                        addresses.map((item, index) => (
+                            <AddressItem
+                                key={index}
+                                data={item}
+                                accountId={accountId}
+                                accessToken={accessToken}
+                                dispatch={dispatch}
+                            />
+                        ))}
                 </Box>
             </Box>
+            <Loading open={isLoading} />
         </Paper>
     );
 }

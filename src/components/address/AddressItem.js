@@ -4,8 +4,7 @@ import { Box, Grid, Typography } from "@mui/material";
 
 import { AddressEdit, AddressDelete } from "../dialog";
 const cx = classnames.bind(style);
-function AddressItem({ data }) {
-    console.log(data);
+function AddressItem({ data, accountId, accessToken, dispatch }) {
     return (
         <Box className={cx("address-card")}>
             <Box className={cx("address-card-body")}>
@@ -31,10 +30,22 @@ function AddressItem({ data }) {
                     </Grid>
                     <Grid item xs={4} className={cx("right-body")}>
                         <Grid container spacing={2} justifyContent={"flex-end"}>
-                            <Grid item>{/* <AddressEdit address={data} /> */}</Grid>
+                            <Grid item>
+                                <AddressEdit
+                                    data={data}
+                                    accountId={accountId}
+                                    accessToken={accessToken}
+                                    dispatch={dispatch}
+                                />
+                            </Grid>
                             {!data?.isDefault && (
                                 <Grid item>
-                                    <AddressDelete />
+                                    <AddressDelete
+                                        data={data.id}
+                                        accountId={accountId}
+                                        accessToken={accessToken}
+                                        dispatch={dispatch}
+                                    />
                                 </Grid>
                             )}
                         </Grid>

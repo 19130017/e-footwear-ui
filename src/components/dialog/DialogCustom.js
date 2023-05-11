@@ -235,26 +235,35 @@ function DialogCustom(props) {
         resetForm,
     } = useForm(initialValues, true, validate);
 
-    // useEffect(() => {
-    //     const renderData = () => {
-    //         if (props?.data) {
-    //             setValues({
-    //                 ...values,
-    //                 fullName: props?.data?.fullName,
-    //                 email: props?.data?.email,
-    //                 phone: props?.data?.phone,
-    //                 provinceName: props?.data?.provinceName,
-    //                 districtName: props?.data?.districtName,
-    //                 wardName: props?.data?.wardName,
-    //                 address: props?.data?.address,
-    //             });
-    //             setDistrict({ id: props?.data?.districtId, name: props?.data?.districtName });
-    //             setProvince({ id: props?.data?.provinceId, name: props?.data?.provinceName });
-    //             setWard({ id: props?.data?.wardId, name: props?.data?.districtName });
-    //         }
-    //     };
-    //     renderData();
-    // }, []);
+    useEffect(() => {
+        const renderData = () => {
+            if (props?.data) {
+                setValues({
+                    ...values,
+                    fullName: props?.data.fullName,
+                    email: props?.data.email,
+                    phone: props?.data.phone,
+                    provinceName: props?.data.addresses.provinceName,
+                    districtName: props?.data.addresses.districtName,
+                    wardName: props?.data.addresses.wardName,
+                    address: props?.data?.address,
+                });
+                setDistrict({
+                    id: props?.data.addresses.districtId,
+                    name: props?.data.addresses.districtName,
+                });
+                setProvince({
+                    id: props?.data.addresses.provinceId,
+                    name: props?.data.addresses.provinceName,
+                });
+                setWard({
+                    id: props?.data.addresses.wardId,
+                    name: props?.data.addresses.districtName,
+                });
+            }
+        };
+        renderData();
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();

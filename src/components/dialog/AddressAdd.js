@@ -2,19 +2,14 @@ import style from "./Dialog.module.scss";
 import { Box, Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import classnames from "classnames/bind";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import DialogCustom from "./DialogCustom";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchCreateAddress } from "~/redux/address/addressSlice";
-import Loading from "../loading/Loading";
+import { fetchCreateAddress, fetchGetAddresses } from "~/redux/address/addressSlice";
 
 const cx = classnames.bind(style);
 
-function AddressAdd() {
+function AddressAdd({ accountId, accessToken, dispatch }) {
     const [open, setOpen] = useState(false);
-    const { accountId, accessToken } = useSelector((state) => state.authReducer);
-    const { isLoading } = useSelector((state) => state.addressReducer);
-    const dispatch = useDispatch();
     const handleOpen = () => {
         setOpen(true);
     };
@@ -22,7 +17,7 @@ function AddressAdd() {
     const handleClose = (childData) => {
         setOpen(childData);
     };
-    const handleSubmit = (childData) => {
+    const handleSubmit = async (childData) => {
         const newAddress = {
             address: childData.address,
             fullName: childData.fullName,
@@ -38,7 +33,8 @@ function AddressAdd() {
                 wardName: childData.wardName,
             },
         };
-        dispatch(fetchCreateAddress({ newAddress, accessToken, accountId }));
+        await dispatch(fetchCreateAddress({ newAddress, accessToken, accountId }));
+        
     };
 
     return (
@@ -52,7 +48,6 @@ function AddressAdd() {
                 parentCallbackClose={handleClose}
                 parentCallbackSubmit={handleSubmit}
             />
-            <Loading open={isLoading} />
         </Box>
     );
 }

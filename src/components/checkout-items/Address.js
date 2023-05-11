@@ -7,7 +7,6 @@ const cx = classnames.bind(style);
 
 function Address(props) {
     const { data } = props;
-
     return (
         <Grid container spacing={2} sx={{ width: "100%" }}>
             {data.map((item, index) => (
@@ -16,7 +15,7 @@ function Address(props) {
                         component={"input"}
                         type="radio"
                         name="address"
-                        defaultChecked
+                        defaultChecked={item.isDefault}
                         id={`address-${item.id}`}
                         hidden
                     />
@@ -26,8 +25,8 @@ function Address(props) {
                             <Box className={cx("address-body")}>
                                 <Box className={cx("phone")}>{item.phone}</Box>
                                 <Box className={cx("address")}>
-                                    {item.address},{item.wardName},{item.districtName},
-                                    {item.provinceName}
+                                    {item.address},{item.addresses.wardName},
+                                    {item.addresses.districtName},{item.addresses.provinceName}
                                 </Box>
                             </Box>
                             <Box className={cx("pseudo")}>

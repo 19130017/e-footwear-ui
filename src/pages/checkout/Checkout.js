@@ -5,7 +5,9 @@ import { Payment, Address } from "~/components/checkout-items";
 import { AddressAdd } from "~/components/dialog";
 import { checkoutData, userInfo } from "~/service/fakeData";
 import style from "./Checkout.module.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchGetAddresses } from "~/redux/address/addressSlice";
 
 const cx = classnames.bind(style);
 
@@ -15,6 +17,14 @@ function Checkout() {
         return accumulator + currentValue.discountPrice * currentValue.quantity;
     }, 0);
     const cost = total + total * 0.1;
+
+    const dispatch = useDispatch();
+    const { accountId, accessToken } = useSelector((state) => state.authReducer);
+    const { addresses, isLoading } = useSelector((state) => state.addressReducer);
+
+    useEffect(() => {
+        dispatch(fetchGetAddresses({ accountId, accessToken }));
+    }, [dispatch]);
 
     return (
         <Grid container spacing={2} className={cx("checkout")}>
@@ -28,9 +38,13 @@ function Checkout() {
                         Thông tin nhận hàng
                     </Typography>
 
-                    <Address data={userInfo.addresses} />
+                    <Address data={addresses} />
                     <Box className={cx("add-address")}>
-                        <AddressAdd />
+                        <AddressAdd
+                            accountId={accountId}
+                            accessToken={accessToken}
+                            dispatch={dispatch}
+                        />
                     </Box>
                     <Typography
                         variant="h6"

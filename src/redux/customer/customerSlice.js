@@ -42,17 +42,6 @@ const fetchUpdateProfile = createAsyncThunk(UPDATE_INFO_CUSTOMER, async (params,
     }
 });
 
-const fetchGetAddresses = createAsyncThunk(CUSTOMER_ADDRESSES, async (params, thunkApi) => {
-    try {
-        const response = await addressApi.requestGetAddresses(params);
-        return response.success
-            ? thunkApi.fulfillWithValue(response)
-            : thunkApi.rejectWithValue(response);
-    } catch (err) {
-        return thunkApi.rejectWithValue(err.response.data);
-    }
-});
-
 const customerSlice = createSlice({
     name: "customer",
     initialState,
@@ -99,27 +88,10 @@ const customerSlice = createSlice({
                     text: data,
                 });
                 return state;
-            })
-            //get address delivery
-            .addCase(fetchGetAddresses.pending, (state, action) => {
-                state.isLoading = true;
-                return state;
-            })
-
-            .addCase(fetchGetAddresses.rejected, (state, action) => {
-                state.isLoading = true;
-                return state;
-            })
-
-            .addCase(fetchGetAddresses.fulfilled, (state, action) => {
-                const data = action.payload.data;
-                state.isLoading = false;
-                state.addresses = data;
-                return state;
             });
     },
 });
 
 const customerReducer = customerSlice.reducer;
 export default customerReducer;
-export { fetchGetProfile, fetchUpdateProfile, fetchGetAddresses };
+export { fetchGetProfile, fetchUpdateProfile };

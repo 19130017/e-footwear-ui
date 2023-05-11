@@ -12,6 +12,7 @@ const cx = classnames.bind(style);
 function Cart() {
     const navigate = useNavigate();
     const cart = useSelector((state) => state.cartReducer.cart);
+    const { isLogin, accessToken } = useSelector((state) => state.authReducer);
     const dispatch = useDispatch();
     const breadcrumbs = [
         <Typography color="text.primary" className={cx("text")} key={1}>
@@ -33,6 +34,11 @@ function Cart() {
         return accumulator + currentValue.discountPrice * currentValue.quantity;
     }, 0);
     const cost = total + total * 0.1;
+
+    const handleClick = () => {
+        if (isLogin) navigate("/checkout");
+        else navigate("/auth/sign-in");
+    };
 
     return (
         <Box className={cx("cart")}>
@@ -125,13 +131,23 @@ function Cart() {
                                             Phí vận chuyển sẽ được tính ở trang thanh toán.
                                         </Typography>
                                     </Box>
-                                    <Button
-                                        onClick={() => navigate("/checkout")}
-                                        variant="contained"
-                                        className={cx("btn-buy-now")}
-                                    >
-                                        Tiếp tục
-                                    </Button>
+                                    {cart.length === 0 ? (
+                                        <Button
+                                            variant="contained"
+                                            className={cx("btn-buy-now", "disabled")}
+                                            disabled={true}
+                                        >
+                                            Tiếp tục
+                                        </Button>
+                                    ) : (
+                                        <Button
+                                            onClick={handleClick}
+                                            variant="contained"
+                                            className={cx("btn-buy-now")}
+                                        >
+                                            Tiếp tục
+                                        </Button>
+                                    )}
                                 </Box>
 
                                 <Box className={cx("order-summary-notify")}>
