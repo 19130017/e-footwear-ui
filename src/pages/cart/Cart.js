@@ -31,7 +31,7 @@ function Cart() {
     };
 
     const total = cart?.reduce((accumulator, currentValue) => {
-        return accumulator + currentValue.discountPrice * currentValue.quantity;
+        return accumulator + currentValue.price * currentValue.quantity;
     }, 0);
     const cost = total + total * 0.1;
 

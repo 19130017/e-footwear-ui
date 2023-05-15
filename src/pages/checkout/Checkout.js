@@ -1,31 +1,73 @@
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import classnames from "classnames/bind";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Payment, Address } from "~/components/checkout-items";
 import { AddressAdd } from "~/components/dialog";
 import { checkoutData, userInfo } from "~/service/fakeData";
 import style from "./Checkout.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchGetAddresses } from "~/redux/address/addressSlice";
+import { fetchCreateOrder } from "~/redux/order/orderSlice";
+import { clearCart } from "~/redux/cart/cartSlice";
 
 const cx = classnames.bind(style);
 
 function Checkout() {
     const cart = useSelector((state) => state.cartReducer.cart);
     const total = cart?.reduce((accumulator, currentValue) => {
-        return accumulator + currentValue.discountPrice * currentValue.quantity;
+        return accumulator + currentValue.price * currentValue.quantity;
     }, 0);
-    const cost = total + total * 0.1;
+    const cost = total + total * 0.1 + (total > 700000 ? 0 : 11000);
 
     const dispatch = useDispatch();
     const { accountId, accessToken } = useSelector((state) => state.authReducer);
-    const { addresses, isLoading } = useSelector((state) => state.addressReducer);
-
+    const { addresses, isLoading, isChanged } = useSelector((state) => state.addressReducer);
+    const [addressDelivery, setAddressDelivery] = useState(null);
+    const [description, setDescription] = useState(null);
+    const navigate = useNavigate();
     useEffect(() => {
         dispatch(fetchGetAddresses({ accountId, accessToken }));
-    }, [dispatch]);
+    }, [dispatch, isChanged]);
 
+    const handleClick = async () => {
+        if (addressDelivery) {
+            const temp = cart.map((item) => ({
+                price: item.price,
+                quantity: item.quantity,
+                detail: { id: item.detail.id },
+            }));
+            const response = await dispatch(
+                fetchCreateOrder({
+                    cost,
+                    transportFee: total > 700000 ? 0 : 11000,
+                    description,
+                    coupon: null,
+                    account: {
+                        id: accountId,
+                    },
+                    address: {
+                        id: addressDelivery.id,
+                    },
+                    items: temp,
+                    accessToken,
+                })
+            );
+            if (response.payload.success) {
+                await dispatch(clearCart());
+                navigate("/");
+            }
+        } else {
+            alert("Chọn địa chỉ giao hàng");
+        }
+    };
+    const handleSelectAddress = (item) => {
+        setAddressDelivery(item);
+    };
+
+    const handleChangeDescription = (e) => {
+        setDescription(e.target.value);
+    };
     return (
         <Grid container spacing={2} className={cx("checkout")}>
             <Grid item xs={8} className={cx("checkout-left")}>
@@ -38,7 +80,7 @@ function Checkout() {
                         Thông tin nhận hàng
                     </Typography>
 
-                    <Address data={addresses} />
+                    <Address data={addresses} parentCallback={handleSelectAddress} />
                     <Box className={cx("add-address")}>
                         <AddressAdd
                             accountId={accountId}
@@ -108,7 +150,7 @@ function Checkout() {
                                 <Box
                                     component={"input"}
                                     type="text"
-                                    value={"dtb751@gmail.com"}
+                                    value={addressDelivery?.email ? addressDelivery.email : ""}
                                     readOnly={true}
                                     sx={{ border: "none", outline: "none", fontSize: "1.3rem" }}
                                 />
@@ -126,8 +168,8 @@ function Checkout() {
                         placeholder="Nhập thông tin ghi chú cho nhà bán hàng"
                         name="note"
                         fullWidth
-                        sx={{ fontSize: "1.3rem" }}
-                        inputProps={{ style: { padding: "1.2rem 1.4rem" } }}
+                        inputProps={{ style: { padding: "1.2rem 1.4rem", fontSize: "1.4rem" } }}
+                        onChange={(e) => handleChangeDescription(e)}
                     />
                 </Box>
                 <Box className={cx("payment-method")}>
@@ -157,8 +199,8 @@ function Checkout() {
                                 <Grid container className={cx("grid-row")}>
                                     <Grid item xs={3} className={cx("grid-column")}>
                                         <img
-                                            src={item.imageURL}
-                                            alt={item.name}
+                                            src={item.detail.product.imageURL}
+                                            alt={item.detail.product.name}
                                             className={cx("image")}
                                         />
                                     </Grid>
@@ -168,12 +210,14 @@ function Checkout() {
                                         className={cx("grid-column")}
                                         sx={{ marginLeft: "2rem" }}
                                     >
-                                        <Link to={`/detail/${item.slug}/${item.color.id}`}>
+                                        <Link
+                                            to={`/detail/${item.detail.product.slug}/${item.detail.product.color.id}`}
+                                        >
                                             <Typography
                                                 variant="body1"
                                                 className={cx("product-name")}
                                             >
-                                                {item.name}
+                                                {item.detail.product.name}
                                             </Typography>
                                         </Link>
                                         <Typography
@@ -183,7 +227,7 @@ function Checkout() {
                                             Số lượng {item.quantity}
                                         </Typography>
                                         <Typography variant="body1" className={cx("product-price")}>
-                                            {item.discountPrice.toLocaleString("it-IT", {
+                                            {item.price.toLocaleString("it-IT", {
                                                 style: "currency",
                                                 currency: "VND",
                                             })}
@@ -236,7 +280,7 @@ function Checkout() {
                         </Box>
                     </Box>
 
-                    <Button variant="contained" className={cx("payment-btn")}>
+                    <Button variant="contained" className={cx("payment-btn")} onClick={handleClick}>
                         Thanh toán
                     </Button>
                     <Typography variant="body2" className={cx("note")}>

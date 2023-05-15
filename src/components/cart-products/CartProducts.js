@@ -12,8 +12,8 @@ function CartProducts({ data, removeParentCallback, decreaseCallback, increaseCa
     return (
         <Box className={cx("product-list")}>
             {data?.map((item, index) => {
-                const totalDiscountPrice = item?.discountPrice * item.quantity;
-                const totalOriginPrice = item.originPrice * item.quantity;
+                const totalDiscountPrice = item.price * item.quantity;
+                const totalOriginPrice = item.detail.product.originPrice * item.quantity;
                 return (
                     <Box key={index} className={cx("product-item")}>
                         <Box
@@ -23,15 +23,18 @@ function CartProducts({ data, removeParentCallback, decreaseCallback, increaseCa
                             <CloseIcon sx={{ height: "2rem", width: "2rem", color: "red" }} />
                         </Box>
                         <Box className={cx("product-image")}>
-                            <img src={item?.imageURL} alt={item.name} />
+                            <img
+                                src={item.detail.product.imageURL}
+                                alt={item.detail.product.name}
+                            />
                         </Box>
                         <Box className={cx("product-info")}>
                             <Typography variant="h5" className={cx("product-text")}>
                                 <Link
-                                    to={`/detail/${item.slug}/${item?.color.id}`}
+                                    to={`/detail/${item.detail.product.slug}/${item.detail.product.color.id}`}
                                     className={cx("product-link")}
                                 >
-                                    {item.name}
+                                    {item.detail.product.name}
                                 </Link>
                             </Typography>
                             <Grid
@@ -42,18 +45,26 @@ function CartProducts({ data, removeParentCallback, decreaseCallback, increaseCa
                             >
                                 <Grid item xs={2} className={cx("item")}>
                                     <Box>
-                                        Màu sắc: <ColorRounded nameColor={item.color.codeColor} />
+                                        Màu sắc:{" "}
+                                        <ColorRounded
+                                            nameColor={item.detail.product.color.codeColor}
+                                        />
                                     </Box>
                                 </Grid>
                                 <Grid item xs={3} className={cx("item")}>
-                                    <Typography variant="body1">Kích thước: {item.size}</Typography>
+                                    <Typography variant="body1">
+                                        Kích thước: {item.detail.size}
+                                    </Typography>
                                 </Grid>
                                 <Grid item xs={3} className={cx("item")}>
                                     <Box className={cx("btn-number")}>
                                         <Box
                                             className={cx("btn-change-quantity")}
                                             onClick={() =>
-                                                decreaseCallback({ id: item.id, size: item.size })
+                                                decreaseCallback({
+                                                    id: item.detail.product.id,
+                                                    size: item.detail.size,
+                                                })
                                             }
                                         >
                                             <RemoveIcon />
@@ -62,7 +73,10 @@ function CartProducts({ data, removeParentCallback, decreaseCallback, increaseCa
                                         <Box
                                             className={cx("btn-change-quantity")}
                                             onClick={() =>
-                                                increaseCallback({ id: item.id, size: item.size })
+                                                increaseCallback({
+                                                    id: item.detail.product.id,
+                                                    size: item.detail.size,
+                                                })
                                             }
                                         >
                                             <AddIcon />

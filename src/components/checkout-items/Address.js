@@ -6,7 +6,7 @@ import style from "./Address.module.scss";
 const cx = classnames.bind(style);
 
 function Address(props) {
-    const { data } = props;
+    const { data, parentCallback } = props;
     return (
         <Grid container spacing={2} sx={{ width: "100%" }}>
             {data.map((item, index) => (
@@ -15,9 +15,9 @@ function Address(props) {
                         component={"input"}
                         type="radio"
                         name="address"
-                        defaultChecked={item.isDefault}
                         id={`address-${item.id}`}
                         hidden
+                        onChange={() => parentCallback(item)}
                     />
                     <Box component={"label"} htmlFor={`address-${item.id}`}>
                         <Box className={cx("card")}>

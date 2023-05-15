@@ -80,21 +80,27 @@ function ProductDetail() {
         }
         dispatch(
             addToCart({
-                id: product.id,
-                slug: product.slug,
-                name: product.name,
-                originPrice: product.originPrice,
-                discountPrice: product.discountPrice,
-                discountRate: product.discountRate,
-                color: {
-                    id: product.color.id,
-                    name: product.color.name,
-                    codeColor: product.color.codeColor,
-                },
-                imageURL: product.images[0].imageURL,
                 quantity: count,
-                size: detail.size.value,
-                stockQuantity: detail.stockQuantity,
+                price: product.discountPrice,
+                detail: {
+                    id: detail.id,
+                    size: detail.size.value,
+                    product: {
+                        id: product.id,
+                        slug: product.slug,
+                        name: product.name,
+                        originPrice: product.originPrice,
+                        discountPrice: product.discountPrice,
+                        discountRate: product.discountRate,
+                        color: {
+                            id: product.color.id,
+                            name: product.color.name,
+                            codeColor: product.color.codeColor,
+                        },
+                        imageURL: product.images[0].imageURL,
+                        stockQuantity: detail.stockQuantity,
+                    },
+                },
             })
         );
     };

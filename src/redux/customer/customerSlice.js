@@ -1,20 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { authApi } from "~/apis/authApi";
 import { addressApi } from "~/apis/addressApi";
-import {
-    CUSTOMER_LOGOUT,
-    GET_CUSTOMER,
-    UPDATE_INFO_CUSTOMER,
-    CUSTOMER_ADDRESSES,
-} from "./customerType";
+import { CUSTOMER_LOGOUT, GET_CUSTOMER, UPDATE_INFO_CUSTOMER } from "./customerType";
 import MySwal, { PopUpSuccess } from "~/utils/MySwal";
 
 const initialState = {
     customers: [],
     customer: null,
     isLoading: false,
-    orders: [],
-    addresses: [],
 };
 
 const fetchGetProfile = createAsyncThunk(GET_CUSTOMER, async (params, thunkApi) => {

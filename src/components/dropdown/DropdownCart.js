@@ -6,8 +6,9 @@ const cx = classnames.bind(style);
 function DropdownCart({ data }) {
     const navigate = useNavigate();
     const total = data?.reduce((accumulator, currentValue) => {
-        return accumulator + currentValue.discountPrice * currentValue.quantity;
+        return accumulator + currentValue.price * currentValue.quantity;
     }, 0);
+
     return (
         <Box className={cx("dropdown")}>
             <Typography variant="h5" className={cx("title")}>
@@ -23,20 +24,20 @@ function DropdownCart({ data }) {
                                 <img
                                     className={cx("image")}
                                     alt="test"
-                                    src={`${item?.imageURL}`}
+                                    src={`${item.detail.product.imageURL}`}
                                 />
                             </Grid>
                             <Grid item sx={{ flex: 1, marginLeft: "0.5rem" }}>
                                 <Link
-                                    to={`/detail/${item.slug}/${item?.color.id}`}
+                                    to={`/detail/${item.detail.product.slug}/${item.detail.product.color.id}`}
                                     className={cx("product-link")}
                                 >
                                     <Typography variant="body1" className={cx("product-name")}>
-                                        {item.name}
+                                        {item.detail.product.name}
                                     </Typography>
                                 </Link>
                                 <Typography variant="body1" className={cx("product-type")}>
-                                    {item?.color.name} / {item.size}
+                                    {item.detail.product.color.name} / {item.detail.size}
                                 </Typography>
                                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                                     <Typography variant="body1" className={cx("quantity")}>
@@ -44,17 +45,20 @@ function DropdownCart({ data }) {
                                     </Typography>
                                     <Box className={cx("summary-price")}>
                                         <Typography variant="body1" className={cx("sale-price")}>
-                                            {item?.discountPrice.toLocaleString("it-IT", {
+                                            {item.price.toLocaleString("it-IT", {
                                                 style: "currency",
                                                 currency: "VND",
                                             })}
                                         </Typography>
-                                        {item?.discountRate !== 0 && (
+                                        {item.detail.product.discountRate !== 0 && (
                                             <Typography variant="body1" className={cx("pre-price")}>
-                                                {item?.originPrice.toLocaleString("it-IT", {
-                                                    style: "currency",
-                                                    currency: "VND",
-                                                })}
+                                                {item.detail.product.originPrice.toLocaleString(
+                                                    "it-IT",
+                                                    {
+                                                        style: "currency",
+                                                        currency: "VND",
+                                                    }
+                                                )}
                                             </Typography>
                                         )}
                                     </Box>

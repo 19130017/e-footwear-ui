@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { authApi } from "~/apis/authApi";
 import MySwal, { PopUpSuccess } from "~/utils/MySwal";
 import { AUTH_LOGIN, AUTH_REGISTER, AUTH_VERIFY_ACCOUNT, AUTH_LOGOUT } from "./authType";
-import storage from "redux-persist/lib/storage";
 
 const initialState = {
     accountId: 0,
@@ -128,6 +127,7 @@ const authSlice = createSlice({
                 state.refreshToken = data.refreshToken;
                 state.accountId = data.accountId;
                 state.avatar = data.avatar;
+                state.auth = data;
                 return state;
             })
             //Logout
@@ -137,7 +137,7 @@ const authSlice = createSlice({
                 state.username = "";
                 state.accessToken = "";
                 state.avatar = "";
-                // storage.getItem("persist:root");
+                state.isLogin = false;
                 return state;
             });
     },

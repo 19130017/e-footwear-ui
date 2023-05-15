@@ -20,8 +20,8 @@ import galleryReducer from "~/redux/gallery/gallerySlice";
 import customerReducer from "~/redux/customer/customerSlice";
 import cartReducer from "~/redux/cart/cartSlice";
 import addressReducer from "~/redux/address/addressSlice";
+import orderReducer from "~/redux/order/orderSlice";
 import { AUTH_LOGOUT } from "~/redux/auth/authType";
-
 const persistConfig = {
     key: "root",
     storage,
@@ -29,25 +29,26 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-    customerReducer: customerReducer,
     authReducer: authReducer,
+    customerReducer: customerReducer,
     productReducer: productReducer,
     categoryReducer: categoryReducer,
     detailReducer: detailReducer,
     galleryReducer: galleryReducer,
     cartReducer: cartReducer,
     addressReducer: addressReducer,
+    orderReducer: orderReducer,
 });
 
-const appReducer = (state, action) => {
-    if (action.type === AUTH_LOGOUT + "/fulfilled") {
-        return rootReducer(undefined, action);
-    }
+// const appReducer = (state, action) => {
+//     if (action.type === AUTH_LOGOUT + "/fulfilled") {
+//         return rootReducer(undefined, action);
+//     }
 
-    return rootReducer(state, action);
-};
+//     return rootReducer(state, action);
+// };
 
-const persistedReducer = persistReducer(persistConfig, appReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
     reducer: persistedReducer,
