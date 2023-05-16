@@ -8,7 +8,6 @@ import { TitleFullWidth } from "~/components/header/FullWidthHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLogin } from "~/redux/auth/authSlice";
 import { useEffect } from "react";
-import { fetchGetProfile } from "~/redux/customer/customerSlice";
 import Loading from "~/components/loading/Loading";
 const cx = classNames.bind(style);
 
@@ -64,7 +63,6 @@ function SignIn() {
 
     const {
         values,
-        setValues,
         errors,
         setErrors,
         errorsEnable,

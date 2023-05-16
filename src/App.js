@@ -67,7 +67,7 @@ function App() {
                     <Route path="/auth/forgot" element={<Forgot />} />
                     <Route path="/auth/verify/:token" element={<AccountSuccess />} />
                     <Route path="/auth/verify-account/:token" element={<VerifyAccount />} />
-                    <Route path="/auth/reset-password" element={<ResetPassword />} />
+                    <Route path="/auth/reset-password/:token" element={<ResetPassword />} />
                 </Route>
             </Routes>
         </div>

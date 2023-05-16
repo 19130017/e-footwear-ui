@@ -58,5 +58,35 @@ export const authApi = {
             )
             .then((response) => response)
             .catch((error) => error.response.data);
-    },   
+    },
+
+    async requestChangePassword(params) {
+        return await axios
+            .put(
+                "/accounts/change-password",
+                {
+                    id: params.id,
+                    newPassword: params.newPassword,
+                    oldPassword: params.oldPassword,
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${params.accessToken}`,
+                    },
+                }
+            )
+            .then((response) => response)
+            .catch((error) => error.response.data);
+    },
+
+    async requestResetPassword(params) {
+        console.log(params);
+        return await axios
+            .put(`/accounts/reset-password`, {
+                token: params.token,
+                newPassword: params.newPassword,
+            })
+            .then((response) => response)
+            .catch((error) => error.response.data);
+    },
 };

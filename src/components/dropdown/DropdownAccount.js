@@ -29,15 +29,7 @@ function DropdownAccount({ isLogin }) {
                             </ListItemText>
                         </ListItem>
                         <Divider />
-                    </Link>
-                    <Link to={"/auth/forgot"} className={cx("item-link")}>
-                        <ListItem>
-                            <ListItemText className={cx("item-text")}>
-                                <HelpIcon className={cx("icon")} />
-                                Quên mật khẩu
-                            </ListItemText>
-                        </ListItem>
-                    </Link>
+                    </Link>                    
                     <Box className={cx("item-link")} onClick={handleClick}>
                         <ListItem>
                             <ListItemText className={cx("item-text")}>

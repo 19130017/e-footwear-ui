@@ -1,7 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { authApi } from "~/apis/authApi";
 import MySwal, { PopUpSuccess } from "~/utils/MySwal";
-import { AUTH_LOGIN, AUTH_REGISTER, AUTH_VERIFY_ACCOUNT, AUTH_LOGOUT } from "./authType";
+import {
+    AUTH_LOGIN,
+    AUTH_REGISTER,
+    AUTH_VERIFY_ACCOUNT,
+    AUTH_LOGOUT,
+    AUTH_CHANGE_PASSWORD,
+    AUTH_FORGOT_PASSWORD,
+    AUTH_RESET_PASSWORD,
+} from "./authType";
 
 const initialState = {
     accountId: 0,
@@ -49,6 +57,40 @@ const fetchLogin = createAsyncThunk(AUTH_LOGIN, async (params, thunkApi) => {
 const fetchLogout = createAsyncThunk(AUTH_LOGOUT, async (params, thunkApi) => {
     return;
 });
+
+const fetchChangePassword = createAsyncThunk(AUTH_CHANGE_PASSWORD, async (params, thunkApi) => {
+    try {
+        const response = await authApi.requestChangePassword(params);
+        return response.success
+            ? thunkApi.fulfillWithValue(response)
+            : thunkApi.rejectWithValue(response);
+    } catch (error) {
+        return thunkApi.rejectWithValue(error.response.data);
+    }
+});
+
+const fetchForgotPassword = createAsyncThunk(AUTH_FORGOT_PASSWORD, async (params, thunkApi) => {
+    try {
+        const response = await authApi.requestForgotPassword(params);
+        return response.success
+            ? thunkApi.fulfillWithValue(response)
+            : thunkApi.rejectWithValue(response);
+    } catch (error) {
+        return thunkApi.rejectWithValue(error.response.data);
+    }
+});
+
+const fetchResetPassword = createAsyncThunk(AUTH_RESET_PASSWORD, async (params, thunkApi) => {
+    try {
+        const response = await authApi.requestResetPassword(params);
+        return response.success
+            ? thunkApi.fulfillWithValue(response)
+            : thunkApi.rejectWithValue(response);
+    } catch (error) {
+        return thunkApi.rejectWithValue(error.response.data);
+    }
+});
+
 const authSlice = createSlice({
     name: "auth",
     initialState,
@@ -139,9 +181,94 @@ const authSlice = createSlice({
                 state.avatar = "";
                 state.isLogin = false;
                 return state;
+            })
+            // change password
+            .addCase(fetchChangePassword.pending, (state, action) => {
+                state.isLoading = true;
+                return state;
+            })
+            .addCase(fetchChangePassword.rejected, (state, action) => {
+                state.isLoading = false;
+                MySwal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: action.payload.message,
+                });
+                return state;
+            })
+            .addCase(fetchChangePassword.fulfilled, (state, action) => {
+                state.accountId = 0;
+                state.refreshToken = "";
+                state.username = "";
+                state.accessToken = "";
+                state.avatar = "";
+                state.isLogin = false;
+                state.isLoading = false;
+                PopUpSuccess.fire({
+                    icon: "success",
+                    title: "Thành công",
+                    text: action.payload.data,
+                });
+
+                return state;
+            })
+            // forgot password
+            .addCase(fetchForgotPassword.pending, (state, action) => {
+                state.isLoading = true;
+                return state;
+            })
+            .addCase(fetchForgotPassword.rejected, (state, action) => {
+                console.log(action);
+                state.isLoading = false;
+                MySwal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: action.payload.message,
+                });
+                return state;
+            })
+            .addCase(fetchForgotPassword.fulfilled, (state, action) => {
+                state.isLoading = false;
+                PopUpSuccess.fire({
+                    icon: "success",
+                    title: "Thành công",
+                    text: action.payload.data,
+                });
+                return state;
+            })
+            // reset password
+            .addCase(fetchResetPassword.pending, (state, action) => {
+                state.isLoading = true;
+                return state;
+            })
+            .addCase(fetchResetPassword.rejected, (state, action) => {
+                state.isLoading = false;
+                MySwal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: action.payload.message,
+                });
+                return state;
+            })
+            .addCase(fetchResetPassword.fulfilled, (state, action) => {
+                state.isLoading = false;
+                PopUpSuccess.fire({
+                    icon: "success",
+                    title: "Thành công",
+                    text: action.payload.data,
+                });
+                return state;
             });
     },
 });
 const authReducer = authSlice.reducer;
 export default authReducer;
-export { fetchRegister, fetchVerifyAccount, fetchLogin, fetchLogout };
+export {
+    fetchRegister,
+    fetchVerifyAccount,
+    fetchLogin,
+    fetchLogout,
+    fetchChangePassword,
+    fetchForgotPassword,
+    fetchResetPassword
+};
