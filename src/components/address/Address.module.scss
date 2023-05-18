@@ -1,0 +1,51 @@
+.address {
+    border-radius: 1rem !important;
+    background-color: #f8f8fc!important;
+    padding: 2rem;
+    .content {
+        .address-list {
+            .address-card {
+                margin-top: 1rem;
+                padding: 1rem;
+                border-radius: 1rem;
+                background-color: #fff;
+                border-style: none;
+                border-width: 1px;
+                border-color: unset;
+                .address-card-body {
+                    .left-body {
+                        .address-subtitle{
+                            span{
+                                font-weight: bold;
+                            }
+                        }
+                        .address-label{
+                            span{
+                                font-size: 1.2rem;
+                                text-transform: uppercase;
+                                color: #1230b0;
+                                background-color: #f3f5fc;
+                                padding: .2rem 0.8rem;
+                                font-weight: bold;
+                                display: inline-block;
+                                border-radius: 0.5rem;
+                            }
+                        }
+                        .address-text,
+                        .address-phone {
+                            color: #82869e;
+                            font-size: 1.3rem;
+                            margin-top: 0.5rem;
+                        }
+                    }
+                    .right-body {
+                        
+                       
+                    }
+                }
+            }
+        }
+
+       
+    }
+}

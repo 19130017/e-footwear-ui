@@ -3,11 +3,18 @@ import style from "./Auth.module.scss";
 import classNames from "classnames/bind";
 import { FacebookButton } from "~/components/button";
 import { Form, useForm } from "~/hooks/useForm";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { TitleFullWidth } from "~/components/header/FullWidthHeader";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchLogin } from "~/redux/auth/authSlice";
+import { useEffect } from "react";
+import Loading from "~/components/loading/Loading";
 const cx = classNames.bind(style);
 
 function SignIn() {
+    const { accountId, accessToken, isLoading } = useSelector((state) => state.authReducer);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const initialValues = {
         username: "",
         password: "",
@@ -21,8 +28,13 @@ function SignIn() {
                 tempEnable.username = true;
                 temp.username = "Không được để trống.";
             } else {
-                tempEnable.username = false;
-                temp.username = "";
+                if (fieldValues.username.length >= 5) {
+                    tempEnable.username = false;
+                    temp.username = "";
+                } else {
+                    tempEnable.username = true;
+                    temp.username = "Username ít nhất phải 5 ký tự";
+                }
             }
         }
         if ("password" in fieldValues) {
@@ -30,8 +42,13 @@ function SignIn() {
                 tempEnable.password = true;
                 temp.password = "Không được để trống.";
             } else {
-                tempEnable.password = false;
-                temp.password = "";
+                if (fieldValues.password.length >= 8) {
+                    temp.password = "";
+                    tempEnable.password = false;
+                } else {
+                    temp.password = "Mật khẩu phải có ít nhất 8 ký tự";
+                    tempEnable.password = true;
+                }
             }
         }
 
@@ -46,7 +63,6 @@ function SignIn() {
 
     const {
         values,
-        setValues,
         errors,
         setErrors,
         errorsEnable,
@@ -55,10 +71,16 @@ function SignIn() {
         resetForm,
     } = useForm(initialValues, true, validate);
 
-    const handleSubmit = (e) => {
+    useEffect(() => {
+        if (accessToken !== "" && accountId !== 0) {
+            navigate("/");
+        }
+    }, [accountId, accessToken]);
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (validate()) {
             // xử lý tiếp
+            await dispatch(fetchLogin(values));
             resetForm();
         }
     };
@@ -79,7 +101,7 @@ function SignIn() {
                     <Box>
                         <TextField
                             autoComplete="off"
-                            label="Tên đăng nhập"
+                            label="Username"
                             name="username"
                             variant="outlined"
                             placeholder="Username"
@@ -146,6 +168,7 @@ function SignIn() {
                     </Grid>
                 </Grid>
             </Box>
+            <Loading open={isLoading} />
         </Box>
     );
 }

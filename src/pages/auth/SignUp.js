@@ -5,14 +5,23 @@ import { Form, useForm } from "~/hooks/useForm";
 import { Link } from "react-router-dom";
 import { TitleFullWidth } from "~/components/header/FullWidthHeader";
 import { FacebookButton } from "~/components/button";
+import { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchRegister } from "~/redux/auth/authSlice";
+import Loading from "~/components/loading/Loading";
+
 const cx = classNames.bind(style);
 function SignUp() {
+    const dispatch = useDispatch();
+    const textRef = useRef();
+    const refPassword = textRef.current?.value;
+    const { isLoading } = useSelector((state) => state.authReducer);
+
     const initialValues = {
         username: "",
         password: "",
         email: "",
-        address: "",
-        phone: "",
+        rePassword: "",
     };
     const validate = (fieldValues = values) => {
         let temp = { ...errors };
@@ -22,8 +31,13 @@ function SignUp() {
                 tempEnable.username = true;
                 temp.username = "Không được để trống.";
             } else {
-                tempEnable.username = false;
-                temp.username = "";
+                if (fieldValues.username.length >= 5) {
+                    tempEnable.username = false;
+                    temp.username = "";
+                } else {
+                    tempEnable.username = true;
+                    temp.username = "Username ít nhất phải 5 ký tự";
+                }
             }
         }
         if ("password" in fieldValues) {
@@ -31,35 +45,45 @@ function SignUp() {
                 tempEnable.password = true;
                 temp.password = "Không được để trống.";
             } else {
-                tempEnable.password = false;
-                temp.password = "";
+                if (fieldValues.password.length >= 8) {
+                    temp.password = "";
+                    tempEnable.password = false;
+                } else {
+                    temp.password = "Mật khẩu phải có ít nhất 8 ký tự";
+                    tempEnable.password = true;
+                }
+            }
+        }
+        if ("rePassword" in fieldValues) {
+            if (fieldValues.rePassword === "") {
+                tempEnable.rePassword = true;
+                temp.rePassword = "Không được để trống.";
+            } else {
+                if (fieldValues.rePassword === refPassword) {
+                    tempEnable.rePassword = false;
+                    temp.rePassword = "";
+                } else {
+                    temp.rePassword = "Không khớp với mật khẩu. Vui lòng nhập lại.";
+                    tempEnable.rePassword = true;
+                }
             }
         }
         if ("email" in fieldValues) {
-            if (fieldValues.email === "") {
+            if (fieldValues.email !== "") {
+                if (
+                    fieldValues.email.match(
+                        /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+                    )
+                ) {
+                    temp.email = "";
+                    tempEnable.email = false;
+                } else {
+                    temp.email = "Không đúng định dạng email";
+                    tempEnable.email = true;
+                }
+            } else {
+                temp.email = "Không được để trống";
                 tempEnable.email = true;
-                temp.email = "Không được để trống.";
-            } else {
-                tempEnable.email = false;
-                temp.email = "";
-            }
-        }
-        if ("address" in fieldValues) {
-            if (fieldValues.address === "") {
-                tempEnable.address = true;
-                temp.address = "Không được để trống.";
-            } else {
-                tempEnable.address = false;
-                temp.address = "";
-            }
-        }
-        if ("phone" in fieldValues) {
-            if (fieldValues.phone === "") {
-                tempEnable.phone = true;
-                temp.phone = "Không được để trống.";
-            } else {
-                tempEnable.phone = false;
-                temp.phone = "";
             }
         }
 
@@ -83,9 +107,10 @@ function SignUp() {
         resetForm,
     } = useForm(initialValues, true, validate);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (validate()) {
+            await dispatch(fetchRegister(values));
             // xử lý tiếp
             resetForm();
         }
@@ -130,6 +155,28 @@ function SignUp() {
                     </Box>
                     <Box sx={{ marginTop: "1rem" }}>
                         <TextField
+                            label="Email"
+                            type="email"
+                            variant="outlined"
+                            fullWidth
+                            autoComplete="off"
+                            name="email"
+                            error={errorsEnable.email}
+                            helperText={errors.email}
+                            value={values.email}
+                            onChange={handleInputChange}
+                            FormHelperTextProps={{ style: { fontSize: 12 } }}
+                            InputProps={{
+                                style: { borderRadius: "1.5rem", fontSize: "1.4rem" },
+                            }}
+                            InputLabelProps={{
+                                style: { fontSize: "1.6rem" },
+                            }}
+                        />
+                    </Box>
+                    <Box sx={{ marginTop: "1rem" }}>
+                        <TextField
+                            inputRef={textRef}
                             label="Mật khẩu"
                             type="password"
                             placeholder="***********"
@@ -152,16 +199,16 @@ function SignUp() {
                     </Box>
                     <Box sx={{ marginTop: "1rem" }}>
                         <TextField
-                            label="Email"
-                            type="email"
+                            label="Nhập lại mật khẩu"
+                            type="password"
+                            placeholder="***********"
                             variant="outlined"
-                            //   placeholder="Email"
                             fullWidth
                             autoComplete="off"
-                            name="email"
-                            error={errorsEnable.email}
-                            helperText={errors.email}
-                            value={values.email}
+                            name="rePassword"
+                            error={errorsEnable.rePassword}
+                            helperText={errors.rePassword}
+                            value={values.rePassword}
                             onChange={handleInputChange}
                             FormHelperTextProps={{ style: { fontSize: 12 } }}
                             InputProps={{
@@ -172,50 +219,7 @@ function SignUp() {
                             }}
                         />
                     </Box>
-                    <Box sx={{ marginTop: "1rem" }}>
-                        <TextField
-                            label="Địa chỉ"
-                            type="text"
-                            variant="outlined"
-                            //   placeholder="Address"
-                            autoComplete="off"
-                            name="address"
-                            value={values.address}
-                            helperText={errors.address}
-                            error={errorsEnable.address}
-                            onChange={handleInputChange}
-                            FormHelperTextProps={{ style: { fontSize: 12 } }}
-                            fullWidth
-                            InputProps={{
-                                style: { borderRadius: "1.5rem", fontSize: "1.4rem" },
-                            }}
-                            InputLabelProps={{
-                                style: { fontSize: "1.6rem" },
-                            }}
-                        />
-                    </Box>
-                    <Box sx={{ marginTop: "1rem" }}>
-                        <TextField
-                            label="Số điện thoại"
-                            type="text"
-                            variant="outlined"
-                            //   placeholder="Phone Number"
-                            autoComplete="off"
-                            name="phone"
-                            helperText={errors.phone}
-                            value={values.phone}
-                            error={errorsEnable.phone}
-                            onChange={handleInputChange}
-                            FormHelperTextProps={{ style: { fontSize: 12 } }}
-                            fullWidth
-                            InputProps={{
-                                style: { borderRadius: "1.5rem", fontSize: "1.4rem" },
-                            }}
-                            InputLabelProps={{
-                                style: { fontSize: "1.6rem" },
-                            }}
-                        />
-                    </Box>
+
                     <Box sx={{ marginTop: "1rem" }}>
                         <Button
                             type="submit"
@@ -223,7 +227,7 @@ function SignUp() {
                             className={cx("btn-login")}
                             fullWidth
                         >
-                            Đăng ký
+                            Tạo tài khoản
                         </Button>
                     </Box>
                 </Form>
@@ -245,6 +249,7 @@ function SignUp() {
                     </Grid>
                 </Grid>
             </Box>
+            <Loading open={isLoading} />
         </Box>
     );
 }

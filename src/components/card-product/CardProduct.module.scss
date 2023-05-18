@@ -1,0 +1,97 @@
+.card {
+    border-radius: 1rem;
+    width: 100% !important;
+    background-color: #fff;
+    border-radius: 1rem;
+    overflow: hidden;
+    .card-area {
+        position: relative;
+        .sale-text{
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: #f00;
+            color: #fff;
+            padding: 5px 15px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 5px;
+            z-index: 1;
+        }
+
+        &:hover {
+            text-decoration: none;
+            color: #000;
+            .main-image {
+                opacity: 0;
+                visibility: hidden;
+            }
+            .sub-image {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+
+        .main-image {
+            width: 100%;
+            transition: all 1s ease-in-out 0s;
+        }
+
+        .sub-image {
+            width: 100%;
+            opacity: 0;
+            visibility: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            transition: all 0.6s ease-in-out 0s;
+        }
+
+        .card-content {
+            background-color: #fff;
+            padding: 1rem;
+            .info {
+                display: flex;
+                justify-content: space-between;
+                .size,
+                .color {
+                    font-size: 1.4rem;
+                }
+            }
+            .title {
+                // padding: 5px 5px;
+                font-size: 1.4rem;
+                line-height: 2rem;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                margin: 0.5rem 0;
+                color: #000;
+                height: 4rem;
+            }
+            .price {
+                padding: 0;
+                align-items: center;
+                .discount-price {
+                    font-size: 1.6rem;
+                    color: #ed4e4e !important;
+                }
+
+                .origin-price {
+                    text-decoration: line-through;
+                    color: #ccc;
+                    font-size: 1.4rem;
+                }
+
+                .discount {
+                    color: #ed4e4e !important;
+                    font-size: 1.4rem;
+                }
+            }
+        }
+    }
+}

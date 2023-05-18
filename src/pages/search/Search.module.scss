@@ -1,0 +1,24 @@
+.wrap-pagination {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    .pagination {
+    }
+}
+.search-item {
+    font-weight: bold;
+}
+
+.sub-title {
+    display: block;
+}
+
+.text-link {
+    font-size: 1.3rem;
+    color: #252a2b;
+    text-decoration: none;
+    &:hover {
+        text-decoration: none;
+        color: #252a2b;
+    }
+}

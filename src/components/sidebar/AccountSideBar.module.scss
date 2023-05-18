@@ -1,20 +1,56 @@
 .side-bar {
-    padding: 0 2.5rem;
-    .avatar{
-        width: 100px;
-        height: 100px;
-        border: 1px solid #ccc;
-    }
-    .verified {
-        background-color: #4caf50;
-        color: #fff;
-        border-radius: 2rem;
-        text-transform: inherit;
-        cursor: default;
-        font-size: 1.4rem;
-        padding: 0.5rem 0;
+    border-radius: 1rem !important;
+    .list {
+        padding: 3.2rem 0;
         display: flex;
-        align-items: center;
-        user-select: none;
+        flex-direction: column;
+        .item {
+            border-radius: 1.2rem;
+            margin: 0 1rem 1rem;
+            padding: 0.8rem 1.6rem;
+            display: inline-block;
+
+            &.active {
+                background-color: #ddebfe;
+            }
+            &:hover.active {
+                background-color: #ddebfe;
+            }
+            &:hover {
+                background-color: rgba(221, 235, 254, 0.4);
+            }
+
+            .text {
+                font-size: 1.4rem;
+                color: #000;
+                display: flex;
+                align-items: center;
+                .icon{
+                    width: 2rem;
+                    height: 2rem;
+                    margin-right: 1rem;
+                }
+            }
+            &:hover {
+                text-decoration: none;
+            }
+        }
     }
+    // .avatar {
+    //     width: 100px;
+    //     height: 100px;
+    //     border: 1px solid #ccc;
+    // }
+    // .verified {
+    //     background-color: #4caf50;
+    //     color: #fff;
+    //     border-radius: 2rem;
+    //     text-transform: inherit;
+    //     cursor: default;
+    //     font-size: 1.4rem;
+    //     padding: 0.5rem 0;
+    //     display: flex;
+    //     align-items: center;
+    //     user-select: none;
+    // }
 }

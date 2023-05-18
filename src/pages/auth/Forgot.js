@@ -1,25 +1,38 @@
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import style from "./Auth.module.scss";
 import classNames from "classnames/bind";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { TitleFullWidth } from "~/components/header/FullWidthHeader";
 import { Form, useForm } from "~/hooks/useForm";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchForgotPassword } from "~/redux/auth/authSlice";
+import Loading from "~/components/loading/Loading";
 const cx = classNames.bind(style);
 
 function Forgot() {
     const initialValues = {
         email: "",
     };
+
     const validate = (fieldValues = values) => {
         let temp = { ...errors };
         let tempEnable = { ...errorsEnable };
         if ("email" in fieldValues) {
-            if (fieldValues.email === "") {
-                tempEnable.email = true;
-                temp.email = "Không được để trống.";
+            if (fieldValues.email !== "") {
+                if (
+                    fieldValues.email.match(
+                        /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+                    )
+                ) {
+                    temp.email = "";
+                    tempEnable.email = false;
+                } else {
+                    temp.email = "Không đúng định dạng email";
+                    tempEnable.email = true;
+                }
             } else {
-                tempEnable.email = false;
-                temp.email = "";
+                temp.email = "Không được để trống";
+                tempEnable.email = true;
             }
         }
         setErrors({
@@ -42,10 +55,16 @@ function Forgot() {
         handleInputChange,
         resetForm,
     } = useForm(initialValues, true, validate);
-    const handleSubmit = (e) => {
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { isLoading } = useSelector((state) => state.authReducer);
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (validate()) {
-            // xử lý tiếp
+            const response = await dispatch(fetchForgotPassword(values));
+            console.log(response);
+            if (response.payload.success) navigate("/auth/notification");
             resetForm();
         }
     };
@@ -102,6 +121,7 @@ function Forgot() {
                     </Grid>
                 </Grid>
             </Box>
+            <Loading open={isLoading} />
         </Box>
     );
 }

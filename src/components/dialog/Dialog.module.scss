@@ -1,0 +1,163 @@
+.dialog-main {
+    .btn-delete {
+        border: 1.5px solid #bcbfd6;
+        color: #434657;
+        text-transform: inherit;
+        font-size: 1.3rem;
+        background-color: #fff;
+        &:hover {
+            border: 1.5px solid #a7abc3;
+        }
+    }
+    .btn-edit {
+        border: 1.5px solid #da4343;
+        color: #da4343;
+        text-transform: inherit;
+        font-size: 1.3rem;
+        background-color: #fff;
+
+        &:hover {
+            border: 1.5px solid #c43c3c;
+        }
+    }
+}
+
+.btn-add-address {
+    .icon-add {
+        color: #000;
+        margin-right: 1rem;
+        width: 1.8rem;
+        height: 1.8rem;
+    }
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem !important;
+    border-radius: 1rem;
+    border: 1px dashed #000;
+    background-color: #fff;
+    width: 100%;
+    height: 60px;
+    text-transform: inherit;
+    color: rgb(20, 53, 195);
+    &:focus {
+        background-color: #fff;
+    }
+}
+
+.dialog-content {
+    position: relative;
+    .dialog-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: flex-end;
+        padding: 1rem 1rem;
+        align-items: center;
+        background-color: #fff;
+        .btn-cancel {
+            border-color: #1435c3;
+            color: #1435c3;
+            text-transform: inherit;
+            font-size: 1.2rem;
+        }
+
+        .btn-save {
+            box-shadow: none;
+            background-color: #1435c3;
+            text-transform: inherit;
+            font-size: 1.2rem;
+            &:hover {
+                box-shadow: none;
+            }
+        }
+        .btn-truncate {
+            background-color: #da4343;
+            color: #fff;
+            box-shadow: none;
+            text-transform: inherit;
+            font-size: 1.2rem;
+            &:hover {
+                background-color: #da4343;
+                box-shadow: none;
+            }
+        }
+    }
+    .form {
+        position: relative;
+        
+        .subtitle {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .form-multiple {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .form-flex {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            position: relative;
+
+            .select-option {
+                position: absolute;
+                display: block;
+                max-height: 150px;
+                overflow-y: scroll;
+                width: 100%;
+                background-color: #fff;
+                top: 100%;
+                z-index: 1;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+                .option {
+                    cursor: pointer;
+                    padding-left: 1rem;
+                    padding-right: 1rem;
+                    height: 4rem;
+                    display: flex;
+                    font-size: 1.3rem;
+                    align-items: center;
+                    justify-content: space-between;
+                    .icon {
+                        width: 2rem;
+                        height: 2rem;
+                        color: #1435c3;
+                    }
+                }
+                &.hidden {
+                    display: none;
+                }
+            }
+            .form-label {
+                font-size: 1.3rem;
+                color: #000;
+                position: relative;
+                padding-left: 1rem;
+                display: inline-block;
+                margin-bottom: 0.5rem;
+                &::before {
+                    content: "*";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    color: #ff4d4f;
+                    font-size: 1.4rem;
+                }
+            }
+        }
+    }
+
+    .dialog-title {
+        color: #1b1d29;
+        font-size: 2.4rem;
+        font-weight: bold;
+    }
+    .dialog-subtitle{
+        font-size: 1.6rem;
+    }
+
+   
+}

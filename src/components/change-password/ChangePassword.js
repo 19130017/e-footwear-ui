@@ -1,26 +1,34 @@
-import { Box, Button, Grid, TextField, Typography } from "@mui/material";
+import { Box, Button, Grid, Paper, TextField, Typography } from "@mui/material";
 import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
 import { Form, useForm } from "~/hooks/useForm";
 import AccountHeader from "../header/AccountHeader";
 import style from "./ChangePassword.module.scss";
+import { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchChangePassword } from "~/redux/auth/authSlice";
 const cx = classNames.bind(style);
 function ChangePassword() {
     const initialFormValues = {
-        currentPassword: "",
+        oldPassword: "",
         newPassword: "",
         verifyPassword: "",
     };
+    const textRef = useRef();
+    const refPassword = textRef.current?.value;
+    const dispatch = useDispatch();
+    const { accountId, accessToken } = useSelector((state) => state.authReducer);
+
     const validate = (fieldValues = values) => {
         const temp = { ...errors };
         const tempEnable = { ...errorsEnable };
-        if ("currentPassword" in fieldValues) {
-            if (fieldValues.currentPassword === "") {
-                temp.currentPassword = "Vui lòng nhập mật khẩu";
-                tempEnable.currentPassword = true;
+        if ("oldPassword" in fieldValues) {
+            if (fieldValues.oldPassword === "") {
+                temp.oldPassword = "Vui lòng nhập mật khẩu";
+                tempEnable.oldPassword = true;
             } else {
-                temp.currentPassword = "";
-                tempEnable.currentPassword = false;
+                temp.oldPassword = "";
+                tempEnable.oldPassword = false;
             }
         }
         if ("newPassword" in fieldValues) {
@@ -34,11 +42,16 @@ function ChangePassword() {
         }
         if ("verifyPassword" in fieldValues) {
             if (fieldValues.verifyPassword === "") {
-                temp.verifyPassword = "Vui lòng nhập mật khẩu xác nhận";
                 tempEnable.verifyPassword = true;
+                temp.verifyPassword = "Không được để trống.";
             } else {
-                temp.verifyPassword = "";
-                tempEnable.verifyPassword = false;
+                if (fieldValues.verifyPassword === refPassword) {
+                    tempEnable.verifyPassword = false;
+                    temp.verifyPassword = "";
+                } else {
+                    temp.verifyPassword = "Không khớp với mật khẩu. Vui lòng nhập lại.";
+                    tempEnable.verifyPassword = true;
+                }
             }
         }
 
@@ -59,14 +72,22 @@ function ChangePassword() {
         resetForm,
     } = useForm(initialFormValues, true, validate);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (validate()) {
-            console.log("submit");
+            await dispatch(
+                fetchChangePassword({
+                    id: accountId,
+                    accessToken,
+                    newPassword: values.newPassword,
+                    oldPassword: values.oldPassword,
+                })
+            );
+            resetForm();
         }
     };
     return (
-        <Box className={cx("change-password-section")}>
+        <Paper className={cx("change-password-section")}>
             <AccountHeader
                 title="Đổi mật khẩu"
                 text="Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác"
@@ -82,13 +103,13 @@ function ChangePassword() {
                             </Grid>
                             <Grid item xs={8}>
                                 <TextField
-                                    name="currentPassword"
+                                    name="oldPassword"
                                     type="password"
                                     fullWidth
-                                    value={values.currentPassword}
+                                    value={values.oldPassword}
                                     onChange={handleInputChange}
-                                    error={errorsEnable.currentPassword}
-                                    helperText={errors.currentPassword}
+                                    error={errorsEnable.oldPassword}
+                                    helperText={errors.oldPassword}
                                     FormHelperTextProps={{ style: { fontSize: "1.4rem" } }}
                                     inputProps={{ style: { padding: "1.5rem 1rem" } }}
                                 />
@@ -102,6 +123,7 @@ function ChangePassword() {
                             </Grid>
                             <Grid item xs={8}>
                                 <TextField
+                                    inputRef={textRef}
                                     name="newPassword"
                                     type="password"
                                     fullWidth
@@ -136,7 +158,7 @@ function ChangePassword() {
                         </Grid>
 
                         <Grid container justifyContent="center">
-                            <Button variant="contained" type="submit">
+                            <Button variant="contained" type="submit" className={cx("btn-save")}>
                                 Lưu
                             </Button>
                         </Grid>
@@ -148,7 +170,7 @@ function ChangePassword() {
                     </Link>
                 </Grid>
             </Grid>
-        </Box>
+        </Paper>
     );
 }
 

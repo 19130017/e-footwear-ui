@@ -1,0 +1,31 @@
+.icon-wrapper {
+    margin: 0 1rem;
+    position: relative;
+    &:hover {
+        .dropdown-account,
+        .dropdown-cart,
+        .dropdown-search {
+            display: block;
+        }
+    }
+    .icon-btn {
+        padding: 0;
+        border-radius: 0;
+        &:hover,
+        &:focus {
+            outline: none;
+        }
+        .icon {
+            height: 30px;
+            color: #252a2b;
+            width: 30px;
+        }
+        .avatar-image {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+}
