@@ -14,7 +14,6 @@ function NotFound() {
             <Button component={Link}
                 to={"/"} className={cx("back")}>Quay lại trang chủ</Button>
             </Box>
-           
         </Box>
     );
 }

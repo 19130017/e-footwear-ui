@@ -2,7 +2,14 @@ import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 // layouts
 import { MainLayout, FullWidthLayout } from "~/layouts";
 // pages
-import { SignIn, SignUp, Forgot, AccountSuccess, VerifyAccount, ResetPassword } from "~/pages/auth";
+import {
+    SignIn,
+    SignUp,
+    Forgot,
+    NotificationItem,
+    VerifyAccount,
+    ResetPassword,
+} from "~/pages/auth";
 import Home from "~/pages/home";
 import Contact from "~/pages/contact";
 import About from "~/pages/about";
@@ -65,7 +72,7 @@ function App() {
                     <Route path="/auth/sign-in" element={<SignIn />} />
                     <Route path="/auth/sign-up" element={<SignUp />} />
                     <Route path="/auth/forgot" element={<Forgot />} />
-                    <Route path="/auth/verify/:token" element={<AccountSuccess />} />
+                    <Route path="/auth/notification" element={<NotificationItem />} />
                     <Route path="/auth/verify-account/:token" element={<VerifyAccount />} />
                     <Route path="/auth/reset-password/:token" element={<ResetPassword />} />
                 </Route>

@@ -14,7 +14,7 @@ function Breadcrumb({ data }) {
     return (
         <Box className="container">
             <Breadcrumbs aria-label="breadcrumb">
-                {breadcrumbs.map((item, index) => item)}
+                {breadcrumbs?.map((item, index) => item)}
             </Breadcrumbs>
         </Box>
     );

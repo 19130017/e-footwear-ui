@@ -4,6 +4,7 @@ import classNames from "classnames/bind";
 import HomeIcon from "@mui/icons-material/Home";
 import PhoneIcon from "@mui/icons-material/Phone";
 import MailIcon from "@mui/icons-material/Mail";
+import { Link } from "react-router-dom";
 const cx = classNames.bind(style);
 
 function Footer() {
@@ -21,29 +22,29 @@ function Footer() {
                     <h6 className={cx("text-title")}>Dịch vụ khách hàng</h6>
                     <ul className={cx("colorlib-footer-links")}>
                         <li className={cx("lib-items")}>
-                            <a className={cx("link")} href="#">
+                            <Link to={"/contact"} className={cx("link")}>
                                 Liên hệ
-                            </a>
+                            </Link>
                         </li>
                         <li className={cx("lib-items")}>
-                            <a className={cx("link")} href="#">
+                            <Link to={"/coming-soon"} className={cx("link")}>
                                 Giảm giá
-                            </a>
+                            </Link>
                         </li>
                         <li className={cx("lib-items")}>
-                            <a className={cx("link")} href="#">
+                            <Link to={"/coming-soon"} className={cx("link")}>
                                 Danh sách yêu thích
-                            </a>
+                            </Link>
                         </li>
                         <li className={cx("lib-items")}>
-                            <a className={cx("link")} href="#">
+                            <Link to={"/coming-soon"} className={cx("link")}>
                                 Sản phẩm đặc biệt
-                            </a>
+                            </Link>
                         </li>
                         <li className={cx("lib-items")}>
-                            <a className={cx("link")} href="#">
+                            <Link to={"/coming-soon"} className={cx("link")}>
                                 Chăm sóc khách hàng
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </Grid>
@@ -51,24 +52,24 @@ function Footer() {
                     <h6 className={cx("text-title")}>Thông tin</h6>
                     <ul className={cx("colorlib-footer-links")}>
                         <li className={cx("lib-items")}>
-                            <a className={cx("link")} href="#">
+                            <Link to={"/about"} className={cx("link")}>
                                 Về chúng tôi
-                            </a>
+                            </Link>
                         </li>
                         <li className={cx("lib-items")}>
-                            <a className={cx("link")} href="#">
+                            <Link to={"/coming-soon"} className={cx("link")}>
                                 Thông tin nhà vận chuyển
-                            </a>
+                            </Link>
                         </li>
                         <li className={cx("lib-items")}>
-                            <a className={cx("link")} href="#">
+                            <Link to={"/coming-soon"} className={cx("link")}>
                                 Quyền riêng tư
-                            </a>
+                            </Link>
                         </li>
                         <li className={cx("lib-items")}>
-                            <a className={cx("link")} href="#">
+                            <Link to={"/coming-soon"} className={cx("link")}>
                                 Hỗ trợ
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </Grid>
@@ -76,9 +77,9 @@ function Footer() {
                     <h6 className={cx("text-title")}>Nổi bật</h6>
                     <ul className={cx("colorlib-footer-links")}>
                         <li className={cx("lib-items")}>
-                            <a className={cx("link")} href="">
+                            <Link to={"/coming-soon"} className={cx("link")} href="">
                                 Sản phẩm mới
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </Grid>

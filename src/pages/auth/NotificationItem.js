@@ -1,13 +1,14 @@
 import { Box, Button, Typography } from "@mui/material";
 import style from "./Auth.module.scss";
 import classNames from "classnames/bind";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { TitleFullWidth } from "~/components/header/FullWidthHeader";
 const cx = classNames.bind(style);
 
-function AccountSuccess() {
+function NotificationItem() {
+    const navigate = useNavigate();
     return (
-        <Box className={cx("wrapper")} >
+        <Box className={cx("wrapper")}>
             <Box className={cx("content")}>
                 <TitleFullWidth cx={cx} title="Cấp lại mật khẩu" />
                 <Box
@@ -34,10 +35,9 @@ function AccountSuccess() {
                             className={cx("text")}
                             sx={{ lineHeight: "25px", padding: "2rem" }}
                         >
-                            {" "}
-                            Vui lòng kiểm tra email của bạn và làm theo hướng dẫn để được cấp
-                            lại mật khẩu. Nếu không tìm thấy email trong hộp thư đến, vui lòng
-                            kiểm tra hộp thư rác.
+                            Vui lòng kiểm tra email của bạn và làm theo hướng dẫn để được cấp lại
+                            mật khẩu. Nếu không tìm thấy email trong hộp thư đến, vui lòng kiểm tra
+                            hộp thư rác.
                         </Typography>
 
                         <Button
@@ -50,8 +50,7 @@ function AccountSuccess() {
                             }}
                             variant="contained"
                             className={cx("btn-login")}
-                            component={Link}
-                            to="/auth/sign-in"
+                            onClick={() => navigate("/auth/sign-in")}
                         >
                             Quay lại trang đăng nhập
                         </Button>
@@ -62,4 +61,4 @@ function AccountSuccess() {
     );
 }
 
-export default AccountSuccess;
+export default NotificationItem;

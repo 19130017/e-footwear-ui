@@ -5,6 +5,7 @@ import {
     GET_PRODUCT_BY_SLUG,
     GET_PRODUCTS_HOT,
     GET_PRODUCTS_NEW,
+    GET_PRODUCT_BY_NAME,
 } from "./productType";
 import { productApi } from "~/apis/productApi";
 const initialState = {
@@ -64,6 +65,17 @@ const fetchProductsHot = createAsyncThunk(GET_PRODUCTS_HOT, async (params, thunk
 const fetchProductsNew = createAsyncThunk(GET_PRODUCTS_NEW, async (params, thunkApi) => {
     try {
         const response = await productApi.requestGetProductNew(params);
+        return response.success
+            ? thunkApi.fulfillWithValue(response)
+            : thunkApi.rejectWithValue(response);
+    } catch (error) {
+        return thunkApi.rejectWithValue(error.response.data);
+    }
+});
+
+const fetchProductsByName = createAsyncThunk(GET_PRODUCT_BY_NAME, async (params, thunkApi) => {
+    try {
+        const response = await productApi.requestGetProductByName(params);
         return response.success
             ? thunkApi.fulfillWithValue(response)
             : thunkApi.rejectWithValue(response);
@@ -152,6 +164,21 @@ const productSlice = createSlice({
                 state.products = products;
                 state.isLoading = false;
                 return state;
+            })
+            // get product by name
+            .addCase(fetchProductsByName.pending, (state, action) => {
+                state.isLoading = true;
+                return state;
+            })
+            .addCase(fetchProductsByName.rejected, (state, action) => {
+                state.isLoading = false;
+                return state;
+            })
+            .addCase(fetchProductsByName.fulfilled, (state, action) => {
+                const products = action.payload.data;
+                state.products = products;
+                state.isLoading = false;
+                return state;
             });
     },
 });
@@ -164,4 +191,5 @@ export {
     fetchProductsBySlug,
     fetchProductsHot,
     fetchProductsNew,
+    fetchProductsByName
 };

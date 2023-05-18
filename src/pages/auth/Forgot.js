@@ -13,9 +13,7 @@ function Forgot() {
     const initialValues = {
         email: "",
     };
-    const dispatch = useDispatch();
-    const { isLoading } = useSelector((state) => state.authReducer);
-    const navigate = useNavigate();
+
     const validate = (fieldValues = values) => {
         let temp = { ...errors };
         let tempEnable = { ...errorsEnable };
@@ -57,11 +55,16 @@ function Forgot() {
         handleInputChange,
         resetForm,
     } = useForm(initialValues, true, validate);
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { isLoading } = useSelector((state) => state.authReducer);
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (validate()) {
             const response = await dispatch(fetchForgotPassword(values));
-            if (response.payload.success) navigate("/auth/sign-in");
+            console.log(response);
+            if (response.payload.success) navigate("/auth/notification");
             resetForm();
         }
     };

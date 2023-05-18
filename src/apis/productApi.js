@@ -36,4 +36,11 @@ export const productApi = {
             .then((response) => response)
             .catch((error) => error.response.data);
     },
+
+    async requestGetProductByName(params) {
+        return await axios
+            .get(`/products/search?query=${params}`)
+            .then((response) => response)
+            .catch((error) => error.response.data);
+    },
 };

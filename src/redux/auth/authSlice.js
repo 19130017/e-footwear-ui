@@ -19,6 +19,7 @@ const initialState = {
     avatar: "",
     isLogin: false,
     isLoading: false,
+    response: "",
 };
 
 const fetchRegister = createAsyncThunk(AUTH_REGISTER, async (params, thunkApi) => {
@@ -129,11 +130,7 @@ const authSlice = createSlice({
             })
             .addCase(fetchVerifyAccount.rejected, (state, action) => {
                 state.isLoading = false;
-                MySwal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: action.payload.message,
-                });
+                state.response = action.payload;
                 return state;
             })
             .addCase(fetchVerifyAccount.fulfilled, (state, action) => {
@@ -144,6 +141,7 @@ const authSlice = createSlice({
                     title: "Thành công",
                     text: data,
                 });
+                state.response = action.payload;
                 return state;
             })
             // login
@@ -218,7 +216,6 @@ const authSlice = createSlice({
                 return state;
             })
             .addCase(fetchForgotPassword.rejected, (state, action) => {
-                console.log(action);
                 state.isLoading = false;
                 MySwal.fire({
                     icon: "error",
@@ -229,11 +226,6 @@ const authSlice = createSlice({
             })
             .addCase(fetchForgotPassword.fulfilled, (state, action) => {
                 state.isLoading = false;
-                PopUpSuccess.fire({
-                    icon: "success",
-                    title: "Thành công",
-                    text: action.payload.data,
-                });
                 return state;
             })
             // reset password
@@ -270,5 +262,5 @@ export {
     fetchLogout,
     fetchChangePassword,
     fetchForgotPassword,
-    fetchResetPassword
+    fetchResetPassword,
 };

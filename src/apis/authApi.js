@@ -80,12 +80,17 @@ export const authApi = {
     },
 
     async requestResetPassword(params) {
-        console.log(params);
         return await axios
             .put(`/accounts/reset-password`, {
                 token: params.token,
                 newPassword: params.newPassword,
             })
+            .then((response) => response)
+            .catch((error) => error.response.data);
+    },
+    async requestForgotPassword(params) {
+        return await axios
+            .post(`/accounts/forgot-password?email=${params.email}`)
             .then((response) => response)
             .catch((error) => error.response.data);
     },
