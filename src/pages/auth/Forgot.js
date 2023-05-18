@@ -47,7 +47,6 @@ function Forgot() {
     };
     const {
         values,
-        setValues,
         errors,
         setErrors,
         errorsEnable,
@@ -63,7 +62,6 @@ function Forgot() {
         e.preventDefault();
         if (validate()) {
             const response = await dispatch(fetchForgotPassword(values));
-            console.log(response);
             if (response.payload.success) navigate("/auth/notification");
             resetForm();
         }
@@ -78,7 +76,6 @@ function Forgot() {
                             label="Email"
                             name="email"
                             variant="outlined"
-                            //   placeholder="Email"
                             autoComplete="off"
                             value={values.email}
                             onChange={handleInputChange}

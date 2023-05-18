@@ -8,9 +8,9 @@ import IconButton from "@mui/material/IconButton";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBagOutlined";
 import Badge from "@mui/material/Badge";
 import { DropdownAccount, DropdownCart } from "../dropdown";
-import Category from "../category/Category";
+import Category from "../category";
 import { useSelector } from "react-redux";
-import Search from "../search/Search";
+import Search from "../search";
 const cx = classNames.bind(style);
 
 function Header() {

@@ -1,7 +1,7 @@
-import axios from "./axios";
+import axiosClient from "./axios";
 export const orderApi = {
     requestCreateOrder(params) {
-        return axios
+        return axiosClient
             .post(
                 `/orders`,
                 {
@@ -24,7 +24,7 @@ export const orderApi = {
     },
 
     requestGetOrders(accountId, accessToken) {
-        return axios
+        return axiosClient
             .get(`orders/account/${accountId}`, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
@@ -34,7 +34,7 @@ export const orderApi = {
             .catch((error) => error.response.data);
     },
     requestGetOrder(id, accessToken) {
-        return axios
+        return axiosClient
             .get(`orders/${id}`, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,

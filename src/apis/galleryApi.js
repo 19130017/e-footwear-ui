@@ -1,32 +1,32 @@
-import axios from "./axios";
+import axiosClient from "./axios";
 export const galleryApi = {
     async requestGetCarousels() {
-        return axios
+        return axiosClient
             .get(`/galleries/slide`)
             .then((response) => response)
             .catch((error) => error.response.data);
     },
     async requestGetBanners() {
-        return axios
+        return axiosClient
             .get(`/galleries/banner`)
             .then((response) => response)
             .catch((error) => error.response.data);
     },
 
     async requestGetCollections() {
-        return axios
+        return axiosClient
             .get(`/galleries/collection`)
             .then((response) => response)
             .catch((error) => error.response.data);
     },
     async requestGetAds() {
-        return axios
+        return axiosClient
             .get(`/galleries/ads`)
             .then((response) => response)
             .catch((error) => error.response.data);
     },
     async requestGetFooter() {
-        return axios
+        return axiosClient
             .get(`/galleries/footer`)
             .then((response) => response)
             .catch((error) => error.response.data);

@@ -1,8 +1,8 @@
-import axios from "./axios";
+import axiosClient from "./axios";
 
 export const authApi = {
     async requestRegister(params) {
-        return await axios
+        return await axiosClient
             .post("/accounts/register", {
                 username: params.username,
                 email: params.email,
@@ -14,14 +14,14 @@ export const authApi = {
 
     async requestVerifyAccount(params) {
         const token = params.token;
-        return await axios
+        return await axiosClient
             .get(`/accounts/verify/${token}`)
             .then((response) => response)
             .catch((error) => error.response.data);
     },
 
     async requestLogin(params) {
-        return await axios
+        return await axiosClient
             .post("/accounts/login", {
                 username: params.username,
                 password: params.password,
@@ -31,7 +31,7 @@ export const authApi = {
     },
 
     async requestGetProfile(params) {
-        return await axios
+        return await axiosClient
             .get(`/accounts/profile/${params.accountId}`, {
                 headers: {
                     Authorization: `Bearer ${params.accessToken}`,
@@ -41,7 +41,7 @@ export const authApi = {
             .catch((error) => error.response.data);
     },
     async requestUpdateProfile(customerInfo, accessToken) {
-        return await axios
+        return await axiosClient
             .put(
                 `/accounts/profile`,
                 {
@@ -61,7 +61,7 @@ export const authApi = {
     },
 
     async requestChangePassword(params) {
-        return await axios
+        return await axiosClient
             .put(
                 "/accounts/change-password",
                 {
@@ -80,7 +80,7 @@ export const authApi = {
     },
 
     async requestResetPassword(params) {
-        return await axios
+        return await axiosClient
             .put(`/accounts/reset-password`, {
                 token: params.token,
                 newPassword: params.newPassword,
@@ -89,7 +89,7 @@ export const authApi = {
             .catch((error) => error.response.data);
     },
     async requestForgotPassword(params) {
-        return await axios
+        return await axiosClient
             .post(`/accounts/forgot-password?email=${params.email}`)
             .then((response) => response)
             .catch((error) => error.response.data);

@@ -110,9 +110,9 @@ function OrderDetail() {
                                             variant="body1"
                                             className={cx("text", "text-light")}
                                         >
-                                            Loại: {item.detail.product.category.name}, 
-                                            Kích cỡ: {item.detail.size.value}, 
-                                            Màu: {item.detail.product.color.name}
+                                            Loại: {item.detail.product.category.name}, Kích cỡ:{" "}
+                                            {item.detail.size.value}, Màu:{" "}
+                                            {item.detail.product.color.name}
                                         </Typography>
                                     </Grid>
                                 </Grid>
@@ -155,6 +155,22 @@ function OrderDetail() {
                                   style: "currency",
                                   currency: "VND",
                               })}
+                    </Typography>
+                </Grid>
+                <Grid item>
+                    Giảm giá:
+                    <Typography variant="body1" className={cx("total")}>
+                        {order?.coupon == null ? (
+                            "0 VND"
+                        ) : (
+                            <span>
+                                -
+                                {order?.coupon.price.toLocaleString("it-IT", {
+                                    style: "currency",
+                                    currency: "VND",
+                                })}
+                            </span>
+                        )}
                     </Typography>
                 </Grid>
                 <Grid item>
