@@ -60,6 +60,7 @@ export const store = configureStore({
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
                 ignoredActionPaths: ["payload.headers"],
             },
+            // serializableCheck: false,
         }),
 });
 

@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { authApi } from "~/apis/authApi";
-import { addressApi } from "~/apis/addressApi";
-import { CUSTOMER_LOGOUT, GET_CUSTOMER, UPDATE_INFO_CUSTOMER } from "./customerType";
+import { CUSTOMER_LOGOUT, GET_CUSTOMER, UPDATE_INFO_CUSTOMER, UPLOAD_AVATAR } from "./customerType";
 import MySwal, { PopUpSuccess } from "~/utils/MySwal";
 
 const initialState = {
@@ -35,6 +34,17 @@ const fetchUpdateProfile = createAsyncThunk(UPDATE_INFO_CUSTOMER, async (params,
     }
 });
 
+const fetchUploadAvatar = createAsyncThunk(UPLOAD_AVATAR, async (params, thunkApi) => {
+    try {
+        const response = await authApi.requestUploadAvatar(params.content, params.accessToken);
+        return response.success
+            ? thunkApi.fulfillWithValue(response)
+            : thunkApi.rejectWithValue(response);
+    } catch (err) {
+        return thunkApi.rejectWithValue(err.response.data);
+    }
+});
+
 const customerSlice = createSlice({
     name: "customer",
     initialState,
@@ -48,7 +58,7 @@ const customerSlice = createSlice({
             })
 
             .addCase(fetchGetProfile.rejected, (state, action) => {
-                state.isLoading = true;
+                state.isLoading = false;
             })
 
             .addCase(fetchGetProfile.fulfilled, (state, action) => {
@@ -64,7 +74,7 @@ const customerSlice = createSlice({
             })
 
             .addCase(fetchUpdateProfile.rejected, (state, action) => {
-                state.isLoading = true;
+                state.isLoading = false;
                 MySwal.fire({
                     icon: "error",
                     title: "Oops...",
@@ -81,10 +91,35 @@ const customerSlice = createSlice({
                     text: data,
                 });
                 return state;
+            })
+            //upload avatar
+            .addCase(fetchUploadAvatar.pending, (state, action) => {
+                state.isLoading = true;
+                return state;
+            })
+
+            .addCase(fetchUploadAvatar.rejected, (state, action) => {
+                state.isLoading = false;
+                MySwal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: action.payload.message,
+                });
+            })
+
+            .addCase(fetchUploadAvatar.fulfilled, (state, action) => {
+                const data = action.payload.data;
+                state.isLoading = false;
+                PopUpSuccess.fire({
+                    icon: "success",
+                    title: "Thành công",
+                    text: data,
+                });
+                return state;
             });
     },
 });
 
 const customerReducer = customerSlice.reducer;
 export default customerReducer;
-export { fetchGetProfile, fetchUpdateProfile };
+export { fetchGetProfile, fetchUpdateProfile, fetchUploadAvatar };

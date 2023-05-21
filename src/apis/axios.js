@@ -2,7 +2,7 @@ import axios from "axios";
 const axiosClient = axios.create({
     baseURL: process.env.REACT_APP_API_ENDPOINT,
     headers: {
-        "Content-type": "application/json; charset=UTF-8",
+        "Content-type": "application/json; charset=UTF-8;",
     },
 });
 // Add a request interceptor

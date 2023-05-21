@@ -94,4 +94,13 @@ export const authApi = {
             .then((response) => response)
             .catch((error) => error.response.data);
     },
+
+    async requestUploadAvatar(params, accessToken) {
+        return await axiosClient.post("/accounts/upload-avatar", params, {
+            headers: {
+                "Authorization": `Bearer ${accessToken}`,
+                "Content-Type": "multipart/form-data",
+            },
+        });
+    },
 };
