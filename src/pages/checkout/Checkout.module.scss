@@ -101,9 +101,15 @@
         }
     }
     .checkout-right {
-        background-color: #f8f8fc;
+        background-color: #e4e7e9;
         border-radius: 1rem;
-
+        .coupon-wrapper {
+            border-radius: 1rem;
+            background-color: #ccc;
+            padding: 1rem 1rem;
+            margin-top: 2rem;
+            overflow: hidden;
+        }
         .info-order {
             border-radius: 1rem;
             background-color: #fff;

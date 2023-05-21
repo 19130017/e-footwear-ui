@@ -3,32 +3,39 @@ import classnames from "classnames/bind";
 import { Link, useNavigate } from "react-router-dom";
 import { Payment, Address } from "~/components/checkout-items";
 import { AddressAdd } from "~/components/dialog";
-import { checkoutData, userInfo } from "~/service/fakeData";
 import style from "./Checkout.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchGetAddresses } from "~/redux/address/addressSlice";
 import { fetchCreateOrder } from "~/redux/order/orderSlice";
 import { clearCart } from "~/redux/cart/cartSlice";
+import Coupon from "~/components/coupon";
+import { fetchGetCoupons } from "~/redux/coupon/couponSlice";
 
 const cx = classnames.bind(style);
 
 function Checkout() {
     const cart = useSelector((state) => state.cartReducer.cart);
-    const total = cart?.reduce((accumulator, currentValue) => {
-        return accumulator + currentValue.price * currentValue.quantity;
-    }, 0);
-    const cost = total + total * 0.1 + (total > 700000 ? 0 : 11000);
-
     const dispatch = useDispatch();
     const { accountId, accessToken } = useSelector((state) => state.authReducer);
-    const { addresses, isLoading, isChanged } = useSelector((state) => state.addressReducer);
+    const { addresses, isChanged } = useSelector((state) => state.addressReducer);
     const [addressDelivery, setAddressDelivery] = useState(null);
     const [description, setDescription] = useState(null);
+    const [coupon, setCoupon] = useState(null);
+    const { coupons } = useSelector((state) => state.couponReducer);
+
+    useEffect(() => {
+        dispatch(fetchGetCoupons());
+    }, [dispatch]);
+
     const navigate = useNavigate();
     useEffect(() => {
         dispatch(fetchGetAddresses({ accountId, accessToken }));
     }, [dispatch, isChanged]);
+    const total = cart?.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue.price * currentValue.quantity;
+    }, 0);
+    const cost = total + total * 0.1 + (total > 700000 ? 0 : 11000) - (coupon ? coupon.price : 0);
 
     const handleClick = async () => {
         if (addressDelivery) {
@@ -42,7 +49,7 @@ function Checkout() {
                     cost,
                     transportFee: total > 700000 ? 0 : 11000,
                     description,
-                    coupon: null,
+                    coupon: coupon,
                     account: {
                         id: accountId,
                     },
@@ -68,6 +75,11 @@ function Checkout() {
     const handleChangeDescription = (e) => {
         setDescription(e.target.value);
     };
+
+    const handleChooseCoupon = (e, item) => {
+        setCoupon(item);
+    };
+
     return (
         <Grid container spacing={2} className={cx("checkout")}>
             <Grid item xs={8} className={cx("checkout-left")}>
@@ -238,6 +250,19 @@ function Checkout() {
                         ))}
                     </Box>
                 </Box>
+                {/* coupon */}
+                <Box className={cx("coupon-wrapper")}>
+                    {coupons &&
+                        coupons.map((item, index) => (
+                            <Coupon
+                                key={index}
+                                item={item}
+                                parentCallback={handleChooseCoupon}
+                                id={coupon?.id}
+                            />
+                        ))}
+                </Box>
+
                 <Box className={cx("summary-order")}>
                     <Box className={cx("d-flex")}>
                         <Typography variant="body1" className={cx("subtitle")}>
@@ -257,10 +282,28 @@ function Checkout() {
                         <Typography variant="body1" className={cx("subtitle--bold")}>
                             {total > 700000
                                 ? "Miễn phi"
-                                : Intl.NumberFormat("vi-VN", {
+                                : (11000).toLocaleString("it-IT", {
                                       style: "currency",
                                       currency: "VND",
-                                  }).format(11000)}
+                                  })}
+                        </Typography>
+                    </Box>
+                    <Box className={cx("d-flex")}>
+                        <Typography variant="body1" className={cx("subtitle")}>
+                            Giảm giá
+                        </Typography>
+                        <Typography variant="body1" className={cx("subtitle--bold")}>
+                            {coupon === null ? (
+                                "0 VND"
+                            ) : (
+                                <span>
+                                    -
+                                    {coupon?.price.toLocaleString("it-IT", {
+                                        style: "currency",
+                                        currency: "VND",
+                                    })}
+                                </span>
+                            )}
                         </Typography>
                     </Box>
                     <Box className={cx("d-flex")}>

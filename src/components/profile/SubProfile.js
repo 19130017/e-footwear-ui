@@ -1,19 +1,23 @@
 import { Avatar, Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { Form, useForm } from "~/hooks/useForm";
-import { fetchUpdateProfile } from "~/redux/customer/customerSlice";
+import { fetchUpdateProfile, fetchUploadAvatar } from "~/redux/customer/customerSlice";
 import classNames from "classnames/bind";
 import style from "./Profile.module.scss";
+import MySwal from "~/utils/MySwal";
+import Loading from "../loading/Loading";
+import { useEffect } from "react";
+
 const cx = classNames.bind(style);
 
 function SubProfile({ customer }) {
     const { accountId, accessToken, username } = useSelector((state) => state.authReducer);
+    const { isLoading } = useSelector((state) => state.customerReducer);
     const dispatch = useDispatch();
-
     const initialFormValues = {
-        firstName: customer.firstName,
-        lastName: customer.lastName,
-        birthday: customer.birthday,
+        firstName: customer?.firstName ? customer.firstName : "",
+        lastName: customer?.lastName ? customer.lastName : "",
+        birthday: customer?.birthday ? customer.birthday : "",
     };
 
     const validate = (fieldValues = values) => {
@@ -53,7 +57,7 @@ function SubProfile({ customer }) {
             return Object.values(temp).every((x) => x === "");
         }
     };
-    
+
     const {
         values,
         setValues,
@@ -64,6 +68,7 @@ function SubProfile({ customer }) {
         handleInputChange,
         resetForm,
     } = useForm(initialFormValues, true, validate);
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (validate()) {
@@ -75,8 +80,33 @@ function SubProfile({ customer }) {
             );
         }
     };
+
+    const handleChange = async (e) => {
+        const file = e.target.files[0];
+        if (file.size > 2097152) {
+            return MySwal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Ảnh phải có size nhỏ hơn 2MB",
+            });
+        }
+
+        const formData = new FormData();
+        formData.append("avatar", file);
+        formData.append("accountId", accountId);
+        const response = await dispatch(
+            fetchUploadAvatar({
+                content: formData,
+                accessToken,
+            })
+        );
+        if (response.payload.success) window.location.reload();
+    };
+
     return (
         <Grid container sx={{ paddingTop: "3rem" }} className={cx("content")}>
+            <Loading open={isLoading} />
+
             <Grid item xs={8} sx={{ borderRight: "1px solid #efefef" }}>
                 <Form onSubmit={handleSubmit}>
                     <Grid container spacing={2} sx={{ marginBottom: "3rem" }}>
@@ -174,7 +204,14 @@ function SubProfile({ customer }) {
                     >
                         Chọn ảnh
                     </Box>
-                    <input type="file" id="upload" name="upload" hidden />
+                    <input
+                        type="file"
+                        id="upload"
+                        name="upload"
+                        hidden
+                        accept=".jpg, .jpeg, .png"
+                        onChange={(e) => handleChange(e)}
+                    />
                     <Box>
                         <Typography variant="body1" className={cx("text")}>
                             Định dạng:.JPEG, .PNG, .JPG

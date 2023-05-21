@@ -1,8 +1,8 @@
 import axiosClient from "./axios";
-export const detailApi = {
-    async requestGetDetail(params) {
+export const couponApi = {
+    async requestGetCoupons() {
         return await axiosClient
-            .get(`/details/${params.size_id}/product/${params.slug}/${params.color_id}`)
+            .get("/coupons")
             .then((response) => response)
             .catch((err) => err.response.data);
     },

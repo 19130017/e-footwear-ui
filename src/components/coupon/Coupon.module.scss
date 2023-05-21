@@ -1,0 +1,81 @@
+.coupon-item {
+    background-color: #fff;
+    display: flex;
+    padding: 5px;
+    overflow: hidden;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+
+    .coupon-item-left {
+        width: 25%;
+        position: relative;
+        display: flex;
+        padding-right: 10px;
+        align-items: center;
+        border-right: 1px dashed #ccc;
+        align-items: center;
+        justify-content: center;
+
+        .coupon-image {
+            width: 80px;
+            height: 80px;
+        }
+        &::after {
+            position: absolute;
+            content: "";
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            bottom: -20px;
+            background-color: #ccc;
+        }
+        &::before {
+            position: absolute;
+            content: "";
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            top: -20px;
+            border-radius: 50%;
+            background-color: #ccc;
+        }
+    }
+    .coupon-item-right {
+        width: 100%;
+        padding-left: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .coupon-info {
+            span {
+                margin-right: 0.5rem;
+            }
+            .discount {
+                font-size: 1.4rem;
+                font-weight: bold;
+            }
+            .code,
+            .max-count,
+            .end-time {
+                font-size: 1.3rem;
+                margin: 0.4rem 0;
+            }
+        }
+        .coupon-btn {
+            margin-right: 0.5rem;
+            .btn-use {
+                background-color: #000;
+                color: #fff;
+                box-shadow: none;
+                border: none;
+                outline: none;
+                &.active {
+                    background-color: #ccc;
+                    border: none;
+                    outline: none;
+                }
+            }
+        }
+    }
+}

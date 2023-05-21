@@ -1,7 +1,7 @@
-import axios from "./axios";
+import axiosClient from "./axios";
 export const addressApi = {
     async requestGetAddresses(params) {
-        return await axios
+        return await axiosClient
             .get(`/addresses?accountId=${params.accountId}`, {
                 headers: {
                     Authorization: `Bearer ${params.accessToken}`,
@@ -11,7 +11,7 @@ export const addressApi = {
             .catch((error) => error.response.data);
     },
     async requestCreateAddress(newAddress, accessToken, accountId) {
-        return await axios
+        return await axiosClient
             .post(
                 `/addresses?accountId=${accountId}`,
                 {
@@ -28,7 +28,7 @@ export const addressApi = {
     },
     async requestUpdateAddress(newAddress, accessToken, accountId) {
         console.log(newAddress, accessToken, accountId);
-        return await axios
+        return await axiosClient
             .put(
                 `/addresses?accountId=${accountId}`,
                 {
@@ -44,7 +44,7 @@ export const addressApi = {
             .catch((error) => error.response.data);
     },
     async requestGetAddress(params) {
-        return await axios
+        return await axiosClient
             .get(`/addresses/${params.id}`, {
                 headers: {
                     Authorization: `Bearer ${params.accessToken}`,
@@ -54,7 +54,7 @@ export const addressApi = {
             .catch((error) => error.response.data);
     },
     async requestDeleteAddress(params) {
-        return await axios
+        return await axiosClient
             .delete(`/addresses/${params.id}`, {
                 headers: {
                     Authorization: `Bearer ${params.accessToken}`,

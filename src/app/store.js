@@ -21,6 +21,7 @@ import customerReducer from "~/redux/customer/customerSlice";
 import cartReducer from "~/redux/cart/cartSlice";
 import addressReducer from "~/redux/address/addressSlice";
 import orderReducer from "~/redux/order/orderSlice";
+import couponReducer from "~/redux/coupon/couponSlice";
 import { AUTH_LOGOUT } from "~/redux/auth/authType";
 const persistConfig = {
     key: "root",
@@ -38,6 +39,7 @@ const rootReducer = combineReducers({
     cartReducer: cartReducer,
     addressReducer: addressReducer,
     orderReducer: orderReducer,
+    couponReducer: couponReducer,
 });
 
 // const appReducer = (state, action) => {
@@ -58,6 +60,7 @@ export const store = configureStore({
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
                 ignoredActionPaths: ["payload.headers"],
             },
+            // serializableCheck: false,
         }),
 });
 
