@@ -83,11 +83,11 @@ function SubProfile({ customer }) {
 
     const handleChange = async (e) => {
         const file = e.target.files[0];
-        if (file.size > 2097152) {
+        if (file.size > 1048576) {
             return MySwal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: "Ảnh phải có size nhỏ hơn 2MB",
+                text: "Ảnh phải có size nhỏ hơn 1MB",
             });
         }
 

@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { authApi } from "~/apis/authApi";
 import { CUSTOMER_LOGOUT, GET_CUSTOMER, UPDATE_INFO_CUSTOMER, UPLOAD_AVATAR } from "./customerType";
 import MySwal, { PopUpSuccess } from "~/utils/MySwal";
+import storage from "redux-persist/lib/storage";
 
 const initialState = {
     customers: [],
@@ -107,13 +108,27 @@ const customerSlice = createSlice({
                 });
             })
 
-            .addCase(fetchUploadAvatar.fulfilled, (state, action) => {
+            .addCase(fetchUploadAvatar.fulfilled, async (state, action) => {
                 const data = action.payload.data;
                 state.isLoading = false;
+                // get
+                const store = await storage.getItem("persist:root");
+                //parse to object
+                const parseObject = JSON.parse(store);
+                const authReducer = JSON.parse(parseObject.authReducer);
+                //set avatar
+                authReducer.avatar = data;
+                
+                // parse json
+                const jsonAuth = JSON.stringify(authReducer);
+                parseObject.authReducer = jsonAuth;
+                const jsonObject = JSON.stringify(parseObject);
+                storage.setItem("persist:root", jsonObject);
+
                 PopUpSuccess.fire({
                     icon: "success",
                     title: "Thành công",
-                    text: data,
+                    text: "Cập nhật ảnh thành công",
                 });
                 return state;
             });
