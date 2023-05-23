@@ -11,6 +11,7 @@ import { fetchCreateOrder } from "~/redux/order/orderSlice";
 import { clearCart } from "~/redux/cart/cartSlice";
 import Coupon from "~/components/coupon";
 import { fetchGetCoupons } from "~/redux/coupon/couponSlice";
+import Breadcrumb from "~/components/breadcrumbs/Breadcrumb";
 
 const cx = classnames.bind(style);
 
@@ -79,260 +80,274 @@ function Checkout() {
     const handleChooseCoupon = (e, item) => {
         setCoupon(item);
     };
-
+    const breadcrumbs = [
+        <Typography color="text.primary" sx={{ fontSize: "1.3rem" }} key={1}>
+            Đặt hàng
+        </Typography>,
+    ];
     return (
-        <Grid container spacing={2} className={cx("checkout")}>
-            <Grid item xs={8} className={cx("checkout-left")}>
-                <Box className={cx("info-address")}>
-                    <Typography
-                        variant="h6"
-                        className={cx("subtitle")}
-                        sx={{ padding: "0 0 1rem 1rem", fontWeight: "bold" }}
-                    >
-                        Thông tin nhận hàng
-                    </Typography>
+        <Box>
+            <Breadcrumb data={breadcrumbs} />
+            <Grid container spacing={2} className={cx("checkout")}>
+                <Grid item xs={8} className={cx("checkout-left")}>
+                    <Box className={cx("info-address")}>
+                        <Typography
+                            variant="h6"
+                            className={cx("subtitle")}
+                            sx={{ padding: "0 0 1rem 1rem", fontWeight: "bold" }}
+                        >
+                            Thông tin nhận hàng
+                        </Typography>
 
-                    <Address data={addresses} parentCallback={handleSelectAddress} />
-                    <Box className={cx("add-address")}>
-                        <AddressAdd
-                            accountId={accountId}
-                            accessToken={accessToken}
-                            dispatch={dispatch}
-                        />
-                    </Box>
-                    <Typography
-                        variant="h6"
-                        className={cx("subtitle")}
-                        sx={{ padding: "0 0 1rem 1rem", fontWeight: "bold" }}
-                    >
-                        Phương thức giao hàng
-                    </Typography>
-                    <Box className={cx("wrapper")}>
-                        <Box className={cx("radio-wrapper")}>
-                            <Box
-                                component={"input"}
-                                type="radio"
-                                defaultChecked
-                                className={cx("radio-btn")}
+                        <Address data={addresses} parentCallback={handleSelectAddress} />
+                        <Box className={cx("add-address")}>
+                            <AddressAdd
+                                accountId={accountId}
+                                accessToken={accessToken}
+                                dispatch={dispatch}
                             />
-                            <Box className={cx("border-box")}>
-                                <Box className={cx("rounded")}></Box>
-                            </Box>
                         </Box>
-                        <Grid container className={cx("delivery-wrapper")}>
-                            <Grid item xs={9}>
-                                <Typography variant="body1" className={cx("subtitle")}>
-                                    Giao tiêu chuẩn
-                                </Typography>
-                            </Grid>
-                            <Grid item xs={3}>
-                                {total < 700000 ? (
-                                    <Typography
-                                        variant="body1"
-                                        className={cx("subtitle", "text-right")}
-                                    >
-                                        {Intl.NumberFormat("vi-VN", {
-                                            style: "currency",
-                                            currency: "VND",
-                                        }).format(11000)}
-                                    </Typography>
-                                ) : (
-                                    <Typography
-                                        variant="body1"
-                                        sx={{ fontSize: "1.3rem", color: "#30cd60" }}
-                                        className={cx("text-right")}
-                                    >
-                                        Miễn phí
-                                    </Typography>
-                                )}
-                            </Grid>
-                        </Grid>
-                    </Box>
-
-                    <Typography
-                        variant="h6"
-                        className={cx("subtitle")}
-                        sx={{ padding: "1rem 0 0 1rem", fontWeight: "bold" }}
-                    >
-                        Nhận Mã online, hóa đơn qua email
-                    </Typography>
-                    <Box className={cx("delivery-email")}>
+                        <Typography
+                            variant="h6"
+                            className={cx("subtitle")}
+                            sx={{ padding: "0 0 1rem 1rem", fontWeight: "bold" }}
+                        >
+                            Phương thức giao hàng
+                        </Typography>
                         <Box className={cx("wrapper")}>
-                            <Box>
+                            <Box className={cx("radio-wrapper")}>
                                 <Box
                                     component={"input"}
-                                    type="text"
-                                    value={addressDelivery?.email ? addressDelivery.email : ""}
-                                    readOnly={true}
-                                    sx={{ border: "none", outline: "none", fontSize: "1.3rem" }}
+                                    type="radio"
+                                    defaultChecked
+                                    className={cx("radio-btn")}
                                 />
+                                <Box className={cx("border-box")}>
+                                    <Box className={cx("rounded")}></Box>
+                                </Box>
+                            </Box>
+                            <Grid container className={cx("delivery-wrapper")}>
+                                <Grid item xs={9}>
+                                    <Typography variant="body1" className={cx("subtitle")}>
+                                        Giao tiêu chuẩn
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={3}>
+                                    {total < 700000 ? (
+                                        <Typography
+                                            variant="body1"
+                                            className={cx("subtitle", "text-right")}
+                                        >
+                                            {Intl.NumberFormat("vi-VN", {
+                                                style: "currency",
+                                                currency: "VND",
+                                            }).format(11000)}
+                                        </Typography>
+                                    ) : (
+                                        <Typography
+                                            variant="body1"
+                                            sx={{ fontSize: "1.3rem", color: "#30cd60" }}
+                                            className={cx("text-right")}
+                                        >
+                                            Miễn phí
+                                        </Typography>
+                                    )}
+                                </Grid>
+                            </Grid>
+                        </Box>
+
+                        <Typography
+                            variant="h6"
+                            className={cx("subtitle")}
+                            sx={{ padding: "1rem 0 0 1rem", fontWeight: "bold" }}
+                        >
+                            Nhận Mã online, hóa đơn qua email
+                        </Typography>
+                        <Box className={cx("delivery-email")}>
+                            <Box className={cx("wrapper")}>
+                                <Box>
+                                    <Box
+                                        component={"input"}
+                                        type="text"
+                                        value={addressDelivery?.email ? addressDelivery.email : ""}
+                                        readOnly={true}
+                                        sx={{ border: "none", outline: "none", fontSize: "1.3rem" }}
+                                    />
+                                </Box>
                             </Box>
                         </Box>
                     </Box>
-                </Box>
 
-                <Box className={cx("order-note")}>
-                    <Typography variant="h6" className={cx("subtitle")}>
-                        Ghi chú cho đơn hàng
-                    </Typography>
-                    <TextField
-                        variant="outlined"
-                        placeholder="Nhập thông tin ghi chú cho nhà bán hàng"
-                        name="note"
-                        fullWidth
-                        inputProps={{ style: { padding: "1.2rem 1.4rem", fontSize: "1.4rem" } }}
-                        onChange={(e) => handleChangeDescription(e)}
-                    />
-                </Box>
-                <Box className={cx("payment-method")}>
-                    <Typography variant="h6" className={cx("title")}>
-                        Phương thức thanh toán
-                    </Typography>
-                    <Typography variant="h6" className={cx("subtitle")}>
-                        Thông tin thanh toán của bạn sẽ luôn được bảo mật
-                    </Typography>
-
-                    <Payment />
-                </Box>
-            </Grid>
-            <Grid item xs={4} className={cx("checkout-right")}>
-                <Box className={cx("info-order")}>
-                    <Box className={cx("title-wrapper")}>
-                        <Typography variant="h4" className={cx("title")}>
-                            Thông tin đơn hàng
+                    <Box className={cx("order-note")}>
+                        <Typography variant="h6" className={cx("subtitle")}>
+                            Ghi chú cho đơn hàng
                         </Typography>
-                        <Link to={"/cart"} className={cx("link")}>
-                            Chỉnh sửa
-                        </Link>
+                        <TextField
+                            variant="outlined"
+                            placeholder="Nhập thông tin ghi chú cho nhà bán hàng"
+                            name="note"
+                            fullWidth
+                            inputProps={{ style: { padding: "1.2rem 1.4rem", fontSize: "1.4rem" } }}
+                            onChange={(e) => handleChangeDescription(e)}
+                        />
                     </Box>
-                    <Box className={cx("info-body")}>
-                        {cart?.map((item, index) => (
-                            <Box key={index} className={cx("checkout-item")}>
-                                <Grid container className={cx("grid-row")}>
-                                    <Grid item xs={3} className={cx("grid-column")}>
-                                        <img
-                                            src={item.detail.product.imageURL}
-                                            alt={item.detail.product.name}
-                                            className={cx("image")}
-                                        />
-                                    </Grid>
-                                    <Grid
-                                        item
-                                        xs={8}
-                                        className={cx("grid-column")}
-                                        sx={{ marginLeft: "2rem" }}
-                                    >
-                                        <Link
-                                            to={`/detail/${item.detail.product.slug}/${item.detail.product.color.id}`}
+                    <Box className={cx("payment-method")}>
+                        <Typography variant="h6" className={cx("title")}>
+                            Phương thức thanh toán
+                        </Typography>
+                        <Typography variant="h6" className={cx("subtitle")}>
+                            Thông tin thanh toán của bạn sẽ luôn được bảo mật
+                        </Typography>
+
+                        <Payment />
+                    </Box>
+                </Grid>
+                <Grid item xs={4} className={cx("checkout-right")}>
+                    <Box className={cx("info-order")}>
+                        <Box className={cx("title-wrapper")}>
+                            <Typography variant="h4" className={cx("title")}>
+                                Thông tin đơn hàng
+                            </Typography>
+                            <Link to={"/cart"} className={cx("link")}>
+                                Chỉnh sửa
+                            </Link>
+                        </Box>
+                        <Box className={cx("info-body")}>
+                            {cart?.map((item, index) => (
+                                <Box key={index} className={cx("checkout-item")}>
+                                    <Grid container className={cx("grid-row")}>
+                                        <Grid item xs={3} className={cx("grid-column")}>
+                                            <img
+                                                src={item.detail.product.imageURL}
+                                                alt={item.detail.product.name}
+                                                className={cx("image")}
+                                            />
+                                        </Grid>
+                                        <Grid
+                                            item
+                                            xs={8}
+                                            className={cx("grid-column")}
+                                            sx={{ marginLeft: "2rem" }}
                                         >
+                                            <Link
+                                                to={`/detail/${item.detail.product.slug}/${item.detail.product.color.id}`}
+                                            >
+                                                <Typography
+                                                    variant="body1"
+                                                    className={cx("product-name")}
+                                                >
+                                                    {item.detail.product.name}
+                                                </Typography>
+                                            </Link>
                                             <Typography
                                                 variant="body1"
-                                                className={cx("product-name")}
+                                                className={cx("product-quantity")}
                                             >
-                                                {item.detail.product.name}
+                                                Số lượng {item.quantity}
                                             </Typography>
-                                        </Link>
-                                        <Typography
-                                            variant="body1"
-                                            className={cx("product-quantity")}
-                                        >
-                                            Số lượng {item.quantity}
-                                        </Typography>
-                                        <Typography variant="body1" className={cx("product-price")}>
-                                            {item.price.toLocaleString("it-IT", {
-                                                style: "currency",
-                                                currency: "VND",
-                                            })}
-                                        </Typography>
+                                            <Typography
+                                                variant="body1"
+                                                className={cx("product-price")}
+                                            >
+                                                {item.price.toLocaleString("it-IT", {
+                                                    style: "currency",
+                                                    currency: "VND",
+                                                })}
+                                            </Typography>
+                                        </Grid>
                                     </Grid>
-                                </Grid>
-                            </Box>
-                        ))}
+                                </Box>
+                            ))}
+                        </Box>
                     </Box>
-                </Box>
-                {/* coupon */}
-                <Box className={cx("coupon-wrapper")}>
-                    {coupons &&
-                        coupons.map((item, index) => (
-                            <Coupon
-                                key={index}
-                                item={item}
-                                parentCallback={handleChooseCoupon}
-                                id={coupon?.id}
-                            />
-                        ))}
-                </Box>
+                    {/* coupon */}
+                    <Box className={cx("coupon-wrapper")}>
+                        {coupons &&
+                            coupons.map((item, index) => (
+                                <Coupon
+                                    key={index}
+                                    item={item}
+                                    parentCallback={handleChooseCoupon}
+                                    id={coupon?.id}
+                                />
+                            ))}
+                    </Box>
 
-                <Box className={cx("summary-order")}>
-                    <Box className={cx("d-flex")}>
-                        <Typography variant="body1" className={cx("subtitle")}>
-                            Tổng tạm tính
-                        </Typography>
-                        <Typography variant="body1" className={cx("subtitle--bold")}>
-                            {total.toLocaleString("it-IT", {
-                                style: "currency",
-                                currency: "VND",
-                            })}
-                        </Typography>
-                    </Box>
-                    <Box className={cx("d-flex")}>
-                        <Typography variant="body1" className={cx("subtitle")}>
-                            Phí vận chuyển
-                        </Typography>
-                        <Typography variant="body1" className={cx("subtitle--bold")}>
-                            {total > 700000
-                                ? "Miễn phi"
-                                : (11000).toLocaleString("it-IT", {
-                                      style: "currency",
-                                      currency: "VND",
-                                  })}
-                        </Typography>
-                    </Box>
-                    <Box className={cx("d-flex")}>
-                        <Typography variant="body1" className={cx("subtitle")}>
-                            Giảm giá
-                        </Typography>
-                        <Typography variant="body1" className={cx("subtitle--bold")}>
-                            {coupon === null ? (
-                                "0 VND"
-                            ) : (
-                                <span>
-                                    -
-                                    {coupon?.price.toLocaleString("it-IT", {
-                                        style: "currency",
-                                        currency: "VND",
-                                    })}
-                                </span>
-                            )}
-                        </Typography>
-                    </Box>
-                    <Box className={cx("d-flex")}>
-                        <Typography variant="body1" className={cx("subtitle")}>
-                            Thành tiền
-                        </Typography>
-                        <Box>
-                            <Typography variant="body1" className={cx("subtitle-cost")}>
-                                {cost.toLocaleString("it-IT", {
+                    <Box className={cx("summary-order")}>
+                        <Box className={cx("d-flex")}>
+                            <Typography variant="body1" className={cx("subtitle")}>
+                                Tổng tạm tính
+                            </Typography>
+                            <Typography variant="body1" className={cx("subtitle--bold")}>
+                                {total.toLocaleString("it-IT", {
                                     style: "currency",
                                     currency: "VND",
                                 })}
                             </Typography>
-                            <Typography variant="body2" className={cx("note-vat")}>
-                                (Đã bao gồm VAT)
+                        </Box>
+                        <Box className={cx("d-flex")}>
+                            <Typography variant="body1" className={cx("subtitle")}>
+                                Phí vận chuyển
+                            </Typography>
+                            <Typography variant="body1" className={cx("subtitle--bold")}>
+                                {total > 700000
+                                    ? "Miễn phi"
+                                    : (11000).toLocaleString("it-IT", {
+                                          style: "currency",
+                                          currency: "VND",
+                                      })}
                             </Typography>
                         </Box>
-                    </Box>
+                        <Box className={cx("d-flex")}>
+                            <Typography variant="body1" className={cx("subtitle")}>
+                                Giảm giá
+                            </Typography>
+                            <Typography variant="body1" className={cx("subtitle--bold")}>
+                                {coupon === null ? (
+                                    "0 VND"
+                                ) : (
+                                    <span>
+                                        -
+                                        {coupon?.price.toLocaleString("it-IT", {
+                                            style: "currency",
+                                            currency: "VND",
+                                        })}
+                                    </span>
+                                )}
+                            </Typography>
+                        </Box>
+                        <Box className={cx("d-flex")}>
+                            <Typography variant="body1" className={cx("subtitle")}>
+                                Thành tiền
+                            </Typography>
+                            <Box>
+                                <Typography variant="body1" className={cx("subtitle-cost")}>
+                                    {cost.toLocaleString("it-IT", {
+                                        style: "currency",
+                                        currency: "VND",
+                                    })}
+                                </Typography>
+                                <Typography variant="body2" className={cx("note-vat")}>
+                                    (Đã bao gồm VAT)
+                                </Typography>
+                            </Box>
+                        </Box>
 
-                    <Button variant="contained" className={cx("payment-btn")} onClick={handleClick}>
-                        Thanh toán
-                    </Button>
-                    <Typography variant="body2" className={cx("note")}>
-                        Nhấn "Thanh toán" đồng nghĩa với việc bạn đọc và đồng ý tuân theo{" "}
-                        <Link to={"/policy"}>Điều khoản và Điều kiện</Link>
-                    </Typography>
-                </Box>
+                        <Button
+                            variant="contained"
+                            className={cx("payment-btn")}
+                            onClick={handleClick}
+                        >
+                            Thanh toán
+                        </Button>
+                        <Typography variant="body2" className={cx("note")}>
+                            Nhấn "Thanh toán" đồng nghĩa với việc bạn đọc và đồng ý tuân theo{" "}
+                            <Link to={"/policy"}>Điều khoản và Điều kiện</Link>
+                        </Typography>
+                    </Box>
+                </Grid>
             </Grid>
-        </Grid>
+        </Box>
     );
 }
 
