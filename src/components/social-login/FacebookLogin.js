@@ -13,8 +13,9 @@ function FacebookLogin() {
     return (
         <LoginSocialFacebook
             appId="298400012522825"
+            isOnlyGetToken
             onLoginStart={onLoginStart}
-            // redirect_uri={process.env.REACT_APP_HOST}
+            version="v15.0"
             onResolve={(response) => {
                 console.log(response);
             }}
