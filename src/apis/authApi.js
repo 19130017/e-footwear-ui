@@ -29,6 +29,12 @@ export const authApi = {
             .then((response) => response)
             .catch((error) => error.response.data);
     },
+    async requestLoginGG(params) {
+        return await axiosClient
+            .post("/accounts/login/google", params)
+            .then((response) => response)
+            .catch((error) => error.response.data);
+    },
 
     async requestGetProfile(params) {
         return await axiosClient
@@ -98,7 +104,7 @@ export const authApi = {
     async requestUploadAvatar(params, accessToken) {
         return await axiosClient.post("/accounts/upload-avatar", params, {
             headers: {
-                "Authorization": `Bearer ${accessToken}`,
+                Authorization: `Bearer ${accessToken}`,
                 "Content-Type": "multipart/form-data",
             },
         });

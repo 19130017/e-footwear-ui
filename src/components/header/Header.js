@@ -15,8 +15,7 @@ const cx = classNames.bind(style);
 
 function Header() {
     const cart = useSelector((state) => state.cartReducer.cart);
-    const { isLogin ,avatar} = useSelector((state) => state.authReducer);
-
+    const { isLogin, avatar } = useSelector((state) => state.authReducer);
     return (
         <Box className={cx("header")}>
             <Grid container>
