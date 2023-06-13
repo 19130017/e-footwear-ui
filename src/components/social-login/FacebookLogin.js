@@ -13,7 +13,6 @@ function FacebookLogin() {
     return (
         <LoginSocialFacebook
             appId={"640001684852756"}
-            isOnlyGetToken
             onLoginStart={onLoginStart}
             onResolve={(response) => {
                 console.log(response);
