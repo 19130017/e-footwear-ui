@@ -9,6 +9,7 @@ import {
     AUTH_CHANGE_PASSWORD,
     AUTH_FORGOT_PASSWORD,
     AUTH_RESET_PASSWORD,
+    AUTH_LOGIN_GG
 } from "./authType";
 
 const initialState = {
@@ -55,6 +56,16 @@ const fetchLogin = createAsyncThunk(AUTH_LOGIN, async (params, thunkApi) => {
     }
 });
 
+const fetchLoginGG = createAsyncThunk(AUTH_LOGIN_GG, async (params, thunkApi) => {
+    try {
+        const response = await authApi.requestLoginGG(params);
+        return response.success
+            ? thunkApi.fulfillWithValue(response)
+            : thunkApi.rejectWithValue(response);
+    } catch (error) {
+        return thunkApi.rejectWithValue(error.response.data);
+    }
+});
 const fetchLogout = createAsyncThunk(AUTH_LOGOUT, async (params, thunkApi) => {
     return;
 });
@@ -170,6 +181,32 @@ const authSlice = createSlice({
                 state.auth = data;
                 return state;
             })
+             // login gg
+             .addCase(fetchLoginGG.pending, (state, action) => {
+                state.isLoading = true;
+                return state;
+            })
+            .addCase(fetchLoginGG.rejected, (state, action) => {
+                state.isLoading = false;
+                MySwal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: action.payload.message,
+                });
+                return state;
+            })
+            .addCase(fetchLoginGG.fulfilled, (state, action) => {
+                const data = action.payload.data;
+                state.isLoading = false;
+                state.isLogin = true;
+                state.username = data.username;
+                state.accessToken = data.token;
+                state.refreshToken = data.refreshToken;
+                state.accountId = data.accountId;
+                state.avatar = data.avatar;
+                state.auth = data;
+                return state;
+            })
             //Logout
             .addCase(fetchLogout.fulfilled, (state, action) => {
                 state.accountId = 0;
@@ -263,4 +300,5 @@ export {
     fetchChangePassword,
     fetchForgotPassword,
     fetchResetPassword,
+    fetchLoginGG
 };

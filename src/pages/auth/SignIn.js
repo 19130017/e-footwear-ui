@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchLogin } from "~/redux/auth/authSlice";
 import { useEffect } from "react";
 import Loading from "~/components/loading/Loading";
+import GoogleLogin from "~/components/social-login/GoogleLogin";
+import FacebookLogin from "~/components/social-login/FacebookLogin";
 const cx = classNames.bind(style);
 
 function SignIn() {
@@ -149,8 +151,12 @@ function SignIn() {
                 <Box>
                     <Typography className={cx("option")}>Hoặc</Typography>
                 </Box>
-                <FacebookButton cx={cx} />
-
+                <Box>
+                    <Box sx={{ marginBottom: "1rem" }}>
+                        <GoogleLogin />
+                    </Box>
+                    <FacebookLogin />
+                </Box>
                 <Grid container sx={{ marginTop: "2rem" }}>
                     <Grid item xs={6}>
                         <Link to="/auth/sign-up" className={cx("btn")}>
