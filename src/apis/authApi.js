@@ -35,6 +35,12 @@ export const authApi = {
             .then((response) => response)
             .catch((error) => error.response.data);
     },
+    async requestLoginFB(params) {
+        return await axiosClient
+            .post("/accounts/login/facebook", params)
+            .then((response) => response)
+            .catch((error) => error.response.data);
+    },
 
     async requestGetProfile(params) {
         return await axiosClient

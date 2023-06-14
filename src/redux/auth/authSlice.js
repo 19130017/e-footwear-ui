@@ -9,7 +9,8 @@ import {
     AUTH_CHANGE_PASSWORD,
     AUTH_FORGOT_PASSWORD,
     AUTH_RESET_PASSWORD,
-    AUTH_LOGIN_GG
+    AUTH_LOGIN_GG,
+    AUTH_LOGIN_FB,
 } from "./authType";
 
 const initialState = {
@@ -59,6 +60,16 @@ const fetchLogin = createAsyncThunk(AUTH_LOGIN, async (params, thunkApi) => {
 const fetchLoginGG = createAsyncThunk(AUTH_LOGIN_GG, async (params, thunkApi) => {
     try {
         const response = await authApi.requestLoginGG(params);
+        return response.success
+            ? thunkApi.fulfillWithValue(response)
+            : thunkApi.rejectWithValue(response);
+    } catch (error) {
+        return thunkApi.rejectWithValue(error.response.data);
+    }
+});
+const fetchLoginFB = createAsyncThunk(AUTH_LOGIN_FB, async (params, thunkApi) => {
+    try {
+        const response = await authApi.requestLoginFB(params);
         return response.success
             ? thunkApi.fulfillWithValue(response)
             : thunkApi.rejectWithValue(response);
@@ -181,8 +192,8 @@ const authSlice = createSlice({
                 state.auth = data;
                 return state;
             })
-             // login gg
-             .addCase(fetchLoginGG.pending, (state, action) => {
+            // login gg
+            .addCase(fetchLoginGG.pending, (state, action) => {
                 state.isLoading = true;
                 return state;
             })
@@ -196,6 +207,33 @@ const authSlice = createSlice({
                 return state;
             })
             .addCase(fetchLoginGG.fulfilled, (state, action) => {
+                const data = action.payload.data;
+                state.isLoading = false;
+                state.isLogin = true;
+                state.username = data.username;
+                state.accessToken = data.token;
+                state.refreshToken = data.refreshToken;
+                state.accountId = data.accountId;
+                state.avatar = data.avatar;
+                state.auth = data;
+                return state;
+            })
+            //login fb
+            // login gg
+            .addCase(fetchLoginFB.pending, (state, action) => {
+                state.isLoading = true;
+                return state;
+            })
+            .addCase(fetchLoginFB.rejected, (state, action) => {
+                state.isLoading = false;
+                MySwal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: action.payload.message,
+                });
+                return state;
+            })
+            .addCase(fetchLoginFB.fulfilled, (state, action) => {
                 const data = action.payload.data;
                 state.isLoading = false;
                 state.isLogin = true;
@@ -300,5 +338,6 @@ export {
     fetchChangePassword,
     fetchForgotPassword,
     fetchResetPassword,
-    fetchLoginGG
+    fetchLoginGG,
+    fetchLoginFB,
 };
