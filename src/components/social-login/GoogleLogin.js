@@ -23,7 +23,7 @@ function GoogleLogin() {
         setProvider("");
         alert("logout success");
     }, []);
-    const onLogout = useCallback(() => {}, []);
+    const onLogout = useCallback(() => { }, []);
 
     const onResolve = ({ provider, data }) => {
         setProvider(provider);
@@ -50,9 +50,7 @@ function GoogleLogin() {
     }, [profile, dispatch]);
     return (
         <LoginSocialGoogle
-            client_id={
-                "882148200553-rro95qim4oaucfj4nvmb66lkhpe1pmma.apps.googleusercontent.com" || ""
-            }
+            client_id={process.env.REACT_APP_GG_APP_ID}
             onLoginStart={onLoginStart}
             redirect_uri={process.env.REACT_APP_HOST}
             scope="openid profile email"

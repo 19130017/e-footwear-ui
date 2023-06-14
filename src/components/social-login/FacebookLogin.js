@@ -1,44 +1,53 @@
-import { useCallback, useState } from "react";
-import { LoginSocialGoogle } from "reactjs-social-login";
+import { useCallback, useEffect, useState } from "react";
+import { LoginSocialFacebook, LoginSocialGoogle } from "reactjs-social-login";
 import { FacebookLoginButton } from "react-social-login-buttons";
 
 import classNames from "classnames/bind";
 import style from "./SocialLogin.module.scss";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { fetchLoginFB } from "~/redux/auth/authSlice";
 const cx = classNames.bind(style);
 
 function FacebookLogin() {
-    const [provider, setProvider] = useState("");
     const [profile, setProfile] = useState();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const onLoginStart = useCallback(() => {
-        alert("login start");
     }, []);
-
-    const onLogoutSuccess = useCallback(() => {
-        setProfile(null);
-        setProvider("");
-        alert("logout success");
-    }, []);
+    const onResolve = ({ provider, data }) => {
+        setProfile(data);
+    };
+    const onReject = (err) => {
+        console.log(err);
+    };
+    useEffect(() => {
+        if (profile) {
+            const data = {
+                fid: profile?.userID,
+                email: profile?.email,
+                customer: {
+                    avatar: profile?.picture?.data?.url,
+                    firstName: profile?.first_name,
+                    lastName: profile?.last_name,
+                }
+            };
+            dispatch(fetchLoginFB(data));
+        }
+    }, [profile, dispatch]);
 
     return (
-        <LoginSocialGoogle
-            client_id="882148200553-rro95qim4oaucfj4nvmb66lkhpe1pmma.apps.googleusercontent.com"
-            // onLoginStart={onLoginStart}
-            redirect_uri={"http://localhost:3000"}
-            scope="openid profile email"
-            discoveryDocs="claims_supported"
-            onResolve={({ provider, data }) => {
-                setProvider(provider);
-                setProfile(data);
-            }}
-            onReject={(err) => {
-                console.log(err);
-            }}
+        <LoginSocialFacebook
+            appId={process.env.REACT_APP_FB_APP_ID}
+            redirect_uri={process.env.REACT_APP_HOST}
+            onLoginStart={onLoginStart}
+            onResolve={onResolve}
+            onReject={onReject}
         >
             <FacebookLoginButton className={cx("facebook-btn")} activeStyle={false}>
                 <span>Đăng nhập với Facebook</span>
             </FacebookLoginButton>
-        </LoginSocialGoogle>
+        </LoginSocialFacebook>
     );
 }
 
