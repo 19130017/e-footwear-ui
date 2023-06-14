@@ -38,8 +38,8 @@ function FacebookLogin() {
 
     return (
         <LoginSocialFacebook
-            appId={process.env.REACT_APP_FB_APP_ID}
-            redirect_uri={process.env.REACT_APP_HOST}
+            appId={"640001684852756"}
+            redirect_uri={"https://footwear-six.vercel.app"}
             onLoginStart={onLoginStart}
             onResolve={onResolve}
             onReject={onReject}

@@ -50,9 +50,9 @@ function GoogleLogin() {
     }, [profile, dispatch]);
     return (
         <LoginSocialGoogle
-            client_id={process.env.REACT_APP_GG_APP_ID}
+            client_id={"882148200553-rro95qim4oaucfj4nvmb66lkhpe1pmma.apps.googleusercontent.com"}
             onLoginStart={onLoginStart}
-            redirect_uri={process.env.REACT_APP_HOST}
+            redirect_uri={"https://footwear-six.vercel.app"}
             scope="openid profile email"
             discoveryDocs="claims_supported"
             access_type="offline"
