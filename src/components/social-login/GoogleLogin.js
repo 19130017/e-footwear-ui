@@ -52,7 +52,7 @@ function GoogleLogin() {
         <LoginSocialGoogle
             client_id={"882148200553-rro95qim4oaucfj4nvmb66lkhpe1pmma.apps.googleusercontent.com"}
             onLoginStart={onLoginStart}
-            redirect_uri={"https://footwear-six.vercel.app"}
+            redirect_uri={"footwear-haba.vercel.app/"}
             scope="openid profile email"
             discoveryDocs="claims_supported"
             access_type="offline"

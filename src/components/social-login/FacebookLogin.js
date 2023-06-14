@@ -39,7 +39,6 @@ function FacebookLogin() {
     return (
         <LoginSocialFacebook
             appId={"640001684852756"}
-            redirect_uri={"https://footwear-six.vercel.app"}
             onLoginStart={onLoginStart}
             onResolve={onResolve}
             onReject={onReject}
