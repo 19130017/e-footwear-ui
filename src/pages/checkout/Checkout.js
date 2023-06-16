@@ -7,7 +7,7 @@ import style from "./Checkout.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchGetAddresses } from "~/redux/address/addressSlice";
-import { fetchCreateOrder } from "~/redux/order/orderSlice";
+import { fetchCreateOrder, fetchCreateOrderMomo } from "~/redux/order/orderSlice";
 import { clearCart } from "~/redux/cart/cartSlice";
 import Coupon from "~/components/coupon";
 import { fetchGetCoupons } from "~/redux/coupon/couponSlice";
@@ -24,7 +24,7 @@ function Checkout() {
     const [description, setDescription] = useState(null);
     const [coupon, setCoupon] = useState(null);
     const { coupons } = useSelector((state) => state.couponReducer);
-
+    const [paymentMethod, setPaymentMethod] = useState("MOMO");
     useEffect(() => {
         dispatch(fetchGetCoupons());
     }, [dispatch]);
@@ -45,30 +45,45 @@ function Checkout() {
                 quantity: item.quantity,
                 detail: { id: item.detail.id },
             }));
-            const response = await dispatch(
-                fetchCreateOrder({
-                    cost,
-                    transportFee: total > 700000 ? 0 : 11000,
-                    description,
-                    coupon: coupon,
-                    account: {
-                        id: accountId,
-                    },
-                    address: {
-                        id: addressDelivery.id,
-                    },
-                    items: temp,
-                    accessToken,
-                })
-            );
-            if (response.payload.success) {
-                await dispatch(clearCart());
-                navigate("/");
+            const common = {
+                cost,
+                transportFee: total > 700000 ? 0 : 11000,
+                description,
+                coupon: coupon,
+                account: {
+                    id: accountId,
+                },
+                address: {
+                    id: addressDelivery.id,
+                },
+                items: temp,
+                accessToken,
+            };
+
+            switch (paymentMethod) {
+                case "COD":
+                    const responseCOD = await dispatch(fetchCreateOrder(common));
+                    if (responseCOD.payload.success) {
+                        navigate("/");
+                        await dispatch(clearCart());
+                    }
+                    break;
+                case "MOMO":
+                    const responseMOMO = await dispatch(fetchCreateOrderMomo(common));
+                    console.log(responseMOMO);
+                    if (responseMOMO.payload.data?.errorCode === 0) {
+                        window.location.href = responseMOMO.payload.data?.payUrl;
+                        await dispatch(clearCart());
+                    }
+                    break;
+                default:
+                    alert("Vui lòng chọn phương thức thanh toán");
             }
         } else {
             alert("Chọn địa chỉ giao hàng");
         }
     };
+
     const handleSelectAddress = (item) => {
         setAddressDelivery(item);
     };
@@ -85,6 +100,12 @@ function Checkout() {
             Đặt hàng
         </Typography>,
     ];
+
+    const handleCallback = (e) => {
+        const paymentMethod = e.target.getAttribute("data-content-name");
+        setPaymentMethod(paymentMethod);
+    };
+
     return (
         <Box>
             <Breadcrumb data={breadcrumbs} />
@@ -195,11 +216,8 @@ function Checkout() {
                         <Typography variant="h6" className={cx("title")}>
                             Phương thức thanh toán
                         </Typography>
-                        <Typography variant="h6" className={cx("subtitle")}>
-                            Thông tin thanh toán của bạn sẽ luôn được bảo mật
-                        </Typography>
 
-                        <Payment />
+                        <Payment callbackParent={handleCallback} />
                     </Box>
                 </Grid>
                 <Grid item xs={4} className={cx("checkout-right")}>

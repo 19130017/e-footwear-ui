@@ -16,7 +16,7 @@ import About from "~/pages/about";
 import Account from "~/pages/account";
 import Cart from "~/pages/cart";
 import ProductDetail from "~/pages/product-detail";
-import Checkout from "~/pages/checkout";
+import { Checkout, CheckoutResult } from "~/pages/checkout";
 //components
 import Address from "~/components/address";
 import Purchase from "~/components/purchase";
@@ -50,6 +50,7 @@ function App() {
                     <Route path="/not-found" element={<NotFound />} />
                     <Route path="/coming-soon" element={<ComingSoon />} />
                     <Route path="/search" element={<Search />} />
+                    <Route path="/payment/response" element={<CheckoutResult />} />
                     <Route
                         path="/account"
                         element={isLogin ? <Account /> : <Navigate to="/auth/sign-in" />}
