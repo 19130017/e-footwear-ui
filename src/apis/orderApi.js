@@ -1,7 +1,7 @@
 import axiosClient from "./axios";
 export const orderApi = {
-    requestCreateOrder(params) {
-        return axiosClient
+    async requestCreateOrder(params) {
+        return await axiosClient
             .post(
                 `/orders`,
                 {
@@ -23,8 +23,8 @@ export const orderApi = {
             .catch((error) => error.response.data);
     },
 
-    requestCreateOrderMomo(params) {
-        return axiosClient
+    async requestCreateOrderMomo(params) {
+        return await axiosClient
             .post(
                 `/orders/payment/momo`,
                 {
@@ -45,8 +45,8 @@ export const orderApi = {
             .then((response) => response)
             .catch((error) => error.response.data);
     },
-    requestCreateOrderVN_Pay(params) {
-        return axiosClient
+    async requestCreateOrderVN_Pay(params) {
+        return await axiosClient
             .post(
                 `/orders/payment/vn-pay`,
                 {
@@ -68,10 +68,10 @@ export const orderApi = {
             .catch((error) => error.response.data);
     },
 
-    requestUpdateStatusByCode(orderRequest, accessToken) {
-        return axiosClient
+    async requestUpdateStatusByCode(orderRequest, accessToken) {
+        return await axiosClient
             .post(
-                "/orders/payment/momo/success",
+                "/orders/payment/success",
                 {
                     id: orderRequest.orderId,
                     status: {
@@ -87,8 +87,8 @@ export const orderApi = {
             .then((response) => response)
             .catch((error) => error.response.data);
     },
-    requestGetOrders(accountId, accessToken) {
-        return axiosClient
+    async requestGetOrders(accountId, accessToken) {
+        return await axiosClient
             .get(`orders/account/${accountId}`, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
@@ -97,8 +97,8 @@ export const orderApi = {
             .then((response) => response)
             .catch((error) => error.response.data);
     },
-    requestGetOrder(id, accessToken) {
-        return axiosClient
+    async requestGetOrder(id, accessToken) {
+        return await axiosClient
             .get(`orders/${id}`, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,

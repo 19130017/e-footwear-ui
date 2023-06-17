@@ -150,7 +150,6 @@ const orderSlice = createSlice({
             .addCase(fetchCreateOrderVN_Pay.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.response = action.payload.data;
-                console.log(action.payload.data);
                 return state;
             })
             // cập nhật trạng thái đơn hàng
@@ -160,9 +159,12 @@ const orderSlice = createSlice({
             })
             .addCase(fetchUpdateStatus.rejected, (state, action) => {
                 state.isLoading = false;
+
                 return state;
             })
             .addCase(fetchUpdateStatus.fulfilled, (state, action) => {
+                const data = action.payload.data;
+                state.order = data;
                 state.isLoading = false;
                 return state;
             })
@@ -202,4 +204,11 @@ const orderSlice = createSlice({
 
 const orderReducer = orderSlice.reducer;
 export default orderReducer;
-export { fetchCreateOrder, fetchGetOrders, fetchGetOrder, fetchCreateOrderMomo, fetchUpdateStatus, fetchCreateOrderVN_Pay };
+export {
+    fetchCreateOrder,
+    fetchGetOrders,
+    fetchGetOrder,
+    fetchCreateOrderMomo,
+    fetchUpdateStatus,
+    fetchCreateOrderVN_Pay,
+};

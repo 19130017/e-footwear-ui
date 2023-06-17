@@ -65,7 +65,7 @@ function Payment({ callbackParent }) {
                     name="payment"
                     id="VN_Pay-payment"
                     hidden
-                    data-content-name="VN_Pay"
+                    data-content-name="VNPay"
                     onChange={(e) => callbackParent(e)}
                 />
                 <Box component={"label"} htmlFor="VN_Pay-payment">
