@@ -8,7 +8,7 @@ const cx = classnames.bind(style);
 function Payment({ callbackParent }) {
     return (
         <Grid container spacing={2} className={cx("method-payment-list")}>
-            <Grid item xs={6} className={cx("method-payment-item")}>
+            <Grid item xs={4} className={cx("method-payment-item")}>
                 <Box
                     component={"input"}
                     type="radio"
@@ -28,7 +28,7 @@ function Payment({ callbackParent }) {
                             </Box>
                         </Box>
                         <Box className={cx("payment-body")}>
-                            Thanh toán qua Internet Banking, Visa, Master, JCB, MOMO.
+                            Thanh toán qua ví điện tử MOMO.
                         </Box>
                         <Box className={cx("pseudo")}>
                             <CheckIcon className={cx("icon")} />
@@ -36,7 +36,7 @@ function Payment({ callbackParent }) {
                     </Box>
                 </Box>
             </Grid>
-            <Grid item xs={6} className={cx("method-payment-item")}>
+            <Grid item xs={4} className={cx("method-payment-item")}>
                 <Box
                     component={"input"}
                     type="radio"
@@ -51,6 +51,28 @@ function Payment({ callbackParent }) {
                         <Box className={cx("subtitle")}>Thanh toán khi nhận hàng</Box>
                         <Box className={cx("payment-body")}>
                             Thanh toán bằng tiền mặt khi nhận hàng.
+                        </Box>
+                        <Box className={cx("pseudo")}>
+                            <CheckIcon className={cx("icon")} />
+                        </Box>
+                    </Box>
+                </Box>
+            </Grid>
+            <Grid item xs={4} className={cx("method-payment-item")}>
+                <Box
+                    component={"input"}
+                    type="radio"
+                    name="payment"
+                    id="VN_Pay-payment"
+                    hidden
+                    data-content-name="VN_Pay"
+                    onChange={(e) => callbackParent(e)}
+                />
+                <Box component={"label"} htmlFor="VN_Pay-payment">
+                    <Box className={cx("card", "active")}>
+                        <Box className={cx("subtitle")}>Thanh toán bằng VNPay</Box>
+                        <Box className={cx("payment-body")}>
+                            Thanh toán qua cổng thanh toán VNPay.
                         </Box>
                         <Box className={cx("pseudo")}>
                             <CheckIcon className={cx("icon")} />

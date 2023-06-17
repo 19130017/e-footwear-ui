@@ -7,7 +7,7 @@ import style from "./Checkout.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchGetAddresses } from "~/redux/address/addressSlice";
-import { fetchCreateOrder, fetchCreateOrderMomo } from "~/redux/order/orderSlice";
+import { fetchCreateOrder, fetchCreateOrderMomo, fetchCreateOrderVN_Pay } from "~/redux/order/orderSlice";
 import { clearCart } from "~/redux/cart/cartSlice";
 import Coupon from "~/components/coupon";
 import { fetchGetCoupons } from "~/redux/coupon/couponSlice";
@@ -76,6 +76,9 @@ function Checkout() {
                         await dispatch(clearCart());
                     }
                     break;
+                case "VN_PAY":
+                    const responseVNPay = await dispatch(fetchCreateOrderVN_Pay(common));
+                    await dispatch(clearCart());
                 default:
                     alert("Vui lòng chọn phương thức thanh toán");
             }
@@ -311,9 +314,9 @@ function Checkout() {
                                 {total > 700000
                                     ? "Miễn phi"
                                     : (11000).toLocaleString("it-IT", {
-                                          style: "currency",
-                                          currency: "VND",
-                                      })}
+                                        style: "currency",
+                                        currency: "VND",
+                                    })}
                             </Typography>
                         </Box>
                         <Box className={cx("d-flex")}>

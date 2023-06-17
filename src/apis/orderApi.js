@@ -45,6 +45,28 @@ export const orderApi = {
             .then((response) => response)
             .catch((error) => error.response.data);
     },
+    requestCreateOrderVN_Pay(params) {
+        return axiosClient
+            .post(
+                `/orders/payment/vn-pay`,
+                {
+                    cost: params.cost,
+                    transportFee: params.transportFee,
+                    description: params.description,
+                    coupon: params.coupon,
+                    account: params.account,
+                    address: params.address,
+                    items: [...params.items],
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${params.accessToken}`,
+                    },
+                }
+            )
+            .then((response) => response)
+            .catch((error) => error.response.data);
+    },
 
     requestUpdateStatusByCode(orderRequest, accessToken) {
         return axiosClient
