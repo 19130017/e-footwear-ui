@@ -49,6 +49,7 @@ function CheckoutResult() {
                     <Typography sx={{ fontSize: '2rem', fontWeight: "bold", }}>Thanh toán thành công</Typography>
                     <Box className={cx("wrap-button")}>
                         <Button onClick={() => navigate("/")} sx={{ padding: '10px 15px', fontSize: '1.4rem', marginTop: '20px' }} variant="contained" className="btn-primary">Trở về trang chủ</Button>
+                        <Button onClick={() => navigate(`/account/purchase/order/${order.id}`)} sx={{ padding: '10px 15px', fontSize: '1.4rem', marginTop: '20px' }} variant="contained" className="btn-primary">Xem lịch sử đơn hàng</Button>
                     </Box>
                 </Box>
             ) : (
@@ -64,6 +65,7 @@ function CheckoutResult() {
                     <Typography sx={{ fontSize: '2rem', fontWeight: "bold", }}>Thanh toán thất bại</Typography>
                     <Box className={cx("wrap-button")}>
                         <Button onClick={() => navigate("/")} sx={{ padding: '10px 15px', fontSize: '1.4rem', marginTop: '20px' }} variant="contained" className="btn-primary">Trở về trang chủ</Button>
+                        <Button onClick={() => navigate(`/account/purchase/order/${order.id}`)} sx={{ padding: '10px 15px', fontSize: '1.4rem', marginTop: '20px' }} variant="contained" className="btn-primary">Xem lịch sử đơn hàng</Button>
                     </Box>
                 </Box>
             )}

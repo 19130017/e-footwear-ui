@@ -115,7 +115,6 @@ function Checkout() {
         const paymentMethod = e.target.getAttribute("data-content-name");
         setPaymentMethod(paymentMethod);
     };
-
     return (
         <Box>
             <Breadcrumb data={breadcrumbs} />
@@ -289,17 +288,20 @@ function Checkout() {
                         </Box>
                     </Box>
                     {/* coupon */}
-                    <Box className={cx("coupon-wrapper")}>
-                        {coupons &&
-                            coupons.map((item, index) => (
-                                <Coupon
-                                    key={index}
-                                    item={item}
-                                    parentCallback={handleChooseCoupon}
-                                    id={coupon?.id}
-                                />
-                            ))}
-                    </Box>
+                    {!coupons &&
+                        <Box className={cx("coupon-wrapper")}>
+                            {
+                                coupons.map((item, index) => (
+                                    <Coupon
+                                        key={index}
+                                        item={item}
+                                        parentCallback={handleChooseCoupon}
+                                        id={coupon?.id}
+                                    />
+                                ))
+                            }
+                        </Box>
+                    }
 
                     <Box className={cx("summary-order")}>
                         <Box className={cx("d-flex")}>
@@ -321,9 +323,9 @@ function Checkout() {
                                 {total > 700000
                                     ? "Miễn phi"
                                     : (11000).toLocaleString("it-IT", {
-                                          style: "currency",
-                                          currency: "VND",
-                                      })}
+                                        style: "currency",
+                                        currency: "VND",
+                                    })}
                             </Typography>
                         </Box>
                         <Box className={cx("d-flex")}>
