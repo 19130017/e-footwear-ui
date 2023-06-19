@@ -29,7 +29,7 @@ function DropdownAccount({ isLogin }) {
                             </ListItemText>
                         </ListItem>
                         <Divider />
-                    </Link>                    
+                    </Link>
                     <Box className={cx("item-link")} onClick={handleClick}>
                         <ListItem>
                             <ListItemText className={cx("item-text")}>
@@ -42,7 +42,7 @@ function DropdownAccount({ isLogin }) {
                 </>
             ) : (
                 <>
-                    <Link to={"/auth/sign-in"} className={cx("item-link")}>
+                    <a href={"/auth/sign-in"} className={cx("item-link")}>
                         <ListItem>
                             <ListItemText className={cx("item-text")}>
                                 <LoginIcon className={cx("icon")} />
@@ -50,7 +50,7 @@ function DropdownAccount({ isLogin }) {
                             </ListItemText>
                         </ListItem>
                         <Divider />
-                    </Link>
+                    </a>
                     <Link to={"/auth/sign-up"} className={cx("item-link")}>
                         <ListItem>
                             <ListItemText className={cx("item-text")}>

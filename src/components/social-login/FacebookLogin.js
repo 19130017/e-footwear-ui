@@ -13,7 +13,7 @@ const cx = classNames.bind(style);
 function FacebookLogin() {
     const [profile, setProfile] = useState();
     const dispatch = useDispatch();
- 
+
     const onResolve = ({ provider, data }) => {
         setProfile(data);
     };
@@ -29,16 +29,17 @@ function FacebookLogin() {
                     avatar: profile?.picture?.data?.url,
                     firstName: profile?.first_name,
                     lastName: profile?.last_name,
-                }
+                },
             };
             dispatch(fetchLoginFB(data));
+            window.location.href = "/";
         }
     }, [profile, dispatch]);
 
     return (
         <LoginSocialFacebook
             appId={"640001684852756"}
-            version="v17.0"        
+            version="v17.0"
             onResolve={onResolve}
             onReject={onReject}
         >
