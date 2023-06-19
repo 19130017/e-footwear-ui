@@ -7,14 +7,13 @@ import style from "./SocialLogin.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fetchLoginFB } from "~/redux/auth/authSlice";
+import { Box } from "@mui/material";
 const cx = classNames.bind(style);
 
 function FacebookLogin() {
     const [profile, setProfile] = useState();
-    const navigate = useNavigate();
     const dispatch = useDispatch();
-    const onLoginStart = useCallback(() => {
-    }, []);
+ 
     const onResolve = ({ provider, data }) => {
         setProfile(data);
     };
@@ -37,16 +36,17 @@ function FacebookLogin() {
     }, [profile, dispatch]);
 
     return (
-        <LoginSocialFacebook
-            appId={"640001684852756"}
-            onLoginStart={onLoginStart}
-            onResolve={onResolve}
-            onReject={onReject}
-        >
-            <FacebookLoginButton className={cx("facebook-btn")} activeStyle={false}>
-                <span>Đăng nhập với Facebook</span>
-            </FacebookLoginButton>
-        </LoginSocialFacebook>
+        <Box></Box>
+        // <LoginSocialFacebook
+        //     appId={"640001684852756"}
+        //     version="v17.0"
+        //     onResolve={onResolve}
+        //     onReject={onReject}
+        // >
+        //     <FacebookLoginButton className={cx("facebook-btn")} activeStyle={false}>
+        //         <span>Đăng nhập với Facebook</span>
+        //     </FacebookLoginButton>
+        // </LoginSocialFacebook>
     );
 }
 

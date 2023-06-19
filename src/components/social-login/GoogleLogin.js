@@ -14,17 +14,6 @@ function GoogleLogin() {
     const [profile, setProfile] = useState();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const onLoginStart = useCallback(() => {
-        // alert("login start");
-    }, []);
-
-    const onLogoutSuccess = useCallback(() => {
-        setProfile(null);
-        setProvider("");
-        alert("logout success");
-    }, []);
-    const onLogout = useCallback(() => { }, []);
-
     const onResolve = ({ provider, data }) => {
         setProvider(provider);
         setProfile(data);
@@ -51,7 +40,6 @@ function GoogleLogin() {
     return (
         <LoginSocialGoogle
             client_id={"882148200553-rro95qim4oaucfj4nvmb66lkhpe1pmma.apps.googleusercontent.com"}
-            onLoginStart={onLoginStart}
             scope="openid profile email"
             discoveryDocs="claims_supported"
             access_type="offline"
