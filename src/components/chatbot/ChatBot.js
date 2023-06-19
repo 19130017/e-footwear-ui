@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 
-function ChatBot(params) {
+function ChatBot() {
     // Messenger Chat plugin Code
 
     var chatbox = document.getElementById("fb-customer-chat");

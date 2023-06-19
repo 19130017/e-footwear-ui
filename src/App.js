@@ -28,6 +28,7 @@ import ComingSoon from "./pages/coming-soon/ComingSoon";
 import Search from "./pages/search/Search";
 import Collection from "./pages/collection";
 import { useSelector } from "react-redux";
+import ChatBot from "./components/chatbot/ChatBot";
 function App() {
     const { isLogin } = useSelector((state) => state.authReducer);
     return (
@@ -61,6 +62,8 @@ function App() {
                         <Route path="purchase" element={<Purchase />} />
                         <Route path="purchase/order/:id" element={<OrderDetail />} />
                     </Route>
+                    {/* set */}
+                    <ChatBot />
                 </Route>
 
                 <Route
