@@ -36,17 +36,16 @@ function FacebookLogin() {
     }, [profile, dispatch]);
 
     return (
-        <Box></Box>
-        // <LoginSocialFacebook
-        //     appId={"640001684852756"}
-        //     version="v17.0"
-        //     onResolve={onResolve}
-        //     onReject={onReject}
-        // >
-        //     <FacebookLoginButton className={cx("facebook-btn")} activeStyle={false}>
-        //         <span>Đăng nhập với Facebook</span>
-        //     </FacebookLoginButton>
-        // </LoginSocialFacebook>
+        <LoginSocialFacebook
+            appId={"640001684852756"}
+            version="v17.0"        
+            onResolve={onResolve}
+            onReject={onReject}
+        >
+            <FacebookLoginButton className={cx("facebook-btn")} activeStyle={false}>
+                <span>Đăng nhập với Facebook</span>
+            </FacebookLoginButton>
+        </LoginSocialFacebook>
     );
 }
 
