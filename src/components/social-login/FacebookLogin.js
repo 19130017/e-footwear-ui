@@ -32,7 +32,7 @@ function FacebookLogin() {
                 },
             };
             dispatch(fetchLoginFB(data));
-            window.location.href = "/";
+            // window.location.href = "/";
         }
     }, [profile, dispatch]);
 
