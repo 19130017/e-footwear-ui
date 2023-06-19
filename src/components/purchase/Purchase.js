@@ -24,7 +24,7 @@ function Purchase() {
                 orders.map((order, index) => {
                     return (
                         <Box key={index} className={cx("purchase-item")}>
-                            <PurchaseHeader data={order.orderStatus.description} />
+                            <PurchaseHeader data={order.orderStatus?.description} />
                             {order?.items.map((item, i) => (
                                 <PurchaseContent key={i} id={order.id} item={item} />
                             ))}
