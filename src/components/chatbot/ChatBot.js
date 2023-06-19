@@ -1,13 +1,6 @@
 import { Box } from "@mui/material";
 
 function ChatBot() {
-    // Messenger Chat plugin Code
-
-    var chatbox = document.getElementById("fb-customer-chat");
-    chatbox.setAttribute("page_id", "103824452759818");
-    chatbox.setAttribute("attribution", "biz_inbox");
-    //  Your SDK code
-
     window.fbAsyncInit = function () {
         window.FB.init({
             xfbml: true,
@@ -25,10 +18,13 @@ function ChatBot() {
         fjs.parentNode.insertBefore(js, fjs);
     })(document, "script", "facebook-jssdk");
 
+    var chatbot = document.getElementById("fb-customer-chat");
+    chatbot?.setAttribute("page_id", "103824452759818");
+    chatbot?.setAttribute("attribution", "biz_inbox");
     return (
         <Box>
             <div id="fb-root"></div>
-            <div id="fb-customer-chat" class="fb-customerchat"></div>
+            <div id="fb-customer-chat" className="fb-customerchat"></div>
         </Box>
     );
 }
