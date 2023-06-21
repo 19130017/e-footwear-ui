@@ -22,7 +22,7 @@ function SlideShow() {
         dispatch(fetchGetCarousels());
     }, []);
     return (
-        <Box>
+        <>
             {!isLoading && (
                 <Swiper
                     autoplay={{ delay: 7000, disableOnInteraction: false }}
@@ -31,18 +31,18 @@ function SlideShow() {
                     pagination={{ clickable: true, dynamicBullets: true }}
                     modules={[Pagination, Autoplay, EffectFade]}
                     effect={"fade"}
-                    className={cx("my-carousel")}
+                    className={"h-[500px] w-full mb-8"}
                 >
                     {carousel?.map((item, index) => (
                         <SwiperSlide key={index}>
                             <Link to={item.link}>
-                                <img src={item.imageURL} alt="" style={{ height: "100%" }} />
+                                <img src={item.imageURL} alt="" />
                             </Link>
                         </SwiperSlide>
                     ))}
                 </Swiper>
             )}
-        </Box>
+        </>
     );
 }
 export default SlideShow;
