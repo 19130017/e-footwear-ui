@@ -1,17 +1,13 @@
-import style from "./Search.module.scss";
-import { Box, Grid, PaginationItem, Typography } from "@mui/material";
-import classNames from "classnames/bind";
-import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
-import CardProduct from "~/components/card-product/CardProduct";
-import { useSearchParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import Loading from "~/components/loading/Loading";
+import { Box, Grid, Typography } from "@mui/material";
 import { useEffect } from "react";
-import { fetchProductsByName } from "~/redux/product/productSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 import Breadcrumb from "~/components/breadcrumbs/Breadcrumb";
+import CardProduct from "~/components/card-product/CardProduct";
+import Loading from "~/components/loading/Loading";
+import { fetchProductsByName } from "~/redux/product/productSlice";
+import "./Search.scss";
 
-const cx = classNames.bind(style);
 function Search() {
     const [searchParams, setSearchParams] = useSearchParams();
     const { products, isLoading } = useSelector((state) => state.productReducer);
@@ -22,7 +18,7 @@ function Search() {
     }, [dispatch, query]);
     
     const data = [
-        <span className={cx("text-link")} key={1}>
+        <span className="text-breakcumbs" key={1}>
             Tìm kiếm
         </span>,
     ];
@@ -39,28 +35,28 @@ function Search() {
                     borderBottom: "1px solid #ccc",
                 }}
             >
-                <Typography variant="body2" className={cx("sub-title")} sx={{ fontSize: "1.7rem" }}>
-                    Tìm kiếm được <span className={cx("search-item")}>{products?.length}</span> với{" "}
-                    <span className={cx("search-item")}> {query}</span>
+                <Typography variant="body2" className="sub-title" sx={{ fontSize: "1.7rem" }}>
+                    Tìm kiếm được <span className="search-item font-bold ">{products?.length}</span> với{" "}
+                    <span className="search-item font-bold"> {query}</span>
                 </Typography>
             </Box>
-            <Box sx={{ margin: "50px" }}>
+            <Box className="container mx-auto my-[50px]">
                 <Grid container spacing={2}>
                     {products?.length === 0 ? (
                         <Box>Không tìm thấy kết quả</Box>
                     ) : (
                         products.map((item, index) => (
-                            <Grid key={index} item xs={3}>
+                            <Grid key={index} item md={3} sm={6}>
                                 <CardProduct data={item} />
                             </Grid>
                         ))
                     )}
                 </Grid>
             </Box>
-            {/* <Box className={cx("wrap-pagination")}>
+            {/* <Box className="wrap-pagination flex justify-center my-[20px] ")}>
                 <Stack spacing={2}>
                     <Pagination
-                        className={cx("pagination")}
+                        className="pagination")}
                         color="primary"
                         count={10}
                         shape="rounded"
