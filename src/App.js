@@ -11,7 +11,6 @@ import {
     ResetPassword,
 } from "~/pages/auth";
 import Home from "~/pages/home";
-import Contact from "~/pages/contact";
 import About from "~/pages/about";
 import Account from "~/pages/account";
 import Cart from "~/pages/cart";
@@ -41,7 +40,6 @@ function App() {
                     }
                 >
                     <Route path="/" element={<Home />} />
-                    <Route path="/contact" element={<Contact />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/collections/:slug" element={<Collection />} />

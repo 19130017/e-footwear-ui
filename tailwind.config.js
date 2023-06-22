@@ -10,6 +10,7 @@ module.exports = {
             facebook: "#3b5998",
             black: "#000",
             white: "#fff",
+            about:"#e8fbfc"
         },
         borderColor: {
             gray: "#e0e0e0",
@@ -17,6 +18,7 @@ module.exports = {
         textColor: {
             link: "#0000EE",
             black: "#000000",
+            white: "#ffffff",
         },
         container: {
             padding: {
@@ -34,7 +36,10 @@ module.exports = {
                 // primary: '#0a0a0a',
                 // accent: '#B809C3',
             },
-            backgroundImage: {},
+            backgroundImage: {
+                'coming-soon': 'url(./assets/images/bg_comingsoon.jpg)',
+                'about-slogan': 'url(./assets/images/about.png)',
+            },
         },
     },
     plugins: [],
