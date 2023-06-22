@@ -1,16 +1,15 @@
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
-import style from "./Auth.module.scss";
-import classNames from "classnames/bind";
+
 import { Form, useForm } from "~/hooks/useForm";
 import { Link } from "react-router-dom";
 import { TitleFullWidth } from "~/components/header/FullWidthHeader";
-import { FacebookButton } from "~/components/button";
+// import { FacebookButton } from "~/components/button";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRegister } from "~/redux/auth/authSlice";
 import Loading from "~/components/loading/Loading";
+import { FacebookLogin, GoogleLogin } from "~/components/social-login";
 
-const cx = classNames.bind(style);
 function SignUp() {
     const dispatch = useDispatch();
     const textRef = useRef();
@@ -117,15 +116,16 @@ function SignUp() {
     };
 
     return (
-        <Box className={cx("wrapper")}>
-            <Box className={cx("content")}>
-                <TitleFullWidth cx={cx} title="Đăng ký tài khoản" />
-                <Typography variant="body2" className={cx("sub-title")} sx={{ fontSize: "1.4rem" }}>
+        <Box className="w-full flex items-center justify-center py-6">
+            <Box className="w-1/2">
+                <TitleFullWidth title="Đăng ký" />
+
+                <Typography variant="body2" className="text-2xl text-center mb-4">
                     Nếu đã từng mua hàng trên Website trước đây, bạn có thể dùng tính năng
-                    <Link href="/auth/forgot" underline="none" sx={{ margin: "0 0.5rem" }}>
-                        "Lấy mật khẩu"
+                    <Link to="/auth/forgot" className="inline no-underline text-link mx-1">
+                        "Quên mật khẩu"
                     </Link>
-                    để có thể truy cập vào tài khoản bằng username nhé.
+                    để có thể truy cập vào tài khoản bằng "Username" nhé.
                 </Typography>
 
                 <Form onSubmit={handleSubmit}>
@@ -140,20 +140,15 @@ function SignUp() {
                             helperText={errors.username}
                             value={values.username}
                             onChange={handleInputChange}
-                            FormHelperTextProps={{ style: { fontSize: 12 } }}
                             fullWidth
-                            InputProps={{
-                                style: {
-                                    borderRadius: "1.5rem",
-                                    fontSize: "1.4rem",
-                                },
-                            }}
+                            FormHelperTextProps={{ className: "text-xl" }}
+                            InputProps={{ className: "rounded-2xl text-2xl" }}
                             InputLabelProps={{
-                                style: { fontSize: "1.6rem" },
+                                className: "text-2xl",
                             }}
                         />
                     </Box>
-                    <Box sx={{ marginTop: "1rem" }}>
+                    <Box className="mt-4">
                         <TextField
                             label="Email"
                             type="email"
@@ -165,16 +160,14 @@ function SignUp() {
                             helperText={errors.email}
                             value={values.email}
                             onChange={handleInputChange}
-                            FormHelperTextProps={{ style: { fontSize: 12 } }}
-                            InputProps={{
-                                style: { borderRadius: "1.5rem", fontSize: "1.4rem" },
-                            }}
+                            FormHelperTextProps={{ className: "text-xl" }}
+                            InputProps={{ className: "rounded-2xl text-2xl" }}
                             InputLabelProps={{
-                                style: { fontSize: "1.6rem" },
+                                className: "text-2xl",
                             }}
                         />
                     </Box>
-                    <Box sx={{ marginTop: "1rem" }}>
+                    <Box className="mt-4">
                         <TextField
                             inputRef={textRef}
                             label="Mật khẩu"
@@ -188,16 +181,14 @@ function SignUp() {
                             helperText={errors.password}
                             value={values.password}
                             onChange={handleInputChange}
-                            FormHelperTextProps={{ style: { fontSize: 12 } }}
-                            InputProps={{
-                                style: { borderRadius: "1.5rem", fontSize: "1.4rem" },
-                            }}
+                            FormHelperTextProps={{ className: "text-xl" }}
+                            InputProps={{ className: "rounded-2xl text-2xl" }}
                             InputLabelProps={{
-                                style: { fontSize: "1.6rem" },
+                                className: "text-2xl",
                             }}
                         />
                     </Box>
-                    <Box sx={{ marginTop: "1rem" }}>
+                    <Box className="mt-4">
                         <TextField
                             label="Nhập lại mật khẩu"
                             type="password"
@@ -210,22 +201,19 @@ function SignUp() {
                             helperText={errors.rePassword}
                             value={values.rePassword}
                             onChange={handleInputChange}
-                            FormHelperTextProps={{ style: { fontSize: 12 } }}
-                            InputProps={{
-                                style: { borderRadius: "1.5rem", fontSize: "1.4rem" },
-                            }}
+                            FormHelperTextProps={{ className: "text-xl" }}
+                            InputProps={{ className: "rounded-2xl text-2xl" }}
                             InputLabelProps={{
-                                style: { fontSize: "1.6rem" },
+                                className: "text-2xl",
                             }}
                         />
                     </Box>
 
-                    <Box sx={{ marginTop: "1rem" }}>
+                    <Box className="mt-4">
                         <Button
                             type="submit"
                             variant="contained"
-                            className={cx("btn-login")}
-                            fullWidth
+                            className="text-2xl rounded-2xl bg-black w-full p-4 normal-case"
                         >
                             Tạo tài khoản
                         </Button>
@@ -233,17 +221,26 @@ function SignUp() {
                 </Form>
 
                 <Box>
-                    <Typography className={cx("option")}>Hoặc</Typography>
+                    <Typography
+                        className="mt-8 text-center w-full text-2xl items-center flex justify-center
+                                    after:content[''] after:h-0.5 after:bg-third after:flex-1
+                                    before:content[''] before:h-0.5 before:bg-third before:flex-1"
+                    >
+                        Hoặc
+                    </Typography>
                 </Box>
-                <FacebookButton cx={cx} />
-                <Grid container sx={{ marginTop: "1rem" }}>
+                <Box className="flex pt-4 flex-wrap flex-col">
+                    <GoogleLogin />
+                    <FacebookLogin />
+                </Box>
+                <Grid container className="pt-8">
                     <Grid item xs={6}>
-                        <Link to="/auth/sign-in" className={cx("btn")}>
-                            Đăng nhập
+                        <Link to="/auth/sign-in" className="block no-underline text-link">
+                            Đăng ký tài khoản mới
                         </Link>
                     </Grid>
                     <Grid item xs={6}>
-                        <Link to="/auth/forgot" className={cx("btn", "btn-right")}>
+                        <Link to="/auth/forgot" className="block no-underline text-right text-link">
                             Quên mật khẩu
                         </Link>
                     </Grid>

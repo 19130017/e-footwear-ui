@@ -1,12 +1,10 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
-import style from "./Auth.module.scss";
-import classNames from "classnames/bind";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Box, Button, TextField } from "@mui/material";
+import { useNavigate, useParams } from "react-router-dom";
 import { Form, useForm } from "~/hooks/useForm";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "~/components/loading/Loading";
 import { fetchResetPassword } from "~/redux/auth/authSlice";
-const cx = classNames.bind(style);
+import { TitleFullWidth } from "~/components/header/FullWidthHeader";
 
 function ResetPassword() {
     const initialValues = {
@@ -75,9 +73,9 @@ function ResetPassword() {
         }
     };
     return (
-        <Box className={cx("wrapper")} sx={{ marginTop: "50px" }}>
-            <Box className={cx("content")}>
-                <Typography className={cx("heading-reset")}>Cập nhật mật khẩu</Typography>
+        <Box className="w-full flex items-center justify-center py-6">
+            <Box className="w-1/2">
+                <TitleFullWidth title="Cập nhật mật khẩu" />
                 <Form onSubmit={handleSubmit}>
                     <Box>
                         <TextField
@@ -91,16 +89,14 @@ function ResetPassword() {
                             error={errorsEnable.password}
                             helperText={errors.password}
                             fullWidth
-                            FormHelperTextProps={{ style: { fontSize: "1.4rem" } }}
-                            InputProps={{
-                                style: { borderRadius: "1.5rem", fontSize: "1.4rem" },
-                            }}
+                            FormHelperTextProps={{ className: "text-xl" }}
+                            InputProps={{ className: "rounded-2xl text-2xl" }}
                             InputLabelProps={{
-                                style: { fontSize: "1.4rem" },
+                                className: "text-2xl",
                             }}
                         />
                     </Box>
-                    <Box sx={{ marginTop: "1.5rem" }}>
+                    <Box className="mt-6">
                         <TextField
                             name="confirmPassword"
                             placeholder="Nhập lại mật khẩu"
@@ -112,21 +108,18 @@ function ResetPassword() {
                             error={errorsEnable.confirmPassword}
                             helperText={errors.confirmPassword}
                             fullWidth
-                            FormHelperTextProps={{ style: { fontSize: "1.4rem" } }}
-                            InputProps={{
-                                style: { borderRadius: "1.5rem", fontSize: "1.4rem" },
-                            }}
+                            FormHelperTextProps={{ className: "text-xl" }}
+                            InputProps={{ className: "rounded-2xl text-2xl" }}
                             InputLabelProps={{
-                                style: { fontSize: "1.4rem" },
+                                className: "text-2xl",
                             }}
                         />
                     </Box>
-                    <Box sx={{ marginTop: "1.5rem" }}>
+                    <Box className="mt-6">
                         <Button
                             type="submit"
                             variant="contained"
-                            className={cx("btn-login")}
-                            fullWidth
+                            className="text-2xl rounded-2xl bg-black w-full p-4 normal-case"
                         >
                             Thay đổi mật khẩu
                         </Button>

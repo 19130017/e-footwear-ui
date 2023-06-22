@@ -1,7 +1,4 @@
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
-import style from "./Auth.module.scss";
-import classNames from "classnames/bind";
-import { FacebookButton } from "~/components/button";
 import { Form, useForm } from "~/hooks/useForm";
 import { Link, useNavigate } from "react-router-dom";
 import { TitleFullWidth } from "~/components/header/FullWidthHeader";
@@ -9,9 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchLogin } from "~/redux/auth/authSlice";
 import { useEffect } from "react";
 import Loading from "~/components/loading/Loading";
-import GoogleLogin from "~/components/social-login/GoogleLogin";
-import FacebookLogin from "~/components/social-login/FacebookLogin";
-const cx = classNames.bind(style);
+import { FacebookLogin, GoogleLogin } from "~/components/social-login";
 
 function SignIn() {
     const { accountId, accessToken, isLoading } = useSelector((state) => state.authReducer);
@@ -88,40 +83,40 @@ function SignIn() {
     };
 
     return (
-        <Box className={cx("wrapper")}>
-            <Box className={cx("content")}>
-                <TitleFullWidth cx={cx} title=" Đăng nhập" />
+        <Box className="w-full flex items-center justify-center py-6">
+            <Box className="w-1/2">
+                <TitleFullWidth title="Đăng nhập" />
 
-                <Typography variant="body2" className={cx("sub-title")} sx={{ fontSize: "1.4rem" }}>
+                <Typography variant="body2" className="text-2xl text-center mb-4">
                     Nếu đã từng mua hàng trên Website trước đây, bạn có thể dùng tính năng
-                    <Link to="/auth/forgot" className={cx("btn", "btn--inline")}>
-                        "Lấy mật khẩu"
+                    <Link to="/auth/forgot" className="inline no-underline text-link mx-1">
+                        "Quên mật khẩu"
                     </Link>
-                    để có thể truy cập vào tài khoản bằng username nhé.
+                    để có thể truy cập vào tài khoản bằng "Username" nhé.
                 </Typography>
                 <Form onSubmit={handleSubmit}>
                     <Box>
                         <TextField
                             autoComplete="off"
-                            label="Username"
+                            label="Tên tài khoản"
                             name="username"
                             variant="outlined"
-                            placeholder="Username"
+                            placeholder="Tên tài khoản"
                             fullWidth
                             onChange={handleInputChange}
-                            FormHelperTextProps={{ style: { fontSize: 12 } }}
                             error={errorsEnable.username}
                             value={values.username}
                             helperText={errors.username}
-                            InputProps={{ style: { borderRadius: "1.5rem", fontSize: "1.4rem" } }}
+                            FormHelperTextProps={{ className: "text-xl" }}
+                            InputProps={{ className: "rounded-2xl text-2xl" }}
                             InputLabelProps={{
-                                style: { fontSize: "1.6rem" },
+                                className: "text-2xl",
                             }}
                         />
                     </Box>
-                    <Box sx={{ marginTop: "1.5rem" }}>
+                    <Box className="pt-6">
                         <TextField
-                            label="Mật khẩu "
+                            label="Mật khẩu"
                             type="password"
                             variant="outlined"
                             placeholder="***********"
@@ -129,46 +124,47 @@ function SignIn() {
                             name="password"
                             autoComplete="off"
                             onChange={handleInputChange}
-                            FormHelperTextProps={{ style: { fontSize: 12 } }}
                             error={errorsEnable.password}
                             value={values.password}
                             helperText={errors.password}
-                            InputProps={{ style: { borderRadius: "1.5rem", fontSize: "1.4rem" } }}
-                            InputLabelProps={{ style: { fontSize: "1.6rem" } }}
+                            FormHelperTextProps={{ className: "text-xl" }}
+                            InputProps={{ className: "rounded-2xl text-2xl" }}
+                            InputLabelProps={{
+                                className: "text-2xl",
+                            }}
                         />
                     </Box>
-                    <Box sx={{ marginTop: "1.5rem" }}>
+                    <Box className="pt-6">
                         <Button
                             type="submit"
                             variant="contained"
-                            className={cx("btn-login")}
-                            fullWidth
+                            className="text-2xl rounded-2xl bg-black w-full p-4 normal-case"
                         >
                             Đăng nhập
                         </Button>
                     </Box>
                 </Form>
                 <Box>
-                    <Typography className={cx("option")}>Hoặc</Typography>
+                    <Typography
+                        className="mt-8 text-center w-full text-2xl items-center flex justify-center
+                                    after:content[''] after:h-0.5 after:bg-third after:flex-1
+                                    before:content[''] before:h-0.5 before:bg-third before:flex-1"
+                    >
+                        Hoặc
+                    </Typography>
                 </Box>
-                <Box>
-                    <Box sx={{ marginBottom: "1rem" }}>
-                        <GoogleLogin />
-                    </Box>
+                <Box className="flex pt-4 flex-wrap flex-col">
+                    <GoogleLogin />
                     <FacebookLogin />
                 </Box>
-                <Grid container sx={{ marginTop: "2rem" }}>
+                <Grid container className="pt-8">
                     <Grid item xs={6}>
-                        <Link to="/auth/sign-up" className={cx("btn")}>
+                        <Link to="/auth/sign-up" className="block no-underline text-link">
                             Đăng ký tài khoản mới
                         </Link>
                     </Grid>
                     <Grid item xs={6}>
-                        <Link
-                            to="/auth/forgot"
-                            className={cx("btn", "btn-right")}
-                            sx={{ textAlign: "right", display: "block" }}
-                        >
+                        <Link to="/auth/forgot" className="block no-underline text-right text-link">
                             Quên mật khẩu
                         </Link>
                     </Grid>

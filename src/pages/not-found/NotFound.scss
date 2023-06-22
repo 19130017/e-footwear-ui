@@ -1,0 +1,49 @@
+.not-found {
+    .back {
+        height: 60px;
+        width: 40%;
+        z-index: 1;
+        position: relative;
+        border: 1px solid #000;
+        overflow: hidden;
+        background-color: #000;
+        color: #fff;
+        font-size: 1.6rem;
+        transition: color 0.6s ease-in-out 0s;
+
+        &:before,
+        &:after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            transition: all 0.7s ease-in-out;
+        }
+
+        &:before {
+            right: -50px;
+            border-right: 50px solid transparent;
+            border-bottom: 80px solid #fff;
+            transform: translateX(-100%);
+        }
+
+        &:after {
+            left: -50px;
+            border-left: 50px solid transparent;
+            border-top: 80px solid #fff;
+            transform: translateX(100%);
+        }
+
+        &:hover {
+            color: #000;
+
+            &:before {
+                transform: translateX(-50%);
+            }
+
+            &:after {
+                transform: translateX(50%);
+            }
+        }
+    }
+}
