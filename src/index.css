@@ -9,6 +9,14 @@ html {
 body {
     font-size: 1.6rem;
 }
+
+.text-slip {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
 /* CSS */
 .popup-btn--confirm {
     appearance: none;

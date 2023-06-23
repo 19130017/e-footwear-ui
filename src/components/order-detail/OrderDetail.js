@@ -1,140 +1,148 @@
-import { Avatar, Box, Button, Grid, Paper, Typography } from "@mui/material";
-import classNames from "classnames/bind";
+import { Avatar, Box, Grid, Paper, Typography } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
-import style from "./OrderDetail.module.scss";
-import ReceiptIcon from "@mui/icons-material/ReceiptOutlined";
+import "./OrderDetail.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchGetOrder } from "~/redux/order/orderSlice";
 import Loading from "../loading/Loading";
 import { fetchGetProfile } from "~/redux/customer/customerSlice";
-const cx = classNames.bind(style);
 function OrderDetail() {
     const params = useParams();
     const { order, isLoading } = useSelector((state) => state.orderReducer);
-    const { customer } = useSelector((state) => state.customerReducer);
 
     const { accessToken, accountId } = useSelector((state) => state.authReducer);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchGetOrder({ id: params.id, accessToken }));
         dispatch(fetchGetProfile({ accessToken, accountId }));
-    }, [dispatch, params, accessToken]);
+    }, [dispatch, params, accessToken, accountId]);
 
-    console.log(order);
     return (
-        <Paper className={cx("order-detail-section")}>
-            <Box className={cx("header-wrapper")}>
-                <Box className={cx("header-top")}>
-                    <Box component={Link} to="/account/purchase" className={cx("btn-back")}>
-                        Trở về
-                    </Box>
+        <Paper className="p-[2.4rem] lg:w-[95%] mb-8 rounded-2xl bg-white ">
+            <Box className="flex justify-end">
+                <Box
+                    component={Link}
+                    to="/account/purchase"
+                    className="text-white bg-green-light py-2 px-4"
+                >
+                    Trở về
                 </Box>
-                <Grid container spacing={2} className={cx("header-content")}>
-                    <Grid item xs={6} className={cx("customer-info")}>
-                        <Typography variant="h5" className={cx("title")}>
-                            Thông tin người đặt
-                        </Typography>
-                        <Typography variant="body1" className={cx("text")}>
-                            <span className={cx("subtitle")}> Tên người đặt: </span>
-                            {customer?.lastName} {customer?.firstName}
-                        </Typography>
-                        <Typography variant="body1" className={cx("text", "text-light")}>
-                            <span className={cx("subtitle")}>Ngày đặt: </span>
-                            {order?.orderTime}
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={6} className={cx("delivery-info")}>
-                        <Typography variant="h5" className={cx("title")}>
-                            Thông tin nhận hàng
-                        </Typography>
-                        <Typography variant="body1" className={cx("text")}>
-                            <span className={cx("subtitle")}> Người nhận hàng: </span>
-                            {order?.address.fullName}
-                        </Typography>
-                        <Typography variant="body1" className={cx("text", "text-light")}>
-                            <span className={cx("subtitle")}>SDT người nhận: </span>
-                            {order?.address.phone}
-                        </Typography>
-                        <Typography
-                            variant="body1"
-                            className={cx("text", "text-light", "text-ellipsis")}
-                        >
-                            <span className={cx("subtitle")}> Địa chỉ giao hàng: </span>
-                            {order?.address.address},{order?.address.addresses.wardName},
-                            {order?.address.addresses.districtName},
-                            {order?.address.addresses.provinceName}
-                        </Typography>
-                        <Typography
-                            variant="body1"
-                            className={cx("text", "text-light", "text-ellipsis")}
-                        >
-                            <span className={cx("subtitle")}>Ghi chú: </span>
-                            {order?.description}
-                        </Typography>
-                    </Grid>
-                </Grid>
             </Box>
-            <Box className={cx("product-wrapper")}>
-                <Typography variant="body1" className={cx("title")}>
+            <Box className="pb-4 border-b border-solid border-gray mt-4">
+                <Typography variant="h5" className="text-[2.4rem] font-bold mb-8">
+                    Thông tin nhận hàng
+                </Typography>
+                <Typography variant="body1" className="text-2xl text-light-black leading-10 w-full">
+                    <span className=" font-bold text-black mr-2">Người nhận hàng:</span>
+                    {order?.address.fullName}
+                </Typography>
+                <Typography variant="body1" className="text-2xl  text-light-black leading-10">
+                    <span className="font-bold text-black mr-2">SDT người nhận: </span>
+                    {order?.address.phone}
+                </Typography>
+                <Typography variant="body1" className="text-2xl text-light-black leading-10 w-full">
+                    <span className=" font-bold text-black mr-2">Địa chỉ giao hàng:</span>
+                    {order?.address.address},{order?.address.addresses.wardName},
+                    {order?.address.addresses.districtName},{order?.address.addresses.provinceName}
+                </Typography>
+                <Typography
+                    variant="body1"
+                    className="text-2xl text-light-black leading-10 w-full text-ellipsis"
+                >
+                    <span className="font-bold text-black mr-2">Ghi chú: </span>
+                    {order?.description}
+                </Typography>
+            </Box>
+            <Box>
+                <Typography variant="h5" className="text-[2.4rem] font-bold mb-8">
                     Thông tin đơn hàng
+                </Typography>
+                <Typography variant="body1" className="text-2xl text-light-black leading-10 w-full">
+                    <span className="text-2xl font-bold text-black mr-2">Mã hoá đơn: </span>
+                    {order?.id}
+                </Typography>
+                <Typography variant="body1" className="text-2xl text-light-black leading-10 w-full">
+                    <span className="text-2xl font-bold text-black mr-2">Ngày đặt: </span>
+                    {order?.orderTime}
+                </Typography>
+                <Typography variant="body1" className="text-2xl  leading-10 w-full">
+                    <span className="text-2xl font-bold text-black mr-2">Trạng thái:</span>
+                    {order?.orderStatus?.description}
+                </Typography>
+            </Box>
+            <Box className="mt-8">
+                <Typography variant="body1" className="text-[2.4rem] font-bold mb-8">
+                    Chi tiết đơn hàng
                 </Typography>
                 {order &&
                     order.items.map((item, index) => (
                         <Grid
                             container
-                            alignItems="center"
                             spacing={2}
-                            className={cx("product-item")}
+                            className="my-4 border-t-2  border-solid border-gray w-full ml-0 items-center"
                             key={index}
                         >
-                            <Grid item>
+                            <Grid item className="lg:mr-4">
                                 <Avatar
                                     variant="rounded"
                                     src={item.detail.product.images[0].imageURL}
-                                    className={cx("product-image")}
+                                    className="h-32 w-32 border border-solid border-gray"
                                 />
                             </Grid>
-                            <Grid item xs={6} className={cx("product-detail")}>
-                                <Grid container direction="column">
-                                    <Grid item className={cx("name")}>
-                                        <Typography
-                                            variant="body1"
-                                            className={cx("text", "text-ellipsis")}
-                                        >
-                                            {item.detail.product.name}
-                                        </Typography>
+                            <Grid item xs={8} md={8}>
+                                <Grid container className="flex-col">
+                                    <Grid item xs={12} className="flex items-center">
+                                        <Grid container className="flex-col">
+                                            <Grid className="flex-col flex lg:w-[60%] text-slip">
+                                                <Grid item xs={12}>
+                                                    <Typography
+                                                        variant="body1"
+                                                        className="text-2xl text-ellipsis"
+                                                    >
+                                                        {item.detail.product.name}
+                                                    </Typography>
+                                                </Grid>
+                                                <Grid item>
+                                                    <Typography
+                                                        variant="body1"
+                                                        className="text-2xl text-light-black leading-10 w-full"
+                                                    >
+                                                        Loại: {item.detail.product.category.name},
+                                                    </Typography>
+                                                    <Typography
+                                                        variant="body1"
+                                                        className="text-2xl text-light-black leading-10 w-full"
+                                                    >
+                                                        Kích cỡ: {item.detail.size.value},
+                                                    </Typography>
+                                                    <Typography
+                                                        variant="body1"
+                                                        className="text-2xl text-light-black leading-10 w-full"
+                                                    >
+                                                        Màu: {item.detail.product.color.name}
+                                                    </Typography>
+                                                </Grid>
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                <Typography variant="body1" className="text-2xl">
+                                                    Số lượng: {item.quantity}
+                                                </Typography>
+                                            </Grid>
+                                        </Grid>
                                     </Grid>
-                                    <Grid item className={cx("catgory")}>
+
+                                    <Grid item xs={12} className="flex justify-end">
                                         <Typography
                                             variant="body1"
-                                            className={cx("text", "text-light")}
+                                            className="text-2xl text-danger "
                                         >
-                                            Loại: {item.detail.product.category.name}, Kích cỡ:{" "}
-                                            {item.detail.size.value}, Màu:{" "}
-                                            {item.detail.product.color.name}
+                                            {item.price.toLocaleString("it-IT", {
+                                                style: "currency",
+                                                currency: "VND",
+                                            })}
                                         </Typography>
                                     </Grid>
                                 </Grid>
-                            </Grid>
-                            <Grid item xs={3} className={cx("price-wrapper")}>
-                                <Typography variant="body1" className={cx("old-price")}>
-                                    {item.detail.product.originPrice.toLocaleString("it-IT", {
-                                        style: "currency",
-                                        currency: "VND",
-                                    })}
-                                </Typography>
-                                <Typography variant="body1" className={cx("new-price")}>
-                                    {item.price.toLocaleString("it-IT", {
-                                        style: "currency",
-                                        currency: "VND",
-                                    })}
-                                </Typography>
-                            </Grid>
-                            <Grid item className={cx("quantity-wrapper")}>
-                                <Typography variant="body1" className={cx("quantity")}>
-                                    Số lượng: {item.quantity}
-                                </Typography>
                             </Grid>
                         </Grid>
                     ))}
@@ -142,13 +150,13 @@ function OrderDetail() {
 
             <Grid
                 container
-                alignItems="flex-end"
-                flexDirection={"column"}
-                className={cx("total-wrapper")}
+                className="flex-col items-end pt-8 border-t-2  border-solid border-gray"
             >
-                <Grid item>
-                    Phí vận chuyển:
-                    <Typography variant="body1" className={cx("total")}>
+                <Grid item className="flex items-center">
+                    <Typography variant="body2" className="text-2xl mr-2">
+                        Phí vận chuyển:
+                    </Typography>
+                    <Typography variant="body1" className="text-danger text-2xl ">
                         {order?.transportFee === 0
                             ? "Miễn phí"
                             : order?.transportFee.toLocaleString("it-IT", {
@@ -157,25 +165,29 @@ function OrderDetail() {
                               })}
                     </Typography>
                 </Grid>
-                <Grid item>
-                    Giảm giá:
-                    <Typography variant="body1" className={cx("total")}>
-                        {order?.coupon == null ? (
-                            "0 VND"
-                        ) : (
-                            <span>
+                <Grid item className="flex items-center leading-10 ">
+                    <Typography variant="body2" className="text-2xl mr-2">
+                        Giảm giá:
+                    </Typography>
+
+                    <Typography variant="body2" className="text-danger text-2xl  inline-block ml-2">
+                        {order?.coupon == null
+                            ? "0 VND"
+                            : `
                                 -
-                                {order?.coupon.price.toLocaleString("it-IT", {
+                                ${order?.coupon.price.toLocaleString("it-IT", {
                                     style: "currency",
                                     currency: "VND",
                                 })}
-                            </span>
-                        )}
+                            `}
                     </Typography>
                 </Grid>
-                <Grid item>
-                    Tổng tiền:
-                    <Typography variant="body1" className={cx("total")}>
+                <Grid item className="flex items-center leading-10 ">
+                    <Typography variant="body2" className="text-2xl font-bold">
+                        {" "}
+                        Tổng tiền:
+                    </Typography>
+                    <Typography variant="body2" className="text-danger  inline-block text-2xl ml-2">
                         {order?.cost.toLocaleString("it-IT", {
                             style: "currency",
                             currency: "VND",

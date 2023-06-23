@@ -29,7 +29,8 @@ import Search from "./pages/search/Search";
 import Collection from "./pages/collection";
 import { useSelector } from "react-redux";
 function App() {
-    const { isLogin } = useSelector((state) => state.authReducer);
+    const { isLogin } = useSelector((state) => state.authReducer);   
+
     return (
         <div className="App">
             <Routes>

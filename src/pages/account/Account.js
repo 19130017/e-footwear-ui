@@ -1,29 +1,30 @@
 import { Box, Grid, Typography } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import { SideBar } from "~/components/sidebar";
-import classnames from "classnames/bind";
-import style from "./Account.module.scss";
-const cx = classnames.bind(style);
+import "./Account.scss";
 
 function Account() {
     return (
-        <Box className={cx("account-section")}>
-            <Box className={cx("theme")}>
-                <Box className={cx("them-content")}>
-                    <Typography variant="h4" className={cx("text", "title")}>
+        <Box className="pb-12 account-section">
+            <Box className="theme bg-account-theme px-[3.2rem]">
+                <Box className="py-24 pl-6 pr-12">
+                    <Typography
+                        variant="h4"
+                        className="text-white leading-[6rem] text-3xl lg:text-6xl"
+                    >
                         Account settings
                     </Typography>
-                    <Typography variant="h6" className={cx("text", "subtitle")}>
+                    <Typography variant="h6" className="text-white text-xl lg:text-4xl">
                         Change account information and settings
                     </Typography>
                 </Box>
             </Box>
-            <Box className={cx("main")}>
-                <Grid container spacing={4} className={cx("main-grid")}>
-                    <Grid item xs={3}>
+            <Box className="w-full pl-6 pr-6 mt-[-6.4rem] ">
+                <Grid container spacing={4} className="mt-[-3.2rem] flex-col">
+                    <Grid item xs={12} md={3} lg={3}>
                         <SideBar />
                     </Grid>
-                    <Grid item xs={9}>
+                    <Grid item xs={12} md={9} lg={9}>
                         <Outlet />
                     </Grid>
                 </Grid>

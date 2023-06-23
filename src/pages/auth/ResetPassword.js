@@ -73,8 +73,8 @@ function ResetPassword() {
         }
     };
     return (
-        <Box className="w-full flex items-center justify-center py-6">
-            <Box className="w-1/2">
+        <Box className="container mx-auto py-6 lg:w-1/2">
+            <Box>
                 <TitleFullWidth title="Cập nhật mật khẩu" />
                 <Form onSubmit={handleSubmit}>
                     <Box>
