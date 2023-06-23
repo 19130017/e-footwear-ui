@@ -9,6 +9,8 @@ import {
     AUTH_CHANGE_PASSWORD,
     AUTH_FORGOT_PASSWORD,
     AUTH_RESET_PASSWORD,
+    AUTH_LOGIN_GG,
+    AUTH_LOGIN_FB,
 } from "./authType";
 
 const initialState = {
@@ -29,7 +31,7 @@ const fetchRegister = createAsyncThunk(AUTH_REGISTER, async (params, thunkApi) =
             ? thunkApi.fulfillWithValue(response)
             : thunkApi.rejectWithValue(response);
     } catch (error) {
-        return thunkApi.rejectWithValue(error.response.data);
+        return thunkApi.rejectWithValue(error?.response?.data || error);
     }
 });
 
@@ -40,7 +42,7 @@ const fetchVerifyAccount = createAsyncThunk(AUTH_VERIFY_ACCOUNT, async (params, 
             ? thunkApi.fulfillWithValue(response)
             : thunkApi.rejectWithValue(response);
     } catch (error) {
-        return thunkApi.rejectWithValue(error.response.data);
+        return thunkApi.rejectWithValue(error?.response?.data || error);
     }
 });
 
@@ -51,10 +53,30 @@ const fetchLogin = createAsyncThunk(AUTH_LOGIN, async (params, thunkApi) => {
             ? thunkApi.fulfillWithValue(response)
             : thunkApi.rejectWithValue(response);
     } catch (error) {
-        return thunkApi.rejectWithValue(error.response.data);
+        return thunkApi.rejectWithValue(error?.response?.data || error);
     }
 });
 
+const fetchLoginGG = createAsyncThunk(AUTH_LOGIN_GG, async (params, thunkApi) => {
+    try {
+        const response = await authApi.requestLoginGG(params);
+        return response.success
+            ? thunkApi.fulfillWithValue(response)
+            : thunkApi.rejectWithValue(response);
+    } catch (error) {
+        return thunkApi.rejectWithValue(error?.response?.data || error);
+    }
+});
+const fetchLoginFB = createAsyncThunk(AUTH_LOGIN_FB, async (params, thunkApi) => {
+    try {
+        const response = await authApi.requestLoginFB(params);
+        return response.success
+            ? thunkApi.fulfillWithValue(response)
+            : thunkApi.rejectWithValue(response);
+    } catch (error) {
+        return thunkApi.rejectWithValue(error?.response?.data || error);
+    }
+});
 const fetchLogout = createAsyncThunk(AUTH_LOGOUT, async (params, thunkApi) => {
     return;
 });
@@ -66,7 +88,7 @@ const fetchChangePassword = createAsyncThunk(AUTH_CHANGE_PASSWORD, async (params
             ? thunkApi.fulfillWithValue(response)
             : thunkApi.rejectWithValue(response);
     } catch (error) {
-        return thunkApi.rejectWithValue(error.response.data);
+        return thunkApi.rejectWithValue(error?.response?.data || error);
     }
 });
 
@@ -77,7 +99,7 @@ const fetchForgotPassword = createAsyncThunk(AUTH_FORGOT_PASSWORD, async (params
             ? thunkApi.fulfillWithValue(response)
             : thunkApi.rejectWithValue(response);
     } catch (error) {
-        return thunkApi.rejectWithValue(error.response.data);
+        return thunkApi.rejectWithValue(error?.response?.data || error);
     }
 });
 
@@ -88,7 +110,7 @@ const fetchResetPassword = createAsyncThunk(AUTH_RESET_PASSWORD, async (params, 
             ? thunkApi.fulfillWithValue(response)
             : thunkApi.rejectWithValue(response);
     } catch (error) {
-        return thunkApi.rejectWithValue(error.response.data);
+        return thunkApi.rejectWithValue(error?.response?.data || error);
     }
 });
 
@@ -154,11 +176,65 @@ const authSlice = createSlice({
                 MySwal.fire({
                     icon: "error",
                     title: "Oops...",
-                    text: action.payload.message,
+                    text: action.payload?.message,
                 });
                 return state;
             })
             .addCase(fetchLogin.fulfilled, (state, action) => {
+                const data = action.payload.data;
+                state.isLoading = false;
+                state.isLogin = true;
+                state.username = data.username;
+                state.accessToken = data.token;
+                state.refreshToken = data.refreshToken;
+                state.accountId = data.accountId;
+                state.avatar = data.avatar;
+                state.auth = data;
+                return state;
+            })
+            // login gg
+            .addCase(fetchLoginGG.pending, (state, action) => {
+                state.isLoading = true;
+                return state;
+            })
+            .addCase(fetchLoginGG.rejected, (state, action) => {
+                state.isLoading = false;
+                MySwal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: action.payload?.message,
+                });
+                console.log(action);
+                return state;
+            })
+            .addCase(fetchLoginGG.fulfilled, (state, action) => {
+                const data = action.payload.data;
+                state.isLoading = false;
+                state.isLogin = true;
+                state.username = data.username;
+                state.accessToken = data.token;
+                state.refreshToken = data.refreshToken;
+                state.accountId = data.accountId;
+                state.avatar = data.avatar;
+                state.auth = data;
+                return state;
+            })
+            //login fb
+            // login gg
+            .addCase(fetchLoginFB.pending, (state, action) => {
+                state.isLoading = true;
+                return state;
+            })
+            .addCase(fetchLoginFB.rejected, (state, action) => {
+                state.isLoading = false;
+                MySwal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: action.payload?.message,
+                });
+                return state;
+            })
+            .addCase(fetchLoginFB.fulfilled, (state, action) => {
                 const data = action.payload.data;
                 state.isLoading = false;
                 state.isLogin = true;
@@ -263,4 +339,6 @@ export {
     fetchChangePassword,
     fetchForgotPassword,
     fetchResetPassword,
+    fetchLoginGG,
+    fetchLoginFB,
 };

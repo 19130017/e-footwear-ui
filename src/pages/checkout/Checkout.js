@@ -7,7 +7,11 @@ import style from "./Checkout.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchGetAddresses } from "~/redux/address/addressSlice";
-import { fetchCreateOrder } from "~/redux/order/orderSlice";
+import {
+    fetchCreateOrder,
+    fetchCreateOrderMomo,
+    fetchCreateOrderVN_Pay,
+} from "~/redux/order/orderSlice";
 import { clearCart } from "~/redux/cart/cartSlice";
 import Coupon from "~/components/coupon";
 import { fetchGetCoupons } from "~/redux/coupon/couponSlice";
@@ -24,7 +28,7 @@ function Checkout() {
     const [description, setDescription] = useState(null);
     const [coupon, setCoupon] = useState(null);
     const { coupons } = useSelector((state) => state.couponReducer);
-
+    const [paymentMethod, setPaymentMethod] = useState("MOMO");
     useEffect(() => {
         dispatch(fetchGetCoupons());
     }, [dispatch]);
@@ -37,7 +41,9 @@ function Checkout() {
         return accumulator + currentValue.price * currentValue.quantity;
     }, 0);
     const cost = total + total * 0.1 + (total > 700000 ? 0 : 11000) - (coupon ? coupon.price : 0);
-
+    const sendRedirect = async (url) => {
+        window.location.href = url;
+    }
     const handleClick = async () => {
         if (addressDelivery) {
             const temp = cart.map((item) => ({
@@ -45,30 +51,51 @@ function Checkout() {
                 quantity: item.quantity,
                 detail: { id: item.detail.id },
             }));
-            const response = await dispatch(
-                fetchCreateOrder({
-                    cost,
-                    transportFee: total > 700000 ? 0 : 11000,
-                    description,
-                    coupon: coupon,
-                    account: {
-                        id: accountId,
-                    },
-                    address: {
-                        id: addressDelivery.id,
-                    },
-                    items: temp,
-                    accessToken,
-                })
-            );
-            if (response.payload.success) {
-                await dispatch(clearCart());
-                navigate("/");
+            const common = {
+                cost,
+                transportFee: total > 700000 ? 0 : 11000,
+                description,
+                coupon: coupon,
+                account: {
+                    id: accountId,
+                },
+                address: {
+                    id: addressDelivery.id,
+                },
+                items: temp,
+                accessToken,
+            };
+
+            switch (paymentMethod) {
+                case "COD":
+                    const responseCOD = await dispatch(fetchCreateOrder(common));
+                    if (responseCOD.payload.success) {
+                        navigate("/");
+                    }
+                    break;
+                case "MOMO":
+                    const responseMOMO = await dispatch(fetchCreateOrderMomo(common));
+                    if (responseMOMO.payload.data?.errorCode === 0) {
+                        await sendRedirect(responseMOMO.payload.data?.payUrl);
+                    }
+                    break;
+                case "VNPay":
+                    const responseVNPay = await dispatch(fetchCreateOrderVN_Pay(common));
+                    if (responseVNPay.payload.success) {
+                        await sendRedirect(responseVNPay.payload?.data);
+                    }
+                    break;
+                default:
+                    alert("Vui lòng chọn phương thức thanh toán");
             }
+            setTimeout(() =>
+                dispatch(clearCart()), 5000
+            )
         } else {
             alert("Chọn địa chỉ giao hàng");
         }
     };
+
     const handleSelectAddress = (item) => {
         setAddressDelivery(item);
     };
@@ -85,6 +112,11 @@ function Checkout() {
             Đặt hàng
         </Typography>,
     ];
+
+    const handleCallback = (e) => {
+        const paymentMethod = e.target.getAttribute("data-content-name");
+        setPaymentMethod(paymentMethod);
+    };
     return (
         <Box>
             <Breadcrumb data={breadcrumbs} />
@@ -195,11 +227,8 @@ function Checkout() {
                         <Typography variant="h6" className={cx("title")}>
                             Phương thức thanh toán
                         </Typography>
-                        <Typography variant="h6" className={cx("subtitle")}>
-                            Thông tin thanh toán của bạn sẽ luôn được bảo mật
-                        </Typography>
 
-                        <Payment />
+                        <Payment callbackParent={handleCallback} />
                     </Box>
                 </Grid>
                 <Grid item xs={4} className={cx("checkout-right")}>
@@ -261,17 +290,20 @@ function Checkout() {
                         </Box>
                     </Box>
                     {/* coupon */}
-                    <Box className={cx("coupon-wrapper")}>
-                        {coupons &&
-                            coupons.map((item, index) => (
-                                <Coupon
-                                    key={index}
-                                    item={item}
-                                    parentCallback={handleChooseCoupon}
-                                    id={coupon?.id}
-                                />
-                            ))}
-                    </Box>
+                    {!coupons &&
+                        <Box className={cx("coupon-wrapper")}>
+                            {
+                                coupons.map((item, index) => (
+                                    <Coupon
+                                        key={index}
+                                        item={item}
+                                        parentCallback={handleChooseCoupon}
+                                        id={coupon?.id}
+                                    />
+                                ))
+                            }
+                        </Box>
+                    }
 
                     <Box className={cx("summary-order")}>
                         <Box className={cx("d-flex")}>
@@ -293,9 +325,9 @@ function Checkout() {
                                 {total > 700000
                                     ? "Miễn phi"
                                     : (11000).toLocaleString("it-IT", {
-                                          style: "currency",
-                                          currency: "VND",
-                                      })}
+                                        style: "currency",
+                                        currency: "VND",
+                                    })}
                             </Typography>
                         </Box>
                         <Box className={cx("d-flex")}>

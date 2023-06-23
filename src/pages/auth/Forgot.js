@@ -1,13 +1,11 @@
-import { Box, Button, Grid, TextField, Typography } from "@mui/material";
-import style from "./Auth.module.scss";
-import classNames from "classnames/bind";
+import { Box, Button, Grid, TextField } from "@mui/material";
+
 import { Link, useNavigate } from "react-router-dom";
 import { TitleFullWidth } from "~/components/header/FullWidthHeader";
 import { Form, useForm } from "~/hooks/useForm";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchForgotPassword } from "~/redux/auth/authSlice";
 import Loading from "~/components/loading/Loading";
-const cx = classNames.bind(style);
 
 function Forgot() {
     const initialValues = {
@@ -67,9 +65,9 @@ function Forgot() {
         }
     };
     return (
-        <Box className={cx("wrapper")}>
-            <Box className={cx("content")}>
-                <TitleFullWidth cx={cx} title="Cấp lại mật khẩu" />
+        <Box className="container mx-auto py-6 lg:w-1/2">
+            <Box>
+                <TitleFullWidth title="Đăng nhập" />
                 <Form onSubmit={handleSubmit}>
                     <Box>
                         <TextField
@@ -78,41 +76,39 @@ function Forgot() {
                             variant="outlined"
                             autoComplete="off"
                             value={values.email}
+                            placeholder="Nhập email của bạn"
                             onChange={handleInputChange}
                             error={errorsEnable.email}
                             helperText={errors.email}
                             fullWidth
-                            FormHelperTextProps={{ style: { fontSize: "1.4rem" } }}
-                            InputProps={{
-                                style: { borderRadius: "1.5rem", fontSize: "1.4rem" },
-                            }}
+                            FormHelperTextProps={{ className: "text-xl" }}
+                            InputProps={{ className: "rounded-2xl text-2xl" }}
                             InputLabelProps={{
-                                style: { fontSize: "1.4rem" },
+                                className: "text-2xl",
                             }}
                         />
                     </Box>
-                    <Box sx={{ marginTop: "1.5rem" }}>
+                    <Box className="mt-6">
                         <Button
                             type="submit"
                             variant="contained"
-                            className={cx("btn-login")}
-                            fullWidth
+                            className="text-2xl rounded-2xl bg-black w-full p-4 normal-case"
                         >
                             Kiểm tra
                         </Button>
                     </Box>
                 </Form>
-                <Box>
-                    <Typography className={cx("option")}>Hoặc</Typography>
-                </Box>
-                <Grid container sx={{ marginTop: "2rem" }}>
+                <Grid container className="pt-8">
                     <Grid item xs={6}>
-                        <Link to="/auth/sign-in" className={cx("btn")}>
+                        <Link to="/auth/sign-in" className="block no-underline text-link">
                             Đăng nhập
                         </Link>
                     </Grid>
                     <Grid item xs={6}>
-                        <Link to="/auth/sign-up" className={cx("btn", "btn-right")}>
+                        <Link
+                            to="/auth/sign-up"
+                            className="block no-underline text-right text-link"
+                        >
                             Đăng ký tài khoản mới
                         </Link>
                     </Grid>

@@ -2,14 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-//:root {
-//    --main-color: #000;
-//    --secondary-color: #fff;
-//    --third-color: #b22d29;
-//    --tag-color: #ff3102;
-//    --bg-color: #bb0000;
-//}
-
 @layer base {
     .section {
         @apply py-8 flex items-center;
@@ -22,6 +14,14 @@ html {
 
 body {
     font-size: 1.6rem;
+}
+
+.text-slip {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 }
 /* CSS */
 .popup-btn--confirm {
@@ -90,4 +90,3 @@ body {
 .popup-text--success {
     line-height: 1.5;
 }
-

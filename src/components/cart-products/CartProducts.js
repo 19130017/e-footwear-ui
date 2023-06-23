@@ -43,7 +43,7 @@ function CartProducts({ data, removeParentCallback, decreaseCallback, increaseCa
                                 sx={{ marginTop: "1rem" }}
                                 className={cx("bottom-info")}
                             >
-                                <Grid item xs={2} className={cx("item")}>
+                                <Grid item md={2}  xs={6} className={cx("item")}>
                                     <Box>
                                         Màu sắc:{" "}
                                         <ColorRounded
@@ -51,12 +51,12 @@ function CartProducts({ data, removeParentCallback, decreaseCallback, increaseCa
                                         />
                                     </Box>
                                 </Grid>
-                                <Grid item xs={3} className={cx("item")}>
+                                <Grid item md={4}  xs={6} className={cx("item")}>
                                     <Typography variant="body1">
                                         Kích thước: {item.detail.size}
                                     </Typography>
                                 </Grid>
-                                <Grid item xs={3} className={cx("item")}>
+                                <Grid item md={3}  xs={6} className={cx("item")}>
                                     <Box className={cx("btn-number")}>
                                         <Box
                                             className={cx("btn-change-quantity")}
@@ -83,7 +83,7 @@ function CartProducts({ data, removeParentCallback, decreaseCallback, increaseCa
                                         </Box>
                                     </Box>
                                 </Grid>
-                                <Grid item xs={4} className={cx("item", "price")}>
+                                <Grid item md={3}  xs={6} className={cx("item", "price")}>
                                     <Box>
                                         <Typography variant="body1" className={cx("current-price")}>
                                             {totalDiscountPrice.toLocaleString("it-IT", {
