@@ -83,11 +83,10 @@ function SignIn() {
     };
 
     return (
-        <Box className="w-full flex items-center justify-center py-6">
-            <Box className="w-1/2">
+        <Box className="container mx-auto py-6 lg:w-1/2">
+            <Box>
                 <TitleFullWidth title="Đăng nhập" />
-
-                <Typography variant="body2" className="text-2xl text-center mb-4">
+                <Typography variant="body2" className="text-2xl text-center mb-4 hidden">
                     Nếu đã từng mua hàng trên Website trước đây, bạn có thể dùng tính năng
                     <Link to="/auth/forgot" className="inline no-underline text-link mx-1">
                         "Quên mật khẩu"
@@ -98,10 +97,10 @@ function SignIn() {
                     <Box>
                         <TextField
                             autoComplete="off"
-                            label="Tên tài khoản"
+                            label="Tên đăng nhập"
                             name="username"
                             variant="outlined"
-                            placeholder="Tên tài khoản"
+                            placeholder="Tên đăng nhập"
                             fullWidth
                             onChange={handleInputChange}
                             error={errorsEnable.username}

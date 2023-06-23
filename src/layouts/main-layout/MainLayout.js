@@ -12,7 +12,7 @@ function MainLayout({ children }) {
             <Header />
             <Box className={cx("wrapper")}>{children}</Box>
              {/* <ChatBot /> */}
-            <Footer />
+            {/* <Footer /> */}
         </Box>
     );
 }
