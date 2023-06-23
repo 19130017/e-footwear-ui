@@ -48,142 +48,140 @@ function Cart() {
                 </Box>
             </Box>
             <Box className={cx("cart-container")}>
-                <Box className="container">
-                    <Grid container>
-                        <Grid item xs={8}>
-                            <Box className={cx("cart-left")}>
+                <Grid container spacing={2} justifyContent="center">
+                    <Grid sm={8} item lg={6}>
+                        <Box className={cx("cart-left")}>
+                            <Typography variant="h5" className={cx("cart-title")}>
+                                Giỏ hàng của bạn
+                            </Typography>
+                            <Divider sx={{ color: "#ccc" }} />
+                            <Box className={cx("list-item")}>
+                                <Typography variant="body1" className={cx("title-number")}>
+                                    Bạn đang có <strong>{cart?.length} sản phẩm</strong> trong
+                                    giỏ hàng
+                                </Typography>
+
+                                {cart?.length === 0 ? (
+                                    <Button
+                                        variant="outlined"
+                                        className={cx("btn-continue")}
+                                        onClick={() =>
+                                            navigate("/collections/giay-bong-da-nam")
+                                        }
+                                    >
+                                        Mua sắm sản phẩm
+                                    </Button>
+                                ) : (
+                                    <Box className={cx("content")}>
+                                        <CartProducts
+                                            data={cart}
+                                            removeParentCallback={removeItem}
+                                            decreaseCallback={decreaseQuantity}
+                                            increaseCallback={increaseQuantity}
+                                        />
+                                    </Box>
+                                )}
+                            </Box>
+                        </Box>
+                    </Grid>
+                    <Grid item sm={8} lg={4}>
+                        <Box className={cx("cart-right")}>
+                            <Box className={cx("order-summary-block")}>
                                 <Typography variant="h5" className={cx("cart-title")}>
-                                    Giỏ hàng của bạn
+                                    Thanh toán
                                 </Typography>
                                 <Divider sx={{ color: "#ccc" }} />
-                                <Box className={cx("list-item")}>
-                                    <Typography variant="body1" className={cx("title-number")}>
-                                        Bạn đang có <strong>{cart?.length} sản phẩm</strong> trong
-                                        giỏ hàng
-                                    </Typography>
-
-                                    {cart?.length === 0 ? (
-                                        <Button
-                                            variant="outlined"
-                                            className={cx("btn-continue")}
-                                            onClick={() =>
-                                                navigate("/collections/giay-bong-da-nam")
-                                            }
-                                        >
-                                            Mua sắm sản phẩm
-                                        </Button>
-                                    ) : (
-                                        <Box className={cx("content")}>
-                                            <CartProducts
-                                                data={cart}
-                                                removeParentCallback={removeItem}
-                                                decreaseCallback={decreaseQuantity}
-                                                increaseCallback={increaseQuantity}
-                                            />
+                                <Box className={cx("checkout-summary")}>
+                                    <Box className={cx("checkout-row")}>
+                                        <Box component={"span"} className={cx("subtitle")}>
+                                            Tổng tính tạm
                                         </Box>
-                                    )}
-                                </Box>
-                            </Box>
-                        </Grid>
-                        <Grid item xs={4}>
-                            <Box className={cx("cart-right")}>
-                                <Box className={cx("order-summary-block")}>
-                                    <Typography variant="h5" className={cx("cart-title")}>
-                                        Thanh toán
-                                    </Typography>
-                                    <Divider sx={{ color: "#ccc" }} />
-                                    <Box className={cx("checkout-summary")}>
-                                        <Box className={cx("checkout-row")}>
-                                            <Box component={"span"} className={cx("subtitle")}>
-                                                Tổng tính tạm
-                                            </Box>
+                                        <Box
+                                            component={"span"}
+                                            className={cx("subtitle", "price")}
+                                        >
+                                            {total.toLocaleString("it-IT", {
+                                                style: "currency",
+                                                currency: "VND",
+                                            })}
+                                        </Box>
+                                    </Box>
+                                    <Box className={cx("checkout-row")}>
+                                        <Box component={"span"} className={cx("subtitle")}>
+                                            Thành tiền
+                                        </Box>
+                                        <Box>
                                             <Box
-                                                component={"span"}
                                                 className={cx("subtitle", "price")}
+                                                sx={{ color: "#da4343" }}
                                             >
-                                                {total.toLocaleString("it-IT", {
+                                                {cost.toLocaleString("it-IT", {
                                                     style: "currency",
                                                     currency: "VND",
                                                 })}
                                             </Box>
-                                        </Box>
-                                        <Box className={cx("checkout-row")}>
-                                            <Box component={"span"} className={cx("subtitle")}>
-                                                Thành tiền
-                                            </Box>
-                                            <Box>
-                                                <Box
-                                                    className={cx("subtitle", "price")}
-                                                    sx={{ color: "#da4343" }}
-                                                >
-                                                    {cost.toLocaleString("it-IT", {
-                                                        style: "currency",
-                                                        currency: "VND",
-                                                    })}
-                                                </Box>
-                                                <Box className={cx("text")}>(Đã bao gồm VAT)</Box>
-                                            </Box>
+                                            <Box className={cx("text")}>(Đã bao gồm VAT)</Box>
                                         </Box>
                                     </Box>
-                                    <Divider sx={{ color: "#ccc" }} />
-                                    <Box className={cx("cart-note")}>
-                                        <Typography variant="body1">
-                                            Phí vận chuyển sẽ được tính ở trang thanh toán.
-                                        </Typography>
-                                    </Box>
-                                    {cart.length === 0 ? (
-                                        <Button
-                                            variant="contained"
-                                            className={cx("btn-buy-now", "disabled")}
-                                            disabled={true}
-                                        >
-                                            Tiếp tục
-                                        </Button>
-                                    ) : (
-                                        <Button
-                                            onClick={handleClick}
-                                            variant="contained"
-                                            className={cx("btn-buy-now")}
-                                        >
-                                            Tiếp tục
-                                        </Button>
-                                    )}
                                 </Box>
+                                <Divider sx={{ color: "#ccc" }} />
+                                <Box className={cx("cart-note")}>
+                                    <Typography variant="body1">
+                                        Phí vận chuyển sẽ được tính ở trang thanh toán.
+                                    </Typography>
+                                </Box>
+                                {cart.length === 0 ? (
+                                    <Button
+                                        variant="contained"
+                                        className={cx("btn-buy-now", "disabled")}
+                                        disabled={true}
+                                    >
+                                        Tiếp tục
+                                    </Button>
+                                ) : (
+                                    <Button
+                                        onClick={handleClick}
+                                        variant="contained"
+                                        className={cx("btn-buy-now")}
+                                    >
+                                        Tiếp tục
+                                    </Button>
+                                )}
+                            </Box>
 
-                                <Box className={cx("order-summary-notify")}>
-                                    <Box className={cx("text-vn")}>
-                                        <Typography variant="body1" className={cx("text")}>
-                                            Để nhận tư vấn hoặc hỗ trợ khi phát sinh khó khăn trong
-                                            lúc mua hàng, hãy liên hệ Hb's thông qua:
-                                        </Typography>
-                                        <Typography variant="body1" className={cx("support")}>
-                                            Gọi <strong>0966.158.666</strong> để được hỗ trợ
-                                        </Typography>
-                                        <Typography variant="body1" className={cx("support")}>
-                                            Email tới địa chỉ
-                                            <strong> cskh@bhfootwear.com</strong>
-                                        </Typography>
-                                    </Box>
-                                    <Box className={cx("text-en")}>
-                                        <Typography variant="body1" className={cx("text")}>
-                                            For further support, please contact us via:
-                                        </Typography>
-                                        <Typography variant="body1" className={cx("support")}>
-                                            Mobile phone: <strong>0966.158.666</strong> to
-                                            supported.
-                                        </Typography>
-                                        <Typography variant="body1" className={cx("support")}>
-                                            Email
-                                            <strong> cskh@bhfootwear.com</strong>
-                                        </Typography>
-                                    </Box>
+                            <Box className={cx("order-summary-notify")}>
+                                <Box className={cx("text-vn")}>
+                                    <Typography variant="body1" className={cx("text")}>
+                                        Để nhận tư vấn hoặc hỗ trợ khi phát sinh khó khăn trong
+                                        lúc mua hàng, hãy liên hệ Hb's thông qua:
+                                    </Typography>
+                                    <Typography variant="body1" className={cx("support")}>
+                                        Gọi <strong>0966.158.666</strong> để được hỗ trợ
+                                    </Typography>
+                                    <Typography variant="body1" className={cx("support")}>
+                                        Email tới địa chỉ
+                                        <strong> cskh@bhfootwear.com</strong>
+                                    </Typography>
+                                </Box>
+                                <Box className={cx("text-en")}>
+                                    <Typography variant="body1" className={cx("text")}>
+                                        For further support, please contact us via:
+                                    </Typography>
+                                    <Typography variant="body1" className={cx("support")}>
+                                        Mobile phone: <strong>0966.158.666</strong> to
+                                        supported.
+                                    </Typography>
+                                    <Typography variant="body1" className={cx("support")}>
+                                        Email
+                                        <strong> cskh@bhfootwear.com</strong>
+                                    </Typography>
                                 </Box>
                             </Box>
-                        </Grid>
+                        </Box>
                     </Grid>
-                </Box>
+                </Grid>
             </Box>
-            <FooterGallery />
+            {/* <FooterGallery /> */}
         </Box>
     );
 }

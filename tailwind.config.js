@@ -10,7 +10,7 @@ module.exports = {
             facebook: "#3b5998",
             black: "#000",
             white: "#fff",
-            about:"#e8fbfc"
+            about: "#e8fbfc"
         },
         borderColor: {
             gray: "#e0e0e0",
@@ -19,6 +19,7 @@ module.exports = {
             link: "#0000EE",
             black: "#000000",
             white: "#ffffff",
+            gray_shadow: "#ededed",
         },
         container: {
             padding: {

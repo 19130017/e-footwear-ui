@@ -16,7 +16,7 @@ function Search() {
     useEffect(() => {
         dispatch(fetchProductsByName(query));
     }, [dispatch, query]);
-    
+
     const data = [
         <span className="text-breakcumbs" key={1}>
             Tìm kiếm
