@@ -1,104 +1,102 @@
 import { Box, Grid } from "@mui/material";
-import style from "./Footer.module.scss";
-import classNames from "classnames/bind";
+import "./Footer.scss";
 import HomeIcon from "@mui/icons-material/Home";
 import PhoneIcon from "@mui/icons-material/Phone";
 import MailIcon from "@mui/icons-material/Mail";
 import { Link } from "react-router-dom";
-const cx = classNames.bind(style);
 
 function Footer() {
     return (
-        <Box className={cx("footer")} component={"footer"}>
-            <Grid container className={cx("container")}>
-                <Grid item xs={3} className={cx("wrap")}>
-                    <h6 className={cx("text-title")}>Về HB</h6>
-                    <p className={cx("introduce")}>
+        <Box className="footer w-full bg-black box-border pb-[30px]" component={"footer"}>
+            <Grid container>
+                <Grid item lg={3} md={4} className="wrap py-[20px] px-[30px]">
+                    <h6 className="text-title text-white text-[20px] font-bold leading-[200%] mb-[20px] ">Về HB</h6>
+                    <p className="introduce  text-[17px] font-thin text-gray_shadow mb-[20px] ">
                         Chúng tôi luôn lắng nghe luôn thấu hiểu và luôn cải thiện để đem đến trải
                         nghiệm tốt nhất cho khách hàng.
                     </p>
                 </Grid>
-                <Grid item xs={2} className={cx("wrap")}>
-                    <h6 className={cx("text-title")}>Dịch vụ khách hàng</h6>
-                    <ul className={cx("colorlib-footer-links")}>
-                        <li className={cx("lib-items")}>
-                            <Link to={"/contact"} className={cx("link")}>
+                <Grid item lg={2} md={4} xs={6} className="wrap py-[20px] px-[30px]">
+                    <h6 className="text-title text-[20px] font-bold leading-[200%] mb-[20px]  text-white">Dịch vụ khách hàng</h6>
+                    <ul className="colorlib-footer-links">
+                        <li className="lib-items list-none mt-[20px]">
+                            <Link to={"/contact"} className="link no-underline text-gray_shadow text-[17px] font-thin">
                                 Liên hệ
                             </Link>
                         </li>
-                        <li className={cx("lib-items")}>
-                            <Link to={"/coming-soon"} className={cx("link")}>
+                        <li className="lib-items list-none mt-[20px] ">
+                            <Link to={"/coming-soon"} className="link no-underline text-gray_shadow text-[17px] font-thin">
                                 Giảm giá
                             </Link>
                         </li>
-                        <li className={cx("lib-items")}>
-                            <Link to={"/coming-soon"} className={cx("link")}>
+                        <li className="lib-items list-none mt-[20px] ">
+                            <Link to={"/coming-soon"} className="link no-underline text-gray_shadow text-[17px] font-thin">
                                 Danh sách yêu thích
                             </Link>
                         </li>
-                        <li className={cx("lib-items")}>
-                            <Link to={"/coming-soon"} className={cx("link")}>
+                        <li className="lib-items list-none mt-[20px] ">
+                            <Link to={"/coming-soon"} className="link no-underline text-gray_shadow text-[17px] font-thin">
                                 Sản phẩm đặc biệt
                             </Link>
                         </li>
-                        <li className={cx("lib-items")}>
-                            <Link to={"/coming-soon"} className={cx("link")}>
+                        <li className="lib-items list-none mt-[20px] ">
+                            <Link to={"/coming-soon"} className="link no-underline text-gray_shadow text-[17px] font-thin">
                                 Chăm sóc khách hàng
                             </Link>
                         </li>
                     </ul>
                 </Grid>
-                <Grid item xs={2} className={cx("wrap")}>
-                    <h6 className={cx("text-title")}>Thông tin</h6>
-                    <ul className={cx("colorlib-footer-links")}>
-                        <li className={cx("lib-items")}>
-                            <Link to={"/about"} className={cx("link")}>
+                <Grid item lg={2} md={4} xs={6} className="wrap py-[20px] px-[30px]">
+                    <h6 className="text-title  text-white text-[20px] font-bold leading-[200%] mb-[20px] ">Thông tin</h6>
+                    <ul className="colorlib-footer-links">
+                        <li className="lib-items">
+                            <Link to={"/about"} className="link no-underline text-gray_shadow text-[17px] font-thin">
                                 Về chúng tôi
                             </Link>
                         </li>
-                        <li className={cx("lib-items")}>
-                            <Link to={"/coming-soon"} className={cx("link")}>
+                        <li className="lib-items list-none mt-[20px] ">
+                            <Link to={"/coming-soon"} className="link no-underline text-gray_shadow text-[17px] font-thin">
                                 Thông tin nhà vận chuyển
                             </Link>
                         </li>
-                        <li className={cx("lib-items")}>
-                            <Link to={"/coming-soon"} className={cx("link")}>
+                        <li className="lib-items list-none mt-[20px] ">
+                            <Link to={"/coming-soon"} className="link no-underline text-gray_shadow text-[17px] font-thin">
                                 Quyền riêng tư
                             </Link>
                         </li>
-                        <li className={cx("lib-items")}>
-                            <Link to={"/coming-soon"} className={cx("link")}>
+                        <li className="lib-items list-none mt-[20px] ">
+                            <Link to={"/coming-soon"} className="link no-underline text-gray_shadow text-[17px] font-thin">
                                 Hỗ trợ
                             </Link>
                         </li>
                     </ul>
                 </Grid>
-                <Grid item xs={2} className={cx("wrap")}>
-                    <h6 className={cx("text-title")}>Nổi bật</h6>
-                    <ul className={cx("colorlib-footer-links")}>
-                        <li className={cx("lib-items")}>
-                            <Link to={"/coming-soon"} className={cx("link")} href="">
+                <Grid item lg={2} md={4} xs={6} className="wrap py-[20px] px-[30px]">
+                    <h6 className="text-title text-white text-[20px] font-bold leading-[200%] mb-[20px] ">Nổi bật</h6>
+                    <ul className="colorlib-footer-links">
+                        <li className="lib-items list-none mt-[20px] ">
+                            <Link to={"/coming-soon"} className="link no-underline text-gray_shadow text-[17px] font-thin" href="">
                                 Sản phẩm mới
                             </Link>
                         </li>
                     </ul>
                 </Grid>
-                <Grid item xs={3} className={cx("wrap")}>
-                    <h6 className={cx("text-title")}>Liên hệ</h6>
-                    <div className={cx("contact")}>
-                        <HomeIcon className={cx("icon")}></HomeIcon>
-                        <p className={cx("contact-text")}>
+                <Grid item lg={3} md={6} xs={6} className="wrap py-[20px] px-[30px]">
+                    <h6 className="text-title  text-white text-[20px] font-bold leading-[200%] mb-[20px] ">Liên hệ</h6>
+                    <div className="contact no-underline text-gray_shadow flex items-center mt-[20px] ">
+                        <HomeIcon className="icon h-[30px] w-[30px] mr-[10px]"></HomeIcon>
+                        <p className="contact-text text-[17px]  font-thin">
                             Khu phố 6, Thủ Đức, Thành Phố Hồ Chí Minh
                         </p>
                     </div>
 
-                    <div className={cx("contact")}>
-                        <PhoneIcon className={cx("icon")}></PhoneIcon>
-                        <p className={cx("contact-text")}>+ 01 234 567 88 </p>
+                    <div className="contact no-underline text-gray_shadow flex items-center mt-[20px] ">
+                        <PhoneIcon className="icon h-[30px] w-[30px] mr-[10px]"></PhoneIcon>
+                        <p className="contact-text text-[17px] font-thin">+ 01 234 567 88 </p>
                     </div>
-                    <div className={cx("contact")}>
-                        <MailIcon className={cx("icon")}></MailIcon>
-                        <p className={cx("contact-text")}>hb@hbfashion.me </p>
+                    <div className="contact no-underline text-gray_shadow flex items-center mt-[20px] ">
+                        <MailIcon className="icon h-[30px] w-[30px] mr-[10px]"></MailIcon>
+                        <p className="contact-text text-[17px] font-thin leading-tight  break-all">haba@footwear.me </p>
                     </div>
                 </Grid>
             </Grid>

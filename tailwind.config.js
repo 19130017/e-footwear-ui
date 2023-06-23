@@ -10,8 +10,12 @@ module.exports = {
             facebook: "#3b5998",
             black: "#000",
             white: "#fff",
+
+            about: "#e8fbfc"
+
             "account-theme": "#3fada8",
             "green-light": "#30a2c4",
+
         },
         borderColor: {
             gray: "#e0e0e0",
@@ -21,11 +25,15 @@ module.exports = {
         textColor: {
             link: "#0000EE",
             black: "#000000",
+
+            gray_shadow: "#ededed",
+
             white: "#fff",
             "light-black": "rgba(85, 85, 85, 0.8)",
             third: "#333",
             success: "#26aa99",
             danger: "#df4759",
+
         },
         container: {
             padding: {
@@ -44,7 +52,10 @@ module.exports = {
                 // primary: '#0a0a0a',
                 // accent: '#B809C3',
             },
-            backgroundImage: {},
+            backgroundImage: {
+                'coming-soon': 'url(./assets/images/bg_comingsoon.jpg)',
+                'about-slogan': 'url(./assets/images/about.png)',
+            },
         },
     },
     plugins: [],
