@@ -1,38 +1,36 @@
 import { Box, Grid, Typography } from "@mui/material";
-import classnames from "classnames/bind";
 import { Link } from "react-router-dom";
 import { ColorRounded } from "../color";
 import CloseIcon from "@mui/icons-material/Close";
-import style from "./CartProducts.module.scss";
+import "./CartProducts.scss";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
-const cx = classnames.bind(style);
 
 function CartProducts({ data, removeParentCallback, decreaseCallback, increaseCallback }) {
     return (
-        <Box className={cx("product-list")}>
+        <Box className="product-list">
             {data?.map((item, index) => {
                 const totalDiscountPrice = item.price * item.quantity;
                 const totalOriginPrice = item.detail.product.originPrice * item.quantity;
                 return (
-                    <Box key={index} className={cx("product-item")}>
+                    <Box key={index} className="product-item">
                         <Box
-                            className={cx("btn-remove")}
+                            className="btn-remove"
                             onClick={() => removeParentCallback(index)}
                         >
                             <CloseIcon sx={{ height: "2rem", width: "2rem", color: "red" }} />
                         </Box>
-                        <Box className={cx("product-image")}>
+                        <Box className="product-image">
                             <img
                                 src={item.detail.product.imageURL}
                                 alt={item.detail.product.name}
                             />
                         </Box>
-                        <Box className={cx("product-info")}>
-                            <Typography variant="h5" className={cx("product-text")}>
+                        <Box className="product-info">
+                            <Typography variant="h5" className="product-text">
                                 <Link
                                     to={`/detail/${item.detail.product.slug}/${item.detail.product.color.id}`}
-                                    className={cx("product-link")}
+                                    className="product-link"
                                 >
                                     {item.detail.product.name}
                                 </Link>
@@ -41,9 +39,9 @@ function CartProducts({ data, removeParentCallback, decreaseCallback, increaseCa
                                 container
                                 spacing={1}
                                 sx={{ marginTop: "1rem" }}
-                                className={cx("bottom-info")}
+                                className="bottom-info"
                             >
-                                <Grid item md={2}  xs={6} className={cx("item")}>
+                                <Grid item md={2}  xs={6}  className="item">
                                     <Box>
                                         Màu sắc:{" "}
                                         <ColorRounded
@@ -51,15 +49,15 @@ function CartProducts({ data, removeParentCallback, decreaseCallback, increaseCa
                                         />
                                     </Box>
                                 </Grid>
-                                <Grid item md={4}  xs={6} className={cx("item")}>
+                                <Grid item md={4}  xs={6} className="item">
                                     <Typography variant="body1">
                                         Kích thước: {item.detail.size}
                                     </Typography>
                                 </Grid>
-                                <Grid item md={3}  xs={6} className={cx("item")}>
-                                    <Box className={cx("btn-number")}>
+                                <Grid item md={3}  xs={6} className="item">
+                                    <Box className="btn-number">
                                         <Box
-                                            className={cx("btn-change-quantity")}
+                                            className="btn-change-quantity"
                                             onClick={() =>
                                                 decreaseCallback({
                                                     id: item.detail.product.id,
@@ -69,9 +67,9 @@ function CartProducts({ data, removeParentCallback, decreaseCallback, increaseCa
                                         >
                                             <RemoveIcon />
                                         </Box>
-                                        <Box className={cx("show-quantity")}>{item.quantity}</Box>
+                                        <Box className="show-quantity">{item.quantity}</Box>
                                         <Box
-                                            className={cx("btn-change-quantity")}
+                                            className="btn-change-quantity"
                                             onClick={() =>
                                                 increaseCallback({
                                                     id: item.detail.product.id,
@@ -83,9 +81,9 @@ function CartProducts({ data, removeParentCallback, decreaseCallback, increaseCa
                                         </Box>
                                     </Box>
                                 </Grid>
-                                <Grid item md={3}  xs={6} className={cx("item", "price")}>
+                                <Grid item md={3}  xs={6} className="item price">
                                     <Box>
-                                        <Typography variant="body1" className={cx("current-price")}>
+                                        <Typography variant="body1" className="current-price">
                                             {totalDiscountPrice.toLocaleString("it-IT", {
                                                 style: "currency",
                                                 currency: "VND",
@@ -94,7 +92,7 @@ function CartProducts({ data, removeParentCallback, decreaseCallback, increaseCa
                                     </Box>
                                     {item?.discountRate !== 0 && (
                                         <Box>
-                                            <Typography variant="body1" className={cx("pre-price")}>
+                                            <Typography variant="body1" className="pre-price">
                                                 {totalOriginPrice.toLocaleString("it-IT", {
                                                     style: "currency",
                                                     currency: "VND",

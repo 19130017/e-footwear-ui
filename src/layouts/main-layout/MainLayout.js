@@ -9,10 +9,10 @@ const cx = classNames.bind(style);
 function MainLayout({ children }) {
     return (
         <Box className={cx("main")}>
-            <Header />
-            <Box className={cx("wrapper")}>{children}</Box>
-             {/* <ChatBot /> */}
-            {/* <Footer /> */}
+            {/* <Header /> */}
+            <Box className="flex-grow">{children}</Box>
+            {/* <ChatBot /> */}
+            <Footer />
         </Box>
     );
 }

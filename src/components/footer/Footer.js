@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 function Footer() {
     return (
-        <Box className="footer w-full bg-black box-border pb-[30px]" component={"footer"}>
+        <Box className="footer w-full bg-black box-border " component={"footer"}>
             <Grid container>
                 <Grid item lg={3} md={4} className="wrap py-[20px] px-[30px]">
                     <h6 className="text-title text-white text-[20px] font-bold leading-[200%] mb-[20px] ">Về HB</h6>
@@ -16,7 +16,7 @@ function Footer() {
                         nghiệm tốt nhất cho khách hàng.
                     </p>
                 </Grid>
-                <Grid item lg={2} md={4} xs={6} className="wrap py-[20px] px-[30px]">
+                <Grid item lg={2} md={4} sm={6} className="wrap py-[20px] px-[30px]">
                     <h6 className="text-title text-[20px] font-bold leading-[200%] mb-[20px]  text-white">Dịch vụ khách hàng</h6>
                     <ul className="colorlib-footer-links">
                         <li className="lib-items list-none mt-[20px]">
@@ -46,7 +46,7 @@ function Footer() {
                         </li>
                     </ul>
                 </Grid>
-                <Grid item lg={2} md={4} xs={6} className="wrap py-[20px] px-[30px]">
+                <Grid item lg={2} md={4} sm={6} className="wrap py-[20px] px-[30px]">
                     <h6 className="text-title  text-white text-[20px] font-bold leading-[200%] mb-[20px] ">Thông tin</h6>
                     <ul className="colorlib-footer-links">
                         <li className="lib-items">
@@ -71,7 +71,7 @@ function Footer() {
                         </li>
                     </ul>
                 </Grid>
-                <Grid item lg={2} md={4} xs={6} className="wrap py-[20px] px-[30px]">
+                <Grid item lg={2} md={4} sm={6} className="wrap py-[20px] px-[30px]">
                     <h6 className="text-title text-white text-[20px] font-bold leading-[200%] mb-[20px] ">Nổi bật</h6>
                     <ul className="colorlib-footer-links">
                         <li className="lib-items list-none mt-[20px] ">
@@ -81,7 +81,7 @@ function Footer() {
                         </li>
                     </ul>
                 </Grid>
-                <Grid item lg={3} md={6} xs={6} className="wrap py-[20px] px-[30px]">
+                <Grid item lg={3} md={6} sm={6} className="wrap py-[20px] px-[30px]">
                     <h6 className="text-title  text-white text-[20px] font-bold leading-[200%] mb-[20px] ">Liên hệ</h6>
                     <div className="contact no-underline text-gray_shadow flex items-center mt-[20px] ">
                         <HomeIcon className="icon h-[30px] w-[30px] mr-[10px]"></HomeIcon>
