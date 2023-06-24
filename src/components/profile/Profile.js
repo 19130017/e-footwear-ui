@@ -1,11 +1,11 @@
 
-import AccountHeader from "../header/AccountHeader";
-import { useDispatch, useSelector } from "react-redux";
+import { Paper } from "@mui/material";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchGetProfile } from "~/redux/customer/customerSlice";
+import AccountHeader from "../header/AccountHeader";
 import Loading from "../loading/Loading";
 import SubProfile from "./SubProfile";
-import { Paper } from "@mui/material";
 
 function Profile() {
     const { customer, isLoading } = useSelector((state) => state.customerReducer);
