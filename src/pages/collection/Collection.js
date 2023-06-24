@@ -1,6 +1,5 @@
-import style from "./Collection.module.scss";
+import "./Collection.scss";
 import { Box, Grid, PaginationItem, Typography } from "@mui/material";
-import classNames from "classnames/bind";
 import FilterProduct from "~/components/filter/FilterProduct";
 import { sizes, colors, orderBy } from "~/service/fakeData";
 import Pagination from "@mui/material/Pagination";
@@ -13,7 +12,6 @@ import FooterGallery from "~/components/footer-gallery/FooterGallery";
 import Breadcrumb from "~/components/breadcrumbs/Breadcrumb";
 import { fetchCategoryBySlug } from "~/redux/category/categorySlice";
 import CardProduct from "~/components/card-product/CardProduct";
-const cx = classNames.bind(style);
 
 function Collection() {
     const products = useSelector((state) => state.productReducer.products);
@@ -22,10 +20,10 @@ function Collection() {
     const slug = useParams();
 
     const breadCrumbData = [
-        <span className={cx("text-link")} key={1}>
+        <span className="text-link-collection" key={1}>
             Danh mục
         </span>,
-        <Link to={`/collection/${category?.slug}`} className={cx("text-link")} key={2}>
+        <Link to={`/collection/${category?.slug}`} className="text-link-collection" key={2}>
             {category?.name} {category?.category?.name}
         </Link>,
     ];
@@ -42,7 +40,7 @@ function Collection() {
                 <img
                     src={category?.gallery?.imageURL}
                     alt={category?.name}
-                    className={cx("image-category")}
+                    className="image-category"
                 />
             </Box>
             <Box
@@ -54,10 +52,10 @@ function Collection() {
                     justifyContent: "space-between",
                 }}
             >
-                <Box sx={{ display: "flex", alignItems: "center" }}>
+                {/* <Box sx={{ display: "flex", alignItems: "center" }}>
                     <Typography
                         variant="body2"
-                        className={cx("sub-title")}
+                        className="sub-title"
                         sx={{ fontSize: "2.5rem", fontWeight: "bold" }}
                     >
                         Sản phẩm
@@ -68,24 +66,24 @@ function Collection() {
 
                 <Box sx={{ alignSelf: "flex-end" }}>
                     <FilterProduct data={orderBy} label={"Sắp xếp theo"} />
-                </Box>
+                </Box> */}
             </Box>
 
             <Box sx={{ margin: "50px" }}>
                 <Grid container spacing={2}>
                     {products &&
                         products.map((item, index) => (
-                            <Grid key={index} item xs={3}>
+                            <Grid key={index} item md={3} sm={6}>
                                 <CardProduct data={item} />
                             </Grid>
                         ))}
                 </Grid>
             </Box>
             {products.length > 10 && (
-                <Box className={cx("wrap-pagination")}>
+                <Box className="wrap-pagination">
                     <Stack spacing={2}>
                         <Pagination
-                            className={cx("pagination")}
+                            className="pagination"
                             color="primary"
                             count={2}
                             shape="rounded"
