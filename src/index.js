@@ -14,11 +14,12 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 const theme = createTheme({
     breakpoints: {
         values: {
-            sm: 640,
-            md: 768,
-            lg: 1024,
-            xl: 1280,
-            xxl: 1536,
+            xs: 0, // 0 - 639
+            sm: 640, // 640 - 767
+            md: 768, // 768 - 1023
+            lg: 1024, // 1024 -1279
+            xl: 1280, // 1280 - 1535
+            xxl: 1536, // 1536 - max
         },
     },
 });

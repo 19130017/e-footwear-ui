@@ -10,12 +10,9 @@ module.exports = {
             facebook: "#3b5998",
             black: "#000",
             white: "#fff",
-
-            about: "#e8fbfc"
-
+            about: "#e8fbfc",
             "account-theme": "#3fada8",
             "green-light": "#30a2c4",
-
         },
         borderColor: {
             gray: "#e0e0e0",
@@ -33,7 +30,6 @@ module.exports = {
             third: "#333",
             success: "#26aa99",
             danger: "#df4759",
-
         },
         container: {
             padding: {
@@ -53,8 +49,8 @@ module.exports = {
                 // accent: '#B809C3',
             },
             backgroundImage: {
-                'coming-soon': 'url(./assets/images/bg_comingsoon.jpg)',
-                'about-slogan': 'url(./assets/images/about.png)',
+                "coming-soon": "url(./assets/images/bg_comingsoon.jpg)",
+                "about-slogan": "url(./assets/images/about.png)",
             },
         },
     },
