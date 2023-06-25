@@ -1,0 +1,11 @@
+.item {
+    &.active {
+        background-color: #ddebfe;
+    }
+    &:hover.active {
+        background-color: #ddebfe;
+    }
+    &:hover {
+        background-color: rgba(221, 235, 254, 0.4);
+    }
+}

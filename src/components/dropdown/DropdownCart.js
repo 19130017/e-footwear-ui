@@ -1,8 +1,5 @@
-import { Box, Button, Divider, Grid, Typography } from "@mui/material";
-import classnames from "classnames/bind";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import style from "./Dropdown.module.scss";
-const cx = classnames.bind(style);
 function DropdownCart({ data }) {
     const navigate = useNavigate();
     const total = data?.reduce((accumulator, currentValue) => {
@@ -10,108 +7,108 @@ function DropdownCart({ data }) {
     }, 0);
 
     return (
-        <Box className={cx("dropdown")}>
-            <Typography variant="h5" className={cx("title")}>
-                Giỏ hàng
-            </Typography>
-            {data?.length === 0 ? (
-                <Box className={cx("cart-empty")}>Hiện chưa có sản phẩm</Box>
-            ) : (
-                <Box className={cx("content")}>
-                    {data?.map((item, index) => (
-                        <Grid key={index} container className={cx("wrapper")}>
-                            <Grid item>
-                                <img
-                                    className={cx("image")}
-                                    alt="test"
-                                    src={`${item.detail.product.imageURL}`}
-                                />
-                            </Grid>
-                            <Grid item sx={{ flex: 1, marginLeft: "0.5rem" }}>
-                                <Link
-                                    to={`/detail/${item.detail.product.slug}/${item.detail.product.color.id}`}
-                                    className={cx("product-link")}
-                                >
-                                    <Typography variant="body1" className={cx("product-name")}>
-                                        {item.detail.product.name}
-                                    </Typography>
-                                </Link>
-                                <Typography variant="body1" className={cx("product-type")}>
-                                    {item.detail.product.color.name} / {item.detail.size}
-                                </Typography>
-                                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                                    <Typography variant="body1" className={cx("quantity")}>
-                                        Số lượng: {item.quantity}
-                                    </Typography>
-                                    <Box className={cx("summary-price")}>
-                                        <Typography variant="body1" className={cx("sale-price")}>
-                                            {item.price.toLocaleString("it-IT", {
-                                                style: "currency",
-                                                currency: "VND",
-                                            })}
-                                        </Typography>
-                                        {item.detail.product.discountRate !== 0 && (
-                                            <Typography variant="body1" className={cx("pre-price")}>
-                                                {item.detail.product.originPrice.toLocaleString(
-                                                    "it-IT",
-                                                    {
-                                                        style: "currency",
-                                                        currency: "VND",
-                                                    }
-                                                )}
-                                            </Typography>
-                                        )}
-                                    </Box>
-                                </Box>
-                            </Grid>
-                        </Grid>
-                    ))}
-                </Box>
-            )}
-
-            <Box className={cx("cart-summary")}>
-                <Box
-                    sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        padding: "1rem 0",
-                    }}
+        <Box className="w-[300px] md:w-[400px]">
+            <Box className="py-4 px-8">
+                <Typography
+                    variant="h5"
+                    className="text-center text-2xl uppercase pb-2 border-b border-solid border-[#ccc]"
                 >
-                    <Typography
-                        variant="body1"
-                        sx={{ fontSize: "1.4rem", textTransform: "uppercase" }}
-                    >
-                        Tổng tiền
-                    </Typography>
-                    <Typography
-                        variant="body1"
-                        sx={{ fontSize: "1.8rem", color: "red", fontWeight: "bold" }}
-                    >
-                        {total?.toLocaleString("it-IT", {
-                            style: "currency",
-                            currency: "VND",
-                        })}
-                    </Typography>
-                </Box>
+                    Giỏ hàng
+                </Typography>
+                {data?.length === 0 ? (
+                    <Box className="flex items-center justify-center h-[100px]">
+                        Hiện chưa có sản phẩm
+                    </Box>
+                ) : (
+                    <Box className="m-h-[250px] overflow-y-scroll gap-4">
+                        {data?.map((item, index) => (
+                            <Grid
+                                key={index}
+                                container
+                                className="w-full py-4 border-b border-solid border-[#ddd]"
+                            >
+                                <Grid item xs={4}>
+                                    <img
+                                        className="w-[75px] h-[75px]"
+                                        alt="test"
+                                        src={`${item.detail.product.imageURL}`}
+                                    />
+                                </Grid>
+                                <Grid item xs={8}>
+                                    <Link
+                                        to={`/detail/${item.detail.product.slug}/${item.detail.product.color.id}`}
+                                        className="block text-black hover:no-underline"
+                                    >
+                                        <Typography
+                                            variant="body1"
+                                            className="text-xl text-slip w-[150px] md:w-[200px]"
+                                        >
+                                            {item.detail.product.name}
+                                        </Typography>
+                                    </Link>
+                                    <Typography
+                                        variant="body1"
+                                        className="text-[#677279] text-xl mb-3 text-start"
+                                    >
+                                        {item.detail.product.color.name} / {item.detail.size}
+                                    </Typography>
+                                    <Box className="flex flex-col items-start md:flex-row  md:justify-between md:items-center">
+                                        <Typography variant="body1" className="text-2xl">
+                                            Số lượng: {item.quantity}
+                                        </Typography>
+                                        <Box className="">
+                                            <Typography
+                                                variant="body1"
+                                                className="text-2xl font-bold"
+                                            >
+                                                {item.price.toLocaleString("it-IT", {
+                                                    style: "currency",
+                                                    currency: "VND",
+                                                })}
+                                            </Typography>
+                                            {item.detail.product.discountRate !== 0 && (
+                                                <Typography
+                                                    variant="body1"
+                                                    className="text-2xl line-through text-[#677279]"
+                                                >
+                                                    {item.detail.product.originPrice.toLocaleString(
+                                                        "it-IT",
+                                                        {
+                                                            style: "currency",
+                                                            currency: "VND",
+                                                        }
+                                                    )}
+                                                </Typography>
+                                            )}
+                                        </Box>
+                                    </Box>
+                                </Grid>
+                            </Grid>
+                        ))}
+                    </Box>
+                )}
+
                 <Box>
-                    <Button
-                        variant="contained"
-                        onClick={() => navigate("/cart")}
-                        sx={{
-                            backgroundColor: "#000",
-                            color: "#fff",
-                            width: "100%",
-                            fontSize: "1.4rem",
-                            boxShadow: "none",
-                            "&:hover": {
-                                backgroundColor: "#000",
-                                boxShadow: "none",
-                            },
-                        }}
-                    >
-                        Xem giỏ hàng
-                    </Button>
+                    <Box className="flex items-center justify-between py-4">
+                        <Typography variant="body1" className="text-2xl uppercase">
+                            Tổng tiền
+                        </Typography>
+                        <Typography variant="body1" className="text-3xl font-bold text-danger">
+                            {total?.toLocaleString("it-IT", {
+                                style: "currency",
+                                currency: "VND",
+                            })}
+                        </Typography>
+                    </Box>
+                    <Box>
+                        <Button
+                            variant="contained"
+                            onClick={() => navigate("/cart")}
+                            className="bg-black text-white w-full text-2xl shadow-none hover:shadow-none hover:bg-black "
+                        >
+                            Xem giỏ hàng
+                        </Button>
+                    </Box>
                 </Box>
             </Box>
         </Box>

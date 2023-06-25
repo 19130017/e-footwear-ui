@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -19,14 +19,8 @@ function VerifyAccount() {
         if (response.success) navigate("/auth/sign-in");
     }, [response]);
     return (
-        <Box
-            sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-            }}
-        >
-            {response?.success ? <Box sx={{ height: "80vh" }}></Box> : <NotFound />}
+        <Box className="flex items-center justify-center">
+            {response?.success ? <Box className="h-screen"></Box> : <NotFound />}
             <Loading open={isLoading} />
         </Box>
     );

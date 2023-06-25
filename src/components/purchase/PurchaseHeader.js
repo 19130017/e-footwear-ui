@@ -1,17 +1,12 @@
 import { Box, Grid } from "@mui/material";
-import { Link } from "react-router-dom";
-import style from "./Purchase.module.scss";
-import classNames from "classnames/bind";
 import TruckIcon from "@mui/icons-material/LocalShippingOutlined";
-
-const cx = classNames.bind(style);
 
 function PurchaseHeader(props) {
     return (
-        <Grid container className={cx("delivery-wrapper")}>
+        <Grid container className="border-b border-solid border-gray pb-4">
             <Grid item>
-                <Box className={cx("delivery-status")}>
-                    <TruckIcon className={cx("delivery-icon")} />
+                <Box className="text-2xl no-underline flex items-center text-success">
+                    <TruckIcon className="w-8 h-8 mr-4" />
                     {props.data}
                 </Box>
             </Grid>

@@ -1,5 +1,5 @@
-import { Box, IconButton, InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+
 import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
 import SettingsVoiceIcon from '@mui/icons-material/SettingsVoice';
 import useSpeechToText from 'react-hook-speech-to-text';
@@ -7,9 +7,10 @@ import style from "./Search.module.scss";
 import classnames from "classnames/bind";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Box, IconButton, InputBase } from "@mui/material";
 
 const cx = classnames.bind(style);
-const Search = () => {
+function Search({ parentCallback }) {
     const navigate = useNavigate();
     const [query, setQuery] = useState("");
     var timer;
@@ -37,6 +38,7 @@ const Search = () => {
         e.preventDefault();
         navigate({ pathname: "/search", search: `?query=${query}` });
         setQuery("");
+        parentCallback && parentCallback();
     };
 
     const handleRequestSearchByVoice = async () => {
@@ -60,7 +62,6 @@ const Search = () => {
         timer = setTimeout(() => {
             if (interimResult) {
                 stopSpeechToText();
-                // resetTranscript();
                 handleRequestSearchByVoice();
             }
 
@@ -74,13 +75,7 @@ const Search = () => {
     return (
         <Box
             component={"form"}
-            sx={{
-                display: "flex",
-                backgroundColor: "#efefef",
-                borderRadius: "5px",
-                width: "50%",
-            }}
-            className={cx("icon-wrapper")}
+            className={"w-full flex bg-[#efefef] md:rounded-[5px] md:mx-4"}
             onSubmit={(e) => handleSubmit(e)}
         >
             {
@@ -103,25 +98,19 @@ const Search = () => {
                 </IconButton>
             }
             <InputBase
-                sx={{
-                    ml: 1,
-                    flex: 1,
-                    fontSize: "16px",
-                    padding: "5px 0 5px 8px",
-                }}
                 value={query}
                 placeholder="Bạn đang tìm gì ?"
                 type="text"
+                classes={{ root: "flex-1 text-xl md:text-[16px] px-4" }}
                 name="query"
                 onChange={(e) => handleChange(e)}
             />
             <IconButton
                 aria-label="search"
-                className={cx("icon-btn")}
-                sx={{ width: "20%" }}
+                className={"flex-none right-0 px-4 rounded-none focus:rounded-none"}
                 type="submit"
             >
-                <SearchIcon className={cx("icon")} />
+                <SearchIcon className="w-[20px] h-[20px] md:w-[30px] md:h-[30px] text-[#252a2b]" />
             </IconButton>
         </Box>
     );

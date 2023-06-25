@@ -1,14 +1,9 @@
-import { useCallback, useEffect, useState } from "react";
-import { LoginSocialFacebook, LoginSocialGoogle } from "reactjs-social-login";
+import { useEffect, useState } from "react";
 import { FacebookLoginButton } from "react-social-login-buttons";
+import { LoginSocialFacebook } from "reactjs-social-login";
 
-import classNames from "classnames/bind";
-import style from "./SocialLogin.module.scss";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fetchLoginFB } from "~/redux/auth/authSlice";
-import { Box } from "@mui/material";
-const cx = classNames.bind(style);
 
 function FacebookLogin() {
     const [profile, setProfile] = useState();
@@ -43,7 +38,10 @@ function FacebookLogin() {
             onResolve={onResolve}
             onReject={onReject}
         >
-            <FacebookLoginButton className={cx("facebook-btn")} activeStyle={false}>
+            <FacebookLoginButton
+                className="rounded-2xl flex justify-center items-center text-2xl "
+                activeStyle={false}
+            >
                 <span>Đăng nhập với Facebook</span>
             </FacebookLoginButton>
         </LoginSocialFacebook>

@@ -1,17 +1,14 @@
-import * as React from "react";
-import PropTypes from "prop-types";
-import SelectUnstyled, {
-  selectUnstyledClasses,
-} from "@mui/base/SelectUnstyled";
+import { PopperUnstyled } from "@mui/base";
 import OptionUnstyled, {
   optionUnstyledClasses,
 } from "@mui/base/OptionUnstyled";
-import { Box, fontSize, styled } from "@mui/system";
-import { PopperUnstyled } from "@mui/base";
-import classNames from "classnames/bind";
-import style from "./FilterProduct.module.scss";
-import { label } from "~/service/fakeData";
-const cx = classNames.bind(style);
+import SelectUnstyled, {
+  selectUnstyledClasses,
+} from "@mui/base/SelectUnstyled";
+import { styled } from "@mui/system";
+import PropTypes from "prop-types";
+import * as React from "react";
+
 
 const blue = {
   100: "#DAECFF",

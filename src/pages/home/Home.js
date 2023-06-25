@@ -1,20 +1,16 @@
 import { Box, Grid } from "@mui/material";
-import React, { useEffect } from "react";
-import classNames from "classnames/bind";
-import style from "./Home.module.scss";
-// components
-import Banner from "~/components/banner";
-import { TabHome } from "~/components/tab";
-import Collection from "~/components/collection";
+import { useEffect } from "react";
 import Ads from "~/components/ads";
-import HomeMarquee from "~/components/marquee";
+import Banner from "~/components/banner";
+import Collection from "~/components/collection";
 import FooterGallery from "~/components/footer-gallery";
+import HomeMarquee from "~/components/marquee";
+import { TabHome } from "~/components/tab";
 
 import { useDispatch, useSelector } from "react-redux";
-import { fetchGetAds, fetchGetBanners, fetchGetCollections } from "~/redux/gallery/gallerySlice";
 import { SlideShow } from "~/components/swiper";
 import AfterSale from "~/components/swiper/AfterSale";
-const cx = classNames.bind(style);
+import { fetchGetAds, fetchGetBanners, fetchGetCollections } from "~/redux/gallery/gallerySlice";
 
 function Home() {
     const ads = useSelector((state) => state.galleryReducer.ads);
@@ -27,23 +23,17 @@ function Home() {
         dispatch(fetchGetCollections());
     }, []);
     return (
-        <Box className={cx("main")}>
+        <>
             {/* carousel bitis */}
-            <Box className={cx("slide-show")}>
-                <SlideShow />
-            </Box>
+            <SlideShow />
             {/* after sale  */}
-            <Box className="container">
-                <Box component={"section"} className={cx("section-after-sale")}>
-                    <AfterSale />
-                </Box>
-            </Box>
+            <AfterSale />
             {/* banner */}
-            <Box className="container">
-                <Box component={"section"} className={cx("section-banner")}>
+            <Box component={"section"} className={"section hidden sm:flex"}>
+                <Box className={"container mx-auto"}>
                     <Grid container spacing={1}>
                         {banner?.map((item, index) => (
-                            <Grid item xs={4} key={index}>
+                            <Grid item sm={4} key={index}>
                                 <Banner
                                     image={item.imageURL}
                                     title={item.typeGallery.typeName}
@@ -64,7 +54,7 @@ function Home() {
             <HomeMarquee />
 
             <FooterGallery />
-        </Box>
+        </>
     );
 }
 export default Home;

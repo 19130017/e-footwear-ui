@@ -1,13 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { galleryApi } from "~/apis/galleryApi";
 import {
+    GET_ADS,
+    GET_BANNER,
     GET_CAROUSEL,
     GET_COLLECTION,
-    GET_ADS,
-    GET_FOOTER,
-    GET_BANNER,
-    GET_CATEGORY,
+    GET_FOOTER
 } from "./galleryType";
-import { galleryApi } from "~/apis/galleryApi";
 
 const initialState = {
     carousel: [],
@@ -159,9 +158,7 @@ const gallerySlice = createSlice({
 const galleryReducer = gallerySlice.reducer;
 export default galleryReducer;
 export {
-    fetchGetCarousels,
     fetchGetAds,
-    fetchGetBanners,
-    fetchGetCollections,
-    fetchGetFooter,
+    fetchGetBanners, fetchGetCarousels, fetchGetCollections,
+    fetchGetFooter
 };

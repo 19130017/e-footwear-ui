@@ -11,7 +11,6 @@ import {
     ResetPassword,
 } from "~/pages/auth";
 import Home from "~/pages/home";
-import Contact from "~/pages/contact";
 import About from "~/pages/about";
 import Account from "~/pages/account";
 import Cart from "~/pages/cart";
@@ -29,7 +28,8 @@ import Search from "./pages/search/Search";
 import Collection from "./pages/collection";
 import { useSelector } from "react-redux";
 function App() {
-    const { isLogin } = useSelector((state) => state.authReducer);
+    const { isLogin } = useSelector((state) => state.authReducer);   
+
     return (
         <div className="App">
             <Routes>
@@ -41,7 +41,6 @@ function App() {
                     }
                 >
                     <Route path="/" element={<Home />} />
-                    <Route path="/contact" element={<Contact />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/collections/:slug" element={<Collection />} />

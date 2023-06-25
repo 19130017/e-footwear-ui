@@ -25,12 +25,7 @@
 
 .dropdown {
     padding: 1rem 2rem;
-    .cart-empty {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100px;
-    }
+   
     .content {
         .wrapper {
             padding: 1.5rem 0;
@@ -88,13 +83,7 @@
             text-decoration: none;
         }
     }
-    .title {
-        text-align: center;
-        font-size: 1.4rem;
-        text-transform: uppercase;
-        padding-bottom: 0.5rem;
-        border-bottom: 1px solid #ccc;
-    }
+
     .content {
         overflow-y: scroll;
         max-height: 250px;

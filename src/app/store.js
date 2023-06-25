@@ -1,28 +1,21 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import {
-    persistStore,
     persistReducer,
-    FLUSH,
-    REHYDRATE,
-    PAUSE,
-    PERSIST,
-    PURGE,
-    REGISTER,
+    persistStore
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 // reducers
+import addressReducer from "~/redux/address/addressSlice";
 import authReducer from "~/redux/auth/authSlice";
-import productReducer from "~/redux/product/productSlice";
+import cartReducer from "~/redux/cart/cartSlice";
 import categoryReducer from "~/redux/category/categorySlice";
+import couponReducer from "~/redux/coupon/couponSlice";
+import customerReducer from "~/redux/customer/customerSlice";
 import detailReducer from "~/redux/detail/detailSlice";
 import galleryReducer from "~/redux/gallery/gallerySlice";
-import customerReducer from "~/redux/customer/customerSlice";
-import cartReducer from "~/redux/cart/cartSlice";
-import addressReducer from "~/redux/address/addressSlice";
 import orderReducer from "~/redux/order/orderSlice";
-import couponReducer from "~/redux/coupon/couponSlice";
-import { AUTH_LOGOUT } from "~/redux/auth/authType";
+import productReducer from "~/redux/product/productSlice";
 const persistConfig = {
     key: "root",
     storage,
@@ -56,11 +49,11 @@ export const store = configureStore({
     reducer: persistedReducer,
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
-            serializableCheck: {
-                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-                ignoredActionPaths: ["payload"],
-            },
-            // serializableCheck: false,
+            // serializableCheck: {
+            //     ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+            //     ignoredActionPaths: ["payload"],
+            // },
+            serializableCheck: false,
         }),
 });
 
