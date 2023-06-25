@@ -43,7 +43,7 @@ function Search() {
             <Box className="container mx-auto my-[50px]">
                 <Grid container spacing={2}>
                     {products?.length === 0 ? (
-                        <Box>Không tìm thấy kết quả</Box>
+                        <Box className={"flex flex-1 justify-center items-center h-[65vh] text-[4rem] lg:text-[6rem]"}>Không tìm thấy kết quả</Box>
                     ) : (
                         products.map((item, index) => (
                             <Grid key={index} item md={3} sm={6}>
