@@ -43,7 +43,7 @@ function CardProduct({ data }) {
                     >
                         {data?.discountRate !== 0 && (
                             <>
-                                <Grid item className={cx("origin-price text-3xl hidden line-through sm:block")}>
+                                <Grid item className={cx("origin-price text-[#ccc] text-2xl hidden line-through sm:block")}>
                                     {data?.originPrice.toLocaleString("it-IT", {
                                         style: "currency",
                                         currency: "VND",

@@ -1,5 +1,8 @@
 import CloseIcon from "@mui/icons-material/Close";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
 import MenuIcon from "@mui/icons-material/Menu";
+import PersonIcon from "@mui/icons-material/Person";
 import {
     Badge,
     Box,
@@ -8,21 +11,15 @@ import {
     Grid,
     IconButton,
     List,
-    ListItem,
-    ListItemButton,
-    ListItemText,
-    Toolbar,
+    ListItemButton
 } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import logo from "~/assets/images/logo.png";
-import Search from "../search/Search";
-import { useDispatch, useSelector } from "react-redux";
 import { fetchGetParentCategory } from "~/redux/category/categorySlice";
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
 import { DropdownAccount, DropdownCart } from "../dropdown";
-import PersonIcon from "@mui/icons-material/Person";
+import Search from "../search/Search";
 import "./Header.scss";
 
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBagOutlined";
@@ -79,7 +76,7 @@ function HeaderMobile({ isLogin, avatar, cart }) {
                         </Box>
                     </Box>
 
-                    <Box item className=" icon-wrapper relative ml-4">
+                    <Box  className=" icon-wrapper relative ml-4">
                         <IconButton
                             size="large"
                             aria-label="show 4 new mails"

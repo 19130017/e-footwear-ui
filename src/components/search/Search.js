@@ -1,38 +1,28 @@
 import SearchIcon from "@mui/icons-material/Search";
 
-import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
-import SettingsVoiceIcon from '@mui/icons-material/SettingsVoice';
-import useSpeechToText from 'react-hook-speech-to-text';
-import style from "./Search.module.scss";
-import classnames from "classnames/bind";
+import KeyboardVoiceIcon from "@mui/icons-material/KeyboardVoice";
+import SettingsVoiceIcon from "@mui/icons-material/SettingsVoice";
+import useSpeechToText from "react-hook-speech-to-text";
+
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Box, IconButton, InputBase } from "@mui/material";
 
-const cx = classnames.bind(style);
 function Search({ parentCallback }) {
     const navigate = useNavigate();
     const [query, setQuery] = useState("");
-    var timer;
-    const {
-        error,
-        interimResult,
-        isRecording,
-        results,
-        startSpeechToText,
-        stopSpeechToText,
-    } = useSpeechToText({
-        speechRecognitionProperties: {
-            lang: 'vi-VN',
-            interimResults: true // Allows for displaying real-time speech results
-        },
-        continuous: true,
-        googleApiKey: 'AIzaSyB0Gsdi8t8o0ljBfBKAIGTqClcnfLyj3Dk',
-        useLegacyResults: false,
-        crossBrowser: true,
-    });
 
-
+    const { error, interimResult, isRecording, results, startSpeechToText, stopSpeechToText } =
+        useSpeechToText({
+            speechRecognitionProperties: {
+                lang: "vi-VN",
+                interimResults: true, // Allows for displaying real-time speech results
+            },
+            continuous: true,
+            googleApiKey: "AIzaSyB0Gsdi8t8o0ljBfBKAIGTqClcnfLyj3Dk",
+            useLegacyResults: false,
+            crossBrowser: true,
+        });
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -44,7 +34,8 @@ function Search({ parentCallback }) {
     const handleRequestSearchByVoice = async () => {
         navigate({ pathname: "/search", search: `?query=${query}` });
         setQuery("");
-    }
+        parentCallback && parentCallback();
+    };
 
     const handleChange = (e) => {
         const value = e.target.value;
@@ -52,6 +43,7 @@ function Search({ parentCallback }) {
     };
 
     useEffect(() => {
+        var timer;
         if (interimResult && isRecording) {
             setQuery(interimResult);
         }
@@ -64,37 +56,31 @@ function Search({ parentCallback }) {
                 stopSpeechToText();
                 handleRequestSearchByVoice();
             }
-
         }, 2000);
 
-
         return () => clearTimeout(timer);
-
     }, [query, interimResult, isRecording]);
 
     return (
         <Box
             component={"form"}
-            className={"w-full flex bg-[#efefef] md:rounded-[5px] md:mx-4"}
+            className={"w-full flex bg-[#efefef] md:rounded-[5px]  md:mx-4"}
             onSubmit={(e) => handleSubmit(e)}
         >
             {
                 <IconButton
                     aria-label="search"
-                    className={cx("icon-btn")}
-                    sx={{ width: "20%", padding: "0 10px" }}
+                    className="w-[50px] h-[50px] rounded-none"
                     onClick={!isRecording ? startSpeechToText : stopSpeechToText}
                 >
-                    {!isRecording ? <KeyboardVoiceIcon
-                        color="error"
-                        sx={{ padding: "0 2px" }}
-                        className={cx("icon")} />
-                        : <SettingsVoiceIcon
-                            color="error"
-                            sx={{ padding: "0 2px" }}
-                            className={cx("icon")} />
-                    }
-
+                    {!isRecording ? (
+                        <KeyboardVoiceIcon
+                            // color="error"
+                            className="px-1 w-[20px] h-[20px]"
+                        />
+                    ) : (
+                        <SettingsVoiceIcon color="error" className="px-1 w-[20px] h-[20px]" />
+                    )}
                 </IconButton>
             }
             <InputBase
