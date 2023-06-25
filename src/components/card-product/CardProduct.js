@@ -11,7 +11,7 @@ function CardProduct({ data }) {
                 to={`/detail/${data?.slug}/${data?.color.id}`}
                 className={cx("card-area")}
             >
-                {data?.discountRate !== 0 && <Box className={cx("sale-text")}>Sale</Box>}
+                {data?.discountRate !== 0 && <Box className={cx("sale-text")}>Sale {data?.discountRate}%</Box>}
 
                 <Box className={cx("main-image")}>
                     <CardMedia
@@ -34,7 +34,7 @@ function CardProduct({ data }) {
                         <Typography className={cx("color")}>+ {data?.colorCounter} màu</Typography>
                     </Box>
                     <Box className={cx("title")}>{data?.name}</Box>
-                    <Grid container spacing={1} className={cx("price")}>
+                    <Grid container spacing={1} className={cx("price", "justify-evenly items-center")}>
                         <Grid item className={cx("discount-price")}>
                             {data?.discountPrice.toLocaleString("it-IT", {
                                 style: "currency",
@@ -49,9 +49,9 @@ function CardProduct({ data }) {
                                         currency: "VND",
                                     })}
                                 </Grid>
-                                <Grid item xs={2} className={cx("discount")}>
-                                    -{data?.discountRate}%
-                                </Grid>
+                                {/*<Grid item xs={2} className={cx("discount")}>*/}
+                                {/*    -{data?.discountRate}%*/}
+                                {/*</Grid>*/}
                             </>
                         )}
                     </Grid>

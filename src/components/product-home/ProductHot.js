@@ -1,4 +1,3 @@
-import { Box } from "@mui/material";
 import { ProductSlide } from "../swiper";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -11,6 +10,6 @@ function ProductHot() {
     useEffect(() => {
         dispatch(fetchProductsHot());
     }, []);
-    return <Box className="container">{!isLoading && <ProductSlide data={products} />}</Box>;
+    return !isLoading && <ProductSlide data={products} />;
 }
 export default ProductHot;

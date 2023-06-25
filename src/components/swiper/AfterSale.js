@@ -12,29 +12,33 @@ const cx = classnames.bind(style);
 
 function AfterSale() {
     return (
-        <Swiper
-            autoplay={{
-                delay: 5000,
-                disableOnInteraction: false,
-            }}
-            modules={[Navigation, Autoplay]}
-            navigation={true}
-            spaceBetween={50}
-            slidesPerView={1}
-            loop={true}
-        >
-            {afterSaleData?.map((item, index) => (
-                <SwiperSlide key={index}>
-                    <Box key={index} className={cx("after-sale-content")}>
-                        <Typography variant="body1" className={cx("after-sale-text")}>
-                            <strong>{item.title} </strong>
-                            {item.text}
-                        </Typography>
-                    </Box>
-                </SwiperSlide>
-            ))}
-            {/* <div className="swiper-pagination"></div> */}
-        </Swiper>
+        <Box component={"section"} className={"section py-8"}>
+            <Box className={"container mx-auto"}>
+                <Swiper
+                    autoplay={{
+                        delay: 5000,
+                        disableOnInteraction: false,
+                    }}
+                    modules={[Navigation, Autoplay]}
+                    navigation={true}
+                    spaceBetween={50}
+                    slidesPerView={1}
+                    loop={true}
+                >
+                    {afterSaleData?.map((item, index) => (
+                        <SwiperSlide key={index}>
+                            <Box key={index} className={cx("after-sale-content")}>
+                                <Typography variant="body1" className={cx("after-sale-text")}>
+                                    <strong>{item.title} </strong>
+                                    {item.text}
+                                </Typography>
+                            </Box>
+                        </SwiperSlide>
+                    ))}
+                    {/* <div className="swiper-pagination"></div> */}
+                </Swiper>
+            </Box>
+        </Box>
     );
 }
 

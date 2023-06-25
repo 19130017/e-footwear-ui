@@ -16,7 +16,7 @@ function Category() {
     }, []);
 
     return (
-        <ul className={cx("menu")}>
+        <ul className={cx("menu", "flex justify-around w-full")}>
             {categories &&
                 categories.map((item, index) => (
                     <li key={index} className={cx("link")}>
