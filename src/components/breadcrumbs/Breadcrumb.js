@@ -1,6 +1,6 @@
 import { Box, Breadcrumbs } from "@mui/material";
-import { Link } from "react-router-dom";
 import classnames from "classnames/bind";
+import { Link } from "react-router-dom";
 import style from "./Breadcrumb.module.scss";
 const cx = classnames.bind(style);
 

@@ -1,11 +1,12 @@
 import { Avatar, Box, Grid, Paper, Typography } from "@mui/material";
-import { Link, useParams } from "react-router-dom";
-import "./OrderDetail.scss";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
+import { fetchGetProfile } from "~/redux/customer/customerSlice";
 import { fetchGetOrder } from "~/redux/order/orderSlice";
 import Loading from "../loading/Loading";
-import { fetchGetProfile } from "~/redux/customer/customerSlice";
+import "./OrderDetail.scss";
+import { OrderProduct } from "../order-product";
 function OrderDetail() {
     const params = useParams();
     const { order, isLoading } = useSelector((state) => state.orderReducer);
@@ -75,77 +76,7 @@ function OrderDetail() {
                     Chi tiết đơn hàng
                 </Typography>
                 {order &&
-                    order.items.map((item, index) => (
-                        <Grid
-                            container
-                            spacing={2}
-                            className="my-4 border-t-2  border-solid border-gray w-full ml-0 items-center"
-                            key={index}
-                        >
-                            <Grid item className="lg:mr-4">
-                                <Avatar
-                                    variant="rounded"
-                                    src={item.detail.product.images[0].imageURL}
-                                    className="h-32 w-32 border border-solid border-gray"
-                                />
-                            </Grid>
-                            <Grid item xs={8} md={8}>
-                                <Grid container className="flex-col">
-                                    <Grid item xs={12} className="flex items-center">
-                                        <Grid container className="flex-col">
-                                            <Grid className="flex-col flex lg:w-[60%] text-slip">
-                                                <Grid item xs={12}>
-                                                    <Typography
-                                                        variant="body1"
-                                                        className="text-2xl text-ellipsis"
-                                                    >
-                                                        {item.detail.product.name}
-                                                    </Typography>
-                                                </Grid>
-                                                <Grid item>
-                                                    <Typography
-                                                        variant="body1"
-                                                        className="text-2xl text-light-black leading-10 w-full"
-                                                    >
-                                                        Loại: {item.detail.product.category.name},
-                                                    </Typography>
-                                                    <Typography
-                                                        variant="body1"
-                                                        className="text-2xl text-light-black leading-10 w-full"
-                                                    >
-                                                        Kích cỡ: {item.detail.size.value},
-                                                    </Typography>
-                                                    <Typography
-                                                        variant="body1"
-                                                        className="text-2xl text-light-black leading-10 w-full"
-                                                    >
-                                                        Màu: {item.detail.product.color.name}
-                                                    </Typography>
-                                                </Grid>
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <Typography variant="body1" className="text-2xl">
-                                                    Số lượng: {item.quantity}
-                                                </Typography>
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-
-                                    <Grid item xs={12} className="flex justify-end">
-                                        <Typography
-                                            variant="body1"
-                                            className="text-2xl text-danger "
-                                        >
-                                            {item.price.toLocaleString("it-IT", {
-                                                style: "currency",
-                                                currency: "VND",
-                                            })}
-                                        </Typography>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                    ))}
+                    order.items.map((item, index) => <OrderProduct key={index} item={item} />)}
             </Box>
 
             <Grid

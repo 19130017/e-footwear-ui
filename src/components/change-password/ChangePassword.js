@@ -90,11 +90,17 @@ function ChangePassword() {
                 title="Đổi mật khẩu"
                 text="Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác"
             />
-            <Grid container className="pt-10 flex-col">
-                <Grid item xs={12} md={9} lg={9} className="border-r border-solid border-secondary">
+            <Grid container className="pt-10 flex-col lg:flex-row">
+                <Grid
+                    item
+                    xs={12}
+                    md={12}
+                    lg={9}
+                    className="lg:border-r lg:border-solid lg:border-gray"
+                >
                     <Form onSubmit={handleSubmit}>
                         <Grid container spacing={2} className="pt-12 items-center">
-                            <Grid item xs={12} md={3} lg={3}>
+                            <Grid item xs={12} md={4} lg={3}>
                                 <Typography
                                     variant="body2"
                                     className="text-2xl lg:text-end text-light-black"
@@ -117,7 +123,7 @@ function ChangePassword() {
                             </Grid>
                         </Grid>
                         <Grid container spacing={2} className="pt-12 items-center">
-                            <Grid item xs={12} md={3} lg={3}>
+                            <Grid item xs={12} md={4} lg={3}>
                                 <Typography
                                     variant="body2"
                                     className="text-2xl lg:text-end normal-case text-light-black"
@@ -141,7 +147,7 @@ function ChangePassword() {
                             </Grid>
                         </Grid>
                         <Grid container spacing={2} className="pt-12 items-center">
-                            <Grid item xs={12} md={3} lg={3}>
+                            <Grid item xs={12} md={4} lg={3}>
                                 <Typography
                                     variant="body2"
                                     className="text-2xl lg:text-end normal-case text-light-black"
@@ -175,7 +181,7 @@ function ChangePassword() {
                         </Grid>
                     </Form>
                 </Grid>
-                <Grid item xs={12} md={3} lg={3} className="mt-8">
+                <Grid item xs={12} md={12} lg={3} className="mt-8">
                     <Link
                         to="/auth/forgot"
                         className="no-underline text-link inline-block ml-8 text-2xl"

@@ -22,38 +22,11 @@ input[name="address"]:checked ~ label > .card {
         height: 1.8rem;
     }
 }
-
 .card {
-    border: 1px solid #e0e0e0;
-    background-color: rgb(255, 255, 255);
-    padding: 1rem 1.7rem;
-    overflow: hidden;
-    width: 100%;
-    border-radius: 0.4rem;
-    height: 10rem;
-    cursor: pointer;
-    .address-body {
-        .phone {
-            font-size: 1.3rem;
-        }
-        .address {
-            font-size: 1.3rem;
-            -webkit-line-clamp: 2;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-        }
-    }
     .pseudo {
         display: none;
     }
     &:hover {
         background: rgb(243, 243, 243);
-    }
-    .subtitle {
-        font-size: 1.3rem;
-        font-weight: bold;
-        line-height: 2.4rem;
     }
 }

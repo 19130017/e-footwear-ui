@@ -1,16 +1,14 @@
 import { Grid } from "@mui/material";
 import { Box } from "@mui/system";
 import CheckIcon from "@mui/icons-material/Check";
-import classnames from "classnames/bind";
-import style from "./Address.module.scss";
-const cx = classnames.bind(style);
+import "./Address.scss";
 
 function Address(props) {
     const { data, parentCallback } = props;
     return (
-        <Grid container spacing={2} sx={{ width: "100%" }}>
+        <Grid container className="flex-col">
             {data.map((item, index) => (
-                <Grid item xs={6} key={index}>
+                <Grid item xs={12} key={index} className="mb-4">
                     <Box
                         component={"input"}
                         type="radio"
@@ -20,17 +18,17 @@ function Address(props) {
                         onChange={() => parentCallback(item)}
                     />
                     <Box component={"label"} htmlFor={`address-${item.id}`}>
-                        <Box className={cx("card")}>
-                            <Box className={cx("subtitle")}>{item.fullName}</Box>
-                            <Box className={cx("address-body")}>
-                                <Box className={cx("phone")}>{item.phone}</Box>
-                                <Box className={cx("address")}>
+                        <Box className="card border border-solid border-[#e0e0e0] bg-white py-4 px-6 overflow-hidden rounded-lg cursor-pointer">
+                            <Box className="text-2xl">{item.fullName}</Box>
+                            <Box>
+                                <Box className="text-xl">{item.phone}</Box>
+                                <Box className="text-xl text-slip">
                                     {item.address},{item.addresses.wardName},
                                     {item.addresses.districtName},{item.addresses.provinceName}
                                 </Box>
                             </Box>
-                            <Box className={cx("pseudo")}>
-                                <CheckIcon className={cx("icon")} />
+                            <Box className="pseudo">
+                                <CheckIcon className="icon" />
                             </Box>
                         </Box>
                     </Box>

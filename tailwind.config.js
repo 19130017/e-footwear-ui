@@ -16,7 +16,6 @@ module.exports = {
             "green-light": "#30a2c4",
             "gray-shadow": "#ccc",
             "order-notify":"#e4e7e9",
-
         },
         borderColor: {
             gray: "#e0e0e0",
@@ -37,7 +36,6 @@ module.exports = {
             price:"#82869e",
             "price-sale":"#ff0000",
             "vat-color": "#82869e"
-
         },
         container: {
             padding: {
@@ -57,8 +55,8 @@ module.exports = {
                 // accent: '#B809C3',
             },
             backgroundImage: {
-                'coming-soon': 'url(./assets/images/bg_comingsoon.jpg)',
-                'about-slogan': 'url(./assets/images/about.png)',
+                "coming-soon": "url(./assets/images/bg_comingsoon.jpg)",
+                "about-slogan": "url(./assets/images/about.png)",
             },
         },
     },
