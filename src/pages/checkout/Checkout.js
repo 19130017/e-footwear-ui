@@ -41,7 +41,9 @@ function Checkout() {
         return accumulator + currentValue.price * currentValue.quantity;
     }, 0);
     const cost = total + total * 0.1 + (total > 700000 ? 0 : 11000) - (coupon ? coupon.price : 0);
-
+    const sendRedirect = async (url) => {
+        window.location.href = url;
+    }
     const handleClick = async () => {
         if (addressDelivery) {
             const temp = cart.map((item) => ({
@@ -69,26 +71,26 @@ function Checkout() {
                     const responseCOD = await dispatch(fetchCreateOrder(common));
                     if (responseCOD.payload.success) {
                         navigate("/");
-                        await dispatch(clearCart());
                     }
                     break;
                 case "MOMO":
                     const responseMOMO = await dispatch(fetchCreateOrderMomo(common));
                     if (responseMOMO.payload.data?.errorCode === 0) {
-                        window.location.href = responseMOMO.payload.data?.payUrl;
-                        await dispatch(clearCart());
+                        await sendRedirect(responseMOMO.payload.data?.payUrl);
                     }
                     break;
                 case "VNPay":
                     const responseVNPay = await dispatch(fetchCreateOrderVN_Pay(common));
                     if (responseVNPay.payload.success) {
-                        window.location.href = responseVNPay.payload.data;
-                        await dispatch(clearCart());
+                        await sendRedirect(responseVNPay.payload?.data);
                     }
                     break;
                 default:
                     alert("Vui lòng chọn phương thức thanh toán");
             }
+            setTimeout(() =>
+                dispatch(clearCart()), 5000
+            )
         } else {
             alert("Chọn địa chỉ giao hàng");
         }

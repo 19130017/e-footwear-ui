@@ -31,7 +31,7 @@ const fetchRegister = createAsyncThunk(AUTH_REGISTER, async (params, thunkApi) =
             ? thunkApi.fulfillWithValue(response)
             : thunkApi.rejectWithValue(response);
     } catch (error) {
-        return thunkApi.rejectWithValue(error.response.data);
+        return thunkApi.rejectWithValue(error?.response?.data || error);
     }
 });
 
@@ -42,7 +42,7 @@ const fetchVerifyAccount = createAsyncThunk(AUTH_VERIFY_ACCOUNT, async (params, 
             ? thunkApi.fulfillWithValue(response)
             : thunkApi.rejectWithValue(response);
     } catch (error) {
-        return thunkApi.rejectWithValue(error.response.data);
+        return thunkApi.rejectWithValue(error?.response?.data || error);
     }
 });
 
@@ -53,7 +53,7 @@ const fetchLogin = createAsyncThunk(AUTH_LOGIN, async (params, thunkApi) => {
             ? thunkApi.fulfillWithValue(response)
             : thunkApi.rejectWithValue(response);
     } catch (error) {
-        return thunkApi.rejectWithValue(error.response.data);
+        return thunkApi.rejectWithValue(error?.response?.data || error);
     }
 });
 
@@ -64,7 +64,7 @@ const fetchLoginGG = createAsyncThunk(AUTH_LOGIN_GG, async (params, thunkApi) =>
             ? thunkApi.fulfillWithValue(response)
             : thunkApi.rejectWithValue(response);
     } catch (error) {
-        return thunkApi.rejectWithValue(error.response.data);
+        return thunkApi.rejectWithValue(error?.response?.data || error);
     }
 });
 const fetchLoginFB = createAsyncThunk(AUTH_LOGIN_FB, async (params, thunkApi) => {
@@ -74,7 +74,7 @@ const fetchLoginFB = createAsyncThunk(AUTH_LOGIN_FB, async (params, thunkApi) =>
             ? thunkApi.fulfillWithValue(response)
             : thunkApi.rejectWithValue(response);
     } catch (error) {
-        return thunkApi.rejectWithValue(error.response.data);
+        return thunkApi.rejectWithValue(error?.response?.data || error);
     }
 });
 const fetchLogout = createAsyncThunk(AUTH_LOGOUT, async (params, thunkApi) => {
@@ -88,7 +88,7 @@ const fetchChangePassword = createAsyncThunk(AUTH_CHANGE_PASSWORD, async (params
             ? thunkApi.fulfillWithValue(response)
             : thunkApi.rejectWithValue(response);
     } catch (error) {
-        return thunkApi.rejectWithValue(error.response.data);
+        return thunkApi.rejectWithValue(error?.response?.data || error);
     }
 });
 
@@ -99,7 +99,7 @@ const fetchForgotPassword = createAsyncThunk(AUTH_FORGOT_PASSWORD, async (params
             ? thunkApi.fulfillWithValue(response)
             : thunkApi.rejectWithValue(response);
     } catch (error) {
-        return thunkApi.rejectWithValue(error.response.data);
+        return thunkApi.rejectWithValue(error?.response?.data || error);
     }
 });
 
@@ -110,7 +110,7 @@ const fetchResetPassword = createAsyncThunk(AUTH_RESET_PASSWORD, async (params, 
             ? thunkApi.fulfillWithValue(response)
             : thunkApi.rejectWithValue(response);
     } catch (error) {
-        return thunkApi.rejectWithValue(error.response.data);
+        return thunkApi.rejectWithValue(error?.response?.data || error);
     }
 });
 
@@ -176,7 +176,7 @@ const authSlice = createSlice({
                 MySwal.fire({
                     icon: "error",
                     title: "Oops...",
-                    text: action.payload.message,
+                    text: action.payload?.message,
                 });
                 return state;
             })
@@ -202,8 +202,9 @@ const authSlice = createSlice({
                 MySwal.fire({
                     icon: "error",
                     title: "Oops...",
-                    text: action.payload.message,
+                    text: action.payload?.message,
                 });
+                console.log(action);
                 return state;
             })
             .addCase(fetchLoginGG.fulfilled, (state, action) => {
@@ -229,7 +230,7 @@ const authSlice = createSlice({
                 MySwal.fire({
                     icon: "error",
                     title: "Oops...",
-                    text: action.payload.message,
+                    text: action.payload?.message,
                 });
                 return state;
             })

@@ -9,7 +9,7 @@ export const authApi = {
                 password: params.password,
             })
             .then((response) => response)
-            .catch((error) => error.response.data);
+            .catch((error) => error?.response?.data || error);
     },
 
     async requestVerifyAccount(params) {
@@ -17,7 +17,7 @@ export const authApi = {
         return await axiosClient
             .get(`/accounts/verify/${token}`)
             .then((response) => response)
-            .catch((error) => error.response.data);
+            .catch((error) => error?.response?.data || error);
     },
 
     async requestLogin(params) {
@@ -27,19 +27,19 @@ export const authApi = {
                 password: params.password,
             })
             .then((response) => response)
-            .catch((error) => error.response.data);
+            .catch((error) => error?.response?.data || error);
     },
     async requestLoginGG(params) {
         return await axiosClient
             .post("/accounts/login/google", params)
             .then((response) => response)
-            .catch((error) => error.response.data);
+            .catch((error) => error?.response?.data || error);
     },
     async requestLoginFB(params) {
         return await axiosClient
             .post("/accounts/login/facebook", params)
             .then((response) => response)
-            .catch((error) => error.response.data);
+            .catch((error) => error?.response?.data || error);
     },
 
     async requestGetProfile(params) {
@@ -50,7 +50,7 @@ export const authApi = {
                 },
             })
             .then((response) => response)
-            .catch((error) => error.response.data);
+            .catch((error) => error?.response?.data || error);
     },
     async requestUpdateProfile(customerInfo, accessToken) {
         return await axiosClient
@@ -69,7 +69,7 @@ export const authApi = {
                 }
             )
             .then((response) => response)
-            .catch((error) => error.response.data);
+            .catch((error) => error?.response?.data || error);
     },
 
     async requestChangePassword(params) {
@@ -88,7 +88,7 @@ export const authApi = {
                 }
             )
             .then((response) => response)
-            .catch((error) => error.response.data);
+            .catch((error) => error?.response?.data || error);
     },
 
     async requestResetPassword(params) {
@@ -98,13 +98,13 @@ export const authApi = {
                 newPassword: params.newPassword,
             })
             .then((response) => response)
-            .catch((error) => error.response.data);
+            .catch((error) => error?.response?.data || error);
     },
     async requestForgotPassword(params) {
         return await axiosClient
             .post(`/accounts/forgot-password?email=${params.email}`)
             .then((response) => response)
-            .catch((error) => error.response.data);
+            .catch((error) => error?.response?.data || error);
     },
 
     async requestUploadAvatar(params, accessToken) {
