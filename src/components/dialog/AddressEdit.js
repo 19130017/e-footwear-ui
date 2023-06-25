@@ -1,9 +1,9 @@
-import style from "./Dialog.module.scss";
 import { Box, Button } from "@mui/material";
 import classnames from "classnames/bind";
 import { useState } from "react";
+import { fetchUpdateAddress } from "~/redux/address/addressSlice";
+import style from "./Dialog.module.scss";
 import DialogCustom from "./DialogCustom";
-import { fetchGetAddresses, fetchUpdateAddress } from "~/redux/address/addressSlice";
 const cx = classnames.bind(style);
 
 function AddressEdit({ data, accountId, accessToken, dispatch }) {

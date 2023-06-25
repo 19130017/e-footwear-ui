@@ -1,19 +1,14 @@
-import { useCallback, useEffect, useState } from "react";
-import { LoginSocialGoogle } from "reactjs-social-login";
-import { GoogleLoginButton } from "react-social-login-buttons";
-
-import classNames from "classnames/bind";
-import style from "./SocialLogin.module.scss";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { GoogleLoginButton } from "react-social-login-buttons";
+import { LoginSocialGoogle } from "reactjs-social-login";
 import { fetchLoginGG } from "~/redux/auth/authSlice";
-const cx = classNames.bind(style);
 
 function GoogleLogin() {
     const [provider, setProvider] = useState("");
     const [profile, setProfile] = useState();
-    const navigate = useNavigate();
     const dispatch = useDispatch();
+    
     const onResolve = ({ provider, data }) => {
         setProvider(provider);
         setProfile(data);
@@ -46,7 +41,10 @@ function GoogleLogin() {
             onResolve={onResolve}
             onReject={onReject}
         >
-            <GoogleLoginButton className={cx("google-btn")} activeStyle={false}>
+            <GoogleLoginButton
+                className="text-black rounded-2xl flex justify-center items-center text-2xl "
+                activeStyle={false}
+            >
                 <span>Đăng nhập với Google</span>
             </GoogleLoginButton>
         </LoginSocialGoogle>

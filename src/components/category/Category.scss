@@ -1,0 +1,62 @@
+.link {
+    .icon {
+        height: 2.4rem;
+        color: #252a2b;
+        width: 2.4rem;
+    }
+    &:hover > .submenu {
+        visibility: visible;
+        transition: linear 0.2s;
+        opacity: 1;
+    }
+    .submenu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 200px;
+        text-decoration: none;
+        list-style: none;
+        background-color: #fff;
+        z-index: 5;
+        opacity: 0;
+        visibility: hidden;
+        .submenu-item {
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #000;
+            position: relative;
+            font-size: 16px;
+            font-weight: 400;
+            border-bottom: 1px solid #f3f1f1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .icon-sub {
+                height: 2.4rem;
+                color: #252a2b;
+                width: 2.4rem;
+            }
+            &:hover {
+                background-color: #eff2f7;
+            }
+
+            &:hover > .submenu-level {
+                opacity: 1;
+                visibility: visible;
+                transition: linear 0.2s;
+            }
+            .submenu-level {
+                position: absolute;
+                top: 0;
+                left: 200px;
+                width: 200px;
+                text-decoration: none;
+                list-style: none;
+                background-color: #fff;
+                z-index: 5;
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+    }
+}

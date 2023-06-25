@@ -1,18 +1,14 @@
 import { Box, Grid, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
-import MoneyIcon from "@mui/icons-material/AttachMoney";
-import style from "./Purchase.module.scss";
-import classNames from "classnames/bind";
-const cx = classNames.bind(style);
+import "./Purchase.scss";
 
 function PurchaseFooter(props) {
     return (
-        <Box className={cx("total-wrapper")}>
-            <Grid container justifyContent="flex-end">
+        <Box className="pt-4">
+            <Grid container className="justify-end">
                 <Grid item>
-                    <Typography variant="body1" className={cx("cost-wrapper")}>
-                        <MoneyIcon /> Thành tiền:
-                        <span className={cx("cost")}>
+                    <Typography variant="body1" className="flex items-center">
+                        <span className="text-3xl">Thành tiền:</span>
+                        <span className="text-3xl font-bold ml-2 text-danger">
                             {props?.data.toLocaleString("it-IT", {
                                 style: "currency",
                                 currency: "VND",

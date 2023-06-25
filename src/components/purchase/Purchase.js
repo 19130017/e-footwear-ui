@@ -1,13 +1,11 @@
 import { Box, Paper } from "@mui/material";
-import style from "./Purchase.module.scss";
-import classNames from "classnames/bind";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { fetchGetOrders } from "~/redux/order/orderSlice";
-import PurchaseHeader from "./PurchaseHeader";
-import PurchaseContent from "./PurchaseContent";
+import { OrderProduct } from "../order-product";
 import PurchaseFooter from "./PurchaseFooter";
-const cx = classNames.bind(style);
+import PurchaseHeader from "./PurchaseHeader";
 
 function Purchase() {
     const { accountId, accessToken } = useSelector((state) => state.authReducer);
@@ -19,14 +17,24 @@ function Purchase() {
     }, [dispatch, accountId, accessToken]);
 
     return (
-        <Paper className={cx("purchase-section")}>
+        <Paper className="pb-12 rounded-2xl overflow-hidden">
             {orders &&
                 orders.map((order, index) => {
                     return (
-                        <Box key={index} className={cx("purchase-item")}>
+                        <Box
+                            key={index}
+                            className="m-[2.4rem] p-6 lg:w-[95%] bg-black/5 rounded-2xl"
+                        >
                             <PurchaseHeader data={order.orderStatus?.description} />
+                            
                             {order?.items.map((item, i) => (
-                                <PurchaseContent key={i} id={order.id} item={item} />
+                                <Link
+                                    key={i}
+                                    to={`/account/purchase/order/${order?.id}`}
+                                    className="no-underline relative"
+                                >
+                                    <OrderProduct item={item} />
+                                </Link>
                             ))}
 
                             <PurchaseFooter data={order.cost} />

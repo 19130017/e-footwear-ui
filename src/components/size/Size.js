@@ -1,4 +1,4 @@
-import { Box, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import classnames from "classnames/bind";
 import style from "./Size.module.scss";
 

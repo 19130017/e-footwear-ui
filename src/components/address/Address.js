@@ -1,13 +1,13 @@
 import { Box, Paper } from "@mui/material";
-import AccountHeader from "../header/AccountHeader";
 import classnames from "classnames/bind";
-import style from "./Address.module.scss";
-import { AddressAdd } from "../dialog";
-import AddressItem from "./AddressItem";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchGetAddresses } from "~/redux/address/addressSlice";
+import { AddressAdd } from "../dialog";
+import AccountHeader from "../header/AccountHeader";
 import Loading from "../loading/Loading";
+import style from "./Address.module.scss";
+import AddressItem from "./AddressItem";
 
 const cx = classnames.bind(style);
 

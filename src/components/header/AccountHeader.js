@@ -1,16 +1,12 @@
 import { Box, Typography } from "@mui/material";
-import classNames from "classnames/bind";
-import style from "./AccountHeader.module.scss";
-
-const cx = classNames.bind(style);
 
 function AccountHeader({ title, text }) {
     return (
-        <Box className={cx("header-wrapper")}>
-            <Typography variant="h5" className={cx("title")}>
+        <Box className="pb-4 border-b border-solid border-gray">
+            <Typography variant="h5" className="text-4xl text-black">
                 {title}
             </Typography>
-            <Typography variant="body2" className={cx("text")}>
+            <Typography variant="body2" className="text-2xl">
                 {text}
             </Typography>
         </Box>

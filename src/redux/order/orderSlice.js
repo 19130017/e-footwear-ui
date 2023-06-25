@@ -1,15 +1,14 @@
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { orderApi } from "~/apis/orderApi";
+import MySwal, { PopUpSuccess } from "~/utils/MySwal";
 import {
     CREATE_ORDER,
-    GET_ORDER_OF_CUSTOMER,
-    GET_ORDER,
     CREATE_ORDER_MOMO,
-    UPDATE_STATUS,
     CREATE_ORDER_VNPAY,
+    GET_ORDER,
+    GET_ORDER_OF_CUSTOMER,
+    UPDATE_STATUS,
 } from "./orderType";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import MySwal, { PopUpSuccess } from "~/utils/MySwal";
-import storage from "redux-persist/lib/storage";
 
 const initialState = {
     order: null,
@@ -205,10 +204,5 @@ const orderSlice = createSlice({
 const orderReducer = orderSlice.reducer;
 export default orderReducer;
 export {
-    fetchCreateOrder,
-    fetchGetOrders,
-    fetchGetOrder,
-    fetchCreateOrderMomo,
-    fetchUpdateStatus,
-    fetchCreateOrderVN_Pay,
+    fetchCreateOrder, fetchCreateOrderMomo, fetchCreateOrderVN_Pay, fetchGetOrder, fetchGetOrders, fetchUpdateStatus
 };

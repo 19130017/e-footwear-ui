@@ -1,27 +1,24 @@
-import { Grid, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import logo from "~/assets/images/logo.png";
 
-export function TitleFullWidth(props) {
-    const { cx, title } = props;
+function TitleFullWidth(props) {
+    const { title } = props;
     return (
-        <Typography variant="h3" className={cx("title")}>
-           {title}
+        <Typography variant="h3" className="text-5xl font-bold text-center mb-8">
+            {title}
         </Typography>
     );
 }
 
 function FullWidthHeader({ cx }) {
     return (
-        <Grid container>
-            <Grid item xs={1}></Grid>
-            <Grid item xs={1}>
-                <Link to="/" className={cx("link")}>
-                    <img src={logo} alt="" className={cx("logo")} />
-                </Link>
-            </Grid>
-        </Grid>
+        <Box className="container">
+            <Link to="/" className="block no-underline">
+                <img src={logo} alt="" className="w-60" />
+            </Link>
+        </Box>
     );
 }
 
-export default FullWidthHeader;
+export { FullWidthHeader, TitleFullWidth };

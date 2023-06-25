@@ -1,49 +1,26 @@
-.section-footer-gallery {
-    .gallery-list {
-        display: flex;
-        .gallery-item {
-            width: calc(100% / 8);
+.gallery-link {
+    &:hover::before {
+        content: "";
+        background: rgba(255, 255, 255, 0.5) none repeat scroll 0 0;
+        top: 50%;
+        bottom: 50%;
+    }
+    &:hover::after {
+        content: "";
+        background: rgba(255, 255, 255, 0.5) none repeat scroll 0 0;
+        right: 50%;
+        left: 50%;
+    }
 
-            .gallery-link {
-                text-decoration: none;
-                position: relative;
-                overflow: hidden;
-                display: block;
-                transition: all 0.5s;
-                background-color: transparent;
-                &:hover::before {
-                    content: "";
-                    background: rgba(255, 255, 255, 0.5) none repeat scroll 0 0;
-                    top: 50%;
-                    bottom: 50%;
-                }
-                &:hover::after {
-                    content: "";
-                    background: rgba(255, 255, 255, 0.5) none repeat scroll 0 0;
-                    right: 50%;
-                    left: 50%;
-                }
-
-                &::after,
-                &::before {
-                    content: "";
-                    position: absolute;
-                    top: 0;
-                    bottom: 0;
-                    right: 0;
-                    left: 0;
-                    transition: all 0.5s ease-in-out 0s;
-                    --webkit-transition: all 0.5s ease-in-out 0s;
-                }
-
-                &:hover .gallery-image {
-                    transform: scale(1.05);
-                }
-                .gallery-image {
-                    transition: all 0.5s ease-in-out 0s;
-                    width: 100%;
-                }
-            }
-        }
+    &::after,
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        transition: all 0.5s ease-in-out 0s;
+        --webkit-transition: all 0.5s ease-in-out 0s;
     }
 }

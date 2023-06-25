@@ -1,15 +1,11 @@
-import { Box, Grid, Link } from "@mui/material";
-import classNames from "classnames/bind";
+import { Box } from "@mui/material";
 import Footer from "~/components/footer/Footer";
-import FullWidthHeader from "~/components/header/FullWidthHeader";
-import style from "./FullWidthLayout.module.scss";
-const cx = classNames.bind(style);
+import { FullWidthHeader } from "~/components/header/FullWidthHeader";
 function FullWidthLayout({ children }) {
     return (
         <Box>
-            <FullWidthHeader cx={cx} />
-
-            <Box sx={{paddingBottom:"3rem"}}>{children}</Box>
+            <FullWidthHeader />
+            <Box className="pt-12">{children}</Box>
             <Footer />
         </Box>
     );

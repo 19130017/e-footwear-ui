@@ -1,16 +1,28 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import CardProduct from "../card-product/CardProduct";
-import "swiper/css";
-import style from "./Swiper.module.scss"
-import classnames from "classnames/bind";
-const cx = classnames.bind(style);
+import { useEffect, useState } from "react";
 
 function ProductSlide({ data }) {
+    const [currentWidth, setCurrentWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        setCurrentWidth(window.innerWidth);
+
+        window.addEventListener("resize", _ => {
+            setCurrentWidth(window.innerWidth);
+        });
+
+        return () => {
+            window.removeEventListener("resize", _ => {});
+        };
+    }, []);
+
+
     return (
         <Swiper
-            spaceBetween={10}
-            slidesPerView={4}
-            style={{paddingBottom:'1rem'}}
+            spaceBetween={20}
+            slidesPerView={currentWidth > 960 ? 4 : 2}
+            className={"pb-4"}
         >
             {data?.map((item, index) => {
                 return (

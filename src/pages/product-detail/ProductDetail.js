@@ -1,27 +1,21 @@
-import style from "./ProductDetail.module.scss";
-import { Box, Button, Grid, Input, TextField, Typography } from "@mui/material";
-import classNames from "classnames/bind";
-import Rating from "@mui/material/Rating";
-import Size from "~/components/size";
-import FooterGallery from "~/components/footer-gallery";
-import { ColorDetail } from "~/components/color";
-import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
-import Rate from "~/components/rate/Rate";
-import { useParams } from "react-router-dom";
+import RemoveIcon from "@mui/icons-material/Remove";
+import { Box, Button, Typography } from "@mui/material";
+import Rating from "@mui/material/Rating";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useDeferredValue, useEffect, useState } from "react";
-import { fetchProductBySlugColor, fetchProductsBySlug } from "~/redux/product/productSlice";
-import { fetchGetDetail } from "~/redux/detail/detailSlice";
+import { useParams } from "react-router-dom";
+import { ColorDetail } from "~/components/color";
+import FooterGallery from "~/components/footer-gallery";
+import Size from "~/components/size";
 import { DetailSlide } from "~/components/swiper";
-import { ProductCategory } from "~/components/product-home";
-import MySwal from "~/utils/MySwal";
 import { addToCart } from "~/redux/cart/cartSlice";
-
-const cx = classNames.bind(style);
+import { fetchGetDetail } from "~/redux/detail/detailSlice";
+import { fetchProductBySlugColor, fetchProductsBySlug } from "~/redux/product/productSlice";
+import MySwal from "~/utils/MySwal";
+import "./ProductDetail.scss";
 
 function ProductDetail() {
-    const [value, setValue] = useState(3);
     const params = useParams();
     const { products, product, isLoading } = useSelector((state) => state.productReducer);
     const detail = useSelector((state) => state.detailReducer.detail);
@@ -108,29 +102,29 @@ function ProductDetail() {
     return (
         <Box>
             <Box sx={{ marginBottom: "6rem" }}>
-                <Box className={cx("wrap-detail")}>
-                    <Box className={cx("wrap-img")}>
+                <Box className="wrap-detail flex-col lg:flex-row ">
+                    <Box className="wrap-img block sm:w-[75%]  sm:mx-auto lg:w-full lg:m-[50px]  lg:basis-[50%] lg:sticky">
                         {!isLoading && <DetailSlide data={product?.images} />}
                     </Box>
-                    <Box className={cx("wrap-content")}>
-                        <Typography className={cx("title")}>{product?.name}</Typography>
-                        <Box className={cx("price")}>
+                    <Box className="wrap-content">
+                        <Typography className="title">{product?.name}</Typography>
+                        <Box className="price lg:text-[30px]">
                             {product?.discountRate !== 0 && (
-                                <Box className={cx("sale-price")}>
+                                <Box className="sale-price">
                                     {product?.originPrice.toLocaleString("it-IT", {
                                         style: "currency",
                                         currency: "VND",
                                     })}
                                 </Box>
                             )}
-                            <Box className={cx("pre-sale-price")}>
+                            <Box className="pre-sale-price">
                                 {product?.discountPrice.toLocaleString("it-IT", {
                                     style: "currency",
                                     currency: "VND",
                                 })}
                             </Box>
                         </Box>
-                        <Box className={cx("evaluate")}>
+                        <Box className="evaluate">
                             <Box
                                 sx={{
                                     display: "flex",
@@ -138,33 +132,33 @@ function ProductDetail() {
                                     alignItems: "center",
                                 }}
                             >
-                                <Rating name="read-only" value={value} readOnly size="large" />
-                                <Typography className={cx("evaluate-content")} component="legend">
+                                <Rating name="read-only" value={3} readOnly size="large" />
+                                <Typography className="evaluate-content" component="legend">
                                     Đánh giá
                                 </Typography>
                             </Box>
                         </Box>
-                        <Box className={cx("state")}>
-                            <Box className={cx("state-title")}>Tình trạng:</Box>
+                        <Box className="state">
+                            <Box className="state-title">Tình trạng:</Box>
                             {detail?.stockQuantity !== 0 ? (
-                                <Box className={cx("state-content")}>
+                                <Box className="state-content">
                                     Còn hàng ({detail?.stockQuantity})
                                 </Box>
                             ) : (
-                                <Box className={cx("state-content")}>Hết hàng</Box>
+                                <Box className="state-content">Hết hàng</Box>
                             )}
                         </Box>
-                        <Box className={cx("color")}>
-                            <Box className={cx("color-title")}>
+                        <Box className="color">
+                            <Box className="color-title">
                                 Màu sắc: <strong>{product?.color?.name}</strong>
                             </Box>
-                            <Box className={cx("color-content")}>
+                            <Box className="color-content">
                                 <ColorDetail data={products} params={params} />
                             </Box>
                         </Box>
-                        <Box className={cx("size")}>
-                            <Box className={cx("size-title")}>Kích thước:</Box>
-                            <Box className={cx("size-content")}>
+                        <Box className="size">
+                            <Box className="size-title">Kích thước:</Box>
+                            <Box className="size-content">
                                 {product?.details && (
                                     <Size
                                         data={product?.details}
@@ -174,41 +168,41 @@ function ProductDetail() {
                                 )}
                             </Box>
                         </Box>
-                        <Box className={cx("wrap")}>
-                            <Box className={cx("quantity-content")}>
+                        <Box className="wrap">
+                            <Box className="quantity-content">
                                 <Box
                                     component={"button"}
                                     variant="outlined"
-                                    className={cx("btn-change-quantity")}
+                                    className="btn-change-quantity"
                                     onClick={handleDecrease}
                                 >
                                     <RemoveIcon />
                                 </Box>
-                                <Box className={cx("quantity-buy")}>{count}</Box>
+                                <Box className="quantity-buy">{count}</Box>
                                 <Box
                                     component={"button"}
                                     variant="outlined"
-                                    className={cx("btn-change-quantity")}
+                                    className="btn-change-quantity"
                                     onClick={handleIncrease}
                                 >
                                     <AddIcon />
                                 </Box>
                             </Box>
-                            <Button className={cx("buy-btn", "btn-red")} onClick={addCart}>
+                            <Button className="buy-btn btn-red" onClick={addCart}>
                                 Thêm vào giỏ
                             </Button>
                         </Box>
 
-                        <Box className={cx("description")}>
-                            <Box className={cx("description-title")}>Mô tả</Box>
-                            <Box className={cx("description-content")}>{product?.description}</Box>
+                        <Box className="description">
+                            <Box className="description-title">Mô tả</Box>
+                            <Box className="description-content">{product?.description}</Box>
                         </Box>
                     </Box>
                 </Box>
 
-                <Box className={cx("wrap-rate")}>{/* <Rate /> */}</Box>
-                {/* <Box className={cx("product-relationship")}>
-                    <ProductCategory data={products} />
+                <Box className="wrap-rate">{/* <Rate /> */}</Box>
+                {/* <Box className="product-relationship")}>
+                    <ProductCategory data={products} /
                 </Box> */}
             </Box>
 

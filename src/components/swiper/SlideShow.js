@@ -1,20 +1,14 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectFade, Autoplay, Pagination } from "swiper";
 import { Link } from "react-router-dom";
+import { Autoplay, EffectFade, Pagination } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-import classnames from "classnames/bind";
-import style from "./Swiper.module.scss";
-import { slideData } from "~/service/fakeData";
-
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/effect-fade";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import "swiper/css";
+import "swiper/css/effect-fade";
+import "swiper/css/pagination";
 import { fetchGetCarousels } from "~/redux/gallery/gallerySlice";
-import { Box } from "@mui/material";
 
-const cx = classnames.bind(style);
 function SlideShow() {
     const { isLoading, carousel } = useSelector((state) => state.galleryReducer);
     const dispatch = useDispatch();
@@ -22,7 +16,7 @@ function SlideShow() {
         dispatch(fetchGetCarousels());
     }, []);
     return (
-        <Box>
+        <>
             {!isLoading && (
                 <Swiper
                     autoplay={{ delay: 7000, disableOnInteraction: false }}
@@ -31,18 +25,18 @@ function SlideShow() {
                     pagination={{ clickable: true, dynamicBullets: true }}
                     modules={[Pagination, Autoplay, EffectFade]}
                     effect={"fade"}
-                    className={cx("my-carousel")}
+                    className={"h-fit w-full mb-8"}
                 >
                     {carousel?.map((item, index) => (
                         <SwiperSlide key={index}>
                             <Link to={item.link}>
-                                <img src={item.imageURL} alt="" style={{ height: "100%" }} />
+                                <img src={item.imageURL} alt="" />
                             </Link>
                         </SwiperSlide>
                     ))}
                 </Swiper>
             )}
-        </Box>
+        </>
     );
 }
 export default SlideShow;

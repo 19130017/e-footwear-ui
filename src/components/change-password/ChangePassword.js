@@ -1,13 +1,11 @@
-import { Box, Button, Grid, Paper, TextField, Typography } from "@mui/material";
-import classNames from "classnames/bind";
-import { Link } from "react-router-dom";
-import { Form, useForm } from "~/hooks/useForm";
-import AccountHeader from "../header/AccountHeader";
-import style from "./ChangePassword.module.scss";
+import { Button, Grid, Paper, TextField, Typography } from "@mui/material";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { Form, useForm } from "~/hooks/useForm";
 import { fetchChangePassword } from "~/redux/auth/authSlice";
-const cx = classNames.bind(style);
+import AccountHeader from "../header/AccountHeader";
+import "./ChangePassword.scss";
 function ChangePassword() {
     const initialFormValues = {
         oldPassword: "",
@@ -63,7 +61,6 @@ function ChangePassword() {
     };
     const {
         values,
-        setValues,
         errors,
         setErrors,
         errorsEnable,
@@ -87,21 +84,30 @@ function ChangePassword() {
         }
     };
     return (
-        <Paper className={cx("change-password-section")}>
+        <Paper className="bg-white mx-4 p-8 rounded-2xl">
             <AccountHeader
                 title="Đổi mật khẩu"
                 text="Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác"
             />
-            <Grid container sx={{ paddingTop: "3rem" }} className={cx("content")}>
-                <Grid item xs={8} sx={{ borderRight: "1px solid #efefef" }}>
+            <Grid container className="pt-10 flex-col lg:flex-row">
+                <Grid
+                    item
+                    xs={12}
+                    md={12}
+                    lg={9}
+                    className="lg:border-r lg:border-solid lg:border-gray"
+                >
                     <Form onSubmit={handleSubmit}>
-                        <Grid container spacing={2} sx={{ marginBottom: "3rem" }}>
-                            <Grid item xs={3}>
-                                <Typography variant="body2" className={cx("text", "text-light")}>
+                        <Grid container spacing={2} className="pt-12 items-center">
+                            <Grid item xs={12} md={4} lg={3}>
+                                <Typography
+                                    variant="body2"
+                                    className="text-2xl lg:text-end text-light-black"
+                                >
                                     Mật Khẩu Hiện Tại
                                 </Typography>
                             </Grid>
-                            <Grid item xs={8}>
+                            <Grid item xs={12} md={8} lg={8}>
                                 <TextField
                                     name="oldPassword"
                                     type="password"
@@ -110,18 +116,21 @@ function ChangePassword() {
                                     onChange={handleInputChange}
                                     error={errorsEnable.oldPassword}
                                     helperText={errors.oldPassword}
-                                    FormHelperTextProps={{ style: { fontSize: "1.4rem" } }}
-                                    inputProps={{ style: { padding: "1.5rem 1rem" } }}
+                                    FormHelperTextProps={{ className: "text-xl" }}
+                                    InputProps={{ className: "rounded-2xl text-2xl" }}
                                 />
                             </Grid>
                         </Grid>
-                        <Grid container spacing={2} sx={{ marginBottom: "3rem" }}>
-                            <Grid item xs={3}>
-                                <Typography variant="body2" className={cx("text", "text-light")}>
+                        <Grid container spacing={2} className="pt-12 items-center">
+                            <Grid item xs={12} md={4} lg={3}>
+                                <Typography
+                                    variant="body2"
+                                    className="text-2xl lg:text-end normal-case text-light-black"
+                                >
                                     Mật Khẩu Mới
                                 </Typography>
                             </Grid>
-                            <Grid item xs={8}>
+                            <Grid item xs={12} md={8} lg={8}>
                                 <TextField
                                     inputRef={textRef}
                                     name="newPassword"
@@ -131,18 +140,21 @@ function ChangePassword() {
                                     onChange={handleInputChange}
                                     error={errorsEnable.newPassword}
                                     helperText={errors.newPassword}
-                                    FormHelperTextProps={{ style: { fontSize: "1.4rem" } }}
-                                    inputProps={{ style: { padding: "1.5rem 1rem" } }}
+                                    FormHelperTextProps={{ className: "text-xl" }}
+                                    InputProps={{ className: "rounded-2xl text-2xl" }}
                                 />
                             </Grid>
                         </Grid>
-                        <Grid container spacing={2} sx={{ marginBottom: "3rem" }}>
-                            <Grid item xs={3}>
-                                <Typography variant="body2" className={cx("text", "text-light")}>
+                        <Grid container spacing={2} className="pt-12 items-center">
+                            <Grid item xs={12} md={4} lg={3}>
+                                <Typography
+                                    variant="body2"
+                                    className="text-2xl lg:text-end normal-case text-light-black"
+                                >
                                     Xác Nhận Mật Khẩu
                                 </Typography>
                             </Grid>
-                            <Grid item xs={8}>
+                            <Grid item xs={12} md={8} lg={8}>
                                 <TextField
                                     name="verifyPassword"
                                     type="password"
@@ -151,21 +163,28 @@ function ChangePassword() {
                                     onChange={handleInputChange}
                                     error={errorsEnable.verifyPassword}
                                     helperText={errors.verifyPassword}
-                                    FormHelperTextProps={{ style: { fontSize: "1.4rem" } }}
-                                    inputProps={{ style: { padding: "1.5rem 1rem" } }}
+                                    FormHelperTextProps={{ className: "text-xl" }}
+                                    InputProps={{ className: "rounded-2xl text-2xl" }}
                                 />
                             </Grid>
                         </Grid>
 
-                        <Grid container justifyContent="center">
-                            <Button variant="contained" type="submit" className={cx("btn-save")}>
+                        <Grid container className="justify-center mt-6">
+                            <Button
+                                variant="contained"
+                                type="submit"
+                                className="p-4 text-white bg-black w-1/2"
+                            >
                                 Lưu
                             </Button>
                         </Grid>
                     </Form>
                 </Grid>
-                <Grid item xs={4} className={cx("forgot")}>
-                    <Link to="/auth/forgot" className={cx("link")}>
+                <Grid item xs={12} md={12} lg={3} className="mt-8">
+                    <Link
+                        to="/auth/forgot"
+                        className="no-underline text-link inline-block ml-8 text-2xl"
+                    >
                         Quên mật khẩu?
                     </Link>
                 </Grid>

@@ -2,13 +2,9 @@ import { Avatar, Box, Button, Grid, TextField, Typography } from "@mui/material"
 import { useDispatch, useSelector } from "react-redux";
 import { Form, useForm } from "~/hooks/useForm";
 import { fetchUpdateProfile, fetchUploadAvatar } from "~/redux/customer/customerSlice";
-import classNames from "classnames/bind";
-import style from "./Profile.module.scss";
 import MySwal from "~/utils/MySwal";
 import Loading from "../loading/Loading";
-import { useEffect } from "react";
-
-const cx = classNames.bind(style);
+import "./Profile.scss";
 
 function SubProfile({ customer }) {
     const { accountId, accessToken, username } = useSelector((state) => state.authReducer);
@@ -58,21 +54,16 @@ function SubProfile({ customer }) {
         }
     };
 
-    const {
-        values,
-        setValues,
-        errors,
-        setErrors,
-        errorsEnable,
-        setErrorsEnable,
-        handleInputChange,
-        resetForm,
-    } = useForm(initialFormValues, true, validate);
+    const { values, errors, setErrors, errorsEnable, setErrorsEnable, handleInputChange } = useForm(
+        initialFormValues,
+        true,
+        validate
+    );
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (validate()) {
-            dispatch(
+            await dispatch(
                 fetchUpdateProfile({
                     customerInfo: { ...values, accountId },
                     accessToken: accessToken,
@@ -104,30 +95,41 @@ function SubProfile({ customer }) {
     };
 
     return (
-        <Grid container sx={{ paddingTop: "3rem" }} className={cx("content")}>
+        <Grid container className="pt-10 flex-col-reverse lg:flex-row">
             <Loading open={isLoading} />
-
-            <Grid item xs={8} sx={{ borderRight: "1px solid #efefef" }}>
+            <Grid item xs={12} md={12} lg={8}>
                 <Form onSubmit={handleSubmit}>
-                    <Grid container spacing={2} sx={{ marginBottom: "3rem" }}>
-                        <Grid item xs={3}>
-                            <Typography variant="body2" className={cx("text", "text-light")}>
-                                Tên đăng nhập
+                    {username && (
+                        <Grid container spacing={2} className="pt-12 lg:items-center">
+                            <Grid item md={3}>
+                                <Typography
+                                    variant="body2"
+                                    className="text-2xl md:text-end text-light-black"
+                                >
+                                    Tên đăng nhập:
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Typography variant="body2" className="text-third text-2xl">
+                                    {username}
+                                </Typography>
+                            </Grid>
+                        </Grid>
+                    )}
+                    <Grid
+                        container
+                        spacing={2}
+                        className="pt-12 md:items-center flex-col md:flex-row"
+                    >
+                        <Grid item xs={12} md={3}>
+                            <Typography
+                                variant="body2"
+                                className="text-2xl md:text-end text-light-black"
+                            >
+                                Tên:
                             </Typography>
                         </Grid>
-                        <Grid item xs={8}>
-                            <Typography variant="body2" className={cx("text")}>
-                                {username}
-                            </Typography>
-                        </Grid>
-                    </Grid>
-                    <Grid container spacing={2} sx={{ marginBottom: "3rem" }}>
-                        <Grid item xs={3}>
-                            <Typography variant="body2" className={cx("text", "text-light")}>
-                                Tên
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={8}>
+                        <Grid item xs={12} md={9}>
                             <TextField
                                 name="firstName"
                                 fullWidth
@@ -135,18 +137,25 @@ function SubProfile({ customer }) {
                                 onChange={handleInputChange}
                                 error={errorsEnable.firstName}
                                 helperText={errors.firstName}
-                                FormHelperTextProps={{ style: { fontSize: "1.4rem" } }}
-                                inputProps={{ style: { padding: "1.5rem 1rem" } }}
+                                FormHelperTextProps={{ className: "text-xl" }}
+                                InputProps={{ className: "rounded-2xl text-2xl" }}
                             />
                         </Grid>
                     </Grid>
-                    <Grid container spacing={2} sx={{ marginBottom: "3rem" }}>
-                        <Grid item xs={3}>
-                            <Typography variant="body2" className={cx("text", "text-light")}>
-                                Họ và tên đệm
+                    <Grid
+                        container
+                        spacing={2}
+                        className="pt-12 flex-col md:items-center md:flex-row"
+                    >
+                        <Grid item xs={12} md={3}>
+                            <Typography
+                                variant="body2"
+                                className="text-2xl md:text-end text-light-black"
+                            >
+                                Họ và tên đệm:
                             </Typography>
                         </Grid>
-                        <Grid item xs={8}>
+                        <Grid item xs={12} md={9}>
                             <TextField
                                 name="lastName"
                                 type="lastName"
@@ -155,18 +164,25 @@ function SubProfile({ customer }) {
                                 onChange={handleInputChange}
                                 error={errorsEnable.lastName}
                                 helperText={errors.lastName}
-                                FormHelperTextProps={{ style: { fontSize: "1.4rem" } }}
-                                inputProps={{ style: { padding: "1.5rem 1rem" } }}
+                                FormHelperTextProps={{ className: "text-xl" }}
+                                InputProps={{ className: "rounded-2xl text-2xl" }}
                             />
                         </Grid>
                     </Grid>
-                    <Grid container spacing={2} sx={{ marginBottom: "3rem" }}>
-                        <Grid item xs={3}>
-                            <Typography variant="body2" className={cx("text", "text-light")}>
+                    <Grid
+                        container
+                        spacing={2}
+                        className="pt-12 flex-col md:items-center md:flex-row"
+                    >
+                        <Grid item xs={12} md={3}>
+                            <Typography
+                                variant="body2"
+                                className="text-2xl md:text-end text-light-black"
+                            >
                                 Ngày sinh
                             </Typography>
                         </Grid>
-                        <Grid item xs={8}>
+                        <Grid item xs={12} md={9}>
                             <TextField
                                 name="birthday"
                                 type="date"
@@ -175,32 +191,36 @@ function SubProfile({ customer }) {
                                 onChange={handleInputChange}
                                 error={errorsEnable.birthday}
                                 helperText={errors.birthday}
-                                FormHelperTextProps={{ style: { fontSize: "1.4rem" } }}
-                                inputProps={{ style: { padding: "1.5rem 1rem" } }}
+                                FormHelperTextProps={{ className: "text-xl" }}
+                                InputProps={{ className: "rounded-2xl text-2xl" }}
                             />
                         </Grid>
                     </Grid>
-                    <Grid container justifyContent="center">
-                        <Button variant="contained" type="submit" className={cx("btn-save")}>
+                    <Grid container className="justify-center mt-6">
+                        <Button
+                            variant="contained"
+                            type="submit"
+                            className="p-4 text-white bg-black w-1/2"
+                        >
                             Lưu
                         </Button>
                     </Grid>
                 </Form>
             </Grid>
-            <Grid item xs={4} className={cx("upload-avatar")}>
-                <Grid container direction="column" justifyContent="center" alignItems="center">
+            <Grid item xs={12} md={12} lg={4} className="mt-8">
+                <Grid container className="justify-center flex-col items-center">
                     <Avatar
                         component="label"
                         htmlFor="upload"
                         alt="Avatar"
                         src={customer?.avatar}
-                        className={cx("avatar")}
+                        className="h-[100px] w-[100px] border border-solid border-gray cursor-pointer"
                     />
                     <Box
                         component="label"
                         htmlFor="upload"
                         variant="body1"
-                        className={cx("label-name")}
+                        className="mt-8 border border-solid boder-gray text-xl p-2 cursor-pointer rounded-lg"
                     >
                         Chọn ảnh
                     </Box>
@@ -212,8 +232,8 @@ function SubProfile({ customer }) {
                         accept=".jpg, .jpeg, .png"
                         onChange={(e) => handleChange(e)}
                     />
-                    <Box>
-                        <Typography variant="body1" className={cx("text")}>
+                    <Box className="mb-8">
+                        <Typography variant="body1" className="text-third text-xl mt-8">
                             Định dạng:.JPEG, .PNG, .JPG
                         </Typography>
                     </Box>
