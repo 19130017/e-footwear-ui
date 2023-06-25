@@ -41,7 +41,7 @@ function CartProducts({ data, removeParentCallback, decreaseCallback, increaseCa
                                 sx={{ marginTop: "1rem" }}
                                 className="bottom-info"
                             >
-                                <Grid item md={2}  xs={6}  className="item">
+                                <Grid item md={2} xs={6} className="item">
                                     <Box>
                                         Màu sắc:{" "}
                                         <ColorRounded
@@ -49,12 +49,12 @@ function CartProducts({ data, removeParentCallback, decreaseCallback, increaseCa
                                         />
                                     </Box>
                                 </Grid>
-                                <Grid item md={4}  xs={6} className="item">
+                                <Grid item md={4} xs={6} className="item">
                                     <Typography variant="body1">
                                         Kích thước: {item.detail.size}
                                     </Typography>
                                 </Grid>
-                                <Grid item md={3}  xs={6} className="item">
+                                <Grid item md={3} xs={6} className="item">
                                     <Box className="btn-number">
                                         <Box
                                             className="btn-change-quantity"
@@ -81,7 +81,7 @@ function CartProducts({ data, removeParentCallback, decreaseCallback, increaseCa
                                         </Box>
                                     </Box>
                                 </Grid>
-                                <Grid item md={3}  xs={6} className="item price">
+                                <Grid item md={3} xs={6} className="item price">
                                     <Box>
                                         <Typography variant="body1" className="current-price">
                                             {totalDiscountPrice.toLocaleString("it-IT", {
