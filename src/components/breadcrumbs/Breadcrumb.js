@@ -6,7 +6,7 @@ const cx = classnames.bind(style);
 
 function Breadcrumb({ data }) {
     const breadcrumbs = [
-        <Link to={"/"} className={cx("text-link")} key={0}>
+        <Link to={"/"} className={cx("text-linkk")} key={0}>
             Trang chủ
         </Link>,
         ...data,

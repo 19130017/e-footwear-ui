@@ -5,15 +5,13 @@
     .wrap-img {
         flex-basis: 50%;
         overflow: hidden;
-        margin: 50px;
-        padding-bottom: 50px;
-        position: sticky;
+        margin: 20px;
         top: 50px;
     }
 
     .wrap-content {
         flex-basis: 50%;
-        margin: 50px;
+        margin: 20px;
 
         .title {
             font-size: 24px;
@@ -24,7 +22,7 @@
         .price {
             display: flex;
             margin-top: 20px;
-            font-size: 30px;
+            font-size: 23px;
 
             .sale-price {
                 color: #ccc;
