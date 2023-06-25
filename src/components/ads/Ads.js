@@ -2,7 +2,7 @@ import { Box, Grid, Typography } from "@mui/material";
 
 function Ads({ data }) {
     return (
-        <Box component={"section"} className={"section"}>
+        <Box component={"section"} className={"section hidden sm:flex"}>
             <Box className={"container mx-auto"}>
                 <Typography variant="h3" className={"text-center text-[2.4rem] font-[700] pb-8 leading-[2.2rem] uppercase"}>
                     Chúng tôi có gì mới

@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 import classnames from "classnames/bind";
 import style from "./Swiper.module.scss";
-import { slideData } from "~/service/fakeData";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -12,7 +11,6 @@ import "swiper/css/effect-fade";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchGetCarousels } from "~/redux/gallery/gallerySlice";
-import { Box } from "@mui/material";
 
 const cx = classnames.bind(style);
 function SlideShow() {
@@ -31,7 +29,7 @@ function SlideShow() {
                     pagination={{ clickable: true, dynamicBullets: true }}
                     modules={[Pagination, Autoplay, EffectFade]}
                     effect={"fade"}
-                    className={"h-[500px] w-full mb-8"}
+                    className={"h-fit w-full mb-8"}
                 >
                     {carousel?.map((item, index) => (
                         <SwiperSlide key={index}>

@@ -6,6 +6,10 @@
     .section {
         @apply py-8 flex items-center;
     }
+
+    .marquee-group {
+        @apply text-white text-[2rem];
+    }
 }
 
 html {

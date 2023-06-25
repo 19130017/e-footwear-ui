@@ -10,9 +10,7 @@ module.exports = {
             facebook: "#3b5998",
             black: "#000",
             white: "#fff",
-
-            about: "#e8fbfc"
-
+            about: "#e8fbfc",
             "account-theme": "#3fada8",
             "green-light": "#30a2c4",
 

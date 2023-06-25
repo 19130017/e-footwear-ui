@@ -29,11 +29,11 @@ function Home() {
             {/* after sale  */}
             <AfterSale />
             {/* banner */}
-            <Box component={"section"} className={"section my-8"}>
+            <Box component={"section"} className={"section hidden sm:flex"}>
                 <Box className={"container mx-auto"}>
                     <Grid container spacing={1}>
                         {banner?.map((item, index) => (
-                            <Grid item xs={4} key={index}>
+                            <Grid item sm={4} key={index}>
                                 <Banner
                                     image={item.imageURL}
                                     title={item.typeGallery.typeName}
