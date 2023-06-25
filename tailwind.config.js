@@ -10,10 +10,12 @@ module.exports = {
             facebook: "#3b5998",
             black: "#000",
             white: "#fff",
+            "cart-theme": "#f5f5f5",
             about: "#e8fbfc",
             "account-theme": "#3fada8",
             "green-light": "#30a2c4",
-
+            "gray-shadow": "#ccc",
+            "order-notify":"#e4e7e9",
         },
         borderColor: {
             gray: "#e0e0e0",
@@ -23,7 +25,7 @@ module.exports = {
         textColor: {
             link: "#0000EE",
             black: "#000000",
-
+            cart_text: "#252a2b",
             gray_shadow: "#ededed",
 
             white: "#fff",
@@ -31,7 +33,9 @@ module.exports = {
             third: "#333",
             success: "#26aa99",
             danger: "#df4759",
-
+            price:"#82869e",
+            "price-sale":"#ff0000",
+            "vat-color": "#82869e"
         },
         container: {
             padding: {
@@ -51,8 +55,8 @@ module.exports = {
                 // accent: '#B809C3',
             },
             backgroundImage: {
-                'coming-soon': 'url(./assets/images/bg_comingsoon.jpg)',
-                'about-slogan': 'url(./assets/images/about.png)',
+                "coming-soon": "url(./assets/images/bg_comingsoon.jpg)",
+                "about-slogan": "url(./assets/images/about.png)",
             },
         },
     },

@@ -2,10 +2,9 @@ import { Avatar, Box, Button, Grid, TextField, Typography } from "@mui/material"
 import { useDispatch, useSelector } from "react-redux";
 import { Form, useForm } from "~/hooks/useForm";
 import { fetchUpdateProfile, fetchUploadAvatar } from "~/redux/customer/customerSlice";
-import "./Profile.scss";
 import MySwal from "~/utils/MySwal";
 import Loading from "../loading/Loading";
-import { useEffect } from "react";
+import "./Profile.scss";
 
 function SubProfile({ customer }) {
     const { accountId, accessToken, username } = useSelector((state) => state.authReducer);
@@ -55,21 +54,16 @@ function SubProfile({ customer }) {
         }
     };
 
-    const {
-        values,
-        setValues,
-        errors,
-        setErrors,
-        errorsEnable,
-        setErrorsEnable,
-        handleInputChange,
-        resetForm,
-    } = useForm(initialFormValues, true, validate);
+    const { values, errors, setErrors, errorsEnable, setErrorsEnable, handleInputChange } = useForm(
+        initialFormValues,
+        true,
+        validate
+    );
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (validate()) {
-            dispatch(
+            await dispatch(
                 fetchUpdateProfile({
                     customerInfo: { ...values, accountId },
                     accessToken: accessToken,
@@ -101,18 +95,18 @@ function SubProfile({ customer }) {
     };
 
     return (
-        <Grid container className="pt-10 flex-col-reverse">
+        <Grid container className="pt-10 flex-col-reverse lg:flex-row">
             <Loading open={isLoading} />
-            <Grid item xs={12} md={9} lg={9} className="border-r border-solid border-secondary">
+            <Grid item xs={12} md={12} lg={8}>
                 <Form onSubmit={handleSubmit}>
                     {username && (
                         <Grid container spacing={2} className="pt-12 lg:items-center">
-                            <Grid item xs={6}>
+                            <Grid item md={3}>
                                 <Typography
                                     variant="body2"
-                                    className="text-2xl ld:text-end text-light-black"
+                                    className="text-2xl md:text-end text-light-black"
                                 >
-                                    Tên đăng nhập
+                                    Tên đăng nhập:
                                 </Typography>
                             </Grid>
                             <Grid item xs={6}>
@@ -122,16 +116,20 @@ function SubProfile({ customer }) {
                             </Grid>
                         </Grid>
                     )}
-                    <Grid container spacing={2} className="pt-12 lg:items-center flex-col">
-                        <Grid item xs={12}>
+                    <Grid
+                        container
+                        spacing={2}
+                        className="pt-12 md:items-center flex-col md:flex-row"
+                    >
+                        <Grid item xs={12} md={3}>
                             <Typography
                                 variant="body2"
-                                className="text-2xl ld:text-end text-light-black"
+                                className="text-2xl md:text-end text-light-black"
                             >
-                                Tên
+                                Tên:
                             </Typography>
                         </Grid>
-                        <Grid item xs={12}>
+                        <Grid item xs={12} md={9}>
                             <TextField
                                 name="firstName"
                                 fullWidth
@@ -144,16 +142,20 @@ function SubProfile({ customer }) {
                             />
                         </Grid>
                     </Grid>
-                    <Grid container spacing={2} className="pt-12 flex-col lg:items-center">
-                        <Grid item xs={12}>
+                    <Grid
+                        container
+                        spacing={2}
+                        className="pt-12 flex-col md:items-center md:flex-row"
+                    >
+                        <Grid item xs={12} md={3}>
                             <Typography
                                 variant="body2"
-                                className="text-2xl ld:text-end text-light-black"
+                                className="text-2xl md:text-end text-light-black"
                             >
-                                Họ và tên đệm
+                                Họ và tên đệm:
                             </Typography>
                         </Grid>
-                        <Grid item xs={12}>
+                        <Grid item xs={12} md={9}>
                             <TextField
                                 name="lastName"
                                 type="lastName"
@@ -167,16 +169,20 @@ function SubProfile({ customer }) {
                             />
                         </Grid>
                     </Grid>
-                    <Grid container spacing={2} className="pt-12 flex-col lg:items-center">
-                        <Grid item xs={12}>
+                    <Grid
+                        container
+                        spacing={2}
+                        className="pt-12 flex-col md:items-center md:flex-row"
+                    >
+                        <Grid item xs={12} md={3}>
                             <Typography
                                 variant="body2"
-                                className="text-2xl ld:text-end text-light-black"
+                                className="text-2xl md:text-end text-light-black"
                             >
                                 Ngày sinh
                             </Typography>
                         </Grid>
-                        <Grid item xs={12}>
+                        <Grid item xs={12} md={9}>
                             <TextField
                                 name="birthday"
                                 type="date"
@@ -201,7 +207,7 @@ function SubProfile({ customer }) {
                     </Grid>
                 </Form>
             </Grid>
-            <Grid item xs={12} md={3} lg={3} className="mt-8">
+            <Grid item xs={12} md={12} lg={4} className="mt-8">
                 <Grid container className="justify-center flex-col items-center">
                     <Avatar
                         component="label"

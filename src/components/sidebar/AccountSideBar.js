@@ -24,67 +24,73 @@ function SideBar() {
     }, [location]);
     return (
         <Paper className="rounded-2xl">
-            <List className="pt-4 lg:pt-[3.2rem] flex lg:flex-col">
+            <List className="pt-4 flex md:flex-col md:pt-[2rem] md:mx-4 lg:pt-[3.2rem] ">
                 <Link
                     to={"/account/profile"}
-                    className={`item w-[25%] flex justify-center items-center lg:mx-4 lg:mb-4 rounded-2xl ${
+                    className={`item w-[25%]  flex justify-center items-center md:w-full lg:justify-start md:my-1  rounded-2xl ${
                         active === 0 ? "active" : ""
                     }`}
                 >
                     <Typography
                         variant="h6"
-                        className="text-2xl flex justify-center items-center text-black py-[0.8rem] px-[1.6rem]"
+                        className="text-2xl flex justify-center items-center text-black py-[0.8rem] px-[1.6rem] md:px-[1.2rem]"
                     >
                         <PersonIcon
-                            className="w-8 h-8 lg:mr-4"
+                            className="w-8 h-8 md:mr-4"
                             color={`${active === 0 ? "primary" : ""}`}
                         />
-                        <span className="hidden">Thông tin cá nhân</span>
+                        <span className="hidden md:block">Thông tin cá nhân</span>
                     </Typography>
                 </Link>
                 <Link
                     to={"/account/change-password"}
-                    className={`item w-[25%] flex justify-center items-center lg:mx-4 lg:mb-4 rounded-2xl ${active === 1 ? "active" : ""}`}
+                    className={`item w-[25%] md:w-full  flex justify-center items-center lg:justify-start md:my-1 rounded-2xl ${
+                        active === 1 ? "active" : ""
+                    }`}
                 >
                     <Typography
                         variant="h6"
-                        className="text-2xl flex items-center text-black py-[0.8rem] px-[1.6rem]"
+                        className="text-2xl flex items-center text-black py-[0.8rem] px-[1.6rem] md:px-[1.2rem]"
                     >
                         <ChangePasswordIcon
-                            className="w-8 h-8 mr-4"
+                            className="w-8 h-8 md:mr-4"
                             color={`${active === 1 ? "primary" : ""}`}
                         />
-                        <span className="hidden"> Thay đổi mật khẩu</span>
+                        <span className="hidden md:block"> Thay đổi mật khẩu</span>
                     </Typography>
                 </Link>
                 <Link
                     to={"/account/addresses"}
-                    className={`item w-[25%] flex justify-center items-center lg:mx-4 lg:mb-4 rounded-2xl ${active === 2 ? "active" : ""}`}
+                    className={`item w-[25%] md:w-full  flex justify-center items-center lg:justify-start md:my-1 rounded-2xl ${
+                        active === 2 ? "active" : ""
+                    }`}
                 >
                     <Typography
                         variant="h6"
-                        className="text-2xl flex items-center text-black py-[0.8rem] px-[1.6rem]"
+                        className="text-2xl flex items-center text-black py-[0.8rem] px-[1.6rem] md:px-[1.2rem]"
                     >
                         <AddLocationIcon
-                            className="w-8 h-8 mr-4"
+                            className="w-8 h-8 md:mr-4"
                             color={`${active === 2 ? "primary" : ""}`}
                         />
-                        <span className="hidden"> Địa chỉ giao hàng</span>
+                        <span className="hidden md:block"> Địa chỉ giao hàng</span>
                     </Typography>
                 </Link>
                 <Link
                     to={"/account/purchase"}
-                    className={`item w-[25%] flex justify-center items-center lg:mx-4 lg:mb-4 rounded-2xl ${active === 3 ? "active" : ""}`}
+                    className={`item w-[25%] md:w-full  flex justify-center items-center lg:justify-start md:my-1 rounded-2xl ${
+                        active === 3 ? "active" : ""
+                    }`}
                 >
                     <Typography
                         variant="h6"
-                        className="text-2xl flex items-center text-black py-[0.8rem] px-[1.6rem]"
+                        className="text-2xl flex items-center text-black py-[0.8rem] px-[1.6rem] md:px-[1.2rem]"
                     >
                         <PaymentsIcon
-                            className="w-8 h-8 mr-4"
+                            className="w-8 h-8 md:mr-4"
                             color={`${active === 3 ? "primary" : ""}`}
                         />
-                        <span className="hidden">Lịch sử mua hàng</span>
+                        <span className="hidden md:block">Lịch sử mua hàng</span>
                     </Typography>
                 </Link>
             </List>

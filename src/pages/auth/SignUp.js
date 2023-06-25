@@ -236,7 +236,7 @@ function SignUp() {
                 <Grid container className="pt-8">
                     <Grid item xs={6}>
                         <Link to="/auth/sign-in" className="block no-underline text-link">
-                            Đăng ký tài khoản mới
+                           Đăng nhập
                         </Link>
                     </Grid>
                     <Grid item xs={6}>
