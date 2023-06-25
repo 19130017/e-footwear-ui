@@ -125,12 +125,14 @@ function Checkout() {
                         </Typography>
 
                         <Address data={addresses} parentCallback={handleSelectAddress} />
-                        <Box className="">
-                            <AddressAdd
-                                accountId={accountId}
-                                accessToken={accessToken}
-                                dispatch={dispatch}
-                            />
+                        <Box className="flex items-center justify-center">
+                            <Box className="border border-solid border-gray">
+                                <AddressAdd
+                                    accountId={accountId}
+                                    accessToken={accessToken}
+                                    dispatch={dispatch}
+                                />
+                            </Box>
                         </Box>
                         <Typography variant="h6" className="text-2xl pb-4 pl-4 font-bold">
                             Phương thức giao hàng

@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { LoginSocialGoogle } from "reactjs-social-login";
-import { GoogleLoginButton } from "react-social-login-buttons";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { GoogleLoginButton } from "react-social-login-buttons";
+import { LoginSocialGoogle } from "reactjs-social-login";
 import { fetchLoginGG } from "~/redux/auth/authSlice";
 
 function GoogleLogin() {

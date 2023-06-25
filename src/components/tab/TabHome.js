@@ -1,6 +1,5 @@
-import { useState } from "react";
-import classnames from "classnames/bind";
 import { Box } from "@mui/material";
+import { useState } from "react";
 import { ProductHot, ProductNews } from "../product-home";
 
 function TabHome() {

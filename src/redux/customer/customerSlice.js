@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { authApi } from "~/apis/authApi";
-import { CUSTOMER_LOGOUT, GET_CUSTOMER, UPDATE_INFO_CUSTOMER, UPLOAD_AVATAR } from "./customerType";
-import MySwal, { PopUpSuccess } from "~/utils/MySwal";
 import storage from "redux-persist/lib/storage";
+import { authApi } from "~/apis/authApi";
+import MySwal, { PopUpSuccess } from "~/utils/MySwal";
+import { GET_CUSTOMER, UPDATE_INFO_CUSTOMER, UPLOAD_AVATAR } from "./customerType";
 
 const initialState = {
     customers: [],

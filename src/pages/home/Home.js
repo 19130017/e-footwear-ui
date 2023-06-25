@@ -1,16 +1,16 @@
 import { Box, Grid } from "@mui/material";
-import React, { useEffect } from "react";
-import Banner from "~/components/banner";
-import { TabHome } from "~/components/tab";
-import Collection from "~/components/collection";
+import { useEffect } from "react";
 import Ads from "~/components/ads";
-import HomeMarquee from "~/components/marquee";
+import Banner from "~/components/banner";
+import Collection from "~/components/collection";
 import FooterGallery from "~/components/footer-gallery";
+import HomeMarquee from "~/components/marquee";
+import { TabHome } from "~/components/tab";
 
 import { useDispatch, useSelector } from "react-redux";
-import { fetchGetAds, fetchGetBanners, fetchGetCollections } from "~/redux/gallery/gallerySlice";
 import { SlideShow } from "~/components/swiper";
 import AfterSale from "~/components/swiper/AfterSale";
+import { fetchGetAds, fetchGetBanners, fetchGetCollections } from "~/redux/gallery/gallerySlice";
 
 function Home() {
     const ads = useSelector((state) => state.galleryReducer.ads);

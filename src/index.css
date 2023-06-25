@@ -27,6 +27,14 @@ body {
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
 }
+
+.text-slip-2{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
 /* CSS */
 .popup-btn--confirm {
     appearance: none;

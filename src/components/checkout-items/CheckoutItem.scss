@@ -1,5 +1,6 @@
-input[name="payment"]:checked ~ label > div {
-    border: 1px solid #1435c3;
+input[name="payment"]:checked ~ label > .card,
+input[name="address"]:checked ~ label > .card {
+    border: 1px solid #1435c3 !important;
     position: relative;
     &:hover {
         background-color: rgb(255, 255, 255);
@@ -23,6 +24,7 @@ input[name="payment"]:checked ~ label > div {
     }
 }
 .card {
+    border: 1px solid #e0e0e0;
     .pseudo {
         display: none;
     }

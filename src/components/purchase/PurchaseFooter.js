@@ -1,5 +1,4 @@
 import { Box, Grid, Typography } from "@mui/material";
-import MoneyIcon from "@mui/icons-material/AttachMoney";
 import "./Purchase.scss";
 
 function PurchaseFooter(props) {

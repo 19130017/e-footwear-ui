@@ -1,11 +1,11 @@
 import { Button, Grid, Paper, TextField, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
-import { Form, useForm } from "~/hooks/useForm";
-import AccountHeader from "../header/AccountHeader";
-import "./ChangePassword.scss";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { Form, useForm } from "~/hooks/useForm";
 import { fetchChangePassword } from "~/redux/auth/authSlice";
+import AccountHeader from "../header/AccountHeader";
+import "./ChangePassword.scss";
 function ChangePassword() {
     const initialFormValues = {
         oldPassword: "",
@@ -61,7 +61,6 @@ function ChangePassword() {
     };
     const {
         values,
-        setValues,
         errors,
         setErrors,
         errorsEnable,

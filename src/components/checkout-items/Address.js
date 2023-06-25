@@ -1,14 +1,14 @@
 import { Grid } from "@mui/material";
 import { Box } from "@mui/system";
 import CheckIcon from "@mui/icons-material/Check";
-import "./Address.scss";
+import "./CheckoutItem.scss";
 
 function Address(props) {
     const { data, parentCallback } = props;
     return (
-        <Grid container className="flex-col">
+        <Grid container spacing={2} className="flex-col lg:flex-row ">
             {data.map((item, index) => (
-                <Grid item xs={12} key={index} className="mb-4">
+                <Grid item xs={12} lg={6} key={index} className="mb-4">
                     <Box
                         component={"input"}
                         type="radio"
@@ -18,11 +18,11 @@ function Address(props) {
                         onChange={() => parentCallback(item)}
                     />
                     <Box component={"label"} htmlFor={`address-${item.id}`}>
-                        <Box className="card border border-solid border-[#e0e0e0] bg-white py-4 px-6 overflow-hidden rounded-lg cursor-pointer">
+                        <Box className="card bg-white py-4 px-6 overflow-hidden rounded-lg cursor-pointer  lg:h-[100px]">
                             <Box className="text-2xl">{item.fullName}</Box>
                             <Box>
                                 <Box className="text-xl">{item.phone}</Box>
-                                <Box className="text-xl text-slip">
+                                <Box className="text-xl text-slip-2">
                                     {item.address},{item.addresses.wardName},
                                     {item.addresses.districtName},{item.addresses.provinceName}
                                 </Box>

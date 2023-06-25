@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { LoginSocialFacebook, LoginSocialGoogle } from "reactjs-social-login";
 import { FacebookLoginButton } from "react-social-login-buttons";
+import { LoginSocialFacebook } from "reactjs-social-login";
 
 import { useDispatch } from "react-redux";
 import { fetchLoginFB } from "~/redux/auth/authSlice";

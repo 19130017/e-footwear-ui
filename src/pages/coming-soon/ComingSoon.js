@@ -1,10 +1,10 @@
-import { Box, Button, IconButton, InputBase, TextField, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
-import "./ComingSoon.scss";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
+import { Box, Button, IconButton, InputBase, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
+import "./ComingSoon.scss";
 
 function ComingSoon() {
 

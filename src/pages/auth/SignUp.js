@@ -1,14 +1,14 @@
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 
-import { Form, useForm } from "~/hooks/useForm";
 import { Link } from "react-router-dom";
 import { TitleFullWidth } from "~/components/header/FullWidthHeader";
+import { Form, useForm } from "~/hooks/useForm";
 // import { FacebookButton } from "~/components/button";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchRegister } from "~/redux/auth/authSlice";
 import Loading from "~/components/loading/Loading";
 import { FacebookLogin, GoogleLogin } from "~/components/social-login";
+import { fetchRegister } from "~/redux/auth/authSlice";
 
 function SignUp() {
     const dispatch = useDispatch();

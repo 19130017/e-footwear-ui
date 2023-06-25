@@ -1,25 +1,21 @@
-import "./ProductDetail.scss";
-import { Box, Button, Grid, Input, TextField, Typography } from "@mui/material";
-import Rating from "@mui/material/Rating";
-import Size from "~/components/size";
-import FooterGallery from "~/components/footer-gallery";
-import { ColorDetail } from "~/components/color";
-import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
-import Rate from "~/components/rate/Rate";
-import { useParams } from "react-router-dom";
+import RemoveIcon from "@mui/icons-material/Remove";
+import { Box, Button, Typography } from "@mui/material";
+import Rating from "@mui/material/Rating";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useDeferredValue, useEffect, useState } from "react";
-import { fetchProductBySlugColor, fetchProductsBySlug } from "~/redux/product/productSlice";
-import { fetchGetDetail } from "~/redux/detail/detailSlice";
+import { useParams } from "react-router-dom";
+import { ColorDetail } from "~/components/color";
+import FooterGallery from "~/components/footer-gallery";
+import Size from "~/components/size";
 import { DetailSlide } from "~/components/swiper";
-import { ProductCategory } from "~/components/product-home";
-import MySwal from "~/utils/MySwal";
 import { addToCart } from "~/redux/cart/cartSlice";
-
+import { fetchGetDetail } from "~/redux/detail/detailSlice";
+import { fetchProductBySlugColor, fetchProductsBySlug } from "~/redux/product/productSlice";
+import MySwal from "~/utils/MySwal";
+import "./ProductDetail.scss";
 
 function ProductDetail() {
-    const [value, setValue] = useState(3);
     const params = useParams();
     const { products, product, isLoading } = useSelector((state) => state.productReducer);
     const detail = useSelector((state) => state.detailReducer.detail);
@@ -136,7 +132,7 @@ function ProductDetail() {
                                     alignItems: "center",
                                 }}
                             >
-                                <Rating name="read-only" value={value} readOnly size="large" />
+                                <Rating name="read-only" value={3} readOnly size="large" />
                                 <Typography className="evaluate-content" component="legend">
                                     Đánh giá
                                 </Typography>

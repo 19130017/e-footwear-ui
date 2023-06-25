@@ -3,7 +3,7 @@ import "./Coupon.scss";
 function Coupon(props) {
     const { item, parentCallback, id } = props;
     return (
-        <Box className="bg-white flex p-2 overflow-auto rounded-2xl mb-4 overflow-hidden">
+        <Box className="bg-white flex p-2 rounded-2xl mb-4 overflow-hidden">
             <Box className="coupon-item-left relative w-1/4 flex items-center justify-center border-r border-dash border-[#ccc] ">
                 <img
                     src="https://file.hstatic.net/1000230642/file/icon-coupon-3_c002643e1e1f4f4197daf580deed043a.png"

@@ -1,10 +1,10 @@
 import { Box } from "@mui/material";
 import classnames from "classnames/bind";
-import { Link } from "react-router-dom";
-import style from "./FooterGallery.module.scss";
-import { fetchGetFooter } from "~/redux/gallery/gallerySlice";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { fetchGetFooter } from "~/redux/gallery/gallerySlice";
+import style from "./FooterGallery.module.scss";
 const cx = classnames.bind(style);
 
 function FooterGalleryItem(props) {

@@ -1,12 +1,12 @@
-import { Avatar, Box, Grid, Paper, Typography } from "@mui/material";
+import { Box, Grid, Paper, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { fetchGetProfile } from "~/redux/customer/customerSlice";
 import { fetchGetOrder } from "~/redux/order/orderSlice";
 import Loading from "../loading/Loading";
-import "./OrderDetail.scss";
 import { OrderProduct } from "../order-product";
+import "./OrderDetail.scss";
 function OrderDetail() {
     const params = useParams();
     const { order, isLoading } = useSelector((state) => state.orderReducer);

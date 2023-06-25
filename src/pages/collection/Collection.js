@@ -1,21 +1,19 @@
-import "./Collection.scss";
-import { Box, Grid, PaginationItem, Typography } from "@mui/material";
-import FilterProduct from "~/components/filter/FilterProduct";
-import { sizes, colors, orderBy } from "~/service/fakeData";
+import { Box, Grid, PaginationItem } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { fetchAllProductByCateSlug } from "~/redux/product/productSlice";
-import FooterGallery from "~/components/footer-gallery/FooterGallery";
 import Breadcrumb from "~/components/breadcrumbs/Breadcrumb";
-import { fetchCategoryBySlug } from "~/redux/category/categorySlice";
 import CardProduct from "~/components/card-product/CardProduct";
+import FooterGallery from "~/components/footer-gallery/FooterGallery";
+import { fetchCategoryBySlug } from "~/redux/category/categorySlice";
+import { fetchAllProductByCateSlug } from "~/redux/product/productSlice";
+import "./Collection.scss";
 
 function Collection() {
     const products = useSelector((state) => state.productReducer.products);
-    const { isLoading, category } = useSelector((state) => state.categoryReducer);
+    const {  category } = useSelector((state) => state.categoryReducer);
     const dispatch = useDispatch();
     const slug = useParams();
 

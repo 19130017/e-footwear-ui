@@ -20,7 +20,7 @@ function AfterSale() {
                         disableOnInteraction: false,
                     }}
                     modules={[Navigation, Autoplay]}
-                    navigation={true}
+                    // navigation={true}
                     spaceBetween={50}
                     slidesPerView={1}
                     loop={true}

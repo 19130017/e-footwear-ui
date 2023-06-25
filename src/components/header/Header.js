@@ -1,76 +1,76 @@
+import PersonIcon from "@mui/icons-material/Person";
+import ShoppingBagIcon from "@mui/icons-material/ShoppingBagOutlined";
 import { Box, Grid } from "@mui/material";
-import style from "./Header.module.scss";
-import classNames from "classnames/bind";
+import Badge from "@mui/material/Badge";
+import IconButton from "@mui/material/IconButton";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import logo from "~/assets/images/logo.png";
-import PersonIcon from "@mui/icons-material/Person";
-import IconButton from "@mui/material/IconButton";
-import ShoppingBagIcon from "@mui/icons-material/ShoppingBagOutlined";
-import Badge from "@mui/material/Badge";
-import { DropdownAccount, DropdownCart } from "../dropdown";
 import Category from "../category";
-import { useSelector } from "react-redux";
+import { DropdownAccount, DropdownCart } from "../dropdown";
 import Search from "../search";
-const cx = classNames.bind(style);
+import "./Header.scss";
+import HeaderMobile from "./HeaderMobile";
 
 function Header() {
     const cart = useSelector((state) => state.cartReducer.cart);
     const { isLogin, avatar } = useSelector((state) => state.authReducer);
+
     return (
-        <Box className={cx("header")}>
-            <Grid container className={"justify-between items-center"}>
-                <Grid item sm={3} md={2}>
-                    <Link to="/" className={cx("link-logo")}>
-                        <img src={logo} alt="" className={cx("logo")} />
+        <Box className="container header mx-auto ">
+            <HeaderMobile isLogin={isLogin} avatar={avatar} cart={cart}/>
+
+            <Grid container className="items-center hidden sm:flex py-4">
+                <Grid item sm={1}>
+                    <Link to="/" className="no-underline flex items-center justify-center">
+                        <img src={logo} alt="" />
                     </Link>
                 </Grid>
-                <Grid item sm={6} md={3} className={"hidden sm:flex"}>
+                <Grid item sm={4}>
                     <Category />
                 </Grid>
-                <Grid item md={5} className={"hidden md:flex"}>
+                <Grid item sm={5}>
                     <Search />
                 </Grid>
-                <Grid item sm={3} md={2}>
-                    <Box className={cx("icons")}>
-                        <Box className={cx("icon-wrapper")}>
-                            <IconButton className={cx("icon-btn")}>
+
+                <Grid item sm={2}>
+                    <Grid
+                        container
+                        className="h-full  justify-center outline-none mr-12 items-center"
+                    >
+                        <Grid item className="my-4 relative icon-wrapper mr-12">
+                            <IconButton className="p-0  hover:outline-none focus:outline-none border border-solid border-gray rounded-[100%]">
                                 {isLogin ? (
                                     <img
                                         src={avatar}
                                         alt="Anh dai dien"
-                                        className={cx("avatar-image")}
+                                        className="w-12 h-12 rounded-[50%] object-cover object-center"
                                     />
                                 ) : (
-                                    <PersonIcon className={cx("icon")} />
+                                    <PersonIcon className="h-[30px] w-[30px]" />
                                 )}
                             </IconButton>
-                            <Box className={cx("dropdown-account")}>
+                            <Box className="dropdown-account">
                                 <DropdownAccount isLogin={isLogin} />
                             </Box>
-                        </Box>
+                        </Grid>
 
-                        <Box className={cx("icon-wrapper")}>
+                        <Grid item className="my-4 block icon-wrapper relative text-end">
                             <IconButton
                                 size="large"
                                 aria-label="show 4 new mails"
                                 color="inherit"
-                                className={cx("icon-btn")}
+                                className="p-0 rounded-none hover:outline-none focus:outline-none"
                             >
                                 <Badge badgeContent={cart.length} color="error">
-                                    <ShoppingBagIcon className={cx("icon")} />
+                                    <ShoppingBagIcon className="h-[30px] w-[30px]" />
                                 </Badge>
                             </IconButton>
-                            <Box className={cx("dropdown-cart")}>
+                            <Box className="dropdown-cart">
                                 <DropdownCart data={cart} />
                             </Box>
-                        </Box>
-                    </Box>
-                </Grid>
-                <Grid item xs={12} className={"flex sm:hidden"}>
-                    <Category />
-                </Grid>
-                <Grid item xs={12} className={"flex flex-1 md:hidden mb-8 mx-8"}>
-                    <Search />
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Grid>
         </Box>
