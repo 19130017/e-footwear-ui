@@ -18,19 +18,20 @@ function Header() {
     const { isLogin, avatar } = useSelector((state) => state.authReducer);
     return (
         <Box className={cx("header")}>
-            <Grid container>
-                <Grid item xs={2}>
+            <Grid container className={"justify-between items-center"}>
+                <Grid item sm={3} md={2}>
                     <Link to="/" className={cx("link-logo")}>
                         <img src={logo} alt="" className={cx("logo")} />
                     </Link>
                 </Grid>
-                <Grid item xs={5}>
+                <Grid item sm={6} md={3} className={"hidden sm:flex"}>
                     <Category />
                 </Grid>
-                <Grid item xs={5}>
+                <Grid item md={5} className={"hidden md:flex"}>
+                    <Search />
+                </Grid>
+                <Grid item sm={3} md={2}>
                     <Box className={cx("icons")}>
-                        <Search />
-
                         <Box className={cx("icon-wrapper")}>
                             <IconButton className={cx("icon-btn")}>
                                 {isLogin ? (
@@ -64,6 +65,12 @@ function Header() {
                             </Box>
                         </Box>
                     </Box>
+                </Grid>
+                <Grid item xs={12} className={"flex sm:hidden"}>
+                    <Category />
+                </Grid>
+                <Grid item xs={12} className={"flex flex-1 md:hidden mb-8 mx-8"}>
+                    <Search />
                 </Grid>
             </Grid>
         </Box>

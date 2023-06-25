@@ -21,35 +21,23 @@ function Search() {
     return (
         <Box
             component={"form"}
-            sx={{
-                display: "flex",
-                backgroundColor: "#efefef",
-                borderRadius: "5px",
-                width: "50%",
-            }}
-            className={cx("icon-wrapper")}
+            className={"w-full flex bg-[#efefef] rounded-[5px] mx-4"}
             onSubmit={(e) => handleSubmit(e)}
         >
             <InputBase
-                sx={{
-                    ml: 1,
-                    flex: 1,
-                    fontSize: "16px",
-                    padding: "5px 0 5px 8px",
-                }}
                 value={query}
                 placeholder="Bạn đang tìm gì ?"
                 type="text"
+                classes={{ root: "flex-1 text-[16px] px-4" }}
                 name="query"
                 onChange={(e) => handleChange(e)}
             />
             <IconButton
                 aria-label="search"
-                className={cx("icon-btn")}
-                sx={{ width: "20%" }}
+                className={"flex-none right-0 px-4 rounded-none focus:rounded-none"}
                 type="submit"
             >
-                <SearchIcon className={cx("icon")} />
+                <SearchIcon className={"w-[30px] h-[30px] text-[#252a2b]"} />
             </IconButton>
         </Box>
     );

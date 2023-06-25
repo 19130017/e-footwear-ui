@@ -1,58 +1,55 @@
 import { Box, Grid, Typography } from "@mui/material";
-import style from "./Ads.module.scss";
-import classnames from "classnames/bind";
-const cx = classnames.bind(style);
 
 function Ads({ data }) {
-    const image1 = data?.[0]?.imageURL;
-    const image2 = data?.[1]?.imageURL;
-    const image3 = data?.[2]?.imageURL;
     return (
-        <Box component={"section"} className={cx("section-ads", "container")}>
-            <Typography variant="h3" className={cx("title")}>
-                Chúng tôi có gì mới
-            </Typography>
-            <Grid container spacing={1}>
-                {data?.map((item, index) => {
-                    if (index === 0) {
-                        return (
-                            <Grid key={index} item sx={{ width: "calc(25% - 5px)" }}>
-                                <Box className={cx("ads-wrapper")}>
-                                    <img
-                                        alt={item.typeGallery.typeName}
-                                        className={cx("ads-img")}
-                                        src={item.imageURL}
-                                    />
-                                </Box>
-                            </Grid>
-                        );
-                    } else if (index === 1) {
-                        return (
-                            <Grid key={index} item xs={6}>
-                                <Box className={cx("ads-wrapper")}>
-                                    <img
-                                        src={item.imageURL}
-                                        alt={item.typeGallery.typeName}
-                                        className={cx("ads-img")}
-                                    />
-                                </Box>
-                            </Grid>
-                        );
-                    } else if (index === 2) {
-                        return (
-                            <Grid key={index} item sx={{ width: "calc(25% - 5px)" }}>
-                                <Box className={cx("ads-wrapper")}>
-                                    <img
-                                        src={item.imageURL}
-                                        alt={item.typeGallery.typeName}
-                                        className={cx("ads-img")}
-                                    />
-                                </Box>
-                            </Grid>
-                        );
-                    }
-                })}
-            </Grid>
+        <Box component={"section"} className={"section hidden sm:flex"}>
+            <Box className={"container mx-auto"}>
+                <Typography variant="h3" className={"text-center text-[2.4rem] font-[700] pb-8 leading-[2.2rem] uppercase"}>
+                    Chúng tôi có gì mới
+                </Typography>
+                <Grid container spacing={2} className={""}>
+                    {data?.map((item, index) => {
+                        switch (index) {
+                            case 0:
+                                return (
+                                    <Grid key={index} item md={3} sm={12} xs={12} className={"h-[200px] md:h-[350px] lg:h-[500px]"}>
+                                        <Box className={"h-full rounded-[5px] overflow-hidden"}>
+                                            <img
+                                                src={item.imageURL}
+                                                alt={item.typeGallery.typeName}
+                                                className={"w-full h-full object-cover hover:scale-105 transition-all duration-500"}
+                                            />
+                                        </Box>
+                                    </Grid>
+                                );
+                            case 1:
+                                return (
+                                    <Grid key={index} item md={6} sm={6} xs={12} className={"h-[200px] md:h-[350px] lg:h-[500px]"}>
+                                        <Box className={"h-full rounded-[5px] overflow-hidden"}>
+                                            <img
+                                                src={item.imageURL}
+                                                alt={item.typeGallery.typeName}
+                                                className={"w-full h-full object-cover hover:scale-105 transition-all duration-500"}
+                                            />
+                                        </Box>
+                                    </Grid>
+                                );
+                            case 2:
+                                return (
+                                    <Grid key={index} item md={3} sm={6} xs={12} className={"h-[200px] md:h-[350px] lg:h-[500px]"}>
+                                        <Box className={"h-full rounded-[5px] overflow-hidden"}>
+                                            <img
+                                                src={item.imageURL}
+                                                alt={item.typeGallery.typeName}
+                                                className={"w-full h-full object-cover hover:scale-105 transition-all duration-500"}
+                                            />
+                                        </Box>
+                                    </Grid>
+                                );
+                        }
+                    })}
+                </Grid>
+            </Box>
         </Box>
     );
 }

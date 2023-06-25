@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    .section {
+        @apply py-8 flex items-center;
+    }
+
+    .marquee-group {
+        @apply text-white text-[2rem];
+    }
+}
+
 html {
     font-size: 62.5%;
 }
