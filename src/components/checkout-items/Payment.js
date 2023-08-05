@@ -37,7 +37,6 @@ function Payment({ callbackParent }) {
                     component={"input"}
                     type="radio"
                     name="payment"
-                    defaultChecked
                     id="vnpay-payment"
                     hidden
                     data-content-name="VNPay"
@@ -62,7 +61,6 @@ function Payment({ callbackParent }) {
                     component={"input"}
                     type="radio"
                     name="payment"
-                    defaultChecked
                     id="cod-payment"
                     hidden
                     data-content-name="COD"
