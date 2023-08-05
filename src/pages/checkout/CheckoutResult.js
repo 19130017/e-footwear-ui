@@ -7,6 +7,7 @@ import fail from "~/assets/images/fail.png";
 import success from "~/assets/images/success.png";
 import { fetchUpdateStatus } from "~/redux/order/orderSlice";
 import style from "./CheckoutResult.module.scss";
+import { clearCart } from "~/redux/cart/cartSlice";
 function CheckoutResult() {
     const cx = classNames.bind(style);
     const [searchParams, setSearchParams] = useSearchParams();
@@ -21,7 +22,9 @@ function CheckoutResult() {
     const isSuccess = resultCode == "0" || vnp_ResponseCode == "00";
     const code = isSuccess ? "SUCCESS" : "FAILING";
     const order = useSelector((state) => state.orderReducer.order);
-
+    useEffect(() => {
+        dispatch(clearCart());
+    }, [dispatch]);
     useEffect(() => {
         dispatch(
             fetchUpdateStatus({

@@ -67,6 +67,7 @@ function Checkout() {
                     const responseCOD = await dispatch(fetchCreateOrder(common));
                     if (responseCOD.payload.success) {
                         navigate("/");
+                        dispatch(clearCart());
                     }
                     break;
                 case "MOMO":
@@ -84,7 +85,6 @@ function Checkout() {
                 default:
                     alert("Vui lòng chọn phương thức thanh toán");
             }
-            setTimeout(() => dispatch(clearCart()), 5000);
         } else {
             alert("Chọn địa chỉ giao hàng");
         }
@@ -343,9 +343,9 @@ function Checkout() {
                                 {total > 700000
                                     ? "Miễn phi"
                                     : (11000).toLocaleString("it-IT", {
-                                          style: "currency",
-                                          currency: "VND",
-                                      })}
+                                        style: "currency",
+                                        currency: "VND",
+                                    })}
                             </Typography>
                         </Box>
                         <Box className="flex justify-between items-start mb-4">
