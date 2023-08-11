@@ -36,7 +36,8 @@ function Checkout() {
     const total = cart?.reduce((accumulator, currentValue) => {
         return accumulator + currentValue.price * currentValue.quantity;
     }, 0);
-    const cost = total + total * 0.1 + (total > 700000 ? 0 : 11000) - (coupon ? coupon.price : 0);
+    const cost = (total + total * 0.1 + (total > 700000 ? 0 : 11000) - (coupon ? coupon.price : 0)) > 0 
+    ? (total + total * 0.1 + (total > 700000 ? 0 : 11000) - (coupon ? coupon.price : 0)) : 11000;
     const sendRedirect = async (url) => {
         window.location.href = url;
     };
